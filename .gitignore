@@ -40,3 +40,6 @@
 *.log
 .DS_Store
 Thumbs.db
+# Local Python import caches from native asset tooling
+**/__pycache__/
+*.py[cod]

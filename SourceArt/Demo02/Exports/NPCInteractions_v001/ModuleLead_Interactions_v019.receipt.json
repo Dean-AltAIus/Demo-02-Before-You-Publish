@@ -1,0 +1,126 @@
+{
+  "source": "SourceArt\\Demo02\\Characters\\ModuleLead\\ModuleLead_Interactions_v019.blend",
+  "source_sha256": "01e59cdaa0c4587ae54cde75de36c9ce32042590a57742f6813659bd9b81ad31",
+  "fbx": "SourceArt\\Demo02\\Exports\\NPCInteractions_v001\\ModuleLead_Interactions_v019.fbx",
+  "fbx_sha256": "554c4b0e269608a8ca6d35a838bcde8dc03e1a12df8c3681c5000918800562e2",
+  "bones": 54,
+  "fps": 30,
+  "clips": [
+    {
+      "name": "D02_ModuleLead_SeatedIdle_v019",
+      "frames": [
+        1.0,
+        121.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_SeatedListen_v019",
+      "frames": [
+        1.0,
+        121.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_PickupPacket_v019",
+      "frames": [
+        1.0,
+        34.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_ReadPacket_v019",
+      "frames": [
+        1.0,
+        37.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_PlaceOpen_v019",
+      "frames": [
+        1.0,
+        13.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_PointCurrentPair_v019",
+      "frames": [
+        1.0,
+        16.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_RecoverPoint_v019",
+      "frames": [
+        1.0,
+        16.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_ReturnPacket_v019",
+      "frames": [
+        1.0,
+        16.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_RecoverToReady_v019",
+      "frames": [
+        1.0,
+        19.0
+      ]
+    },
+    {
+      "name": "D02_ModuleLead_SeatedSpeak_v019",
+      "frames": [
+        1.0,
+        91.0
+      ]
+    }
+  ],
+  "contact_scope": "All 484 saved 30 fps samples, actual hand skin against closed prop volumes and whole-body vertices against tabletop. 0.1 mm tolerance. This is not continuous triangle collision proof.",
+  "max_foot_drift_m": 0,
+  "maximum_packet_track_error_m": 0,
+  "boundaries": [
+    {
+      "from": "SeatedIdle",
+      "to": "PickupPacket",
+      "maximum_world_matrix_error": 1.1920928955078125e-07
+    },
+    {
+      "from": "PickupPacket",
+      "to": "ReadPacket",
+      "maximum_world_matrix_error": 0.0
+    },
+    {
+      "from": "ReadPacket",
+      "to": "PlaceOpen",
+      "maximum_world_matrix_error": 8.195638656616211e-07
+    },
+    {
+      "from": "PlaceOpen",
+      "to": "PointCurrentPair",
+      "maximum_world_matrix_error": 9.08970832824707e-07
+    },
+    {
+      "from": "PointCurrentPair",
+      "to": "RecoverPoint",
+      "maximum_world_matrix_error": 0.0
+    },
+    {
+      "from": "RecoverPoint",
+      "to": "ReturnPacket",
+      "maximum_world_matrix_error": 9.5367431640625e-07
+    },
+    {
+      "from": "ReturnPacket",
+      "to": "RecoverToReady",
+      "maximum_world_matrix_error": 8.456408977508545e-07
+    },
+    {
+      "from": "RecoverToReady",
+      "to": "SeatedIdle",
+      "maximum_world_matrix_error": 1.1920928955078125e-07
+    }
+  ],
+  "runtime_status": "Unity import, normal-speed visual playback, interruption, reset and persistence not yet accepted."
+}

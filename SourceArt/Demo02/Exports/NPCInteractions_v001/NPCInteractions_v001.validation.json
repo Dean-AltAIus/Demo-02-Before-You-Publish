@@ -1,0 +1,199 @@
+{
+  "scope": "Native saved source and FBX reimport, not Unity gameplay acceptance",
+  "lead": {
+    "source_sha256": "01e59cdaa0c4587ae54cde75de36c9ce32042590a57742f6813659bd9b81ad31",
+    "saved_frames": 484,
+    "failed_frames": 0,
+    "max_foot_drift_m": 0,
+    "source_unchanged": true,
+    "boundaries": [
+      {
+        "from": "SeatedIdle",
+        "to": "PickupPacket",
+        "maximum_world_matrix_error": 1.1920928955078125e-07
+      },
+      {
+        "from": "PickupPacket",
+        "to": "ReadPacket",
+        "maximum_world_matrix_error": 0.0
+      },
+      {
+        "from": "ReadPacket",
+        "to": "PlaceOpen",
+        "maximum_world_matrix_error": 8.195638656616211e-07
+      },
+      {
+        "from": "PlaceOpen",
+        "to": "PointCurrentPair",
+        "maximum_world_matrix_error": 9.08970832824707e-07
+      },
+      {
+        "from": "PointCurrentPair",
+        "to": "RecoverPoint",
+        "maximum_world_matrix_error": 0.0
+      },
+      {
+        "from": "RecoverPoint",
+        "to": "ReturnPacket",
+        "maximum_world_matrix_error": 9.5367431640625e-07
+      },
+      {
+        "from": "ReturnPacket",
+        "to": "RecoverToReady",
+        "maximum_world_matrix_error": 8.456408977508545e-07
+      },
+      {
+        "from": "RecoverToReady",
+        "to": "SeatedIdle",
+        "maximum_world_matrix_error": 1.1920928955078125e-07
+      }
+    ],
+    "roundtrip": {
+      "source_sha256": "01e59cdaa0c4587ae54cde75de36c9ce32042590a57742f6813659bd9b81ad31",
+      "fbx_sha256": "554c4b0e269608a8ca6d35a838bcde8dc03e1a12df8c3681c5000918800562e2",
+      "bones": 54,
+      "clips": [
+        {
+          "take": "SeatedIdle",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_SeatedIdle_v019",
+          "frames": 121,
+          "bone_samples": 6534,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.5884945696598152e-06
+        },
+        {
+          "take": "SeatedListen",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_SeatedListen_v019",
+          "frames": 121,
+          "bone_samples": 6534,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.5884945696598152e-06
+        },
+        {
+          "take": "PickupPacket",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_PickupPacket_v019",
+          "frames": 34,
+          "bone_samples": 1836,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.7682223187875934e-06
+        },
+        {
+          "take": "ReadPacket",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_ReadPacket_v019",
+          "frames": 37,
+          "bone_samples": 1998,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.7565681673659128e-06
+        },
+        {
+          "take": "PlaceOpen",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_PlaceOpen_v019",
+          "frames": 13,
+          "bone_samples": 702,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.6761654251240543e-06
+        },
+        {
+          "take": "PointCurrentPair",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_PointCurrentPair_v019",
+          "frames": 16,
+          "bone_samples": 864,
+          "max_bone_head_error_m": 1.8841574094383411e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 2.0695990770036587e-06
+        },
+        {
+          "take": "RecoverPoint",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_RecoverPoint_v019",
+          "frames": 16,
+          "bone_samples": 864,
+          "max_bone_head_error_m": 1.886571751178133e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.856495714491757e-06
+        },
+        {
+          "take": "ReturnPacket",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_ReturnPacket_v019",
+          "frames": 16,
+          "bone_samples": 864,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.8192237121184007e-06
+        },
+        {
+          "take": "RecoverToReady",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_RecoverToReady_v019",
+          "frames": 19,
+          "bone_samples": 1026,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.8042100009552087e-06
+        },
+        {
+          "take": "SeatedSpeak",
+          "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_SeatedSpeak_v019",
+          "frames": 91,
+          "bone_samples": 4914,
+          "max_bone_head_error_m": 1.5283136819245045e-06,
+          "skin_sample_frames": 3,
+          "max_hand_skin_error_m": 1.5884945696598152e-06
+        }
+      ],
+      "maximum_packet_position_error_m": 0,
+      "maximum_packet_quaternion_error_degrees": 0,
+      "maximum_bone_head_error_m": 1.886571751178133e-06,
+      "maximum_sampled_hand_skin_error_m": 2.0695990770036587e-06,
+      "status": "Native FBX reimport proof only. Actual Unity gameplay acceptance remains separate."
+    }
+  },
+  "colleague": {
+    "export_sha256": "be33bc3959f50c51a5dd508afcd1d692708872b4e6df17bca550ac57feac6eb6",
+    "armature": "Colleague_EditableRig",
+    "bones": 24,
+    "actions": [
+      {
+        "name": "Colleague_EditableRig|Colleague_EditableRig|D02_Colleague_Idle_v001",
+        "frames": [
+          1.0,
+          121.0
+        ]
+      },
+      {
+        "name": "Colleague_EditableRig|Colleague_EditableRig|D02_Colleague_Listen_v001",
+        "frames": [
+          1.0,
+          121.0
+        ]
+      },
+      {
+        "name": "Colleague_EditableRig|Colleague_EditableRig|D02_Colleague_SourcePoint_v001",
+        "frames": [
+          1.0,
+          61.0
+        ]
+      },
+      {
+        "name": "Colleague_EditableRig|Colleague_EditableRig|D02_Colleague_Speak_v001",
+        "frames": [
+          1.0,
+          91.0
+        ]
+      }
+    ],
+    "sample_count": 61,
+    "max_wrist_roundtrip_error_m": 5.877936757599122e-07,
+    "status": "Native FBX roundtrip only, Unity import and gameplay acceptance pending"
+  },
+  "visual_review": "Root inspected front, back, both sides and selected action transitions. The outward preparation and complete motion still require normal-speed actual Unity review.",
+  "remaining": [
+    "Unity import and single-packet ownership",
+    "actual source/current-pair state binding",
+    "normal-speed complete entry/action/recovery and contact-camera composition",
+    "pause, reduced motion, cancellation, reset and saved authoring persistence"
+  ]
+}
