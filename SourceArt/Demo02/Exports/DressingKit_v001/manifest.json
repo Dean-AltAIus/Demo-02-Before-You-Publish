@@ -1,0 +1,228 @@
+{
+  "assets": [
+    {
+      "name": "IvyColumn",
+      "production_ids": "D02.ASSET.ENV.COURTYARD",
+      "bounds_m": [
+        1.2563164234161377,
+        0.4977607727050781,
+        3.630847427994013
+      ],
+      "mesh_objects": 1
+    },
+    {
+      "name": "IvyLintel",
+      "production_ids": "D02.ASSET.ENV.COURTYARD",
+      "bounds_m": [
+        4.162930011749268,
+        0.6039757132530212,
+        0.8120609223842621
+      ],
+      "mesh_objects": 1
+    },
+    {
+      "name": "TreeCanopy",
+      "production_ids": "D02.ASSET.ENV.COURTYARD",
+      "bounds_m": [
+        2.8578882217407227,
+        2.9381678104400635,
+        1.9818326234817505
+      ],
+      "mesh_objects": 1
+    },
+    {
+      "name": "PlanterCrown",
+      "production_ids": "D02.ASSET.ENV.COURTYARD",
+      "bounds_m": [
+        1.5233988165855408,
+        0.906166136264801,
+        0.8928534388542175
+      ],
+      "mesh_objects": 17
+    },
+    {
+      "name": "NoticeBoard",
+      "production_ids": "D02.ASSET.ENV.STUDIO",
+      "bounds_m": [
+        1.2999999523162842,
+        0.09400000050663948,
+        0.8999999761581421
+      ],
+      "mesh_objects": 14
+    },
+    {
+      "name": "AcademicSkyline",
+      "production_ids": "D02.ASSET.ENV.COURTYARD",
+      "bounds_m": [
+        20.149999618530273,
+        4.016366481781006,
+        11.399999618530273
+      ],
+      "mesh_objects": 44
+    },
+    {
+      "name": "CampusGround",
+      "production_ids": "D02.ASSET.ENV.COURTYARD",
+      "bounds_m": [
+        100.0,
+        100.0,
+        0.15000000596046448
+      ],
+      "mesh_objects": 1
+    }
+  ],
+  "materials": [
+    {
+      "name": "D02_LeafSunlit",
+      "linear_base_color": [
+        0.41999998688697815,
+        0.5899999737739563,
+        0.054999999701976776,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_LeafFresh",
+      "linear_base_color": [
+        0.23999999463558197,
+        0.41999998688697815,
+        0.02500000037252903,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_LeafShade",
+      "linear_base_color": [
+        0.10499999672174454,
+        0.25,
+        0.017999999225139618,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_LeafGold",
+      "linear_base_color": [
+        0.5299999713897705,
+        0.5799999833106995,
+        0.054999999701976776,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_PaleCampusStone",
+      "linear_base_color": [
+        0.7799999713897705,
+        0.6499999761581421,
+        0.44999998807907104,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_AcademicTerracotta",
+      "linear_base_color": [
+        0.5099999904632568,
+        0.25999999046325684,
+        0.1599999964237213,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_CampusSlate",
+      "linear_base_color": [
+        0.054999999701976776,
+        0.14000000059604645,
+        0.2199999988079071,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_DistantWindow",
+      "linear_base_color": [
+        0.05999999865889549,
+        0.12999999523162842,
+        0.18000000715255737,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_NoticePaper",
+      "linear_base_color": [
+        0.9300000071525574,
+        0.8899999856948853,
+        0.7400000095367432,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_CampusBlue",
+      "linear_base_color": [
+        0.014000000432133675,
+        0.14000000059604645,
+        0.5299999713897705,
+        1.0
+      ],
+      "roughness": 0.3499999940395355
+    },
+    {
+      "name": "D02_NoticeOak",
+      "linear_base_color": [
+        0.47999998927116394,
+        0.25,
+        0.07999999821186066,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_GardenSoil",
+      "linear_base_color": [
+        0.09000000357627869,
+        0.054999999701976776,
+        0.02500000037252903,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_SunflowerPetal",
+      "linear_base_color": [
+        0.949999988079071,
+        0.6000000238418579,
+        0.03500000014901161,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_LavenderFlower",
+      "linear_base_color": [
+        0.30000001192092896,
+        0.11999999731779099,
+        0.41999998688697815,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_CampusLawn",
+      "linear_base_color": [
+        0.23999999463558197,
+        0.3400000035762787,
+        0.10000000149011612,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    }
+  ],
+  "source": "Native Blender authoring from supplied Demo 02 campus reference",
+  "validation": "Source preview and Unity integration pending"
+}
