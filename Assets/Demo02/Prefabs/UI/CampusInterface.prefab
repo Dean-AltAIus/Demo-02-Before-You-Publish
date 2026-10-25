@@ -74,7 +74,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -502,7 +502,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -581,7 +581,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -660,7 +660,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -739,7 +739,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -1370,7 +1370,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -1607,7 +1607,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -1686,7 +1686,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -1765,7 +1765,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -1920,7 +1920,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -1999,7 +1999,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -2621,7 +2621,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -2916,7 +2916,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -3289,7 +3289,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -3540,7 +3540,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -3953,7 +3953,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -4169,7 +4169,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -4248,7 +4248,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
@@ -4261,6 +4261,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 73257966023773665, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591277959875006720, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3459862693791768367, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4374,6 +4382,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 3936922607740574256, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8833602791732419859, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Name
       value: Authored Text slot 4
@@ -4495,9 +4511,17 @@ PrefabInstance:
       propertyPath: m_Text
       value: Inspected criterion
       objectReference: {fileID: 0}
+    - target: {fileID: 3936922607740574256, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Text
       value: Select a current criterion to mark.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8833602791732419859, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Name
@@ -4729,9 +4753,17 @@ PrefabInstance:
       propertyPath: m_Text
       value: Inspected work passage
       objectReference: {fileID: 0}
+    - target: {fileID: 3936922607740574256, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Text
       value: Select work at the experiment table.
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8833602791732419859, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Name
@@ -4846,6 +4878,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 3936922607740574256, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8833602791732419859, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Name
       value: Authored Text slot 1
@@ -4959,6 +4999,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 3936922607740574256, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8833602791732419859, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Name
       value: Authored Text slot 3
@@ -5193,6 +5241,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 73257966023773665, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591277959875006720, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3459862693791768367, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5310,6 +5366,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 3936922607740574256, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6423572258677234933, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8833602791732419859, guid: 12d2fa9a9641b9a458ebd77d79b99ef4, type: 3}
       propertyPath: m_Name
       value: Authored Text slot 2
@@ -5427,6 +5491,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 73257966023773665, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591277959875006720, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3459862693791768367, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -5778,6 +5850,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4370417437636187166}
     m_Modifications:
+    - target: {fileID: 73257966023773665, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2591277959875006720, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
+      propertyPath: m_FontData.m_RichText
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3459862693791768367, guid: 1c4d5d3d6e28c4648841af4828f922f2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

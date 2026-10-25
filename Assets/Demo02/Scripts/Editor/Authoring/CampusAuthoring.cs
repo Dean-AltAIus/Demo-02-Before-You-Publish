@@ -16,13 +16,17 @@ namespace Altaius.Demo02.Authoring
         public const string ScenePath="Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity";
         const string Kit="Assets/Demo02/Prefabs/Environment/Kit_v001/";
         const string Prefabs="Assets/Demo02/Prefabs/Gameplay/";
+        const string PreviewMaterial="Assets/Demo02/Settings/Gameplay/PreviewLearner.mat";
+        public static IEnumerable<string> NewSceneOutputs => new[]{ScenePath,PreviewMaterial}
+            .Concat(new[]{"CourtyardStation","StudioStation","ReviewStation","ArchiveStation","LearnerController","CampusCamera","CampusLighting"}.Select(name=>Prefabs+name+".prefab"))
+            .Concat(NativeUiAuthoring.NewOutputs);
         [Serializable] sealed class Layout {public Placement[] placements;}
         [Serializable] sealed class Placement {public string asset,name;public float[] blender_position;public float rotation_z_degrees;}
         [MenuItem("Altaius/Demo 02/Author new campus once")]
         public static void CreateNewScene()
         {
             if(EditorApplication.isPlaying)throw new InvalidOperationException("Stop Play before authoring.");
-            if(File.Exists(ScenePath))throw new InvalidOperationException("Saved campus exists. Refusing to replace authored content. Edit the saved scene or make a named copy explicitly.");
+            AuthoringOutputGuard.RequireAbsent(NewSceneOutputs);
             if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty)throw new InvalidOperationException("Preserve the current unsaved scene before authoring.");
             foreach(var path in new[]{"Assets/Demo02/Scenes",Prefabs,"Assets/Demo02/Art/UI","Assets/Demo02/Settings/Gameplay"})Directory.CreateDirectory(path);
             var scene=EditorSceneManager.NewScene(NewSceneSetup.EmptyScene,NewSceneMode.Single);
@@ -97,12 +101,12 @@ namespace Altaius.Demo02.Authoring
         static void Sign(Transform parent,string label,Vector3 pos,float yaw)
         {
             var g=new GameObject(label+" sign");g.transform.SetParent(parent);g.transform.position=pos;g.transform.rotation=Quaternion.Euler(0,yaw,0);
-            var text=g.AddComponent<TextMesh>();text.text=label;text.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");text.fontSize=64;text.characterSize=.04f;text.anchor=TextAnchor.MiddleCenter;text.color=new Color(.02f,.09f,.18f);
+            var text=g.AddComponent<TextMesh>();text.text=label;text.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");text.richText=false;text.fontSize=64;text.characterSize=.04f;text.anchor=TextAnchor.MiddleCenter;text.color=new Color(.02f,.09f,.18f);
             g.GetComponent<MeshRenderer>().sharedMaterial=text.font.material;
         }
         static void PreviewBody(Transform parent)
         {
-            var mat=new Material(Shader.Find("Universal Render Pipeline/Lit"));mat.color=new Color(.07f,.35f,.48f);AssetDatabase.CreateAsset(mat,"Assets/Demo02/Settings/Gameplay/PreviewLearner.mat");
+            var mat=new Material(Shader.Find("Universal Render Pipeline/Lit"));mat.color=new Color(.07f,.35f,.48f);AssetDatabase.CreateAsset(mat,PreviewMaterial);
             Part("Preview torso",PrimitiveType.Capsule,parent,new Vector3(0,1.12f,0),new Vector3(.48f,.37f,.3f),mat);
             Part("Preview head",PrimitiveType.Sphere,parent,new Vector3(0,1.67f,0),new Vector3(.29f,.31f,.29f),mat);
             foreach(float x in new[]{-.14f,.14f}){Part("Preview leg",PrimitiveType.Capsule,parent,new Vector3(x,.43f,0),new Vector3(.19f,.39f,.19f),mat);Part("Preview shoe",PrimitiveType.Cube,parent,new Vector3(x,.055f,.06f),new Vector3(.2f,.11f,.32f),mat);}

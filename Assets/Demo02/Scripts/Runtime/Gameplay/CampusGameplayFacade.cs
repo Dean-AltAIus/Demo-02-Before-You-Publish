@@ -44,7 +44,7 @@ namespace Altaius.Demo02.Gameplay
             var keyboard = Keyboard.current; var mouse = Mouse.current;
             if (!PresenterOwnsInput && keyboard != null && !IsComposing)
             {
-                if (keyboard.escapeKey.wasPressedThisFrame) { if (Workspace != null && Workspace.IsOpen) Workspace.Back(); else Workspace?.Pause(); }
+                if (keyboard.escapeKey.wasPressedThisFrame) HandleEscape();
                 else if (keyboard.tabKey.wasPressedThisFrame && !(Workspace?.IsOpen ?? false)) Workspace?.OpenRoutes();
                 else if (WorldOwnsInput && keyboard.eKey.wasPressedThisFrame) TryInspectNearest();
             }
@@ -61,6 +61,14 @@ namespace Altaius.Demo02.Gameplay
                 var station = Nearest();
                 WorldPrompt.text = station != null ? "E  Inspect " + station.DisplayName + "    |    Tab  Direct routes" : "WASD  Move    |    Hold right mouse  Look    |    Tab  Direct routes";
             }
+        }
+        public void HandleEscape()
+        {
+            if(IsComposing)return;
+            // End native field ownership before rebuilding the view. NativeRow also protects
+            // the draft if uGUI processed its Escape cancellation earlier in this frame.
+            EventSystem.current?.SetSelectedGameObject(null);
+            if(Workspace!=null && Workspace.IsOpen)Workspace.Back();else Workspace?.Pause();
         }
         CampusStation Nearest()
         {

@@ -14,6 +14,7 @@ namespace Altaius.Demo02.Authoring
     {
         internal static readonly Color Navy=new Color(.035f,.11f,.22f), Cream=new Color(.98f,.965f,.91f), Cobalt=new Color(.035f,.29f,.55f), Teal=new Color(.02f,.49f,.52f);
         const string UI="Assets/Demo02/Prefabs/UI/";
+        internal static readonly string[] NewOutputs={UI+"TextRow.prefab",UI+"ActionRow.prefab",UI+"InputRow.prefab",UI+"CampusInterface.prefab"};
         static Font Font => Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         internal static GameObject Rect(string name,Transform parent)
         {var g=new GameObject(name,typeof(RectTransform));if(parent)g.transform.SetParent(parent,false);return g;}
@@ -24,7 +25,7 @@ namespace Altaius.Demo02.Authoring
         internal static Text Label(string name,Transform parent,string text,int size,Color color)
         {
             var g=Rect(name,parent);var t=g.AddComponent<Text>();t.font=Font;t.text=text;t.fontSize=size;t.color=color;
-            t.horizontalOverflow=HorizontalWrapMode.Wrap;t.verticalOverflow=VerticalWrapMode.Overflow;t.raycastTarget=false;return t;
+            t.horizontalOverflow=HorizontalWrapMode.Wrap;t.verticalOverflow=VerticalWrapMode.Overflow;t.raycastTarget=false;t.supportRichText=false;return t;
         }
         internal static Button Button(string name,Transform parent,string caption)
         {
@@ -69,6 +70,7 @@ namespace Altaius.Demo02.Authoring
         }
         internal static WorkbenchView Create(CampusGameplayFacade gameplay,CampusSession host)
         {
+            AuthoringOutputGuard.RequireAbsent(NewOutputs);
             Directory.CreateDirectory(UI);
             var textPrefab=RowPrefab(NativeRowKind.Text);var actionPrefab=RowPrefab(NativeRowKind.Action);var inputPrefab=RowPrefab(NativeRowKind.Input);
             var canvasObject=Rect("Campus interface",null);var canvas=canvasObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;

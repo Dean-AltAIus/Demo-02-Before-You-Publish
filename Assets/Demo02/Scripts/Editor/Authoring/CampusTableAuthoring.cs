@@ -11,9 +11,11 @@ namespace Altaius.Demo02.Authoring
     {
         const string Folder="Assets/Demo02/Prefabs/Gameplay/";
         const string Kit="Assets/Demo02/Prefabs/Environment/Kit_v001/";
+        public static readonly string[] NewOutputs={Folder+"MarkingLane.prefab",Folder+"InspectableFolio.prefab",Folder+"PublicationCabinet.prefab"};
         [MenuItem("Altaius/Demo 02/Add physical table bindings once")]
         public static void AddOnce()
         {
+            AuthoringOutputGuard.RequireAbsent(NewOutputs);
             if(EditorApplication.isPlaying || UnityEngine.Object.FindFirstObjectByType<CampusExperimentProjection>())
                 throw new InvalidOperationException("Stop Play. Existing table bindings are preserved; this command only creates them once.");
             var root=new GameObject("Editable receipt-bound marking table");
@@ -53,7 +55,7 @@ namespace Altaius.Demo02.Authoring
         static TextMesh Text(Transform parent,string name,string value,Vector3 position,float size)
         {
             var g=new GameObject(name);g.transform.SetParent(parent);g.transform.position=position;g.transform.rotation=Quaternion.Euler(0,270,0);
-            var t=g.AddComponent<TextMesh>();t.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");t.text=value;t.characterSize=size;t.fontSize=64;t.anchor=TextAnchor.MiddleCenter;t.color=new Color(.01f,.08f,.13f);g.GetComponent<MeshRenderer>().sharedMaterial=t.font.material;return t;
+            var t=g.AddComponent<TextMesh>();t.font=Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");t.richText=false;t.text=value;t.characterSize=size;t.fontSize=64;t.anchor=TextAnchor.MiddleCenter;t.color=new Color(.01f,.08f,.13f);g.GetComponent<MeshRenderer>().sharedMaterial=t.font.material;return t;
         }
     }
 }
