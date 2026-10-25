@@ -32,6 +32,8 @@ namespace Altaius.Demo02.UI
         [Range(1f,2f)] public float TextScale = 1f;
         public Transform ConversationExtensionSlot;
         public Transform CoachExtensionSlot;
+        public event System.Action ReviewRequested;
+        public event System.Action PauseRequested;
         public bool IsOpen => Window && Window.activeSelf;
         public string ViewId { get; private set; }
         public string SelectedWork { get; private set; }
@@ -300,12 +302,13 @@ namespace Altaius.Demo02.UI
         }
         void OpenReview()
         {
+            if(ReviewRequested!=null){ReviewRequested();return;}
             Begin("review","Review and publication");
             Text("Review.Scope","Current pair", "Task "+S.Task.Version+" / Rubric "+S.Rubric.Version+"\nReview: "+S.ReviewStatus+"\nPublication: "+S.Publication+"\nThe cabinet stays closed until an accepted current release. Offline authority dialogue is not available in this slice.");
             Action("Review.History","Inspect current pair and history",OpenHistory); Buttons("Campus routes",OpenRoutes); FirstFocus();
         }
         public void Pause()
-        {Begin("pause","Paused"); Text("Pause.Info","Offline local session","Reading, typing and pausing do not advance the logical clock. Drafts stay in this session."); Buttons("Resume",CloseWindow,"Campus routes",OpenRoutes);FirstFocus();}
+        {if(PauseRequested!=null){PauseRequested();return;}Begin("pause","Paused"); Text("Pause.Info","Offline local session","Reading, typing and pausing do not advance the logical clock. Drafts stay in this session."); Buttons("Resume",CloseWindow,"Campus routes",OpenRoutes);FirstFocus();}
         public void Back()
         {
             switch(ViewId)
@@ -351,10 +354,10 @@ namespace Altaius.Demo02.UI
             var largeX=new[]{18f,230,478,690,998};var largeWidth=new[]{200f,236,200,296,264};
             for(int i=0;i<buttons.Length;i++)if(buttons[i])
             {buttons[i].GetComponentInChildren<Text>().fontSize=(int)(20*scale);Place((RectTransform)buttons[i].transform,large?largeX[i]:normalX[i],large?122:20,large?largeWidth[i]:normalWidth[i],large?68:40);}
-            LeenaDock.sizeDelta=large?new Vector2(684,128):new Vector2(342,112);
+            LeenaDock.sizeDelta=large?new Vector2(684,146):new Vector2(342,112);
             LeenaIdentity.fontSize=(int)(21*scale);LeenaStatus.fontSize=(int)(17*scale);
             Place(LeenaIdentity.rectTransform,112,large?10:20,large?558:220,large?54:32);
-            Place(LeenaStatus.rectTransform,112,large?68:58,large?558:220,large?50:40);
+            Place(LeenaStatus.rectTransform,112,large?62:58,large?558:220,large?82:40);
             WorldHelp.gameObject.SetActive(!IsOpen);
             WorldHelp.anchorMin=new Vector2(large?.56f:.29f,0);WorldHelp.anchorMax=new Vector2(.99f,0);WorldHelp.sizeDelta=new Vector2(0,large?128:48);
             Gameplay.WorldPrompt.fontSize=(int)(18*scale);

@@ -20,5 +20,6 @@ namespace Altaius.Demo02.Gameplay
             Workbench = new WorkbenchModel(Session); NotifyChanged();
         }
         public void NotifyChanged() => Changed?.Invoke();
+        public void RebindWorkbench() { Workbench = new WorkbenchModel(Session); NotifyChanged(); }
     }
 }

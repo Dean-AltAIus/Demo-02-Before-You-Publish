@@ -1,0 +1,1 @@
+{"name":"Altaius.Demo02.Presentation","references":["Altaius.Demo02.Domain","Altaius.Demo02.Integration"],"noEngineReferences":true,"autoReferenced":true}
