@@ -1,0 +1,12 @@
+{
+  "material": "D02_WarmOak",
+  "source": "SourceArt/Demo02/Environment/CampusKit_v001.blend",
+  "bake_type": "Diffuse color only, lighting excluded",
+  "resolution": [
+    1024,
+    1024
+  ],
+  "uv": "Native default cube UV layout; noncube oak parts require visual check",
+  "texture_sha256": "c9f4da6ab6be3aa89ffb6b3d2c2cd1e21b9b7589f1960513c54e2e30ecbbbf83",
+  "unity_import": "pending"
+}

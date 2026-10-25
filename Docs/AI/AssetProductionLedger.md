@@ -14,6 +14,8 @@ Observed source preview: three stations and clear central courtyard are visible.
 
 Unity import: 21 FBX assets, 21 URP palette materials and 21 saved reusable prefabs now exist. Measured imported bounds match metre-scale source intent, including the asymmetric folio, door cabinet and 4m portal. Material remapping was explicit. Prefab creation preserves existing assets. Full scene rendering and collision clearance still need the gameplay assembly.
 
+Material bake: WarmOak_v001 preserves the first cube-atlas experiment. Its empty UV regions are unsuitable for all kit shapes, so WarmOak_v002 is a full-UV color-only bake from the editable source nodes, with no lighting baked in. The full texture was inspected. Unity import remains pending. Actual campus Game-view capture now shows the authored layout, corrected facing signs and transparent Leena dock. Stone palette/lighting, sign contrast, backdrop, temporary learner and final dressing remain visual refinement items. The current scene has roughly 5,500 renderers; a frozen-frame statistics snapshot cannot establish runtime performance.
+
 ## Academic learner pilot
 
 Input: the supplied academic-learner-tpose-v2.png, with exact front/back panel extraction for multiview input. Original source hash and extraction coordinates are in Characters/Learner/Reference/reference-provenance.json. No visual identity was regenerated before model generation. Model created with Meshy 7.1 through Magnific, 30,000 target faces, actual provider report 30,807 triangles. Original GLB is preserved with SHA-256 receipt.
@@ -30,9 +32,13 @@ Locomotion: one compatible Meshy catalogue Walking_Woman source was acquired for
 
 Both missing meshes were generated from the supplied exact front/back reference crops with Meshy 7.1, 1160 credits each, without retries. Original GLBs, hashes, input crop provenance and native metre-scale Blender sources are preserved. Both rigs cost 120 credits each and received local bone-tail, split-normal and bounded trouser-surface repairs. Six rest views and front/side/three-quarter static shoulder/reach/knee probes were inspected for each before authoring restrained native idle loops. Current idle shoulder folds are a visual refinement item, and neither rig yet has finger controls for precise prop contacts. These sources do not establish finished game art or animation quality.
 
+Motion_v002 for both roles retains the native idle and adds a bounded editable pre-armature shoulder surface modifier plus eight local weight-continuity passes. Front, three-quarter and rear-three-quarter views were inspected: the original hard ridges are softer and body balance remains intact. Residual jacket shoulder seams still need actual Unity-framing review; this is a local repair, with no additional generation charge.
+
 ## Character export candidates
 
 SourceArt/Demo02/Exports/Characters_v001 contains three FBX derivatives, three albedo maps and hashed source/export receipts. The learner contains 54 bones and separate Idle/Walk clips; the other cast roles contain 24 bones and a native Idle clip each. An isolated Blender FBX roundtrip verified expected 1.68m, 1.80m and 1.65m heights to within 0.000002m, material names and the intended clip counts/ranges. No source clips or helpers were silently substituted into the export. Unity Avatar/material/animation, post-Play persistence and final contact checks remain pending.
+
+Characters_v002 repeats the learner derivative and exports the two locally refined NPC sources. Its independent FBX roundtrip again confirms the three expected heights, bone counts, one mesh per role and intended Idle/Walk ranges. Versioned sources and previous exports are preserved. This is the current candidate for a Unity import pilot.
 
 Existing local Mixamo gesture sources were considered read-only for reuse. No original Mixamo file was copied into this repository. The GitHub repository is public, so raw third-party motion redistribution must not be inferred from game-use permission. Current native idle loops use locally authored keyframes.
 

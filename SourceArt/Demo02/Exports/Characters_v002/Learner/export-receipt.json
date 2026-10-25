@@ -1,0 +1,22 @@
+{
+  "source": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_Motion_v002.blend",
+  "source_sha256": "a4fbbea156d2805172d726a3b29c1874d517ad6521a821c7c914f516e71963ae",
+  "export": "AcademicLearner_v002.fbx",
+  "sha256": "7dd3fb5c5c04cc4b3e6f39f3d62c2a7fd67c8919873f0ca284f0a4c3438b6425",
+  "units": "metres via FBX unit scaling",
+  "axis_forward": "-Z",
+  "axis_up": "Y",
+  "bones": 54,
+  "mesh_vertices": 24179,
+  "actions": [
+    "D02_Learner_Idle_v001",
+    "D02_Learner_Walk_v002"
+  ],
+  "textures": [
+    {
+      "file": "Learner_Albedo.png",
+      "sha256": "2c5c160a7aba9aa14b1ae39b82599c10af1051573298949be4b428e9c108b58d"
+    }
+  ],
+  "status": "Export candidate, Unity avatar/render/play validation pending"
+}

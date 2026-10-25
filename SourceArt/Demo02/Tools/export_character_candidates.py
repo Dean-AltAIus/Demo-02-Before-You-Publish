@@ -1,11 +1,13 @@
 """Versioned, selected-only Unity export derivatives from preserved native sources."""
-import bpy,json,hashlib
+import bpy,json,hashlib,sys,argparse
 from pathlib import Path
 R=Path(r'D:\Altaius\Demo-02-Before-You-Publish')
-for role,stem,version in [('Learner','AcademicLearner','v002'),('Colleague','Colleague','v001'),('ModuleLead','ModuleLead','v001')]:
+parser=argparse.ArgumentParser();parser.add_argument('--edition',default='v001');parser.add_argument('--npc-motion',default='v001')
+args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+for role,stem,version in [('Learner','AcademicLearner','v002'),('Colleague','Colleague',args.npc_motion),('ModuleLead','ModuleLead',args.npc_motion)]:
  source=R/f'SourceArt/Demo02/Characters/{role}/{stem}_Motion_{version}.blend'
- dest=R/f'SourceArt/Demo02/Exports/Characters_v001/{role}';dest.mkdir(parents=True,exist_ok=True)
- target=dest/(stem+'_v001.fbx')
+ dest=R/f'SourceArt/Demo02/Exports/Characters_{args.edition}/{role}';dest.mkdir(parents=True,exist_ok=True)
+ target=dest/(stem+'_'+args.edition+'.fbx')
  if target.exists():raise RuntimeError('Refuse existing export replacement')
  bpy.ops.wm.open_mainfile(filepath=str(source));s=bpy.data.scenes['Demo02_'+role+'Rig_v001'];bpy.context.window.scene=s
  a=bpy.data.objects[stem+'_EditableRig'];body=bpy.data.objects[stem+'_WeightedMesh'];root=bpy.data.objects[stem+'_Root']

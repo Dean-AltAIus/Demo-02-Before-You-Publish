@@ -1,0 +1,12 @@
+{
+  "material": "D02_WarmOak",
+  "source": "SourceArt/Demo02/Environment/CampusKit_v001.blend",
+  "bake_type": "Diffuse color only, lighting excluded",
+  "resolution": [
+    1024,
+    1024
+  ],
+  "uv": "Entire 0 to 1 UV field, no empty atlas regions. Grain orientation follows each editable mesh UV.",
+  "texture_sha256": "93cbd1dcf22b9847ed3fa233a634a7184f67209fec1bab2a1a84bceb9d70050c",
+  "unity_import": "pending"
+}

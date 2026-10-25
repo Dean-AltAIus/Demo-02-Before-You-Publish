@@ -1,0 +1,21 @@
+{
+  "source": "SourceArt\\Demo02\\Characters\\ModuleLead\\ModuleLead_Motion_v002.blend",
+  "source_sha256": "79f6837bf9542e32a86b7aee85fd945a48603abf089928fa8b851b33a46edd1b",
+  "export": "ModuleLead_v002.fbx",
+  "sha256": "9d9880e24666f2fda6265464d49540f7375e54deaf4b3bc54e58a128aaafd09f",
+  "units": "metres via FBX unit scaling",
+  "axis_forward": "-Z",
+  "axis_up": "Y",
+  "bones": 24,
+  "mesh_vertices": 15309,
+  "actions": [
+    "D02_ModuleLead_Idle_v001"
+  ],
+  "textures": [
+    {
+      "file": "ModuleLead_Albedo.png",
+      "sha256": "660ca574ff6d582dec0a8c239747ce643705652aab2a2c0931d79e6d2d594a58"
+    }
+  ],
+  "status": "Export candidate, Unity avatar/render/play validation pending"
+}
