@@ -1,0 +1,6 @@
+{
+  "name": "Altaius.Demo02.Domain.Tests",
+  "references": ["Altaius.Demo02.Domain"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Altaius.Demo02.Domain",
+  "rootNamespace": "Altaius.Demo02.Domain",
+  "noEngineReferences": true,
+  "autoReferenced": true
+}
