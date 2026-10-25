@@ -1,0 +1,195 @@
+using System;
+using System.Linq;
+using Altaius.Demo02.Domain;
+using Altaius.Demo02.Gameplay;
+using Altaius.Demo02.Integration;
+using Altaius.Demo02.Presentation;
+using Altaius.Demo02.UI;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+namespace Altaius.Demo02.Presenter
+{
+    [DefaultExecutionOrder(-25)]
+    public sealed class PresenterRunner:MonoBehaviour,IPresenterControls
+    {
+        public PresentationView UI;public PresenterSequence Sequence;public Transform[] RouteNodes=Array.Empty<Transform>();
+        public GameObject Dock;public Text Status,Commentary;public Button PauseButton,CancelButton,ResetButton,ExitButton,CommentaryButton;
+        public bool Active {get;private set;} public bool Paused {get;private set;} public bool Completed {get;private set;}
+        public int StepIndex {get;private set;} public float PresentedSeconds {get;private set;} public float TravelledMetres {get;private set;}
+        public string LastError {get;private set;} public Guid AttemptId {get;private set;}
+        public PresenterStep CurrentStep=>frozen&&StepIndex<frozen.Steps.Length?frozen.Steps[StepIndex]:null;
+        PresenterSequence frozen,source;PresenterScenarioScope scope;PresenterInputLease lease;CampusSessionState original;PresenterWorkspaceBookmark bookmark;
+        Vector3 originalPosition,lastPosition;Quaternion originalFacing;float yaw,pitch,timeScale,elapsed,typed,phraseWait;bool originalMotion,direct,entered,actionDone,showCommentary,bindings;
+        string digest,identity,taskDigest,rubricDigest,fieldExpected;int world,epoch;InputField typingField;PresenterRoute route;
+        AuthorityReply authority;CommandReceipt findingReceipt;Guid findingDelivery;bool findingAcknowledged;
+        CampusGameplayFacade Game=>UI.Gameplay;SessionSnapshot S=>UI.Host.Session.Snapshot;
+        void Start(){BindButtons();if(Dock)Dock.SetActive(false);}
+        void BindButtons()
+        {
+            if(bindings)return;bindings=true;
+            if(PauseButton)PauseButton.onClick.AddListener(()=>{if(Paused)Resume();else Pause();});
+            if(CancelButton)CancelButton.onClick.AddListener(Cancel);if(ResetButton)ResetButton.onClick.AddListener(ResetRun);if(ExitButton)ExitButton.onClick.AddListener(Exit);
+            if(CommentaryButton)CommentaryButton.onClick.AddListener(()=>{showCommentary=!showCommentary;RefreshDock();});
+        }
+        public void ShowBrief()=>UI.ShowPresenterBrief(()=>StartSequence(Sequence,false),()=>StartSequence(Sequence,true),UI.OpenTitle);
+        public void StartSequence(PresenterSequence sequence,bool useDirectRoutes)
+        {
+            if(!UI||!sequence)throw new InvalidOperationException("Bind the saved presenter sequence and native campus UI.");
+            if(Game.IsComposing)throw new InvalidOperationException("Finish text composition before starting the walkthrough.");
+            if(Active)Cancel();BindButtons();original=UI.Host.CaptureState();bookmark=UI.CapturePresenterWorkspace();originalPosition=Game.Motor.transform.position;originalFacing=Game.Motor.CharacterVisual?Game.Motor.CharacterVisual.rotation:Quaternion.identity;yaw=Game.CameraRig.Yaw;pitch=Game.CameraRig.Pitch;timeScale=Time.timeScale;originalMotion=Game.CameraRig.ReducedMotion;
+            source=sequence;digest=source.Digest;frozen=Instantiate(sequence);frozen.hideFlags=HideFlags.HideAndDontSave;
+            direct=useDirectRoutes||UI.Applied?.ReducedMotion==true;showCommentary=frozen.BuyerCommentary;StepIndex=0;PresentedSeconds=TravelledMetres=0;LastError=null;Completed=Paused=false;ResetStep();epoch++;
+            if(direct)Game.CameraRig.ReducedMotion=true;
+            UI.EnterPresenterSession();AttemptId=S.AttemptId;scope=new PresenterScenarioScope(AttemptId,frozen);Game.PresenterOwnsInput=true;Game.DriveMovement(Vector2.zero);lease=new PresenterInputLease(UI);Active=true;lastPosition=Game.Motor.transform.position;
+            if(Dock){Dock.SetActive(true);Dock.transform.SetAsLastSibling();}Checkpoint();RefreshDock();
+        }
+        void Update()=>Tick(Time.unscaledDeltaTime);
+        public void Tick(float deltaTime)
+        {
+            if(!Active)return;
+            try
+            {
+                lease?.Apply();AcceptOwnedAuthorityChange();
+                if(source.Digest!=digest||S.AttemptId!=AttemptId||S.Mode!=SessionMode.Presenter||S.Task.Digest!=taskDigest||S.Rubric.Digest!=rubricDigest||S.WorldRevision!=world||UI.NativeSurfaceIdentity!=identity)
+                    throw new InvalidOperationException("The authored sequence, document, attempt or native surface changed. Walkthrough stopped safely.");
+                if(typingField&&typingField.text!=fieldExpected)throw new InvalidOperationException("The automated native draft changed outside its input driver.");
+                if(Game.IsComposing){Pause();return;}if(Paused||Completed){Game.DriveMovement(Vector2.zero);return;}
+                var displacement=Game.Motor.transform.position-lastPosition;displacement.y=0;TravelledMetres+=displacement.magnitude;lastPosition=Game.Motor.transform.position;
+                PresentedSeconds+=Mathf.Max(0,deltaTime);var step=CurrentStep;if(step==null){Completed=true;Game.DriveMovement(Vector2.zero);RefreshDock();return;}
+                if(step.TaskVersion>0&&S.Task.Version!=step.TaskVersion||step.RubricVersion>0&&S.Rubric.Version!=step.RubricVersion)throw new InvalidOperationException("The presenter step's required version guard changed.");
+                float dt=Mathf.Max(0,deltaTime)*Mathf.Max(.1f,frozen.Pace);
+                if(!entered){entered=true;Enter(step);Checkpoint();lease?.Apply();}
+                elapsed+=dt;
+                if(step.Kind==PresenterStepKind.TypePresentation||step.Kind==PresenterStepKind.TypeWorkbench)Type(step,dt);
+                else if(step.Kind==PresenterStepKind.MoveStation&&!actionDone)
+                {
+                    if(route.Tick(Mathf.Max(.001f,deltaTime)))
+                    {Game.DriveMovement(Vector2.zero);if(!Game.TryInspectNearest()||Game.ActiveStation.StationId!=step.Station)throw new InvalidOperationException("Actual range inspection did not reach the intended saved station.");actionDone=true;elapsed=0;Checkpoint();}
+                    else if(elapsed>90*frozen.Pace)throw new InvalidOperationException("Movement did not reach the saved station. Check the collision route.");
+                }
+                else if(step.Kind==PresenterStepKind.Await&&!actionDone)
+                {actionDone=Ready(step.Control);if(elapsed>45)throw new InvalidOperationException("The actual rendered reply was not delivered. No synthetic authority was inferred.");}
+                if(actionDone&&elapsed>=step.Dwell){StepIndex++;ResetStep();}
+                RefreshDock();
+            }
+            catch(Exception error){LastError=error.Message;Cancel();UI.ShowPresenterStopNotice("Walkthrough stopped safely: "+LastError);}
+        }
+        void Enter(PresenterStep step)
+        {
+            switch(step.Kind)
+            {
+                case PresenterStepKind.Dwell:actionDone=true;break;
+                case PresenterStepKind.WorkbenchControl:Require(UI.Workbench.ActivateControl(step.Control),step.Control);actionDone=true;break;
+                case PresenterStepKind.PresentationControl:
+                    Require(UI.ActivateControl(step.Control),step.Control);authority=UI.LastAuthorityReply;
+                    if(step.Control=="Send")authority=null;actionDone=true;break;
+                case PresenterStepKind.OpenConversation:UI.OpenConversation(step.Role);actionDone=true;break;
+                case PresenterStepKind.TypePresentation:case PresenterStepKind.TypeWorkbench:
+                    typingField=step.Kind==PresenterStepKind.TypePresentation?UI.FindPresenterField(step.Control):UI.Workbench.Rows.Find(step.Control)?.Input;
+                    if(!typingField)throw new InvalidOperationException("The expected native field is unavailable: "+step.Control);SetText(step,"");break;
+                case PresenterStepKind.MoveStation:
+                    CloseWorkspace();var station=Game.Stations.Single(s=>s.StationId==step.Station);
+                    if(direct){Require(Game.DirectRoute(step.Station),step.Station);lastPosition=Game.Motor.transform.position;actionDone=true;}
+                    else route=new PresenterRoute(Game,RouteNodes,station);break;
+                case PresenterStepKind.CloseWorkspace:CloseWorkspace();actionDone=true;break;
+                case PresenterStepKind.ObserveBaseline:
+                    UI.ShowPresenterObservation("W_LIST | full-mark counterexample",S.DraftTotal("W_LIST")+" / 20 saved authored hypothesis under Task "+S.Task.Version+" / Rubric "+S.Rubric.Version+".\nCurrent evaluations: "+S.CurrentEvaluations.Count+". Naming and listing do not require comparison or a justified decision. O2 evaluation remains unobserved.\nAnnotation receipts: "+string.Join(", ",S.CurrentAnnotations.Select(a=>a.Id.ToString())));actionDone=true;break;
+                case PresenterStepKind.Finding:ShowFinding(step.Control);actionDone=true;break;
+                case PresenterStepKind.ReviewDecision:
+                    var request=S.ReviewHistory.Last();authority=UI.Lifecycle.Authority.PreparePresenterDecision(scope.DecisionScope(S,request.Id),ReviewDecision.Approved,scope.ReviewReason);UI.ShowAuthority(authority);actionDone=true;break;
+                case PresenterStepKind.Await:actionDone=Ready(step.Control);break;
+                case PresenterStepKind.Debrief:UI.OpenDebrief();actionDone=true;break;
+                case PresenterStepKind.ReadWorkbench:
+                    var row=UI.Workbench.Rows.Find(step.Control);Require(row,step.Control);EventSystem.current?.SetSelectedGameObject(null);UI.Workbench.Focus.EnsureVisible(row.gameObject);actionDone=true;break;
+                case PresenterStepKind.ReadPresentation:Require(UI.ReadPresenterControl(step.Control),step.Control);actionDone=true;break;
+            }
+        }
+        void Type(PresenterStep step,float deltaTime)
+        {
+            if(actionDone)return;if(EventSystem.current&&EventSystem.current.currentSelectedGameObject!=typingField.gameObject)throw new InvalidOperationException("Native typing focus changed. The draft was preserved.");
+            if(phraseWait>0){phraseWait-=deltaTime;return;}typed+=deltaTime*Mathf.Max(1,step.CharactersPerSecond);int count=Mathf.Min(step.Text?.Length??0,Mathf.FloorToInt(typed));
+            if(count>fieldExpected.Length)
+            {
+                int boundary=-1;for(int i=fieldExpected.Length;i<count;i++)if(".,;:!?".IndexOf(step.Text[i])>=0){boundary=i+1;break;}
+                if(boundary>0){count=boundary;typed=count;phraseWait=step.PhrasePause;}
+                SetText(step,step.Text.Substring(0,count));
+            }
+            if(count==(step.Text?.Length??0)){actionDone=true;elapsed=0;}
+        }
+        void SetText(PresenterStep step,string text)
+        {Require(step.Kind==PresenterStepKind.TypePresentation?UI.SetFieldText(step.Control,text):UI.Workbench.SetFieldText(step.Control,text),step.Control);fieldExpected=text;typingField.ForceLabelUpdate();}
+        void ShowFinding(string work)
+        {
+            var command=scope.PrepareEvaluation(S,work);var envelope=UI.Host.Session.Stage(command,WorkbenchModel.OpportunityForWork(work));int ownerEpoch=epoch;findingReceipt=null;findingAcknowledged=false;findingDelivery=Guid.NewGuid();
+            var content=new[]{S.Notebook.Single(p=>p.Reference.SourceId==work).DisplayText+"\nSource "+work+" v1 | SHA-256 "+S.Notebook.Single(p=>p.Reference.SourceId==work).Reference.Sha256+"\nTask 2 / Rubric 2 | submitted "+string.Join(", ",command.SubmittedAnnotationIds)}.Concat(command.Findings.Select(f=>{var a=S.CurrentAnnotations.Single(x=>x.Id==f.AnnotationId);var c=S.Rubric.Criteria.Single(x=>x.Id==f.CriterionId);return c.Id+" | "+a.Content.Marks+" / "+c.Marks+" authored marking hypothesis\nCriterion: "+c.Description+"\nDisplayed rationale: "+a.Content.Rationale+"\nScoped finding: "+f.Decision+". "+f.Reason;})).ToArray();
+            UI.ShowPresenterFinding(work,content,findingDelivery,()=>
+            {
+                if(!Active||Paused||epoch!=ownerEpoch||findingAcknowledged)return;
+                try{scope.Validate(S);findingAcknowledged=true;findingReceipt=UI.Host.TrustedScenarioController.SubmitSyntheticEvaluation(envelope,ActorRole.ExperimentReviewer);Require(findingReceipt.Status==ReceiptStatus.Accepted,findingReceipt.ReasonCode);UI.Host.NotifyChanged();Checkpoint();}
+                catch(Exception error){LastError=error.Message;Cancel();}
+            });
+        }
+        bool Ready(string condition)
+        {
+            if(condition=="authority")return authority!=null&&authority.Displayed&&authority.Receipt?.Status==ReceiptStatus.Accepted;
+            if(condition=="finding")return findingReceipt?.Status==ReceiptStatus.Accepted;
+            if(condition=="conversation"){var reply=UI.Lifecycle.Conversation.History.LastOrDefault();return reply!=null&&(reply.State==ReplyState.Shown||reply.State==ReplyState.Unavailable);}
+            throw new InvalidOperationException("Unknown presenter guard: "+condition);
+        }
+        void AcceptOwnedAuthorityChange()
+        {
+            if(S.WorldRevision==world)return;
+            var receipt=authority?.Receipt;if(authority?.Displayed==true&&receipt?.Status==ReceiptStatus.Accepted&&receipt.BeforeRevision==world&&receipt.AfterRevision==S.WorldRevision&&S.Task.Digest==taskDigest&&S.Rubric.Digest==rubricDigest)world=S.WorldRevision;
+        }
+        void Checkpoint(){identity=UI.NativeSurfaceIdentity;world=S.WorldRevision;taskDigest=S.Task.Digest;rubricDigest=S.Rubric.Digest;}
+        void CloseWorkspace(){UI.Workbench.CloseWindow();UI.CloseSurface(false);Game.DriveMovement(Vector2.zero);EventSystem.current?.SetSelectedGameObject(null);}
+        void ResetStep(){entered=actionDone=false;elapsed=typed=phraseWait=0;typingField=null;fieldExpected=null;route=null;}
+        public void Pause(){if(!Active||Paused)return;Paused=true;Game.DriveMovement(Vector2.zero);UI.Lifecycle.Pause(true);RefreshDock();}
+        public void Resume(){if(!Active||!Paused)return;Paused=false;UI.Lifecycle.Pause(false);if(typingField){typingField.Select();typingField.ActivateInputField();}RefreshDock();}
+        public void ResetRun(){if(!Active)return;var again=source;bool useDirect=direct;Cancel();StartSequence(again,useDirect);}
+        public void Exit(){Cancel();if(UI)UI.OpenTitle();}
+        public void Cancel()
+        {
+            if(!Active)return;Active=false;Paused=false;epoch++;Game.DriveMovement(Vector2.zero);UI.InvalidatePresenterDeliveries();UI.Lifecycle.Reset(false);lease?.Dispose();lease=null;Game.ReleasePresenter();Time.timeScale=timeScale;
+            UI.Host.RestoreState(original);Game.Motor.GoTo(originalPosition,originalFacing);Game.CameraRig.Yaw=yaw;Game.CameraRig.Pitch=pitch;Game.CameraRig.ReducedMotion=originalMotion;Game.CameraRig.SnapFollow();UI.RestorePresenterWorkspace(bookmark);if(Dock)Dock.SetActive(false);if(Commentary){Commentary.gameObject.SetActive(false);var backing=Commentary.GetComponent<PresenterCaptionBacking>();if(backing&&backing.Backing)backing.Backing.SetActive(false);}
+            if(frozen){if(Application.isPlaying)Destroy(frozen);else DestroyImmediate(frozen);}frozen=null;scope=null;ResetStep();
+        }
+        void RefreshDock()
+        {
+            LayoutDock();string label=Completed?"Complete. Return to your practice.":Paused?"Paused. Draft and step retained.":CurrentStep?.Label??"Starting";if(label.Length>39)label=label.Substring(0,36)+"...";
+            if(Status)Status.text="SYNTHETIC / AUTHORED / OFFLINE\n"+label+"\n"+PresentedSeconds.ToString("0.0")+"s | "+TravelledMetres.ToString("0.0")+"m | no learner evidence";
+            if(Status&&UI.Workbench.TextScale>1&&!Paused)Status.text="AUTHORED / OFFLINE | no evidence";
+            if(PauseButton)PauseButton.GetComponentInChildren<Text>().text=Paused?"Resume":"Pause";
+            if(Commentary){bool shown=showCommentary&&!string.IsNullOrEmpty(CurrentStep?.BuyerCommentary)&&typingField==null&&UI.SurfaceId!="conversation"&&UI.SurfaceId!="receipt";Commentary.gameObject.SetActive(shown);var backing=Commentary.GetComponent<PresenterCaptionBacking>();if(backing&&backing.Backing)backing.Backing.SetActive(shown);Commentary.text="Buyer commentary\n"+CurrentStep?.BuyerCommentary;}
+        }
+        void LayoutDock()
+        {
+            if(!Dock||!Status)return;var rect=(RectTransform)Dock.transform;bool panel=UI.IsOpen,large=UI.Workbench.TextScale>1;float scale=UI.Workbench.TextScale;
+            if(Commentary){Commentary.fontSize=Mathf.RoundToInt(17*scale);Commentary.rectTransform.sizeDelta=new Vector2(Mathf.Min(684,350*scale),132*scale);Commentary.GetComponent<PresenterCaptionBacking>()?.Fit();}
+            var controls=new[]{PauseButton,CancelButton,ResetButton,ExitButton,CommentaryButton};foreach(var button in controls)if(button){button.gameObject.SetActive(!large||Paused||button==PauseButton||button==CancelButton);var text=button.GetComponentInChildren<Text>(true);text.fontSize=Mathf.RoundToInt(16*scale);text.rectTransform.anchorMin=Vector2.zero;text.rectTransform.anchorMax=Vector2.one;text.rectTransform.offsetMin=new Vector2(8,0);text.rectTransform.offsetMax=new Vector2(-8,0);}
+            if(large)
+            {
+                rect.anchorMin=new Vector2(.56f,0);rect.anchorMax=new Vector2(.99f,0);rect.pivot=new Vector2(.5f,0);rect.anchoredPosition=new Vector2(0,4);rect.sizeDelta=new Vector2(0,Paused?430:146);
+                Place(Status.rectTransform,12,8,524,Paused?158:62);Status.fontSize=Mathf.RoundToInt(14*scale);
+                for(int i=0;i<controls.Length;i++)if(controls[i])Place((RectTransform)controls[i].transform,i==4?12:12+i%2*266,Paused?180+i/2*76:76,i==4?524:250,64);
+                if(!panel)UI.Workbench.WorldHelp.gameObject.SetActive(false);
+            }
+            else if(panel)
+            {
+                rect.anchorMin=new Vector2(.30f,0);rect.anchorMax=new Vector2(.99f,0);rect.pivot=new Vector2(.5f,0);rect.anchoredPosition=new Vector2(0,4);rect.sizeDelta=new Vector2(0,72);Place(Status.rectTransform,12,5,300,62);Status.fontSize=14;
+                var x=new[]{318f,422,526,630,714};var widths=new[]{100f,100,100,76,158};for(int i=0;i<controls.Length;i++)if(controls[i])Place((RectTransform)controls[i].transform,x[i],16,widths[i],40);
+            }
+            else
+            {
+                rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(16,large?-210:-88);rect.sizeDelta=new Vector2(350,198);Place(Status.rectTransform,12,10,326,80);Status.fontSize=16;
+                if(PauseButton)Place((RectTransform)PauseButton.transform,12,98,100,40);if(CancelButton)Place((RectTransform)CancelButton.transform,122,98,100,40);if(ResetButton)Place((RectTransform)ResetButton.transform,232,98,106,40);if(ExitButton)Place((RectTransform)ExitButton.transform,12,148,100,40);if(CommentaryButton)Place((RectTransform)CommentaryButton.transform,122,148,216,40);
+            }
+        }
+        static void Place(RectTransform rect,float x,float y,float width,float height)
+        {rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(x,-y);rect.sizeDelta=new Vector2(width,height);}
+        static void Require(bool valid,string control){if(!valid)throw new InvalidOperationException("The expected native control or response is unavailable: "+control);}
+        void OnDisable(){if(Active)Cancel();}
+        void OnDestroy(){if(Active)Cancel();}
+    }
+}

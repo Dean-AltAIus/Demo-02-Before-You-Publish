@@ -12,7 +12,7 @@ using UnityEngine.UI;
 namespace Altaius.Demo02.UI
 {
     /// <summary>Saved native system surfaces. Composition owns offline responses; text never grants authority.</summary>
-    public sealed class PresentationView : MonoBehaviour,ICampusWorkspace
+    public sealed partial class PresentationView : MonoBehaviour,ICampusWorkspace
     {
         public CampusSession Host;public CampusGameplayFacade Gameplay;public WorkbenchView Workbench;
         public GameObject Overlay;public PresentationSurface[] Surfaces;
@@ -111,6 +111,7 @@ namespace Altaius.Demo02.UI
         {
             Lifecycle.Pause(false);Begin("title","Before You Publish");
             Text("Title.Intro","Fictional practice","Inspect, mark, revise and seek exact-pair review or an owned hold.");
+            if(PresenterControls!=null)Action("Title.Presenter","Watch the authored gameplay walkthrough",PresenterControls.ShowBrief);
             Button(current.Primary,"Begin practice",OpenBrief);Button(current.Secondary,"Settings",()=>OpenSettings("title"));Button(current.Tertiary,"Exit",()=>ConfirmLifecycle("exit"));Finish("Authored offline. English available. Arabic and voice unavailable.");
         }
         public void OpenBrief()
@@ -118,6 +119,7 @@ namespace Altaius.Demo02.UI
             Begin("brief","Before you begin");Text("Brief.Fiction","This is a fictional practice scenario.","Your actual actions and delivered assistance are retained for this local debrief. No real student data is used. This rehearsal does not measure student learning or universal teaching competence.");
             Action("Mode.Independent",(selectedMode==SessionMode.Independent?"Selected: ":"")+"Independent",()=>{selectedMode=SessionMode.Independent;OpenBrief();});
             Action("Mode.Coached",(selectedMode==SessionMode.Coached?"Selected: ":"")+"Coached",()=>{selectedMode=SessionMode.Coached;OpenBrief();});
+            if(PresenterControls!=null)Action("Mode.Presenter","Authored synthetic presenter walkthrough",PresenterControls.ShowBrief);
             Text("Brief.Modes","Choose how to practice","Independent: strategy only when you request it. Coached: source-bounded assistance may be offered within the assistance limits. Controls support is always optional.");
             Button(current.Primary,"Continue",BeginPractice);Button(current.Secondary,"Back",OpenTitle);Finish("Help is optional. Opening or requesting help is different from actual delivery.");
         }
@@ -155,7 +157,7 @@ namespace Altaius.Demo02.UI
             if(records.Length==0)Text("Conversation.Scope",RoleName(ConversationRole)+" | authored offline","Ask in your own words. Source-bounded authored replies are available for role, inspected sources, publication time and current approval. Unsupported questions receive an unavailable reply. Conversation cannot grant approval.");
             foreach(var record in records.Skip(Math.Max(0,records.Length-1)))
             {
-                Text("Conversation.Own."+record.Request.Id,"You",record.Request.OwnText);
+                Text("Conversation.Own."+record.Request.Id,S.Mode==SessionMode.Presenter?"Authored presenter input":"You",record.Request.OwnText);
                 if(record.Reply!=null&&record.State!=ReplyState.Cancelled&&record.State!=ReplyState.Stale)
                 {var row=Text("Conversation.Reply."+record.Request.Id,RoleName(ConversationRole),record.Reply.Text);if(record.State==ReplyState.Ready){var captured=record;var displayId=Guid.NewGuid();AfterRendered(row.Body,displayId,()=>{Lifecycle.Conversation.Acknowledge(new DisplayAcknowledgement(captured.Request.AttemptId,captured.Request.Id,displayId));conversationRefresh=true;});}}
                 if(record.Error!=null)Text("Conversation.Error."+record.Request.Id,"Preserved request",record.Error);
@@ -213,7 +215,7 @@ namespace Altaius.Demo02.UI
             {Text("Review.Original","Original review request",latest.Id+" | "+latest.Status+" | "+LocalAuthority.Time(latest.Minute)+"\n"+latest.ChangeSummary+"\n"+(latest.DecisionReason??"No decision reason recorded."));
                 Action("Review.Schedule","Check local scheduling response",()=>ShowAuthority(Lifecycle.Authority.PrepareScheduling(latest.Id)),latest.Status==ReviewStatus.Pending);
                 Action("Review.Decision","Request separate review decision",()=>ShowAuthority(Lifecycle.Authority.PrepareReviewDecision(latest.Id)),latest.Status==ReviewStatus.Scheduled);}
-            Action("Review.Release","Preview current-pair release",()=>PreviewDomain(Lifecycle.Authority.StageRelease(),"release"),S.CurrentApproval!=null);
+            Action("Review.Release","Preview current-pair release"+(S.CurrentApproval==null?" | current approval missing":""),()=>PreviewDomain(Lifecycle.Authority.StageRelease(),"release"));
             Action("Review.Hold","Propose an owned hold",OpenHold);Action("Review.Timeline","Inspect authority and receipt history",OpenTimeline);
             var hold=S.HoldHistory.LastOrDefault();if(hold!=null){Text("Hold.Current","Hold proposal "+hold.Id,hold.Proposal.Defect+"\nOwner "+hold.Proposal.Owner+" | Review "+hold.Proposal.ReviewAt+"\nNext action: "+hold.Proposal.NextAction+"\nAcceptance "+(hold.Accepted?.ToString()??"Not recorded")+" | Defect verified "+hold.DefectVerified+" | Self-owned "+hold.SelfOwned);
                 if(hold.Accepted==null)Action("Hold.Accept",hold.Proposal.Owner==ActorRole.Learner?"Confirm my self-owned commitment":"Check actual owner response",()=>{if(hold.Proposal.Owner==ActorRole.Learner)PreviewDomain(Lifecycle.Authority.StageSelfAcceptance(hold.Id),"self hold");else ShowAuthority(Lifecycle.Authority.PrepareOwnerAcceptance(hold.Id));});}
@@ -222,7 +224,7 @@ namespace Altaius.Demo02.UI
         public void OpenReviewRequest()
         {
             Begin("reviewRequest","Request review time");Text("Schedule.Clock","Simulation time "+LocalAuthority.Time(S.ClockMinute),"Review window: "+LocalAuthority.Time(Mathf.Max(S.ClockMinute,820))+" to 14:00. Publication due 14:00. A proposal does not guarantee a slot or advance time.");
-            Input("Review.Summary","Your change summary",ReviewSummary,v=>ReviewSummary=v,true);Input("Review.Time","Requested time (HH:MM)",ReviewTime,v=>ReviewTime=v);
+            Input("Review.Summary",S.Mode==SessionMode.Presenter?"Authored demonstration change summary":"Your change summary",ReviewSummary,v=>ReviewSummary=v,true);Input("Review.Time","Requested time (HH:MM)",ReviewTime,v=>ReviewTime=v);
             Button(current.Primary,"Preview request",()=>PreviewDomain(Lifecycle.Authority.StageReview(ReviewSummary,ReviewTime),"review"));Button(current.Secondary,"Keep draft",OpenReview);Finish("The current pair and exact readset will be captured in the preview.");
         }
         public void OpenHold()
@@ -240,7 +242,7 @@ namespace Altaius.Demo02.UI
             if(envelope.Command is RequestReview review)Text("Confirm.Change","Review proposal",review.ChangeSummary+"\nRequested "+review.ReviewBy+". A request does not schedule or approve.");
             if(envelope.Command is RequestHold hold)Text("Confirm.Change","Hold proposal",hold.Defect+"\nOwner "+hold.Owner+" | "+hold.ReviewAt+"\nNext action: "+hold.NextAction+"\nBasis "+hold.Basis+" | inspected anchors "+hold.Anchors.Count);
             if(kind=="self hold")Text("Confirm.Change","Your explicit commitment","I accept the stated next action and future time as the learner owner. This is self-owned, not an NPC response. Unverified defect prose remains unverified.");
-            if(kind=="release")Text("Confirm.Change","Release this exact pair","This will request publication using the current exact approval receipt. A changed pair or stale readset will reject the action.");
+            if(kind=="release")Text("Confirm.Change","Release this exact pair",S.CurrentApproval==null?"Current approval is missing. Confirming submits an actual release request to the gate. The cabinet stays closed unless this exact pair has accepted authority.":"This will request publication using the current exact approval receipt. A changed pair or stale readset will reject the action.");
             Text("Confirm.Scope","Exact Task "+S.Task.Version+" / Rubric "+S.Rubric.Version,"Request "+envelope.CommandId+"\nAttempt "+envelope.AttemptId+"\nWorld revision "+envelope.ExpectedWorldRevision+"\nTask SHA-256 "+S.Task.Digest+"\nRubric SHA-256 "+S.Rubric.Digest);
             Button(current.Primary,kind=="self hold"?"I confirm my commitment":"Confirm "+kind,CommitDomain);Button(current.Secondary,"Keep editing",()=>{if(kind=="hold")OpenHold();else if(kind=="review")OpenReviewRequest();else OpenReview();});Finish("Confirming submits this original staged request once. Changed content needs an explicit fresh preview.");
         }
@@ -248,7 +250,7 @@ namespace Altaius.Demo02.UI
         {
             if(Pending==null)throw new InvalidOperationException("Preview the request first.");var receipt=Lifecycle.Authority.Confirm(Pending);Host.NotifyChanged();
             Begin("receipt",receipt.Status==ReceiptStatus.Accepted?"Request receipt":"Request needs attention");
-            Text("Receipt.Status",receipt.Action+" | "+receipt.Status,receipt.ReasonCode+"\nRequest "+receipt.RequestId+"\nRevision "+receipt.BeforeRevision+" to "+receipt.AfterRevision+"\nAuthority "+receipt.Authority+"\n"+receipt.AuthorityDisclosure);
+            Text("Receipt.Status",receipt.Action+" | "+receipt.Status,receipt.ReasonCode+"\nRequest "+receipt.RequestId+"\nRevision "+receipt.BeforeRevision+" to "+receipt.AfterRevision+"\nAuthority "+receipt.Authority+"\n"+DisplayDisclosure(receipt));
             Text("Receipt.Outcome","Actual current state",AttemptLifecycle.Outcome(S));Button(current.Primary,receipt.Status==ReceiptStatus.Accepted?"Review and publication":"Return to preserved draft",receipt.Status==ReceiptStatus.Accepted?(Action)OpenReview:ReturnDomainDraft);Button(current.Secondary,"View timeline",OpenTimeline);Finish(receipt.Status==ReceiptStatus.Accepted?"Accepted operational record. No semantic or competence claim.":"Your draft and original request are retained. Check this receipt before a fresh preview.");
         }
         void ReturnDomainDraft()
@@ -268,6 +270,7 @@ namespace Altaius.Demo02.UI
         }
         public void Pause()
         {
+            if(PresenterControls?.Active==true){PresenterControls.Pause();return;}
             Lifecycle.Pause(true);Begin("pause","Paused");
             Text("Pause.State","Local practice is paused","Reading, typing and pausing do not advance the logical clock. Pending local responses wait. Your drafts and original request IDs stay in this attempt.");
             Action("Pause.Settings","Settings",()=>OpenSettings("pause"));Action("Pause.Debrief","View practice record",OpenDebrief);Action("Pause.Linked","Start linked practice",()=>ConfirmLifecycle("linked"));Action("Pause.Reset","Full reset",()=>ConfirmLifecycle("reset"));Action("Pause.Exit","Leave the simulation",()=>ConfirmLifecycle("exit"));
@@ -292,12 +295,17 @@ namespace Altaius.Demo02.UI
         public void OpenDebrief()
         {
             Begin("debrief","Practice record");Text("Debrief.Outcome","Actual outcome",AttemptLifecycle.Outcome(S));Text("Debrief.Observation","Observed action and consequence",AttemptLifecycle.BoundedObservation(S)+"\nSemantic evaluation of arbitrary prose is unavailable offline. No measured learning or universal competence claim is available.");Text("Debrief.Assistance","Actual assistance",HelpCoordinator.AssistanceSummary(S));
+            if(S.Mode==SessionMode.Presenter)
+            {
+                var approval=S.ApprovalHistory.LastOrDefault();var release=S.Audit.LastOrDefault(a=>a.Receipt.Action=="release.request");
+                Text("Debrief.Presenter","Exact authored run records","Current Task "+S.Task.Version+" / Rubric "+S.Rubric.Version+". Current approval: "+(S.CurrentApproval==null?"Not recorded":S.CurrentApproval.ReceiptId.ToString())+".\nHistorical approval: "+(approval==null?"Not recorded":"Task "+approval.Pair.TaskVersion+" / Rubric "+approval.Pair.RubricVersion+" | "+approval.ReceiptId)+".\nLast release request: "+(release==null?"Not attempted":release.Receipt.RequestId+" | "+release.Receipt.Status+" | "+release.Receipt.ReasonCode)+".\nPublication: "+S.Publication+". Accepted hold: "+(S.HoldHistory.Any(h=>h.Accepted==true)?"Recorded":"Not recorded")+". Learner evidence records: "+S.Evidence.Count+".\nThe shown repair, hypotheses and scoped findings are authored demonstration content. Seek review of the current pair before release.");
+            }
             Button(current.Primary,"View timeline",OpenTimeline);Button(current.Secondary,"Linked practice",()=>ConfirmLifecycle("linked"));Button(current.Tertiary,"Back",()=>{if(Lifecycle.Paused)Pause();else CloseSurface();});Finish(S.Mode==SessionMode.Presenter?"Synthetic presenter records. No learner evidence.":"This debrief describes only the recorded local attempt.");
         }
         public void OpenTimeline()
         {
             Begin("timeline","Read-only timeline");Text("Timeline.Scope","Current attempt "+S.AttemptId,"Mode "+S.Mode+" | "+AttemptLifecycle.Outcome(S)+"\nThis view cannot create marks, approvals or evidence.");
-            foreach(var a in S.Audit)Text("Timeline.Command."+a.Sequence,"Command "+a.Sequence+" | "+a.Receipt.Action,a.Receipt.Status+" | "+a.Receipt.ReasonCode+"\nReceipt "+a.Receipt.RequestId+"\n"+a.Receipt.AuthorityDisclosure);
+            foreach(var a in S.Audit)Text("Timeline.Command."+a.Sequence,"Command "+a.Sequence+" | "+a.Receipt.Action,a.Receipt.Status+" | "+a.Receipt.ReasonCode+"\nReceipt "+a.Receipt.RequestId+"\n"+DisplayDisclosure(a.Receipt));
             foreach(var r in S.ReviewHistory)Text("Timeline.Review."+r.Id+"."+r.Revision,"Review | "+r.Status,"Task "+r.Pair.TaskVersion+" / Rubric "+r.Pair.RubricVersion+" | Request "+r.Id+"\n"+(r.DecisionReason??r.ChangeSummary)+"\nDecision receipt "+(r.DecisionReceiptId?.ToString()??"Not recorded"));
             foreach(var reply in Lifecycle.Authority.LinkedReplies.Concat(Lifecycle.Authority.Replies))Text("Timeline.RoleReply."+reply.Id,RoleName(reply.AuthorityRole)+" | "+reply.Status,reply.Text+"\nOriginal request "+reply.OriginalRequestId+"\nReply "+reply.Id+" | Attempt "+reply.AttemptId+"\nActually displayed "+reply.Displayed+"\n"+reply.Provenance);
             foreach(var h in S.HoldHistory)Text("Timeline.Hold."+h.Id+"."+h.Revision,"Hold | acceptance "+(h.Accepted?.ToString()??"Not recorded"),h.Id+"\n"+h.Proposal.Defect+"\nOwner "+h.Proposal.Owner+" | "+h.Proposal.ReviewAt+" | "+h.Proposal.NextAction+"\nSelf-owned "+h.SelfOwned+" | Verified defect "+h.DefectVerified);
@@ -358,7 +366,7 @@ namespace Altaius.Demo02.UI
         {
             if(Gameplay.IsComposing||current==null)return false;
             var field=id=="Composer"?current.Composer:current.Rows.Find(id)?.Input;if(!field)return false;
-            field.Select();field.ActivateInputField();field.text=text;field.caretPosition=text.Length;current.Focus.EnsureVisible(field.gameObject);return true;
+            field.Select();field.ActivateInputField();field.text=text;field.caretPosition=text.Length;field.ForceLabelUpdate();current.Focus.EnsureVisible(field.gameObject);return true;
         }
         public bool ActivateControl(string id)
         {

@@ -21,5 +21,17 @@ namespace Altaius.Demo02.Gameplay
         }
         public void NotifyChanged() => Changed?.Invoke();
         public void RebindWorkbench() { Workbench = new WorkbenchModel(Session); NotifyChanged(); }
+        public CampusSessionState CaptureState()=>new CampusSessionState(Session,Workbench,TrustedScenarioController);
+        public void RestoreState(CampusSessionState state)
+        {
+            if(state==null)throw new ArgumentNullException(nameof(state));
+            Session=state.Session;Workbench=state.Workbench;TrustedScenarioController=state.Controller;NotifyChanged();
+        }
+    }
+    public sealed class CampusSessionState
+    {
+        public OfflineSession Session {get;} public WorkbenchModel Workbench {get;} public ScenarioController Controller {get;}
+        internal CampusSessionState(OfflineSession session,WorkbenchModel workbench,ScenarioController controller)
+        {Session=session;Workbench=workbench;Controller=controller;}
     }
 }

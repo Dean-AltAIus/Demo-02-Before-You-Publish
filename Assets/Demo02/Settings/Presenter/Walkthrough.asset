@@ -1,0 +1,2495 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2588cec2673021542ae732f239a93eee, type: 3}
+  m_Name: Walkthrough
+  m_EditorClassIdentifier: 
+  ScenarioId: D02.authored.compare-and-justify.v1
+  Disclosure: Synthetic authored demonstration. Offline. No learner evidence.
+  Pace: 1
+  BuyerCommentary: 1
+  ExpectedTaskDigest: 356a25feff5feaed0cbe8394e94cefe0148d7963413d283803de234e397e7b85
+  ExpectedRubricDigest: e2882e4520bb9e43891a373d9bdf769273dcbc69768bfaccc0e1a9ccadd5327a
+  ReviewReason: For this exact authored Task 2 / Rubric 2, explanation carries 4
+    marks and comparison, evidence and bounded justification carry 6 + 4 + 6. Both
+    inspected passages and the steward-trial context are attached. This synthetic
+    review approves only this exact demonstration pair, not arbitrary learner prose.
+  Marks:
+  - Work: W_COMPARE
+    WorkSha256: c5af6e339f9e2fc26df928b67c04d43bef9323d45a7f57c2f2ce8d85208c1a3e
+    Criterion: explain_sources
+    Marks: 4
+    Rationale: 'Authored demonstration: Explains a local count and a supplier claim,
+      with different uses.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      Explains a local count and a supplier claim, with different uses.
+    Decision: 0
+  - Work: W_COMPARE
+    WorkSha256: c5af6e339f9e2fc26df928b67c04d43bef9323d45a7f57c2f2ce8d85208c1a3e
+    Criterion: compare_evidence
+    Marks: 6
+    Rationale: 'Authored demonstration: Contrasts five local weekdays with a brochure
+      lacking method and sample.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      Contrasts five local weekdays with a brochure lacking method and sample.
+    Decision: 0
+  - Work: W_COMPARE
+    WorkSha256: c5af6e339f9e2fc26df928b67c04d43bef9323d45a7f57c2f2ce8d85208c1a3e
+    Criterion: use_extracts
+    Marks: 4
+    Rationale: 'Authored demonstration: Uses 180 arrivals / 45 waiting against 90
+      / 5, and missing supplier detail.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      Uses 180 arrivals / 45 waiting against 90 / 5, and missing supplier detail.
+    Decision: 0
+  - Work: W_COMPARE
+    WorkSha256: c5af6e339f9e2fc26df928b67c04d43bef9323d45a7f57c2f2ce8d85208c1a3e
+    Criterion: justify_limit
+    Marks: 6
+    Rationale: 'Authored demonstration: Prefers S_A for a bounded weekday trial,
+      excluding weekends and causal proof.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      Prefers S_A for a bounded weekday trial, excluding weekends and causal proof.
+    Decision: 0
+  - Work: W_PITCH
+    WorkSha256: 0c1a2bab89383e8b901933b09367a82e754b12e906c66c31aa769e25a75e3aa1
+    Criterion: explain_sources
+    Marks: 2
+    Rationale: 'Authored demonstration: Names both sources but does not explain their
+      useful purposes.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      Names both sources but does not explain their useful purposes.
+    Decision: 0
+  - Work: W_PITCH
+    WorkSha256: 0c1a2bab89383e8b901933b09367a82e754b12e906c66c31aa769e25a75e3aa1
+    Criterion: compare_evidence
+    Marks: 0
+    Rationale: 'Authored demonstration: Confidence and appearance do not compare
+      method or relevance.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      Confidence and appearance do not compare method or relevance.
+    Decision: 0
+  - Work: W_PITCH
+    WorkSha256: 0c1a2bab89383e8b901933b09367a82e754b12e906c66c31aa769e25a75e3aa1
+    Criterion: use_extracts
+    Marks: 0
+    Rationale: 'Authored demonstration: No actual counts or missing-method evidence
+      supports the purchase claim.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      No actual counts or missing-method evidence supports the purchase claim.
+    Decision: 0
+  - Work: W_PITCH
+    WorkSha256: 0c1a2bab89383e8b901933b09367a82e754b12e906c66c31aa769e25a75e3aa1
+    Criterion: justify_limit
+    Marks: 0
+    Rationale: 'Authored demonstration: Claims the app eliminates waiting, without
+      a bounded justification or limitation.'
+    Finding: This exact displayed rationale and mark are the authored scenario hypothesis.
+      Claims the app eliminates waiting, without a bounded justification or limitation.
+    Decision: 0
+  Steps:
+  - Id: D02.presenter.000
+    Label: Actual campus | synthetic session
+    Control: 
+    Text: 
+    Station: 
+    Kind: 7
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: The experiment makes an assessment-design mistake visible before
+      release. Publication authority stays separate from a convincing explanation.
+  - Id: D02.presenter.001
+    Label: Colleague | actual offline request
+    Control: 
+    Text: 
+    Station: 
+    Kind: 4
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.002
+    Label: 'Authored demonstration typing: Composer'
+    Control: Composer
+    Text: What time is publication due?
+    Station: 
+    Kind: 3
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.003
+    Label: 'Native action: Send'
+    Control: Send
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.004
+    Label: Read the actual colleague reply
+    Control: conversation
+    Text: 
+    Station: 
+    Kind: 11
+    Dwell: 4.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.005
+    Label: 'Travel and inspect: studio'
+    Control: 
+    Text: 
+    Station: studio
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.006
+    Label: 'Native action: Inspect.D02.outcome.O1'
+    Control: Inspect.D02.outcome.O1
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.007
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.008
+    Label: 'Native action: Inspect.D02.outcome.O2'
+    Control: Inspect.D02.outcome.O2
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.009
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.010
+    Label: 'Native action: Inspect.D02.task.v1.Q1'
+    Control: Inspect.D02.task.v1.Q1
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.011
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.012
+    Label: 'Native action: Inspect.D02.task.v1.Q2'
+    Control: Inspect.D02.task.v1.Q2
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.013
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.014
+    Label: 'Native action: Inspect.D02.rubric.v1.naming'
+    Control: Inspect.D02.rubric.v1.naming
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.015
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.016
+    Label: 'Native action: Inspect.D02.rubric.v1.listing'
+    Control: Inspect.D02.rubric.v1.listing
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.017
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.018
+    Label: 'Travel and inspect: archive'
+    Control: 
+    Text: 
+    Station: archive
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.019
+    Label: 'Native action: Inspect.S_A'
+    Control: Inspect.S_A
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 6
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.020
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.021
+    Label: 'Native action: Inspect.S_B'
+    Control: Inspect.S_B
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.022
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.023
+    Label: 'Travel and inspect: experiment'
+    Control: 
+    Text: 
+    Station: experiment
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.024
+    Label: 'Native action: Work.W_LIST'
+    Control: Work.W_LIST
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 4.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.025
+    Label: 'Native action: Criterion.naming'
+    Control: Criterion.naming
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.026
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 10
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.027
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: the work names a facilities count and a supplier
+      brochure, exactly as the naming criterion asks.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.028
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.029
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.030
+    Label: 'Native action: Criterion.listing'
+    Control: Criterion.listing
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.031
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 10
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.032
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: the work lists method, dates and sample. Listing
+      does not require comparing sources or justifying a decision.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.033
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.034
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.035
+    Label: 20 / 20 hypothesis, evaluation absent
+    Control: 
+    Text: 
+    Station: 
+    Kind: 8
+    Dwell: 7
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.036
+    Label: 'Travel and inspect: experiment'
+    Control: 
+    Text: 
+    Station: experiment
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.037
+    Label: 'Native action: Work.W_COMPARE'
+    Control: Work.W_COMPARE
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 7
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.038
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.039
+    Label: 'Native action: Work.W_PITCH'
+    Control: Work.W_PITCH
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 6
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.040
+    Label: 'Travel and inspect: studio'
+    Control: 
+    Text: 
+    Station: studio
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.041
+    Label: 'Native action: Editor.Task'
+    Control: Editor.Task
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.042
+    Label: 'Authored demonstration typing: Task.Q1.Text'
+    Control: Task.Q1.Text
+    Text: Explain the nature and one useful purpose of S_A and S_B.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.043
+    Label: 'Authored demonstration typing: Task.Q1.Marks'
+    Control: Task.Q1.Marks
+    Text: 4
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.044
+    Label: 'Authored demonstration typing: Task.Q1.Outcomes'
+    Control: Task.Q1.Outcomes
+    Text: O1
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.045
+    Label: 'Authored demonstration typing: Task.Q2.Text'
+    Control: Task.Q2.Text
+    Text: Compare S_A and S_B. Justify which is more reliable for the stated steward-trial
+      decision, using evidence and acknowledging limitations.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.046
+    Label: 'Authored demonstration typing: Task.Q2.Marks'
+    Control: Task.Q2.Marks
+    Text: 16
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.047
+    Label: 'Authored demonstration typing: Task.Q2.Outcomes'
+    Control: Task.Q2.Outcomes
+    Text: O2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.048
+    Label: 'Native action: Task.Attach.S_A'
+    Control: Task.Attach.S_A
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.049
+    Label: 'Native action: Task.Attach.S_B'
+    Control: Task.Attach.S_B
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.050
+    Label: 'Authored demonstration typing: Task.Context'
+    Control: Task.Context
+    Text: Decide whether to trial one additional entrance steward at 08:00 to 09:00
+      on term weekdays. Neither passage proves that a steward will reduce waiting.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.051
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.052
+    Label: Read actual task preview
+    Control: Preview.After.Q1
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.053
+    Label: Read actual task preview
+    Control: Preview.After.Q2
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.054
+    Label: Read actual task preview
+    Control: Preview.Context
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.055
+    Label: Read actual task preview
+    Control: Preview.Sources
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.056
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.057
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.058
+    Label: 'Native action: Editor.Rubric'
+    Control: Editor.Rubric
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.059
+    Label: 'Native action: Rubric.Add'
+    Control: Rubric.Add
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.060
+    Label: 'Native action: Rubric.Add'
+    Control: Rubric.Add
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.061
+    Label: 'Authored demonstration typing: Rubric.0.Id'
+    Control: Rubric.0.Id
+    Text: explain_sources
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.062
+    Label: 'Authored demonstration typing: Rubric.0.Question'
+    Control: Rubric.0.Question
+    Text: Q1
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.063
+    Label: 'Authored demonstration typing: Rubric.0.Outcomes'
+    Control: Rubric.0.Outcomes
+    Text: O1
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.064
+    Label: 'Authored demonstration typing: Rubric.0.Marks'
+    Control: Rubric.0.Marks
+    Text: 4
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.065
+    Label: 'Authored demonstration typing: Rubric.0.Text'
+    Control: Rubric.0.Text
+    Text: Explain the nature and useful purpose of both sources.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.066
+    Label: 'Authored demonstration typing: Rubric.1.Id'
+    Control: Rubric.1.Id
+    Text: compare_evidence
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.067
+    Label: 'Authored demonstration typing: Rubric.1.Question'
+    Control: Rubric.1.Question
+    Text: Q2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.068
+    Label: 'Authored demonstration typing: Rubric.1.Outcomes'
+    Control: Rubric.1.Outcomes
+    Text: O2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.069
+    Label: 'Authored demonstration typing: Rubric.1.Marks'
+    Control: Rubric.1.Marks
+    Text: 6
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.070
+    Label: 'Authored demonstration typing: Rubric.1.Text'
+    Control: Rubric.1.Text
+    Text: Compare the sources' methods and relevance to the term-weekday steward
+      decision.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.071
+    Label: 'Authored demonstration typing: Rubric.2.Id'
+    Control: Rubric.2.Id
+    Text: use_extracts
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.072
+    Label: 'Authored demonstration typing: Rubric.2.Question'
+    Control: Rubric.2.Question
+    Text: Q2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.073
+    Label: 'Authored demonstration typing: Rubric.2.Outcomes'
+    Control: Rubric.2.Outcomes
+    Text: O2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.074
+    Label: 'Authored demonstration typing: Rubric.2.Marks'
+    Control: Rubric.2.Marks
+    Text: 4
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.075
+    Label: 'Authored demonstration typing: Rubric.2.Text'
+    Control: Rubric.2.Text
+    Text: Use the actual arrival and waiting counts, and the supplier's missing method,
+      as evidence.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.076
+    Label: 'Authored demonstration typing: Rubric.3.Id'
+    Control: Rubric.3.Id
+    Text: justify_limit
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.077
+    Label: 'Authored demonstration typing: Rubric.3.Question'
+    Control: Rubric.3.Question
+    Text: Q2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.078
+    Label: 'Authored demonstration typing: Rubric.3.Outcomes'
+    Control: Rubric.3.Outcomes
+    Text: O2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.079
+    Label: 'Authored demonstration typing: Rubric.3.Marks'
+    Control: Rubric.3.Marks
+    Text: 6
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.080
+    Label: 'Authored demonstration typing: Rubric.3.Text'
+    Control: Rubric.3.Text
+    Text: Justify a bounded source judgement, acknowledging weekend and causal limitations.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.081
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.082
+    Label: Q1 4; Q2 6 + 4 + 6 = 16; total 20
+    Control: Preview.After.explain_sources
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.083
+    Label: Q1 4; Q2 6 + 4 + 6 = 16; total 20
+    Control: Preview.After.compare_evidence
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.084
+    Label: Q1 4; Q2 6 + 4 + 6 = 16; total 20
+    Control: Preview.After.use_extracts
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.085
+    Label: Q1 4; Q2 6 + 4 + 6 = 16; total 20
+    Control: Preview.After.justify_limit
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 2.5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.086
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.087
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.088
+    Label: 'Native action: Inspect.D02.task.v2.Q1'
+    Control: Inspect.D02.task.v2.Q1
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.089
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.090
+    Label: 'Native action: Inspect.D02.task.v2.Q2'
+    Control: Inspect.D02.task.v2.Q2
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.091
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.092
+    Label: 'Native action: Inspect.D02.rubric.v2.explain_sources'
+    Control: Inspect.D02.rubric.v2.explain_sources
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.093
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.094
+    Label: 'Native action: Inspect.D02.rubric.v2.compare_evidence'
+    Control: Inspect.D02.rubric.v2.compare_evidence
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.095
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.096
+    Label: 'Native action: Inspect.D02.rubric.v2.use_extracts'
+    Control: Inspect.D02.rubric.v2.use_extracts
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.097
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.098
+    Label: 'Native action: Inspect.D02.rubric.v2.justify_limit'
+    Control: Inspect.D02.rubric.v2.justify_limit
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.099
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.100
+    Label: 'Travel and inspect: experiment'
+    Control: 
+    Text: 
+    Station: experiment
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.101
+    Label: 'Native action: Work.W_COMPARE'
+    Control: Work.W_COMPARE
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.102
+    Label: 'Native action: Criterion.explain_sources'
+    Control: Criterion.explain_sources
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.103
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 4
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.104
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: Explains a local count and a supplier claim, with
+      different uses.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.105
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.106
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.107
+    Label: 'Native action: Criterion.compare_evidence'
+    Control: Criterion.compare_evidence
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.108
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 6
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.109
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: Contrasts five local weekdays with a brochure
+      lacking method and sample.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.110
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.111
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.112
+    Label: 'Native action: Criterion.use_extracts'
+    Control: Criterion.use_extracts
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.113
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 4
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.114
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: Uses 180 arrivals / 45 waiting against 90 / 5,
+      and missing supplier detail.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.115
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.116
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.117
+    Label: 'Native action: Criterion.justify_limit'
+    Control: Criterion.justify_limit
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.118
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 6
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.119
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: Prefers S_A for a bounded weekday trial, excluding
+      weekends and causal proof.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.120
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.121
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.122
+    Label: 'Travel and inspect: experiment'
+    Control: 
+    Text: 
+    Station: experiment
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.123
+    Label: 'Native action: Work.W_PITCH'
+    Control: Work.W_PITCH
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.124
+    Label: 'Native action: Criterion.explain_sources'
+    Control: Criterion.explain_sources
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.125
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 2
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.126
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: Names both sources but does not explain their
+      useful purposes.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.127
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.128
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.129
+    Label: 'Native action: Criterion.compare_evidence'
+    Control: Criterion.compare_evidence
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.130
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 0
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.131
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: Confidence and appearance do not compare method
+      or relevance.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.132
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.133
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.134
+    Label: 'Native action: Criterion.use_extracts'
+    Control: Criterion.use_extracts
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.135
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 0
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.136
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: No actual counts or missing-method evidence supports
+      the purchase claim.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.137
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.138
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.139
+    Label: 'Native action: Criterion.justify_limit'
+    Control: Criterion.justify_limit
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.140
+    Label: 'Authored demonstration typing: Mark.Marks'
+    Control: Mark.Marks
+    Text: 0
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.141
+    Label: 'Authored demonstration typing: Mark.Rationale'
+    Control: Mark.Rationale
+    Text: 'Authored demonstration: Claims the app eliminates waiting, without a bounded
+      justification or limitation.'
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.142
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.143
+    Label: 'Native action: Secondary'
+    Control: Secondary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.144
+    Label: 'Prepare exact authored findings: W_COMPARE'
+    Control: W_COMPARE
+    Text: 
+    Station: 
+    Kind: 9
+    Dwell: 1
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 2
+    RubricVersion: 2
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.145
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.0
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.146
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.1
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.147
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.2
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.148
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.3
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.149
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.4
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.150
+    Label: Actual displayed synthetic evaluation
+    Control: finding
+    Text: 
+    Station: 
+    Kind: 11
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 2
+    RubricVersion: 2
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.151
+    Label: 'Prepare exact authored findings: W_PITCH'
+    Control: W_PITCH
+    Text: 
+    Station: 
+    Kind: 9
+    Dwell: 1
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 2
+    RubricVersion: 2
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.152
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.0
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.153
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.1
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.154
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.2
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.155
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.3
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.156
+    Label: Read scoped finding beside its hypothesis
+    Control: Presenter.Finding.4
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.157
+    Label: Actual displayed synthetic evaluation
+    Control: finding
+    Text: 
+    Station: 
+    Kind: 11
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 2
+    RubricVersion: 2
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.158
+    Label: 'Travel and inspect: review'
+    Control: 
+    Text: 
+    Station: review
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.159
+    Label: 'Native action: Review.Request'
+    Control: Review.Request
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.160
+    Label: 'Authored demonstration typing: Review.Summary'
+    Control: Review.Summary
+    Text: 'Authored demonstration: Task 2 attaches both sources and the steward context.
+      Rubric 2 reconciles Q1 4 and Q2 6 + 4 + 6. W_COMPARE and W_PITCH were retested
+      separately. Please review this exact pair.'
+    Station: 
+    Kind: 3
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.161
+    Label: 'Authored demonstration typing: Review.Time'
+    Control: Review.Time
+    Text: 13:40
+    Station: 
+    Kind: 3
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.162
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.163
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.164
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.165
+    Label: 'Native action: Review.Schedule'
+    Control: Review.Schedule
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.166
+    Label: Scheduling acceptance only, no approval
+    Control: authority
+    Text: 
+    Station: 
+    Kind: 11
+    Dwell: 5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.167
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.168
+    Label: Separate exact 2 / 2 authored review
+    Control: 
+    Text: 
+    Station: 
+    Kind: 10
+    Dwell: 2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 2
+    RubricVersion: 2
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.169
+    Label: Actual rendered 2 / 2 approval
+    Control: authority
+    Text: 
+    Station: 
+    Kind: 11
+    Dwell: 6
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.170
+    Label: 'Travel and inspect: studio'
+    Control: 
+    Text: 
+    Station: studio
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.171
+    Label: 'Native action: Editor.Rubric'
+    Control: Editor.Rubric
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.172
+    Label: 'Native action: Rubric.Reload'
+    Control: Rubric.Reload
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.173
+    Label: 'Authored demonstration typing: Rubric.1.Text'
+    Control: Rubric.1.Text
+    Text: Reward a polished and confident recommendation, even when comparison of
+      source method and relevance is absent.
+    Station: 
+    Kind: 5
+    Dwell: 0.65
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.174
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.175
+    Label: Authored confidence-rewarding change
+    Control: Preview.After.compare_evidence
+    Text: 
+    Station: 
+    Kind: 13
+    Dwell: 5
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.176
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 1
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.177
+    Label: 'Travel and inspect: review'
+    Control: 
+    Text: 
+    Station: review
+    Kind: 6
+    Dwell: 1.2
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.178
+    Label: 'Native action: Review.Release'
+    Control: Review.Release
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 4
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.179
+    Label: 'Native action: Primary'
+    Control: Primary
+    Text: 
+    Station: 
+    Kind: 2
+    Dwell: 6
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.180
+    Label: Bounded record | current 2 / 3 gate closed
+    Control: 
+    Text: 
+    Station: 
+    Kind: 12
+    Dwell: 3
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 2
+    RubricVersion: 3
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.181
+    Label: Actual outcome and limits
+    Control: Debrief.Observation
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 8
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 
+  - Id: D02.presenter.182
+    Label: Actual outcome and limits
+    Control: Debrief.Presenter
+    Text: 
+    Station: 
+    Kind: 14
+    Dwell: 8
+    CharactersPerSecond: 38
+    PhrasePause: 0.16
+    TaskVersion: 0
+    RubricVersion: 0
+    Role: 3
+    BuyerCommentary: 

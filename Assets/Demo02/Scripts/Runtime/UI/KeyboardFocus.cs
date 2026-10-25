@@ -24,7 +24,7 @@ namespace Altaius.Demo02.UI
         {if(focusOutline){focusOutline.effectDistance=previousDistance;focusOutline.effectColor=previousColor;}focusOutline=null;}
         void Update()
         {
-            if (!Gameplay || !(Gameplay.Workspace?.IsOpen ?? false) || !EventSystem.current || Gameplay.IsComposing) return;
+            if (!Gameplay || Gameplay.PresenterOwnsInput || !(Gameplay.Workspace?.IsOpen ?? false) || !EventSystem.current || Gameplay.IsComposing) return;
             var k = Keyboard.current;
             if(Time.frameCount==activatedFrame)return;
             if(k!=null && k.spaceKey.wasPressedThisFrame && !Gameplay.Typing)

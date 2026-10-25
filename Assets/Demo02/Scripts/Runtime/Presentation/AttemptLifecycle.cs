@@ -26,7 +26,7 @@ namespace Altaius.Demo02.Presentation
         {
             var baseline=s.AnnotationHistory.Where(a=>a.Content.SpecimenId=="W_LIST"&&a.Pair.TaskVersion==1&&a.Pair.RubricVersion==1).GroupBy(a=>a.Content.CriterionId).Select(g=>g.Last()).ToArray();
             return baseline.Length==2&&baseline.Sum(a=>a.Content.Marks)==20?
-                "Recorded: W_LIST received your full 20 draft marks under Task 1 / Rubric 1. Those marks are marking hypotheses. They do not establish that O2 evaluation was observed. Annotation IDs: "+string.Join(", ",baseline.Select(a=>a.Id.ToString())):
+                (s.Mode==SessionMode.Presenter?"Authored demonstration: W_LIST received full 20 draft marks":"Recorded: W_LIST received your full 20 draft marks")+" under Task 1 / Rubric 1. Those marks are marking hypotheses. They do not establish that O2 evaluation was observed. Annotation IDs: "+string.Join(", ",baseline.Select(a=>a.Id.ToString())):
                 "The most recent baseline W_LIST annotations do not form a complete 20-mark total. Earlier annotations, if any, remain in the timeline. No counterexample explanation or independent evaluation skill is inferred.";
         }
     }

@@ -1,1 +1,1 @@
-{"name":"Altaius.Demo02.Authoring","references":["Altaius.Demo02.Domain","Altaius.Demo02.Gameplay","Altaius.Demo02.UI","Altaius.Demo02.Integration","Altaius.Demo02.Presentation","Unity.InputSystem","Unity.ugui"],"includePlatforms":["Editor"],"autoReferenced":true}
+{"name":"Altaius.Demo02.Authoring","references":["Altaius.Demo02.Domain","Altaius.Demo02.Gameplay","Altaius.Demo02.UI","Altaius.Demo02.Integration","Altaius.Demo02.Presentation","Altaius.Demo02.Presenter","Unity.InputSystem","Unity.ugui"],"includePlatforms":["Editor"],"autoReferenced":true}

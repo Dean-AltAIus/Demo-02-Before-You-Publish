@@ -36,6 +36,7 @@ namespace Altaius.Demo02.UI
         public event System.Action PauseRequested;
         public bool IsOpen => Window && Window.activeSelf;
         public string ViewId { get; private set; }
+        public ulong BindingGeneration {get;private set;}
         public string SelectedWork { get; private set; }
         public string LastEditedControl { get; private set; }
         string previewReturn;
@@ -62,6 +63,7 @@ namespace Altaius.Demo02.UI
         }
         void Begin(string view, string title)
         {
+            BindingGeneration++;
             ViewId = view; Window.SetActive(true); Heading.text = title; Message.text = ""; Rows.Begin();
             Primary.gameObject.SetActive(false); Secondary.gameObject.SetActive(false);
             Primary.interactable = true; Secondary.interactable = true;
@@ -165,7 +167,7 @@ namespace Altaius.Demo02.UI
             Gameplay.SelectInspectedWork(work);
             Begin("work",work + " | current marking");
             Text("Work.Literal","Literal work | v"+passage.Reference.Version,passage.DisplayText);
-            Text("Work.Total","Saved draft total: " + S.DraftTotal(work) + " / 20", "Learner hypothesis. Evaluation is unverified. Offline evaluation is unavailable for arbitrary prose.");
+            Text("Work.Total","Saved draft total: " + S.DraftTotal(work) + " / 20", (S.Mode==SessionMode.Presenter?"Authored demonstration hypothesis.":"Learner hypothesis.")+" Evaluation is unverified. Offline evaluation is unavailable for arbitrary prose.");
             foreach(var c in S.Rubric.Criteria)
             {
                 var criterion = c; bool inspected = S.Notebook.Any(p=>p.Reference.SourceId == WorkbenchModel.CriterionSource(S,c.Id));
@@ -184,8 +186,8 @@ namespace Altaius.Demo02.UI
             Text("Mark.Criterion","Current criterion | maximum " + criterion.Marks,criterion.Description);
             if(MarkContextWork)MarkContextWork.BindText(work+" | inspected passage",Display(S.Notebook.Single(p=>p.Reference.SourceId==work).DisplayText),1);
             if(MarkContextCriterion)MarkContextCriterion.BindText(criterion.QuestionId+" | "+criterionId+" | maximum "+criterion.Marks,Display(criterion.Description),1);
-            Input("Mark.Marks","Your numeric mark, 0 to " + draft.Maximum,draft.Marks,v=>draft.Marks=v);
-            Input("Mark.Rationale","Your rationale",draft.Rationale,v=>draft.Rationale=v,true);
+            Input("Mark.Marks",(S.Mode==SessionMode.Presenter?"Authored numeric mark, 0 to ":"Your numeric mark, 0 to ") + draft.Maximum,draft.Marks,v=>draft.Marks=v);
+            Input("Mark.Rationale",S.Mode==SessionMode.Presenter?"Authored demonstration rationale":"Your rationale",draft.Rationale,v=>draft.Rationale=v,true);
             Text("Mark.Scope","Draft hypothesis", "Saving records your exact passage, criterion, mark and own rationale. It does not validate evaluation or approve publication.");
             Buttons("Save annotation",SaveAnnotation,"Back to work",()=>OpenWork(work)); RefreshMarkAvailability(); FirstFocus();
         }
@@ -210,7 +212,7 @@ namespace Altaius.Demo02.UI
         public void OpenTask()
         {
             if(!TaskInspected()) throw new InvalidOperationException("Open both current task passages before editing.");
-            var d = Model.OpenTask(); Begin("task","Task editor | own draft");
+            var d = Model.OpenTask(); Begin("task",S.Mode==SessionMode.Presenter?"Task editor | authored demonstration":"Task editor | own draft");
             Text("Task.Base","Editing Task " + d.BaseVersion, "Full replacement of Q1 and Q2. Per-question marks must sum to 20. Accepted arithmetic is not semantic approval.");
             foreach(var q in d.Questions)
             {
@@ -224,7 +226,7 @@ namespace Altaius.Demo02.UI
                 Action("Task.Attach."+id,(d.SourceIds.Contains(id)?"Attached: ":"Not attached: ")+id+(admitted?" | Toggle":" | Inspect at archive first"),()=>
                 { if(!d.SourceIds.Add(source)) d.SourceIds.Remove(source); OpenTask(); },admitted);
             }
-            Input("Task.Context","Decision context, in your own words",d.Context,v=>d.Context=v,true);
+            Input("Task.Context",S.Mode==SessionMode.Presenter?"Authored demonstration decision context":"Decision context, in your own words",d.Context,v=>d.Context=v,true);
             if(d.BaseVersion != S.Task.Version) Action("Task.Reload","Load current task (replace this local draft)",()=>{Model.OpenTask(true);OpenTask();});
             Action("Task.Archive","Inspect sources at archive (draft retained)",()=>Gameplay.DirectRoute("archive"));
             Buttons("Preview task",()=>Preview("task"),"Cancel / keep draft",OpenSourceList); FirstFocus();
@@ -232,7 +234,7 @@ namespace Altaius.Demo02.UI
         public void OpenRubric()
         {
             if(!RubricInspected()) throw new InvalidOperationException("Open each current criterion passage before editing.");
-            var d=Model.OpenRubric(); Begin("rubric","Rubric editor | own draft");
+            var d=Model.OpenRubric(); Begin("rubric",S.Mode==SessionMode.Presenter?"Rubric editor | authored demonstration":"Rubric editor | own draft");
             Text("Rubric.Base","Editing Rubric "+d.BaseVersion,"Free descriptions and allocations. Each question must reconcile to its current task marks. Outcomes: O1, O2 or O1,O2.");
             for(int i=0;i<d.Rows.Count;i++)
             {
@@ -252,6 +254,15 @@ namespace Altaius.Demo02.UI
         void Preview(string kind)
         {
             if(kind=="task") Model.PreviewTask(); else Model.PreviewRubric(); previewReturn=kind;
+            ShowPendingPreview();
+        }
+        public void RestorePendingPreview()
+        {
+            if(!(Model.Pending?.Command is EditTask)&&!(Model.Pending?.Command is EditRubric))throw new InvalidOperationException("No original task or rubric preview is retained.");
+            previewReturn=Model.Pending.Command is EditTask?"task":"rubric";ShowPendingPreview();
+        }
+        void ShowPendingPreview()
+        {
             Begin("preview","Before / after preview");
             Text("Preview.Scope","Exact staged change", "Saving creates one immutable next edition. Existing annotations and approval become historical. No semantic review is implied.");
             if(Model.Pending.Command is EditTask t)
@@ -380,7 +391,7 @@ namespace Altaius.Demo02.UI
         public bool SetFieldText(string controlId,string value)
         {
             var row=Rows.Find(controlId); if(!row || !row.Input || Gameplay.IsComposing)return false;
-            row.Input.Select();row.Input.ActivateInputField();row.Input.text=value;row.Input.caretPosition=value.Length; Focus.EnsureVisible(row.Input.gameObject);return true;
+            row.Input.Select();row.Input.ActivateInputField();row.Input.text=value;row.Input.caretPosition=value.Length;row.Input.ForceLabelUpdate(); Focus.EnsureVisible(row.Input.gameObject);return true;
         }
         public bool ActivateControl(string controlId)
         {
@@ -396,7 +407,7 @@ namespace Altaius.Demo02.UI
             if(!button || !button.gameObject.activeInHierarchy || !button.IsInteractable())return false;
             EventSystem.current?.SetSelectedGameObject(button.gameObject);button.onClick.Invoke();return true;
         }
-        static string ReceiptText(CommandReceipt r) => r.Status==ReceiptStatus.Accepted ? "Saved. "+(r.Action=="experiment.annotate"?"Learner hypothesis; evaluation unverified.":"New edition accepted. Earlier annotations and approvals are historical.") :
+        string ReceiptText(CommandReceipt r) => r.Status==ReceiptStatus.Accepted ? "Saved. "+(r.Action=="experiment.annotate"?(S.Mode==SessionMode.Presenter?"Authored hypothesis; evaluation unverified.":"Learner hypothesis; evaluation unverified."):"New edition accepted. Earlier annotations and approvals are historical.") :
             r.Status+": "+r.ReasonCode+". Your draft and original request are retained. Reconcile or explicitly preview a fresh change.";
         public static string Display(string text) => (text??"").Replace("\u2013"," to ").Replace("\u2014",", ");
     }
