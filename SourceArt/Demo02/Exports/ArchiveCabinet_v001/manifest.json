@@ -1,0 +1,66 @@
+{
+  "name": "ArchiveCabinet",
+  "mesh_parts": 17,
+  "source_ids": [
+    "S_A",
+    "S_B"
+  ],
+  "materials": [
+    {
+      "name": "D02_ArchiveEnamel",
+      "linear_base_color": [
+        0.3100000023841858,
+        0.3499999940395355,
+        0.36000001430511475,
+        1.0
+      ],
+      "roughness": 0.47999998927116394,
+      "metallic": 0.25
+    },
+    {
+      "name": "D02_ArchiveShadow",
+      "linear_base_color": [
+        0.07000000029802322,
+        0.10000000149011612,
+        0.11999999731779099,
+        1.0
+      ],
+      "roughness": 0.6000000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ArchiveOak",
+      "linear_base_color": [
+        0.41999998688697815,
+        0.1899999976158142,
+        0.06499999761581421,
+        1.0
+      ],
+      "roughness": 0.5,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ArchiveLabel",
+      "linear_base_color": [
+        0.9200000166893005,
+        0.8799999952316284,
+        0.7200000286102295,
+        1.0
+      ],
+      "roughness": 0.6000000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ArchiveHandle",
+      "linear_base_color": [
+        0.02500000037252903,
+        0.04500000178813934,
+        0.05999999865889549,
+        1.0
+      ],
+      "roughness": 0.30000001192092896,
+      "metallic": 0.550000011920929
+    }
+  ],
+  "status": "Native source; Unity import and live labels pending"
+}
