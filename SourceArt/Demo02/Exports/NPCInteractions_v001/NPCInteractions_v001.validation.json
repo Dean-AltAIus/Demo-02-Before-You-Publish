@@ -565,6 +565,27 @@
       "sample_count": 7,
       "vertices_per_sample": 15309,
       "unity_comparison": "Pending actual Task5 BakeMesh validation"
+    },
+    "portable_skin_fixture_validation": {
+      "tool": "SourceArt/Demo02/Tools/export_npc_skin_fixture.py",
+      "checks": [
+        {
+          "role": "Lead",
+          "identical_fixture_files": 8,
+          "vertices": 15309,
+          "max_float32_normalized_sum_error": 4.951266419084277e-08,
+          "source_sha256": "01e59cdaa0c4587ae54cde75de36c9ce32042590a57742f6813659bd9b81ad31"
+        },
+        {
+          "role": "Colleague",
+          "identical_fixture_files": 8,
+          "vertices": 15359,
+          "max_float32_normalized_sum_error": 4.616777005139738e-08,
+          "source_sha256": "24adac6b16af2f2808587f139030e4334f453977ed2e59e56f3cab89c57dc2c4"
+        }
+      ],
+      "existing_output_guard": "Verified exit1 before opening source; existing index bytes unchanged",
+      "source_saved": false
     }
   }
 }
