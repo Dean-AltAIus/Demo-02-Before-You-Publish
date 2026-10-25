@@ -30,11 +30,10 @@ namespace Altaius.Demo02.UI
         public AuthorityReply LastAuthorityReply { get; private set; }
         PresentationSurface current;SessionMode selectedMode=SessionMode.Independent;
         string settingsCaller="pause",confirmationKind="",confirmationReturn="review";int settingsTab;
-        bool suspendedWorkbench;float pendingAt;Guid pendingConversation;bool conversationRefresh;
+        bool suspendedWorkbench;bool conversationRefresh;GameObject suspendedFocus;
         float previousAudioVolume;bool previousAudioPause;
         string lastEditedControl;
-        readonly List<RenderedDelivery> deliveries=new List<RenderedDelivery>();
-        sealed class RenderedDelivery {public Text Text;public Action Commit;public bool Help;}
+        readonly List<RenderedRowDelivery> deliveries=new List<RenderedRowDelivery>();
         SessionSnapshot S=>Host.Session.Snapshot;
         float Scale=>Applied?.TextScale??1;
         void Start()
@@ -64,8 +63,7 @@ namespace Altaius.Demo02.UI
         {
             if(Lifecycle==null)return;
             if(Workbench.TextScale!=Scale&&!(Overlay&&Overlay.activeSelf)){Applied.TextScale=Workbench.TextScale;}
-            if(pendingConversation!=Guid.Empty&&!Lifecycle.Paused&&Time.unscaledTime>=pendingAt)
-            {var id=pendingConversation;pendingConversation=Guid.Empty;Lifecycle.Conversation.Process(id);if(SurfaceId=="conversation")RenderConversation();}
+            if(Lifecycle.Dispatch.Tick(Time.unscaledTime,Lifecycle.Paused)&&SurfaceId=="conversation")RenderConversation();
             if(conversationRefresh&&SurfaceId=="conversation"){conversationRefresh=false;UpdateConversationStatus();}
             Workbench.LeenaStatus.text=Workbench.TextScale>1.5f?"Offline | Voice unavailable":"Offline | "+(SurfaceId=="coach"?"Help open":"Ask Leena")+" | Voice unavailable";
             TalkLauncher.gameObject.SetActive(!IsOpen); // The persistent coach anchor remains visible on every gameplay surface.
@@ -75,20 +73,21 @@ namespace Altaius.Demo02.UI
             if(!Application.isPlaying||Lifecycle==null||Lifecycle.Paused)return;
             foreach(var d in deliveries.ToArray())
             {
-                if(!d.Text){deliveries.Remove(d);continue;}
-                if(!d.Text.gameObject.activeInHierarchy||d.Text.canvasRenderer.cull||d.Help&&(Gameplay.Typing||Gameplay.IsComposing||pendingConversation!=Guid.Empty))continue;
+                if(!d.Matches){deliveries.Remove(d);continue;}
+                if(!d.Text.gameObject.activeInHierarchy||d.Text.canvasRenderer.cull||d.Help&&(Gameplay.Typing||Gameplay.IsComposing||Lifecycle.Dispatch.PendingCount>0))continue;
                 var scroll=d.Text.GetComponentInParent<ScrollRect>();
                 if(scroll)
                 {var b=RectTransformUtility.CalculateRelativeRectTransformBounds(scroll.viewport,d.Text.rectTransform);if(!scroll.viewport.rect.Overlaps(new Rect(b.min,b.size)))continue;}
-                deliveries.Remove(d);d.Commit();
+                deliveries.Remove(d);d.TryCommit(true);
             }
         }
-        void AfterRendered(Text body,Action commit,bool help=false)=>deliveries.Add(new RenderedDelivery{Text=body,Commit=commit,Help=help});
+        void AfterRendered(Text body,Guid identity,Action commit,bool help=false)=>deliveries.Add(new RenderedRowDelivery(body,current,identity,commit,help));
         PresentationSurface Begin(string id,string heading)
         {
             if(Gameplay.IsComposing)throw new InvalidOperationException("Finish composing before changing this surface.");
-            if(Workbench.IsOpen){suspendedWorkbench=true;Workbench.Window.SetActive(false);}
+            if(Workbench.IsOpen){suspendedWorkbench=true;suspendedFocus=EventSystem.current?EventSystem.current.currentSelectedGameObject:null;if(!suspendedFocus||!suspendedFocus.transform.IsChildOf(Workbench.Window.transform))suspendedFocus=Workbench.Rows.Find(Workbench.LastEditedControl)?.Input?.gameObject;Workbench.Window.SetActive(false);}
             SurfaceId=id;Overlay.SetActive(true);current=Surfaces.Single(s=>s.SurfaceId==id);
+            current.BeginBinding();
             foreach(var screen in Surfaces)screen.gameObject.SetActive(screen==current);
             current.Heading.text=heading;current.Status.text="";current.Rows.Begin();
             foreach(var b in new[]{current.Primary,current.Secondary,current.Tertiary}){b.gameObject.SetActive(false);b.onClick.RemoveAllListeners();b.interactable=true;}
@@ -142,7 +141,7 @@ namespace Altaius.Demo02.UI
             Text("Onramp.Step3","Stage a mark, then cancel","Staging is reversible. Saving and publishing are different actions. These controls carry no assessment credit.");
             Action("Onramp.Studio","Open studio controls",()=>{CloseSurface(false);Gameplay.DirectRoute("studio");});
             Button(current.Primary,"Continue to campus",ReturnToCampus);Button(current.Secondary,"Skip controls",ReturnToCampus);Finish("You can reopen controls from Leena at any time.");
-            AfterRendered(helpRow.Body,()=>{Lifecycle.Help.Acknowledge(help);Host.NotifyChanged();},true);
+            AfterRendered(helpRow.Body,help.Id,()=>{Lifecycle.Help.Acknowledge(help);Host.NotifyChanged();},true);
         }
         public void OpenConversation(ActorRole role)
         {
@@ -158,7 +157,7 @@ namespace Altaius.Demo02.UI
             {
                 Text("Conversation.Own."+record.Request.Id,"You",record.Request.OwnText);
                 if(record.Reply!=null&&record.State!=ReplyState.Cancelled&&record.State!=ReplyState.Stale)
-                {var row=Text("Conversation.Reply."+record.Request.Id,RoleName(ConversationRole),record.Reply.Text);if(record.State==ReplyState.Ready){var captured=record;AfterRendered(row.Body,()=>{Lifecycle.Conversation.Acknowledge(new DisplayAcknowledgement(captured.Request.AttemptId,captured.Request.Id,Guid.NewGuid()));conversationRefresh=true;});}}
+                {var row=Text("Conversation.Reply."+record.Request.Id,RoleName(ConversationRole),record.Reply.Text);if(record.State==ReplyState.Ready){var captured=record;var displayId=Guid.NewGuid();AfterRendered(row.Body,displayId,()=>{Lifecycle.Conversation.Acknowledge(new DisplayAcknowledgement(captured.Request.AttemptId,captured.Request.Id,displayId));conversationRefresh=true;});}}
                 if(record.Error!=null)Text("Conversation.Error."+record.Request.Id,"Preserved request",record.Error);
             }
             foreach(var b in new[]{current.Primary,current.Secondary,current.Tertiary})b.gameObject.SetActive(false);
@@ -181,12 +180,12 @@ namespace Altaius.Demo02.UI
         }
         public void SendConversation()
         {
-            Guard(()=>{if(Lifecycle.Paused)throw new InvalidOperationException("Resume before sending.");var record=Lifecycle.Conversation.Send(ConversationRole,current.Composer.text);pendingConversation=record.Request.Id;pendingAt=Time.unscaledTime+.35f;RenderConversation();});
+            Guard(()=>{if(Lifecycle.Paused)throw new InvalidOperationException("Resume before sending.");var record=Lifecycle.Conversation.Send(ConversationRole,current.Composer.text);Lifecycle.Dispatch.Schedule(record,Time.unscaledTime+.35f);RenderConversation();});
         }
         public void CancelConversation()
         {
             var record=Lifecycle.Conversation.History.LastOrDefault(r=>r.Request.Recipient==ConversationRole);
-            if(record!=null)Lifecycle.Conversation.Cancel(new CancelRequest(record.Request.AttemptId,record.Request.Id));pendingConversation=Guid.Empty;RenderConversation();current.Composer.Select();current.Composer.ActivateInputField();
+            if(record!=null)Lifecycle.Dispatch.Cancel(new CancelRequest(record.Request.AttemptId,record.Request.Id));RenderConversation();current.Composer.Select();current.Composer.ActivateInputField();
         }
         public void OpenCoach()
         {
@@ -202,7 +201,7 @@ namespace Altaius.Demo02.UI
             current.Rows.Begin();var row=Text("Coach.Reply",help.Available?"Leena | requested help":"Help unavailable",help.Text);
             Text("Coach.Identity","Delivery scope","Delivery "+help.Id+"\nOpportunity "+help.OpportunityId+"\n"+(help.Strategic?"Strategic help, attributed only when displayed.":"Controls or recorded facts. No competence claim."));
             Action("Coach.Onramp","Reopen controls",OpenOnramp);Finish("Requested. Actual rendering is acknowledged separately.");
-            AfterRendered(row.Body,()=>{if(Lifecycle.Help.Acknowledge(help)){Host.NotifyChanged();current.Status.text=help.Available?"Help shown. Delivery recorded: "+help.Id:"Unavailable response shown. No strategy supplied.";}},true);
+            AfterRendered(row.Body,help.Id,()=>{if(Lifecycle.Help.Acknowledge(help)){Host.NotifyChanged();current.Status.text=help.Available?"Help shown. Delivery recorded: "+help.Id:"Unavailable response shown. No strategy supplied.";}},true);
         }
         string CurrentOpportunity()=>Workbench.SelectedWork!=null?WorkbenchModel.OpportunityForWork(Workbench.SelectedWork):LocalAuthority.PublicationOpportunity;
         public void OpenReview()
@@ -265,7 +264,7 @@ namespace Altaius.Demo02.UI
             LastAuthorityReply=reply;Begin("receipt",reply.Status);var row=Text("Authority.Reply",RoleName(reply.AuthorityRole)+" | actual local response",reply.Text);
             Text("Authority.Identity","Scoped offline reply",reply.Provenance+"\nOriginal request "+reply.OriginalRequestId+"\nReply "+reply.Id+"\nAttempt "+reply.AttemptId);
             Button(current.Primary,"Review and publication",OpenReview);Button(current.Secondary,"View timeline",OpenTimeline);Finish("Response prepared. Role authority is admitted only after actual display.");
-            AfterRendered(row.Body,()=>{Lifecycle.Authority.Acknowledge(reply);Host.NotifyChanged();if(current&&SurfaceId=="receipt"){current.Heading.text=reply.Status;if(current.SideText)current.SideText.text="Task "+S.Task.Version+"\nRubric "+S.Rubric.Version+"\n\n"+S.Publication+"\n\n"+LocalAuthority.Time(S.ClockMinute);current.Status.text=reply.Status+". "+reply.Provenance;}});
+            AfterRendered(row.Body,reply.Id,()=>{Lifecycle.Authority.Acknowledge(reply);Host.NotifyChanged();if(current&&SurfaceId=="receipt"){current.Heading.text=reply.Status;if(current.SideText)current.SideText.text="Task "+S.Task.Version+"\nRubric "+S.Rubric.Version+"\n\n"+S.Publication+"\n\n"+LocalAuthority.Time(S.ClockMinute);current.Status.text=reply.Status+". "+reply.Provenance;}});
         }
         public void Pause()
         {
@@ -289,7 +288,7 @@ namespace Altaius.Demo02.UI
             if(kind=="exit")OpenTitle();else{CloseSurface(false);OpenOnramp();}
         }
         void ClearDrafts()
-        {ReviewSummary=ReviewTime=HoldDefect=HoldTime=HoldNextAction=HelpDraft="";HoldOwner=ActorRole.Learner;HoldBasis=HoldDefectBasis.Unverified;Pending=null;LastAuthorityReply=null;pendingConversation=Guid.Empty;deliveries.Clear();foreach(var screen in Surfaces)if(screen.Composer)screen.Composer.SetTextWithoutNotify("");}
+        {ReviewSummary=ReviewTime=HoldDefect=HoldTime=HoldNextAction=HelpDraft="";HoldOwner=ActorRole.Learner;HoldBasis=HoldDefectBasis.Unverified;Pending=null;LastAuthorityReply=null;suspendedFocus=null;deliveries.Clear();foreach(var screen in Surfaces)if(screen.Composer)screen.Composer.SetTextWithoutNotify("");}
         public void OpenDebrief()
         {
             Begin("debrief","Practice record");Text("Debrief.Outcome","Actual outcome",AttemptLifecycle.Outcome(S));Text("Debrief.Observation","Observed action and consequence",AttemptLifecycle.BoundedObservation(S)+"\nSemantic evaluation of arbitrary prose is unavailable offline. No measured learning or universal competence claim is available.");Text("Debrief.Assistance","Actual assistance",HelpCoordinator.AssistanceSummary(S));
@@ -333,7 +332,7 @@ namespace Altaius.Demo02.UI
         void ApplyPreferences(bool persist)
         {
             AudioListener.volume=Applied.Silent?0:Applied.Master;Gameplay.CameraRig.ReducedMotion=Applied.ReducedMotion;
-            Workbench.TextScale=Scale;Workbench.TextSizeLabel.text="Text "+Mathf.RoundToInt(Scale*100)+"%";Workbench.ApplyInterfaceScale();
+            Workbench.SetTextScale(Scale);
             foreach(var s in Surfaces)s.ApplyScale(Scale);
             if(Overlay.activeSelf)Workbench.HudHeader.gameObject.SetActive(false);
             foreach(var text in Workbench.GetComponentsInChildren<Text>(true))if(text.color.r<.4f&&text.color.g<.5f)text.color=Applied.HighContrast?new Color(.015f,.04f,.08f):NativeUiPalette.Ink;
@@ -353,7 +352,7 @@ namespace Altaius.Demo02.UI
             if(SurfaceId=="reviewRequest"||SurfaceId=="hold"||SurfaceId=="receipt"){OpenReview();return;}if(Lifecycle.Paused){Pause();return;}CloseSurface();
         }
         public void CloseSurface(bool restoreWorkbench=true)
-        {Overlay.SetActive(false);SurfaceId="world";EventSystem.current?.SetSelectedGameObject(null);if(restoreWorkbench&&suspendedWorkbench){Workbench.Window.SetActive(true);suspendedWorkbench=false;}else if(restoreWorkbench)Gameplay.CloseInspection();else suspendedWorkbench=false;Workbench.ApplyInterfaceScale();}
+        {Overlay.SetActive(false);SurfaceId="world";EventSystem.current?.SetSelectedGameObject(null);bool restoring=restoreWorkbench&&suspendedWorkbench;if(restoring){Workbench.Window.SetActive(true);suspendedWorkbench=false;}else if(restoreWorkbench)Gameplay.CloseInspection();else{suspendedWorkbench=false;suspendedFocus=null;}Workbench.ApplyInterfaceScale();if(restoring&&suspendedFocus&&suspendedFocus.activeInHierarchy){EventSystem.current?.SetSelectedGameObject(suspendedFocus);if(suspendedFocus.TryGetComponent<InputField>(out var field)){field.Select();field.ActivateInputField();}Workbench.Focus.EnsureVisible(suspendedFocus);}if(restoring)suspendedFocus=null;}
         void ReturnToCampus(){suspendedWorkbench=false;Workbench.CloseWindow();CloseSurface(false);}
         public bool SetFieldText(string id,string text)
         {

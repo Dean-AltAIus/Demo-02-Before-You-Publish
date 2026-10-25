@@ -324,14 +324,11 @@ namespace Altaius.Demo02.UI
         public void CloseWindow()
         {Window.SetActive(false); Gameplay.CloseInspection(); EventSystem.current?.SetSelectedGameObject(null); ViewId="world";ApplyInterfaceScale();}
         public void ToggleTextScale()
+        {SetTextScale(TextScale<1.5f?2f:1f);}
+        public void SetTextScale(float scale)
         {
-            TextScale=TextScale<1.5f?2f:1f; TextSizeLabel.text=TextScale>1?"Text 200%":"Text 100%";
+            TextScale=Mathf.Clamp(scale,1,2);TextSizeLabel.text="Text "+Mathf.RoundToInt(TextScale*100)+"%";
             ApplyInterfaceScale();
-            if(!IsOpen)return;
-            foreach(var row in Rows.GetComponentsInChildren<NativeRow>()) row.ApplyScale(TextScale);
-            foreach(var row in Rows.GetComponentsInChildren<NativeRow>()) if(row.Input && row.InputLayout)
-                row.InputLayout.preferredHeight=(row.Input.lineType==InputField.LineType.MultiLineNewline?112:48)*TextScale;
-            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)Rows.transform);
         }
         public void ReadMarkContext()
         {
@@ -343,38 +340,40 @@ namespace Altaius.Demo02.UI
         public void ApplyInterfaceScale()
         {
             if(!HudHeader || !LeenaDock || !WorldHelp)return;
-            bool large=TextScale>1.5f;float scale=large?2:1;
+            bool large=TextScale>1f;float scale=TextScale;
             HudHeader.gameObject.SetActive(!large || !IsOpen);
             HudHeader.sizeDelta=new Vector2(0,large?202:78);
-            HudTitle.fontSize=(int)(23*scale);HudStatus.fontSize=(int)(17*scale);
+            HudTitle.fontSize=Mathf.RoundToInt(23*scale);HudStatus.fontSize=Mathf.RoundToInt(17*scale);
             Place(HudTitle.rectTransform,18,10,large?1220:410,large?58:30);
             Place(HudStatus.rectTransform,18,large?70:44,large?1220:510,large?48:24);
             var buttons=new[]{RoutesButton,NotebookButton,HistoryButton,TextSizeButton,PauseButton};
             var normalX=new[]{560f,692,840,972,1132};var normalWidth=new[]{120f,136,120,148,130};
             var largeX=new[]{18f,230,478,690,998};var largeWidth=new[]{200f,236,200,296,264};
             for(int i=0;i<buttons.Length;i++)if(buttons[i])
-            {buttons[i].GetComponentInChildren<Text>().fontSize=(int)(20*scale);Place((RectTransform)buttons[i].transform,large?largeX[i]:normalX[i],large?122:20,large?largeWidth[i]:normalWidth[i],large?68:40);}
+            {buttons[i].GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(20*scale);Place((RectTransform)buttons[i].transform,large?largeX[i]:normalX[i],large?122:20,large?largeWidth[i]:normalWidth[i],large?68:40);}
             LeenaDock.sizeDelta=large?new Vector2(684,146):new Vector2(342,112);
-            LeenaIdentity.fontSize=(int)(21*scale);LeenaStatus.fontSize=(int)(17*scale);
+            LeenaIdentity.fontSize=Mathf.RoundToInt(21*scale);LeenaStatus.fontSize=Mathf.RoundToInt(17*scale);
             Place(LeenaIdentity.rectTransform,112,large?10:20,large?558:220,large?54:32);
             Place(LeenaStatus.rectTransform,112,large?62:58,large?558:220,large?82:40);
             WorldHelp.gameObject.SetActive(!IsOpen);
             WorldHelp.anchorMin=new Vector2(large?.56f:.29f,0);WorldHelp.anchorMax=new Vector2(.99f,0);WorldHelp.sizeDelta=new Vector2(0,large?128:48);
-            Gameplay.WorldPrompt.fontSize=(int)(18*scale);
+            Gameplay.WorldPrompt.fontSize=Mathf.RoundToInt(18*scale);
             var wr=(RectTransform)Window.transform;wr.anchorMin=new Vector2(large?.015f:.30f,0);wr.anchorMax=new Vector2(.99f,1);
             wr.offsetMin=new Vector2(0,large?152:76);wr.offsetMax=new Vector2(0,large?-12:-90);
-            Heading.fontSize=(int)(27*scale);PairLabel.fontSize=(int)(17*scale);Message.fontSize=(int)(17*scale);
+            Heading.fontSize=Mathf.RoundToInt(27*scale);PairLabel.fontSize=Mathf.RoundToInt(17*scale);Message.fontSize=Mathf.RoundToInt(17*scale);
             Heading.rectTransform.offsetMin=new Vector2(20,large?-76:-44);Heading.rectTransform.offsetMax=new Vector2(large?-110:-66,-10);
             PairLabel.rectTransform.offsetMin=new Vector2(20,large?-124:-72);PairLabel.rectTransform.offsetMax=new Vector2(-20,large?-82:-46);
-            var closeRect=(RectTransform)Close.transform;closeRect.sizeDelta=large?new Vector2(80,68):new Vector2(44,40);Close.GetComponentInChildren<Text>().fontSize=(int)(20*scale);
+            var closeRect=(RectTransform)Close.transform;closeRect.sizeDelta=large?new Vector2(80,68):new Vector2(44,40);Close.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(20*scale);
             var scrollRect=(RectTransform)Scroll.transform;scrollRect.offsetMin=new Vector2(16,large?218:132);scrollRect.offsetMax=new Vector2(-16,large?-132:-80);
             Message.rectTransform.offsetMin=new Vector2(20,large?102:64);Message.rectTransform.offsetMax=new Vector2(-20,large?210:124);
             var first=(RectTransform)Primary.transform;var second=(RectTransform)Secondary.transform;
             first.offsetMin=new Vector2(20,12);first.offsetMax=new Vector2(-8,large?92:56);second.offsetMin=new Vector2(8,12);second.offsetMax=new Vector2(-20,large?92:56);
-            PrimaryText.fontSize=(int)(20*scale);SecondaryText.fontSize=(int)(20*scale);
-            if(WorkspaceTextSizeButton){WorkspaceTextSizeButton.gameObject.SetActive(large&&IsOpen);WorkspaceTextSizeButton.GetComponentInChildren<Text>().text="Text 200%";}
+            PrimaryText.fontSize=Mathf.RoundToInt(20*scale);SecondaryText.fontSize=Mathf.RoundToInt(20*scale);
+            if(WorkspaceTextSizeButton){WorkspaceTextSizeButton.gameObject.SetActive(large&&IsOpen);WorkspaceTextSizeButton.GetComponentInChildren<Text>().text="Text "+Mathf.RoundToInt(scale*100)+"%";WorkspaceTextSizeButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(16*scale);}
             if(MarkContextPanel)MarkContextPanel.SetActive(ViewId=="mark" && IsOpen && !large);
-            if(MarkContextButton)MarkContextButton.gameObject.SetActive(ViewId=="mark" && IsOpen && large);
+            if(MarkContextButton){MarkContextButton.gameObject.SetActive(ViewId=="mark" && IsOpen && large);MarkContextButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(16*scale);}
+            foreach(var row in Rows.GetComponentsInChildren<NativeRow>(true))row.ApplyScale(scale);
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)Rows.transform);
         }
         static void Place(RectTransform r,float x,float y,float width,float height)
         {r.anchorMin=r.anchorMax=new Vector2(0,1);r.pivot=new Vector2(0,1);r.anchoredPosition=new Vector2(x,-y);r.sizeDelta=new Vector2(width,height);}

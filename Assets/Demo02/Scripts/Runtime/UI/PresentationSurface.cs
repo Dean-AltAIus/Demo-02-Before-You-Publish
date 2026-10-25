@@ -23,6 +23,8 @@ namespace Altaius.Demo02.UI
         public NativeSettingRow[] SettingRows;
         public Slider MasterSlider;public Text MasterValue;
         public Toggle SilentToggle,MotionToggle,ContrastToggle;public Dropdown TextSizeDropdown;
+        public ulong BindingGeneration { get; private set; }
+        public void BeginBinding()=>BindingGeneration++;
         public void ApplyScale(float scale)
         {
             bool large=scale>=1.5f;
