@@ -74,4 +74,8 @@ The existing Colleague and ModuleLead prefabs now contain simple editable body c
 
 ## Target and acceptance
 
+The next source-only campus batch contains three paving variants, staggered limestone wall blocks, a fuller teal canopy, a potted broadleaf plant, desk lamp, reference-book stack, campus banner and consolidated flower planter. MasonryKit_v002 preserves 82 native mesh parts and 158 editable modifiers; MasonryKit_v003 exports normalize transforms without replacing that native source. Limestone color and normal maps are baked from editable nodes with lighting excluded from color. AcademicProps_v001 keeps its native parts. FullPlanter_v002 and v003 are unadmitted studies: close inspection found floating flower geometry and incorrect copied pot/soil transforms. FullPlanter_v004 corrects both and is the current import candidate.
+
+Reopened native-source versus FBX-import audits pass for all ten candidates, with maximum bound discrepancy below 0.000001m. Source previews were inspected. These checks establish editable source retention, export scale and visible source corrections, not Unity appearance or runtime performance. Import/placement waits for the presenter Editor handoff. The new static export meshes are combined derivatives; their source parts remain editable in Blender.
+
 Observed computer: Intel Core i7-1255U with Intel Iris Xe integrated graphics. Rendering budget must be measured in the completed Unity slice. No frame-rate or memory acceptance is claimed. Keep URP and current installed packages. No player or GitHub builds have been run for these asset operations.

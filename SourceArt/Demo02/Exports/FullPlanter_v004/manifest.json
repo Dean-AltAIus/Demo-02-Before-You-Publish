@@ -1,0 +1,114 @@
+{
+  "assets": [
+    {
+      "name": "FullPlanter",
+      "native_mesh_parts": 112,
+      "export_vertices": 18588,
+      "materials": [
+        "D02_LeafShade",
+        "D02_LeafSunlit",
+        "D02_LeafFresh",
+        "D02_LeafGold",
+        "D02_SunflowerPetal",
+        "D02_NoticeOak",
+        "D02_Soil",
+        "D02_LimestoneTrim"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "D02_LeafShade",
+      "linear_base_color": [
+        0.10499999672174454,
+        0.25,
+        0.017999999225139618,
+        1.0
+      ],
+      "roughness": 0.8399999737739563
+    },
+    {
+      "name": "D02_LeafSunlit",
+      "linear_base_color": [
+        0.41999998688697815,
+        0.5899999737739563,
+        0.054999999701976776,
+        1.0
+      ],
+      "roughness": 0.8399999737739563
+    },
+    {
+      "name": "D02_LeafFresh",
+      "linear_base_color": [
+        0.23999999463558197,
+        0.41999998688697815,
+        0.02500000037252903,
+        1.0
+      ],
+      "roughness": 0.8399999737739563
+    },
+    {
+      "name": "D02_LeafGold",
+      "linear_base_color": [
+        0.5299999713897705,
+        0.5799999833106995,
+        0.054999999701976776,
+        1.0
+      ],
+      "roughness": 0.8399999737739563
+    },
+    {
+      "name": "D02_SunflowerPetal",
+      "linear_base_color": [
+        0.949999988079071,
+        0.6000000238418579,
+        0.03500000014901161,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_NoticeOak",
+      "linear_base_color": [
+        0.47999998927116394,
+        0.25,
+        0.07999999821186066,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_Soil",
+      "linear_base_color": [
+        0.07999999821186066,
+        0.04500000178813934,
+        0.017999999225139618,
+        1.0
+      ],
+      "roughness": 0.9399999976158142
+    },
+    {
+      "name": "D02_LimestoneTrim",
+      "linear_base_color": [
+        0.8700000047683716,
+        0.7200000286102295,
+        0.5,
+        1.0
+      ],
+      "roughness": 0.6000000238418579
+    }
+  ],
+  "status": "Corrected pot and soil transforms, grounded native source. Unity acceptance pending.",
+  "export_bounds": {
+    "min": [
+      -0.7020434737205505,
+      -0.471935510635376,
+      0.0
+    ],
+    "max": [
+      0.682685136795044,
+      0.4403693377971649,
+      1.2088618278503418
+    ]
+  }
+}
