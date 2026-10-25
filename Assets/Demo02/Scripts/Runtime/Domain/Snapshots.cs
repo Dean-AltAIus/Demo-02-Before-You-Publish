@@ -37,10 +37,11 @@ namespace Altaius.Demo02.Domain
     {
         public Guid Id { get; } public int Revision { get; } public DocumentPair Pair { get; } public int Minute { get; }
         public string ChangeSummary { get; } public ReviewStatus Status { get; } public Guid? DecisionReceiptId { get; }
+        public string DecisionReason { get; }
         public string AuthorityDisclosure { get; }
         internal ReviewRequestRecord(Guid id, int revision, DocumentPair pair, int minute, string summary, ReviewStatus status,
-            Guid? decision = null, string disclosure = null)
-        { Id = id; Revision = revision; Pair = pair; Minute = minute; ChangeSummary = summary; Status = status; DecisionReceiptId = decision; AuthorityDisclosure = disclosure; }
+            Guid? decision = null, string disclosure = null, string decisionReason = null)
+        { Id = id; Revision = revision; Pair = pair; Minute = minute; ChangeSummary = summary; Status = status; DecisionReceiptId = decision; AuthorityDisclosure = disclosure; DecisionReason = decisionReason; }
     }
     public sealed class ApprovalRecord
     {
@@ -92,6 +93,7 @@ namespace Altaius.Demo02.Domain
     {
         public Guid AttemptId { get; internal set; } public Guid? LinkedFromAttemptId { get; internal set; }
         public SessionMode Mode { get; internal set; } public int WorldRevision { get; internal set; }
+        public SessionMode UnderlyingMode { get; internal set; }
         public int ClockMinute { get; internal set; } public int ClockRevision { get; internal set; }
         public int ExperimentRevision { get; internal set; } public TaskDocument Task { get; internal set; } public RubricDocument Rubric { get; internal set; }
         public DocumentPair Pair => new DocumentPair(Task, Rubric);

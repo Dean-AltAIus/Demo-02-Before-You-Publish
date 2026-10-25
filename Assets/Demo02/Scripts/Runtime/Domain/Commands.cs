@@ -120,11 +120,12 @@ namespace Altaius.Demo02.Domain
         public string ScenarioVersion { get; } public string FixtureSha256 { get; } public DomainCommand Command { get; }
         public IReadOnlyDictionary<string, int?> Readset { get; } public IReadOnlyList<PassageRef> SourceRefs { get; }
         public Guid? CausationId { get; } public IReadOnlyList<Guid> AssistanceContextIds { get; }
-        public CommandEnvelope(Guid commandId, Guid attemptId, int expectedWorldRevision, DomainCommand command, IDictionary<string, int?> readset,
+        public string OpportunityId { get; }
+        public CommandEnvelope(Guid commandId, Guid attemptId, int expectedWorldRevision, DomainCommand command, IDictionary<string, int?> readset, string opportunityId,
             IEnumerable<PassageRef> sourceRefs = null, Guid? causationId = null, IEnumerable<Guid> assistanceContextIds = null,
             string scenarioVersion = "6.0-proposed", string fixtureSha256 = LearnerCatalogue.FixtureSha256)
         { CommandId = commandId; AttemptId = attemptId; ExpectedWorldRevision = expectedWorldRevision; Command = command;
           Readset = Frozen.Revisions(readset ?? new Dictionary<string, int?>()); SourceRefs = Frozen.List(sourceRefs); CausationId = causationId;
-          AssistanceContextIds = Frozen.List(assistanceContextIds); ScenarioVersion = scenarioVersion; FixtureSha256 = fixtureSha256; }
+          AssistanceContextIds = Frozen.List(assistanceContextIds); ScenarioVersion = scenarioVersion; FixtureSha256 = fixtureSha256; OpportunityId = opportunityId; }
     }
 }

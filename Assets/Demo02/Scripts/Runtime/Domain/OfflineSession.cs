@@ -10,6 +10,7 @@ namespace Altaius.Demo02.Domain
         private Guid attempt;
         private Guid? linkedFrom;
         private SessionMode mode;
+        private readonly SessionMode underlyingMode;
         private readonly ScenarioController controller;
         private readonly HashSet<Guid> tombstones = new HashSet<Guid>();
         private readonly List<SessionSnapshot> linkedHistory = new List<SessionSnapshot>();
@@ -49,7 +50,7 @@ namespace Altaius.Demo02.Domain
         private OfflineSession(SessionMode selectedMode)
         {
             if (!Enum.IsDefined(typeof(SessionMode), selectedMode)) throw new ArgumentOutOfRangeException(nameof(selectedMode));
-            mode = selectedMode; controller = new ScenarioController(this); Initialise();
+            mode = selectedMode; underlyingMode = selectedMode; controller = new ScenarioController(this); Initialise();
         }
         public static OfflineSession Create(SessionMode mode = SessionMode.Coached) => new OfflineSession(mode);
         public static OfflineSession Create(SessionMode mode, out ScenarioController controller)
@@ -74,7 +75,7 @@ namespace Altaius.Demo02.Domain
         }
         public SessionSnapshot Snapshot => new SessionSnapshot
         {
-            AttemptId = attempt, LinkedFromAttemptId = linkedFrom, Mode = mode, WorldRevision = world, ClockMinute = minute,
+            AttemptId = attempt, LinkedFromAttemptId = linkedFrom, Mode = mode, UnderlyingMode = underlyingMode, WorldRevision = world, ClockMinute = minute,
             ClockRevision = revisions["clock_revision"], ExperimentRevision = revisions["experiment_revision"], Task = Task, Rubric = Rubric,
             ReviewStatus = reviewStatus, Publication = publication, CurrentApproval = approval != null && approval.Pair.Same(Pair) ? approval : null,
             AssistanceHistory = assistanceHistory, TaskHistory = Frozen.List(tasks), RubricHistory = Frozen.List(rubrics),
@@ -94,12 +95,13 @@ namespace Altaius.Demo02.Domain
             if (inspected.Add(p.Reference.Key)) { revisions["admitted_registry_revision"]++; world++; }
             return p;
         }
-        public CommandEnvelope Stage(DomainCommand command, Guid? id = null)
+        public CommandEnvelope Stage(DomainCommand command, string opportunityId, Guid? id = null)
         {
             if (command == null) throw new ArgumentNullException(nameof(command));
+            if (string.IsNullOrWhiteSpace(opportunityId)) throw new ArgumentException("An explicit opportunity ID is required.", nameof(opportunityId));
             var commandId = id ?? Guid.NewGuid();
-            return new CommandEnvelope(commandId, attempt, world, command, RequiredReadset(command, commandId), SourcesFor(command), null,
-                assistance.Where(a => a.Strategic).Select(a => a.Id));
+            return new CommandEnvelope(commandId, attempt, world, command, RequiredReadset(command, commandId), opportunityId, SourcesFor(command), null,
+                RelevantAssistanceIds(opportunityId));
         }
         public CommandReceipt Submit(CommandEnvelope envelope) => Execute(envelope, ActorRole.Learner, "Actual learner action in local offline session", true, false);
         public CommandReceipt FindReceipt(Guid commandId) => receipts.TryGetValue(commandId, out var receipt) ? receipt : null;
@@ -138,6 +140,7 @@ namespace Altaius.Demo02.Domain
             try
             {
                 Require(envelope.ScenarioVersion == LearnerCatalogue.RuleVersion && envelope.FixtureSha256 == LearnerCatalogue.FixtureSha256, "ContractPinMismatch");
+                Require(!string.IsNullOrWhiteSpace(envelope.OpportunityId), "OpportunityRequired");
                 if (evaluatorRoute && mode != SessionMode.Presenter) throw new DomainUnavailable("EvaluatorUnavailable");
                 Require(!evaluatorRoute || envelope.Command is Evaluate && actor == ActorRole.ExperimentReviewer ||
                     evaluatorRoute && (envelope.Command is AdjudicateAct || envelope.Command is AssertRisk || envelope.Command is CorrectRisk) && actor == ActorRole.GroundedEvaluator, "EvaluatorRouteScopeRejected");
@@ -148,6 +151,7 @@ namespace Altaius.Demo02.Domain
                 Require(envelope.Readset.Count == expected.Count && expected.All(x => envelope.Readset.TryGetValue(x.Key, out var value) && value == x.Value), "ReadsetMismatch");
                 Require(envelope.CausationId == null || receipts.TryGetValue(envelope.CausationId.Value, out var cause) && cause.Status == ReceiptStatus.Accepted, "UnknownCausation");
                 Require(envelope.AssistanceContextIds.Distinct().Count() == envelope.AssistanceContextIds.Count && envelope.AssistanceContextIds.All(id => assistance.Any(a => a.Id == id)), "UnknownAssistanceContext");
+                Require(envelope.AssistanceContextIds.OrderBy(id => id).SequenceEqual(RelevantAssistanceIds(envelope.OpportunityId).OrderBy(id => id)), "AssistanceScopeMismatch");
                 Require(RefsEqual(envelope.SourceRefs, SourcesFor(envelope.Command)), "SourceScopeMismatch");
                 foreach (var reference in envelope.SourceRefs) ValidatePassage(reference);
                 var mutation = PrepareMutation(envelope, actor, disclosure);
@@ -157,9 +161,9 @@ namespace Altaius.Demo02.Domain
                     learnerTurns++;
                     if (mode != SessionMode.Presenter)
                     {
-                        var key = envelope.Command.Action + "/" + ContentDigest.Of(envelope.Command);
-                        if (evidenceCreditKeys.Add(key)) evidence.Add(new EvidenceObservation(envelope.CommandId, envelope.Command.Action, envelope.Command.Action,
-                            linkedFrom != null || assistance.Any(a => a.Strategic && a.OpportunityId == envelope.Command.Action), assistanceHistory == AssistanceHistory.Complete));
+                        var key = ContentDigest.Of(new { envelope.OpportunityId, envelope.Command });
+                        if (evidenceCreditKeys.Add(key)) evidence.Add(new EvidenceObservation(envelope.CommandId, envelope.Command.Action, envelope.OpportunityId,
+                            linkedFrom != null || RelevantAssistanceIds(envelope.OpportunityId).Any(), assistanceHistory == AssistanceHistory.Complete));
                     }
                 }
                 finish = Result(ReceiptStatus.Accepted, "Accepted", ChangedResources(envelope.Command));
@@ -171,6 +175,8 @@ namespace Altaius.Demo02.Domain
         }
         private static IEnumerable<string> ChangedResources(DomainCommand c)
         { yield return c.Action; yield return "world_revision"; if (c is EditTask || c is EditRubric) { yield return "approval_revision"; yield return "experiment_revision"; } }
+        private IEnumerable<Guid> RelevantAssistanceIds(string opportunityId) =>
+            assistance.Where(a => a.Strategic && a.OpportunityId == opportunityId).Select(a => a.Id);
         private static bool RoleAllows(DomainCommand c, ActorRole actor)
         {
             if (c is Evaluate) return actor == ActorRole.ExperimentReviewer;
@@ -247,7 +253,7 @@ namespace Altaius.Demo02.Domain
         {
             var previous = Snapshot; tombstones.Add(attempt);
             if (linkedPractice) linkedHistory.Add(previous); else linkedHistory.Clear();
-            if (mode == SessionMode.Replay) mode = SessionMode.Coached;
+            mode = underlyingMode;
             Initialise(); linkedFrom = linkedPractice ? previous.AttemptId : (Guid?)null;
             if (linkedPractice) { assistance.AddRange(previous.Assistance); assistanceHistory = previous.AssistanceHistory; }
         }

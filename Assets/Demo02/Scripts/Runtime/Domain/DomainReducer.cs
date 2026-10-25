@@ -63,7 +63,7 @@ namespace Altaius.Demo02.Domain
                     (c.QuestionId == "Q1" || c.QuestionId == "Q2") && c.Marks >= 0 && ValidOutcomes(c.OutcomeIds)), "InvalidRubricContent");
                 Require(r.Allocations.Select(c => c.Id).Distinct(StringComparer.Ordinal).Count() == r.Allocations.Count, "DuplicateCriterion");
                 Require(r.Allocations.Sum(c => (long)c.Marks) == 20 && Task.Questions.All(q => r.Allocations.Where(c => c.QuestionId == q.Id).Sum(c => (long)c.Marks) == q.Marks), "PerQuestionMarksMismatch");
-                Require(r.Allocations.All(c => c.OutcomeIds.All(o => Task.Questions.Single(q => q.Id == c.QuestionId).OutcomeIds.Contains(o))), "CriterionOutcomeNotInQuestion");
+                ValidateRubricOutcomeMembership(r.Allocations);
                 var next = new RubricDocument(Rubric.Version + 1, r.Allocations);
                 var passages = next.Criteria.Select(c => NewPassage("D02.rubric.v" + next.Version + "." + c.Id, next.Version, c.Description)).ToList();
                 return () => { rubrics.Add(next); foreach (var p in passages) registry.Add(p.Reference.SourceId, p); RegistryChanged(); InvalidateDependencies(); };
@@ -100,7 +100,7 @@ namespace Altaius.Demo02.Domain
                 Require(Enum.IsDefined(typeof(ReviewDecision), decision.Decision) && !string.IsNullOrWhiteSpace(decision.Reason), "ReviewReasonRequired");
                 if (decision.Decision == ReviewDecision.Approved) ValidateReleaseStructure();
                 var status = decision.Decision == ReviewDecision.Approved ? ReviewStatus.Approved : ReviewStatus.Returned;
-                var record = new ReviewRequestRecord(request.Id, request.Revision + 1, request.Pair, request.Minute, request.ChangeSummary, status, id, disclosure);
+                var record = new ReviewRequestRecord(request.Id, request.Revision + 1, request.Pair, request.Minute, request.ChangeSummary, status, id, disclosure, decision.Reason);
                 var approved = decision.Decision == ReviewDecision.Approved ? new ApprovalRecord(id, request.Id, Pair, decision.Reason, disclosure) : null;
                 return () =>
                 {
@@ -231,7 +231,12 @@ namespace Altaius.Demo02.Domain
             Require(Task.Version > 1 && Task.TotalMarks == 20 && Task.Sources.Count == 2 && !string.IsNullOrWhiteSpace(Task.DecisionContext), "SubstantiveCurrentPairRequired");
             foreach (var p in Task.Sources) ValidatePassage(p);
             Require(Rubric.Criteria.Sum(c => (long)c.Marks) == 20 && Task.Questions.All(q => Rubric.Criteria.Where(c => c.QuestionId == q.Id).Sum(c => (long)c.Marks) == q.Marks), "PerQuestionMarksMismatch");
+            ValidateRubricOutcomeMembership(Rubric.Criteria);
             // Arithmetic and attachment are operational prerequisites, never semantic alignment proof.
+        }
+        private void ValidateRubricOutcomeMembership(System.Collections.Generic.IEnumerable<Criterion> criteria)
+        {
+            Require(criteria.All(c => Task.Questions.Any(q => q.Id == c.QuestionId && c.OutcomeIds.All(o => q.OutcomeIds.Contains(o)))), "CriterionOutcomeNotInQuestion");
         }
         private static int ParseMinute(string text)
         {

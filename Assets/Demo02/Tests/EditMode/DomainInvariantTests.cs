@@ -12,7 +12,7 @@ namespace Altaius.Demo02.Tests
         private ScenarioController controller;
         [SetUp] public void Setup() { s = OfflineSession.Create(SessionMode.Coached, out controller); }
         private CommandReceipt Commit(DomainCommand c)
-        { var r = s.Submit(s.Stage(c)); Assert.That(r.Status, Is.EqualTo(ReceiptStatus.Accepted), r.ReasonCode); return r; }
+        { var r = s.Submit(s.Stage(c, "experiment.annotate")); Assert.That(r.Status, Is.EqualTo(ReceiptStatus.Accepted), r.ReasonCode); return r; }
         private PassageRef Inspect(string id, InspectionLocation location) => s.Inspect(id, location).Reference;
         private PassageRef[] Sources() => new[] { Inspect("S_A", InspectionLocation.Archive), Inspect("S_B", InspectionLocation.Archive) };
         private Criterion[] Rubric(int q1 = 4, int q2 = 16) => new[] {
@@ -23,12 +23,12 @@ namespace Altaius.Demo02.Tests
         private void RepairPair() { RepairTask(); Commit(new EditRubric(s.Snapshot.Rubric.Version, Rubric())); }
         private CommandReceipt Scripted(DomainCommand command, ActorRole role = ActorRole.ModuleLead)
         {
-            var e = s.Stage(command);
+            var e = s.Stage(command, "test-op");
             var permit = controller.PermitExactScriptedResponse(e, role, "Exact authored local scenario condition, no semantic grade.");
             return controller.SubmitScripted(e, permit);
         }
         private CommandReceipt Synthetic(DomainCommand command, ActorRole role = ActorRole.GroundedEvaluator)
-        { var r = controller.SubmitSyntheticEvaluation(s.Stage(command), role); Assert.That(r.Status, Is.EqualTo(ReceiptStatus.Accepted), r.ReasonCode); return r; }
+        { var r = controller.SubmitSyntheticEvaluation(s.Stage(command, "test-op"), role); Assert.That(r.Status, Is.EqualTo(ReceiptStatus.Accepted), r.ReasonCode); return r; }
         private Guid Request(string slot = "13:40")
         { return Commit(new RequestReview(s.Snapshot.Task.Version, s.Snapshot.Rubric.Version, "My exact current pair needs review.", slot)).RequestId; }
         private Guid Approve()
@@ -46,7 +46,7 @@ namespace Altaius.Demo02.Tests
         }
         private void RejectedWithoutMutation(DomainCommand command)
         {
-            var before = s.Snapshot; var r = s.Submit(s.Stage(command));
+            var before = s.Snapshot; var r = s.Submit(s.Stage(command, "test-op"));
             Assert.That(r.Status, Is.EqualTo(ReceiptStatus.Rejected), r.ReasonCode);
             Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(before.WorldRevision));
             Assert.That(s.Snapshot.Pair.TaskDigest, Is.EqualTo(before.Pair.TaskDigest));
@@ -79,19 +79,19 @@ namespace Altaius.Demo02.Tests
         }
         [Test] public void DuplicateCommandReturnsOriginalButChangedPayloadConflicts()
         {
-            RepairPair(); var command = new RequestReview(2, 2, "First summary", "13:40"); var envelope = s.Stage(command);
+            RepairPair(); var command = new RequestReview(2, 2, "First summary", "13:40"); var envelope = s.Stage(command, "test-op");
             var receipt = s.Submit(envelope); Assert.That(receipt.Status, Is.EqualTo(ReceiptStatus.Accepted));
             var revision = s.Snapshot.WorldRevision;
             Assert.That(s.Submit(envelope), Is.SameAs(receipt)); Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(revision));
             var changed = new CommandEnvelope(envelope.CommandId, envelope.AttemptId, envelope.ExpectedWorldRevision,
-                new RequestReview(2, 2, "Changed summary", "13:40"), envelope.Readset.ToDictionary(x => x.Key, x => x.Value));
+                new RequestReview(2, 2, "Changed summary", "13:40"), envelope.Readset.ToDictionary(x => x.Key, x => x.Value), opportunityId: "test-op");
             Assert.That(s.Submit(changed).ReasonCode, Is.EqualTo("CommandIdConflict")); Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(revision));
         }
         [Test] public void MissingOrStaleReadsetRejectsAtomically()
         {
-            RepairPair(); var envelope = s.Stage(new EditRubric(2, Rubric())); var before = s.Snapshot.WorldRevision;
+            RepairPair(); var envelope = s.Stage(new EditRubric(2, Rubric()), "test-op"); var before = s.Snapshot.WorldRevision;
             var readset = envelope.Readset.ToDictionary(x => x.Key, x => x.Value); readset.Remove("task_version");
-            var missing = new CommandEnvelope(Guid.NewGuid(), envelope.AttemptId, envelope.ExpectedWorldRevision, envelope.Command, readset);
+            var missing = new CommandEnvelope(Guid.NewGuid(), envelope.AttemptId, envelope.ExpectedWorldRevision, envelope.Command, readset, opportunityId: "test-op");
             Assert.That(s.Submit(missing).ReasonCode, Is.EqualTo("ReadsetMismatch")); Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(before));
             Commit(new EditRubric(2, Rubric())); var after = s.Snapshot.WorldRevision;
             Assert.That(s.Submit(envelope).ReasonCode, Is.EqualTo("StaleWorldRevision")); Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(after));
@@ -141,7 +141,7 @@ namespace Altaius.Demo02.Tests
         {
             var id = Mark(); var c = new Evaluate(s.Snapshot.ExperimentRevision, "W_LIST", FindingDecision.Supported,
                 new[] { new CriterionFinding(id, "naming", FindingDecision.Supported, s.Snapshot.Notebook.Select(p => p.Reference), "Matched a keyword") }, FindingCoverage.Complete, new[] { id });
-            var r = controller.SubmitSyntheticEvaluation(s.Stage(c), ActorRole.ExperimentReviewer);
+            var r = controller.SubmitSyntheticEvaluation(s.Stage(c, "experiment.annotate"), ActorRole.ExperimentReviewer);
             Assert.That(r.Status, Is.EqualTo(ReceiptStatus.Unknown)); Assert.That(r.ReasonCode, Is.EqualTo("EvaluatorUnavailable"));
             Assert.That(s.Snapshot.CurrentEvaluations, Is.Empty);
         }
@@ -153,7 +153,7 @@ namespace Altaius.Demo02.Tests
             Synthetic(partial, ActorRole.ExperimentReviewer);
             Assert.That(s.Snapshot.CurrentEvaluations.Single().Content.Coverage, Is.EqualTo(FindingCoverage.Partial));
             var complete = new Evaluate(s.Snapshot.ExperimentRevision, "W_LIST", FindingDecision.Supported, new[] { finding }, FindingCoverage.Complete, new[] { first, second });
-            var before = s.Snapshot.WorldRevision; var r = controller.SubmitSyntheticEvaluation(s.Stage(complete), ActorRole.ExperimentReviewer);
+            var before = s.Snapshot.WorldRevision; var r = controller.SubmitSyntheticEvaluation(s.Stage(complete, "test-op"), ActorRole.ExperimentReviewer);
             Assert.That(r.Status, Is.EqualTo(ReceiptStatus.Rejected)); Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(before));
         }
         [Test] public void DuplicateAndUnknownFindingsRejectInsteadOfEndorsingTotal()
@@ -161,9 +161,9 @@ namespace Altaius.Demo02.Tests
             s = OfflineSession.Create(SessionMode.Presenter, out controller); var id = Mark();
             var f = new CriterionFinding(id, "naming", FindingDecision.Supported, new[] { Inspect("W_LIST", InspectionLocation.ExperimentTable) }, "Synthetic");
             var duplicate = new Evaluate(s.Snapshot.ExperimentRevision, "W_LIST", FindingDecision.Supported, new[] { f, f }, FindingCoverage.Complete, new[] { id });
-            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(duplicate), ActorRole.ExperimentReviewer).Status, Is.EqualTo(ReceiptStatus.Rejected));
+            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(duplicate, "test-op"), ActorRole.ExperimentReviewer).Status, Is.EqualTo(ReceiptStatus.Rejected));
             var unknown = new Evaluate(s.Snapshot.ExperimentRevision, "W_LIST", FindingDecision.Supported, new[] { new CriterionFinding(Guid.NewGuid(), "other", FindingDecision.Supported, f.Sources, "Synthetic") }, FindingCoverage.Complete, new[] { id });
-            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(unknown), ActorRole.ExperimentReviewer).Status, Is.EqualTo(ReceiptStatus.Rejected));
+            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(unknown, "test-op"), ActorRole.ExperimentReviewer).Status, Is.EqualTo(ReceiptStatus.Rejected));
         }
         [Test] public void ExactApprovalCannotReleaseAfterRubricEdit()
         {
@@ -198,7 +198,7 @@ namespace Altaius.Demo02.Tests
         { RepairPair(); RejectedWithoutMutation(new RequestReview(2, 2, "Review", slot)); }
         [Test] public void StaleReplyCannotMutateClockOrCurrentAuthority()
         {
-            RepairPair(); var id = Request(); var e = s.Stage(new ScheduleReply(id, 2, 2, "13:40", ScheduleDecision.Accepted, Guid.NewGuid()));
+            RepairPair(); var id = Request(); var e = s.Stage(new ScheduleReply(id, 2, 2, "13:40", ScheduleDecision.Accepted, Guid.NewGuid()), "test-op");
             var permit = controller.PermitExactScriptedResponse(e, ActorRole.ModuleLead, "Exact script");
             Commit(new EditRubric(2, Rubric())); var before = s.Snapshot;
             Assert.That(controller.SubmitScripted(e, permit).Status, Is.EqualTo(ReceiptStatus.Rejected));
@@ -226,7 +226,7 @@ namespace Altaius.Demo02.Tests
         { RejectedWithoutMutation(new RequestHold(defect, ActorRole.Learner, time, action)); }
         [Test] public void ResetTombstonesLateCallbackAndLinkedRetryPreservesOriginalHistory()
         {
-            RepairPair(); var id = Request(); var e = s.Stage(new ScheduleReply(id, 2, 2, "13:40", ScheduleDecision.Accepted, Guid.NewGuid()));
+            RepairPair(); var id = Request(); var e = s.Stage(new ScheduleReply(id, 2, 2, "13:40", ScheduleDecision.Accepted, Guid.NewGuid()), "test-op");
             var permit = controller.PermitExactScriptedResponse(e, ActorRole.ModuleLead, "Exact script"); var old = s.Snapshot.AttemptId;
             s.Reset(true); Assert.That(s.Snapshot.LinkedFromAttemptId, Is.EqualTo(old)); Assert.That(s.Snapshot.LinkedHistory.Count, Is.EqualTo(1));
             var before = s.Snapshot.WorldRevision; Assert.That(controller.SubmitScripted(e, permit).ReasonCode, Is.EqualTo("AttemptTombstoned"));
@@ -236,7 +236,7 @@ namespace Altaius.Demo02.Tests
         [Test] public void ReplayRejectsAllWritesAndPresenterProducesNoLearnerEvidence()
         {
             Mark(); var count = s.Snapshot.Evidence.Count; s.EnterReplay(); var before = s.Snapshot.WorldRevision;
-            Assert.That(s.Submit(s.Stage(new EditRubric(1, Rubric(10, 10)))).ReasonCode, Is.EqualTo("ReplayReadOnly"));
+            Assert.That(s.Submit(s.Stage(new EditRubric(1, Rubric(10, 10)), "test-op")).ReasonCode, Is.EqualTo("ReplayReadOnly"));
             Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(before)); Assert.That(s.Snapshot.Evidence.Count, Is.EqualTo(count));
             Assert.Throws<InvalidOperationException>(() => s.Inspect("S_A", InspectionLocation.Archive));
             s = OfflineSession.Create(SessionMode.Presenter, out controller); Mark();
@@ -298,15 +298,15 @@ namespace Altaius.Demo02.Tests
         [Test] public void SyntheticEvaluatorRouteCannotMintModuleLeadAuthority()
         {
             s = OfflineSession.Create(SessionMode.Presenter, out controller); RepairPair(); var request = Request();
-            var e = s.Stage(new ScheduleReply(request, 2, 2, "13:40", ScheduleDecision.Accepted, Guid.NewGuid()));
+            var e = s.Stage(new ScheduleReply(request, 2, 2, "13:40", ScheduleDecision.Accepted, Guid.NewGuid()), "test-op");
             Assert.That(controller.SubmitSyntheticEvaluation(e, ActorRole.ModuleLead).Status, Is.EqualTo(ReceiptStatus.Rejected));
         }
         [Test] public void MissingExplicitNullResourceReadsetIsNotEquivalentToAbsence()
         {
-            var envelope = s.Stage(new RequestReview(1, 1, "Please review.", "13:40"));
+            var envelope = s.Stage(new RequestReview(1, 1, "Please review.", "13:40"), "test-op");
             var readset = envelope.Readset.ToDictionary(x => x.Key, x => x.Value);
             var absent = readset.Single(x => x.Key.StartsWith("requests/")); Assert.That(absent.Value, Is.Null); readset.Remove(absent.Key);
-            var malformed = new CommandEnvelope(envelope.CommandId, envelope.AttemptId, envelope.ExpectedWorldRevision, envelope.Command, readset);
+            var malformed = new CommandEnvelope(envelope.CommandId, envelope.AttemptId, envelope.ExpectedWorldRevision, envelope.Command, readset, opportunityId: "test-op");
             Assert.That(s.Submit(malformed).ReasonCode, Is.EqualTo("ReadsetMismatch")); Assert.That(s.Snapshot.ReviewHistory, Is.Empty);
         }
         [Test] public void CoachedUnsolicitedHelpHonoursCooldownBusyInputAndTwoInterventionCap()
@@ -364,17 +364,17 @@ namespace Altaius.Demo02.Tests
             var text = "I withdraw the first promise."; var communication = Communicate(text);
             var adjudication = Adjudicate(communication, ActFinding.SupportedCorrection, text, first);
             var bad = new CorrectRisk(second, text, Sources(), communication, adjudication); var before = s.Snapshot.WorldRevision;
-            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(bad), ActorRole.GroundedEvaluator).Status, Is.EqualTo(ReceiptStatus.Rejected));
+            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(bad, "test-op"), ActorRole.GroundedEvaluator).Status, Is.EqualTo(ReceiptStatus.Rejected));
             Assert.That(s.Snapshot.ActiveRisks.Count, Is.EqualTo(2)); Assert.That(s.Snapshot.WorldRevision, Is.EqualTo(before));
             var malformed = new AdjudicateAct(communication, ActFinding.SupportedCommitment, new[] { new ClauseRef(0, 4, "fake") }, LearnerCatalogue.RuleVersion, Sources(), Guid.NewGuid());
-            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(malformed), ActorRole.GroundedEvaluator).Status, Is.EqualTo(ReceiptStatus.Rejected));
+            Assert.That(controller.SubmitSyntheticEvaluation(s.Stage(malformed, "test-op"), ActorRole.GroundedEvaluator).Status, Is.EqualTo(ReceiptStatus.Rejected));
         }
         [Test] public void NonassertiveFindingDoesNotManufactureRisk()
         {
             s = OfflineSession.Create(SessionMode.Presenter, out controller); Sources(); var text = "I have not received approval.";
             var communication = Communicate(text); var adjudication = Adjudicate(communication, ActFinding.Nonassertive, text);
             var utterance = s.Snapshot.Communications.Last().Content.UtteranceId;
-            var result = controller.SubmitSyntheticEvaluation(s.Stage(new AssertRisk(utterance, text, communication, adjudication)), ActorRole.GroundedEvaluator);
+            var result = controller.SubmitSyntheticEvaluation(s.Stage(new AssertRisk(utterance, text, communication, adjudication), "test-op"), ActorRole.GroundedEvaluator);
             Assert.That(result.Status, Is.EqualTo(ReceiptStatus.Rejected)); Assert.That(s.Snapshot.ActiveRisks, Is.Empty);
         }
     }
