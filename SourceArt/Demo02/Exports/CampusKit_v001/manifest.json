@@ -1,0 +1,315 @@
+{
+  "version": "v001",
+  "units": "metres",
+  "axes": "Blender Z up, FBX -Z forward Y up",
+  "assets": [
+    {
+      "name": "CourtyardPavers_2m",
+      "ids": [
+        "D02.ASSET.ENV.COURTYARD"
+      ],
+      "mesh_objects": 17,
+      "source_bounds_m": [
+        2.0,
+        2.0,
+        0.1680000051856041
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\CourtyardPavers_2m.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "StoneWall_2m",
+      "ids": [
+        "D02.ASSET.ENV.STUDIO",
+        "D02.ASSET.ENV.ARCHIVE",
+        "D02.ASSET.ENV.REVIEW"
+      ],
+      "mesh_objects": 39,
+      "source_bounds_m": [
+        2.0,
+        0.36500000953674316,
+        3.5999999046325684
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\StoneWall_2m.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "Portal_4m",
+      "ids": [
+        "D02.ASSET.ENV.PORTALS"
+      ],
+      "mesh_objects": 9,
+      "source_bounds_m": [
+        4.0,
+        0.5074999928474426,
+        3.5
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\Portal_4m.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "ArchedWindow_2m",
+      "ids": [
+        "D02.ASSET.ENV.WINDOWS"
+      ],
+      "mesh_objects": 13,
+      "source_bounds_m": [
+        2.049999952316284,
+        0.41999998688697815,
+        3.2899999618530273
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\ArchedWindow_2m.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "Awning_4m",
+      "ids": [
+        "D02.ASSET.ENV.PORTALS"
+      ],
+      "mesh_objects": 4,
+      "source_bounds_m": [
+        3.9000000953674316,
+        1.2496587112545967,
+        3.1190707683563232
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\Awning_4m.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "StudioDesk",
+      "ids": [
+        "D02.ASSET.ENV.SURFACES"
+      ],
+      "mesh_objects": 7,
+      "source_bounds_m": [
+        1.7000000476837158,
+        0.8500000238418579,
+        0.8125
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\StudioDesk.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "ExperimentTable",
+      "ids": [
+        "D02.ASSET.PROP.EXPERIMENT_TABLE"
+      ],
+      "mesh_objects": 7,
+      "source_bounds_m": [
+        2.4000000953674316,
+        1.2000000476837158,
+        0.8125
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\ExperimentTable.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "ReviewDesk",
+      "ids": [
+        "D02.ASSET.ENV.SURFACES"
+      ],
+      "mesh_objects": 7,
+      "source_bounds_m": [
+        1.7999999523162842,
+        0.8999999761581421,
+        0.8125
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\ReviewDesk.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "AcademicChair",
+      "ids": [
+        "D02.ASSET.ENV.SEATING"
+      ],
+      "mesh_objects": 8,
+      "source_bounds_m": [
+        0.49000000953674316,
+        0.5248129367828369,
+        1.0239115953445435
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\AcademicChair.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "ArchiveBookcase",
+      "ids": [
+        "D02.ASSET.ENV.ARCHIVE"
+      ],
+      "mesh_objects": 72,
+      "source_bounds_m": [
+        1.2700001001358032,
+        0.4000000059604645,
+        2.1050000190734863
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\ArchiveBookcase.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "PublicationCabinet",
+      "ids": [
+        "D02.ASSET.PROP.CABINET"
+      ],
+      "mesh_objects": 10,
+      "source_bounds_m": [
+        1.159999966621399,
+        0.5940000116825104,
+        1.5125000476837158
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\PublicationCabinet.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "Folio",
+      "ids": [
+        "D02.ASSET.PROP.TASK_FOLIO",
+        "D02.ASSET.PROP.RUBRIC",
+        "D02.ASSET.PROP.PACKET"
+      ],
+      "mesh_objects": 3,
+      "source_bounds_m": [
+        0.23000000417232513,
+        0.3149999976158142,
+        0.01900000125169754
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\Folio.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "PassageSheet",
+      "ids": [
+        "D02.ASSET.PROP.PASSAGE_PROXY",
+        "D02.ASSET.PROP.WORK_LIST",
+        "D02.ASSET.PROP.WORK_COMPARE",
+        "D02.ASSET.PROP.WORK_PITCH"
+      ],
+      "mesh_objects": 1,
+      "source_bounds_m": [
+        0.20999999344348907,
+        0.296999990940094,
+        0.00139999995008111
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\PassageSheet.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "AnnotationPen",
+      "ids": [
+        "D02.ASSET.PROP.PEN"
+      ],
+      "mesh_objects": 4,
+      "source_bounds_m": [
+        0.010999999940395355,
+        0.009999999776482582,
+        0.14199999533593655
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\AnnotationPen.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "CriterionRail",
+      "ids": [
+        "D02.ASSET.PROP.CRITERION_LANE",
+        "D02.ASSET.PROP.MARK_CONTROL"
+      ],
+      "mesh_objects": 13,
+      "source_bounds_m": [
+        0.46000000834465027,
+        0.07000000029802322,
+        0.052000001072883606
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\CriterionRail.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "SourceStand",
+      "ids": [
+        "D02.ASSET.PROP.SOURCE_A",
+        "D02.ASSET.PROP.SOURCE_B"
+      ],
+      "mesh_objects": 3,
+      "source_bounds_m": [
+        0.5,
+        0.4000000059604645,
+        1.3575198650360107
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\SourceStand.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "ReviewTray",
+      "ids": [
+        "D02.ASSET.PROP.PACKET"
+      ],
+      "mesh_objects": 4,
+      "source_bounds_m": [
+        0.3140000104904175,
+        0.3720000088214874,
+        0.07000000029802322
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\ReviewTray.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "CourtyardBench",
+      "ids": [
+        "D02.ASSET.ENV.SEATING"
+      ],
+      "mesh_objects": 13,
+      "source_bounds_m": [
+        1.75,
+        0.579259604215622,
+        1.0632433891296387
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\CourtyardBench.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "Planter",
+      "ids": [
+        "D02.ASSET.ENV.COURTYARD"
+      ],
+      "mesh_objects": 120,
+      "source_bounds_m": [
+        1.167160987854004,
+        0.7137300074100494,
+        1.1024903059005737
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\Planter.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "CourtyardTree",
+      "ids": [
+        "D02.ASSET.ENV.COURTYARD"
+      ],
+      "mesh_objects": 178,
+      "source_bounds_m": [
+        2.222069501876831,
+        2.2360196113586426,
+        3.697170973289758
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\CourtyardTree.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    },
+    {
+      "name": "CampusLantern",
+      "ids": [
+        "D02.ASSET.ENV.COURTYARD"
+      ],
+      "mesh_objects": 10,
+      "source_bounds_m": [
+        0.7071067690849304,
+        0.7071067690849304,
+        3.3450000286102295
+      ],
+      "fbx": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Exports\\CampusKit_v001\\CampusLantern.fbx",
+      "status": "authored source and export candidate, Unity validation pending"
+    }
+  ],
+  "known_limits": [
+    "Procedural oak requires export texture bake before final Unity art acceptance.",
+    "Unity import, scene assembly and runtime verification pending.",
+    "Tree foliage density and final lighting require gameplay-camera review."
+  ]
+}

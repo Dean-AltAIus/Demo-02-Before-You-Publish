@@ -1,0 +1,33 @@
+{
+  "source": "C:\\Users\\mokde\\Desktop\\AltAIus\\Sims\\Demos\\Developer_Reference_Packs_v6_0_2026-10-17\\02\\visual-reference-pack-v1_2026-10-24\\visuals\\generated\\academic-learner-tpose-v2.png",
+  "source_sha256": "ce804e97a0fae48090597277217516eba28ab3109ef25bc2e186892c851c2845",
+  "operation": "Exact lossless panel extraction for multiview model input. No synthesized or retouched pixels.",
+  "views": [
+    {
+      "view": "front",
+      "path": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\Learner\\Reference\\academic-learner-front.png",
+      "box": [
+        0,
+        0,
+        836,
+        941
+      ],
+      "sha256": "c3a8649275f816ac629ee31b394764afba5886cac9174e2a8a6f7c921c44abe6",
+      "upload_path": "temp-files/883262bd-5e66-4f7c-8ced-77b5e80ab2a5.png",
+      "http_status": 200
+    },
+    {
+      "view": "back",
+      "path": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\Learner\\Reference\\academic-learner-back.png",
+      "box": [
+        836,
+        0,
+        1672,
+        941
+      ],
+      "sha256": "2667fff4d07299416d6c9a439715686515068f62be01068cad475c42711736c6",
+      "upload_path": "temp-files/8445af3e-be56-4d55-926b-37c839b6089c.png",
+      "http_status": 200
+    }
+  ]
+}

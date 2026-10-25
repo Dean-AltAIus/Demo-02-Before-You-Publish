@@ -1,0 +1,35 @@
+{
+  "asset": "D02.ASSET.RIG.LEARNER",
+  "purpose": "Pilot biped skeleton only, multi-angle posture/deformation validation required before animation",
+  "settings": {
+    "creationIdentifier": "rgcvVHWxtc",
+    "provider": "meshy"
+  },
+  "quotedCredits": 120,
+  "job": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Next step: Queued. Results are not displayed automatically. You can call `creations_show` with these newly-created identifiers: `DoL3yl2pcl` to display them inline, then use `creations_wait` to check completion. `creations_wait` accepts 1–8 identifiers per call and blocks until they finish. These are output identifiers; source identifiers refer to the original inputs. Another generation call would create additional results. No folderReference was passed, so results land in the user's Personal project. If the user named a target project, you can use its `folderReference` from `folders_list` on subsequent generation or edit calls."
+      },
+      {
+        "type": "text",
+        "text": "{\"creation\":{\"identifier\":\"DoL3yl2pcl\",\"status\":\"processing\",\"expectTime\":120,\"tool\":\"rigging-3d\",\"credits\":120},\"instruction\":\"Queued. Results are not displayed automatically. You can call `creations_show` with these newly-created identifiers: `DoL3yl2pcl` to display them inline, then use `creations_wait` to check completion. `creations_wait` accepts 1–8 identifiers per call and blocks until they finish. These are output identifiers; source identifiers refer to the original inputs. Another generation call would create additional results. No folderReference was passed, so results land in the user's Personal project. If the user named a target project, you can use its `folderReference` from `folders_list` on subsequent generation or edit calls.\"}"
+      }
+    ],
+    "structuredContent": {
+      "creation": {
+        "identifier": "DoL3yl2pcl",
+        "status": "processing",
+        "expectTime": 120,
+        "tool": "rigging-3d",
+        "credits": 120
+      },
+      "instruction": "Queued. Results are not displayed automatically. You can call `creations_show` with these newly-created identifiers: `DoL3yl2pcl` to display them inline, then use `creations_wait` to check completion. `creations_wait` accepts 1–8 identifiers per call and blocks until they finish. These are output identifiers; source identifiers refer to the original inputs. Another generation call would create additional results. No folderReference was passed, so results land in the user's Personal project. If the user named a target project, you can use its `folderReference` from `folders_list` on subsequent generation or edit calls. When replying to the user, use names, titles, webUrl, and plain descriptions — do not quote internal identifiers (UUIDs, folder references, session or request ids) unless they explicitly ask."
+    },
+    "isError": false
+  },
+  "attempt": 1,
+  "status": "submitted",
+  "repairPolicy": "Repeat the validated local mesh welding and bounded trouser smoothing on the weighted derivative. Preserve raw rig and all manual edits."
+}

@@ -1,0 +1,1777 @@
+{
+  "footprint_m": [
+    24,
+    18
+  ],
+  "blender_axes": "Z up, front -Y",
+  "placements": [
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_00",
+      "blender_position": [
+        -11,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_01",
+      "blender_position": [
+        -11,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_02",
+      "blender_position": [
+        -11,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_03",
+      "blender_position": [
+        -11,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_04",
+      "blender_position": [
+        -11,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_05",
+      "blender_position": [
+        -11,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_06",
+      "blender_position": [
+        -11,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_07",
+      "blender_position": [
+        -11,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_00_08",
+      "blender_position": [
+        -11,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_00",
+      "blender_position": [
+        -9,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_01",
+      "blender_position": [
+        -9,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_02",
+      "blender_position": [
+        -9,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_03",
+      "blender_position": [
+        -9,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_04",
+      "blender_position": [
+        -9,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_05",
+      "blender_position": [
+        -9,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_06",
+      "blender_position": [
+        -9,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_07",
+      "blender_position": [
+        -9,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_01_08",
+      "blender_position": [
+        -9,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_00",
+      "blender_position": [
+        -7,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_01",
+      "blender_position": [
+        -7,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_02",
+      "blender_position": [
+        -7,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_03",
+      "blender_position": [
+        -7,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_04",
+      "blender_position": [
+        -7,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_05",
+      "blender_position": [
+        -7,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_06",
+      "blender_position": [
+        -7,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_07",
+      "blender_position": [
+        -7,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_02_08",
+      "blender_position": [
+        -7,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_00",
+      "blender_position": [
+        -5,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_01",
+      "blender_position": [
+        -5,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_02",
+      "blender_position": [
+        -5,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_03",
+      "blender_position": [
+        -5,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_04",
+      "blender_position": [
+        -5,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_05",
+      "blender_position": [
+        -5,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_06",
+      "blender_position": [
+        -5,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_07",
+      "blender_position": [
+        -5,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_03_08",
+      "blender_position": [
+        -5,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_00",
+      "blender_position": [
+        -3,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_01",
+      "blender_position": [
+        -3,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_02",
+      "blender_position": [
+        -3,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_03",
+      "blender_position": [
+        -3,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_04",
+      "blender_position": [
+        -3,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_05",
+      "blender_position": [
+        -3,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_06",
+      "blender_position": [
+        -3,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_07",
+      "blender_position": [
+        -3,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_04_08",
+      "blender_position": [
+        -3,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_00",
+      "blender_position": [
+        -1,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_01",
+      "blender_position": [
+        -1,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_02",
+      "blender_position": [
+        -1,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_03",
+      "blender_position": [
+        -1,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_04",
+      "blender_position": [
+        -1,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_05",
+      "blender_position": [
+        -1,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_06",
+      "blender_position": [
+        -1,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_07",
+      "blender_position": [
+        -1,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_05_08",
+      "blender_position": [
+        -1,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_00",
+      "blender_position": [
+        1,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_01",
+      "blender_position": [
+        1,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_02",
+      "blender_position": [
+        1,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_03",
+      "blender_position": [
+        1,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_04",
+      "blender_position": [
+        1,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_05",
+      "blender_position": [
+        1,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_06",
+      "blender_position": [
+        1,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_07",
+      "blender_position": [
+        1,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_06_08",
+      "blender_position": [
+        1,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_00",
+      "blender_position": [
+        3,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_01",
+      "blender_position": [
+        3,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_02",
+      "blender_position": [
+        3,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_03",
+      "blender_position": [
+        3,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_04",
+      "blender_position": [
+        3,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_05",
+      "blender_position": [
+        3,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_06",
+      "blender_position": [
+        3,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_07",
+      "blender_position": [
+        3,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_07_08",
+      "blender_position": [
+        3,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_00",
+      "blender_position": [
+        5,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_01",
+      "blender_position": [
+        5,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_02",
+      "blender_position": [
+        5,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_03",
+      "blender_position": [
+        5,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_04",
+      "blender_position": [
+        5,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_05",
+      "blender_position": [
+        5,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_06",
+      "blender_position": [
+        5,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_07",
+      "blender_position": [
+        5,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_08_08",
+      "blender_position": [
+        5,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_00",
+      "blender_position": [
+        7,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_01",
+      "blender_position": [
+        7,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_02",
+      "blender_position": [
+        7,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_03",
+      "blender_position": [
+        7,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_04",
+      "blender_position": [
+        7,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_05",
+      "blender_position": [
+        7,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_06",
+      "blender_position": [
+        7,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_07",
+      "blender_position": [
+        7,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_09_08",
+      "blender_position": [
+        7,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_00",
+      "blender_position": [
+        9,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_01",
+      "blender_position": [
+        9,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_02",
+      "blender_position": [
+        9,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_03",
+      "blender_position": [
+        9,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_04",
+      "blender_position": [
+        9,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_05",
+      "blender_position": [
+        9,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_06",
+      "blender_position": [
+        9,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_07",
+      "blender_position": [
+        9,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_10_08",
+      "blender_position": [
+        9,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_00",
+      "blender_position": [
+        11,
+        -8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_01",
+      "blender_position": [
+        11,
+        -6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_02",
+      "blender_position": [
+        11,
+        -4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_03",
+      "blender_position": [
+        11,
+        -2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_04",
+      "blender_position": [
+        11,
+        0,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_05",
+      "blender_position": [
+        11,
+        2,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_06",
+      "blender_position": [
+        11,
+        4,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_07",
+      "blender_position": [
+        11,
+        6,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardPavers_2m",
+      "name": "Paving_11_08",
+      "blender_position": [
+        11,
+        8,
+        -0.018
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Portal_4m",
+      "name": "Studio_Entrance",
+      "blender_position": [
+        -6.0,
+        1.1999999284744263,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Studio_Back-2",
+      "blender_position": [
+        -10.0,
+        -0.7999997735023499,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Studio_Back0",
+      "blender_position": [
+        -10.0,
+        1.2000001668930054,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Studio_Back2",
+      "blender_position": [
+        -10.0,
+        3.200000286102295,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Studio_Side-3_-1",
+      "blender_position": [
+        -7.0,
+        -1.8000000715255737,
+        0.0
+      ],
+      "rotation_z_degrees": 180
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Studio_Side-3_1",
+      "blender_position": [
+        -9.0,
+        -1.7999998331069946,
+        0.0
+      ],
+      "rotation_z_degrees": 180
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Studio_Side3_-1",
+      "blender_position": [
+        -7.0,
+        4.199999809265137,
+        0.0
+      ],
+      "rotation_z_degrees": 180
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Studio_Side3_1",
+      "blender_position": [
+        -9.0,
+        4.200000286102295,
+        0.0
+      ],
+      "rotation_z_degrees": 180
+    },
+    {
+      "asset": "ArchedWindow_2m",
+      "name": "Studio_WindowLeft",
+      "blender_position": [
+        -5.970000267028809,
+        -1.3000000715255737,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "Planter",
+      "name": "Studio_PlanterLeft",
+      "blender_position": [
+        -5.450000286102295,
+        -1.6000001430511475,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "Planter",
+      "name": "Studio_PlanterRight",
+      "blender_position": [
+        -5.449999809265137,
+        3.999999761581421,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "ExperimentTable",
+      "name": "Studio_Experiment",
+      "blender_position": [
+        -8.0,
+        1.2000000476837158,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "AcademicChair",
+      "name": "Studio_LearnerChair",
+      "blender_position": [
+        -7.050000190734863,
+        1.1999999284744263,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "StudioDesk",
+      "name": "Studio_RevisionDesk",
+      "blender_position": [
+        -9.34999942779541,
+        2.8000001907348633,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "ArchiveBookcase",
+      "name": "Studio_Shelves",
+      "blender_position": [
+        -9.699999809265137,
+        -0.5999997854232788,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "Folio",
+      "name": "Studio_Task",
+      "blender_position": [
+        -8.0,
+        0.6000000238418579,
+        0.8149999976158142
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "Folio",
+      "name": "Studio_Rubric",
+      "blender_position": [
+        -8.0,
+        1.350000023841858,
+        0.8149999976158142
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "PassageSheet",
+      "name": "Studio_WorkSample",
+      "blender_position": [
+        -7.920000076293945,
+        0.9800000190734863,
+        0.8159999847412109
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "CriterionRail",
+      "name": "Studio_Lane",
+      "blender_position": [
+        -7.679999828338623,
+        1.850000023841858,
+        0.8149999976158142
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "AnnotationPen",
+      "name": "Studio_Pen",
+      "blender_position": [
+        -7.869999885559082,
+        2.0,
+        0.8199999928474426
+      ],
+      "rotation_z_degrees": 180
+    },
+    {
+      "asset": "Portal_4m",
+      "name": "Review_Entrance",
+      "blender_position": [
+        6.0,
+        1.2000001668930054,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Review_Back-2",
+      "blender_position": [
+        10.0,
+        3.200000047683716,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Review_Back0",
+      "blender_position": [
+        10.0,
+        1.1999999284744263,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Review_Back2",
+      "blender_position": [
+        10.0,
+        -0.800000011920929,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Review_Side-3_-1",
+      "blender_position": [
+        7.0,
+        4.200000286102295,
+        0.0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Review_Side-3_1",
+      "blender_position": [
+        9.0,
+        4.199999809265137,
+        0.0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Review_Side3_-1",
+      "blender_position": [
+        7.0,
+        -1.7999999523162842,
+        0.0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Review_Side3_1",
+      "blender_position": [
+        9.0,
+        -1.7999999523162842,
+        0.0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "ArchedWindow_2m",
+      "name": "Review_WindowLeft",
+      "blender_position": [
+        5.970000267028809,
+        3.700000047683716,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "Planter",
+      "name": "Review_PlanterLeft",
+      "blender_position": [
+        5.450000286102295,
+        4.0,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "Planter",
+      "name": "Review_PlanterRight",
+      "blender_position": [
+        5.449999809265137,
+        -1.5999997854232788,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "ReviewDesk",
+      "name": "Review_Desk",
+      "blender_position": [
+        8.0,
+        1.2000000476837158,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "AcademicChair",
+      "name": "Review_LeadChair",
+      "blender_position": [
+        8.75,
+        1.2000000476837158,
+        0.0
+      ],
+      "rotation_z_degrees": 90
+    },
+    {
+      "asset": "PublicationCabinet",
+      "name": "Review_Cabinet",
+      "blender_position": [
+        9.550000190734863,
+        -0.5999999642372131,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "ReviewTray",
+      "name": "Review_Tray",
+      "blender_position": [
+        8.0,
+        1.6500000953674316,
+        0.8149999976158142
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "Folio",
+      "name": "Review_ReviewPacket",
+      "blender_position": [
+        8.0,
+        1.2000000476837158,
+        0.8149999976158142
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "ArchiveBookcase",
+      "name": "Review_Shelves",
+      "blender_position": [
+        9.699999809265137,
+        3.0999999046325684,
+        0.0
+      ],
+      "rotation_z_degrees": -90
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Archive_Back_-2",
+      "blender_position": [
+        -2,
+        8,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Archive_Back_0",
+      "blender_position": [
+        0,
+        8,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "StoneWall_2m",
+      "name": "Archive_Back_2",
+      "blender_position": [
+        2,
+        8,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Awning_4m",
+      "name": "Archive_Awning",
+      "blender_position": [
+        0,
+        6.7,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "StudioDesk",
+      "name": "Archive_Surface",
+      "blender_position": [
+        0,
+        6.2,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "SourceStand",
+      "name": "Archive_SourceA",
+      "blender_position": [
+        -0.85,
+        5.7,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "SourceStand",
+      "name": "Archive_SourceB",
+      "blender_position": [
+        0.85,
+        5.7,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "ArchiveBookcase",
+      "name": "Archive_Shelf",
+      "blender_position": [
+        -2.1,
+        7.7,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Archive_Planter_-2.6",
+      "blender_position": [
+        -2.6,
+        6.8,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Archive_Planter_2.6",
+      "blender_position": [
+        2.6,
+        6.8,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Courtyard_Planter_-4.8_-6.7",
+      "blender_position": [
+        -4.8,
+        -6.7,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardTree",
+      "name": "Courtyard_Tree_-4.8_-6.7",
+      "blender_position": [
+        -4.8,
+        -6.7,
+        0.5
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Courtyard_Planter_4.8_-6.7",
+      "blender_position": [
+        4.8,
+        -6.7,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardTree",
+      "name": "Courtyard_Tree_4.8_-6.7",
+      "blender_position": [
+        4.8,
+        -6.7,
+        0.5
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Courtyard_Planter_-4.8_4.1",
+      "blender_position": [
+        -4.8,
+        4.1,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardTree",
+      "name": "Courtyard_Tree_-4.8_4.1",
+      "blender_position": [
+        -4.8,
+        4.1,
+        0.5
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Courtyard_Planter_4.8_4.1",
+      "blender_position": [
+        4.8,
+        4.1,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardTree",
+      "name": "Courtyard_Tree_4.8_4.1",
+      "blender_position": [
+        4.8,
+        4.1,
+        0.5
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Courtyard_Planter_-10.7_7.2",
+      "blender_position": [
+        -10.7,
+        7.2,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardTree",
+      "name": "Courtyard_Tree_-10.7_7.2",
+      "blender_position": [
+        -10.7,
+        7.2,
+        0.5
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "Planter",
+      "name": "Courtyard_Planter_10.7_7.2",
+      "blender_position": [
+        10.7,
+        7.2,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardTree",
+      "name": "Courtyard_Tree_10.7_7.2",
+      "blender_position": [
+        10.7,
+        7.2,
+        0.5
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardBench",
+      "name": "Bench_-7_-6",
+      "blender_position": [
+        -7,
+        -6,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardBench",
+      "name": "Bench_7_-6",
+      "blender_position": [
+        7,
+        -6,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CourtyardBench",
+      "name": "Bench_-3_3.8",
+      "blender_position": [
+        -3,
+        3.8,
+        0
+      ],
+      "rotation_z_degrees": 180
+    },
+    {
+      "asset": "CourtyardBench",
+      "name": "Bench_3_3.8",
+      "blender_position": [
+        3,
+        3.8,
+        0
+      ],
+      "rotation_z_degrees": 180
+    },
+    {
+      "asset": "CampusLantern",
+      "name": "Lantern_-4.5_-4.4",
+      "blender_position": [
+        -4.5,
+        -4.4,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CampusLantern",
+      "name": "Lantern_4.5_-4.4",
+      "blender_position": [
+        4.5,
+        -4.4,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CampusLantern",
+      "name": "Lantern_-4.5_6.3",
+      "blender_position": [
+        -4.5,
+        6.3,
+        0
+      ],
+      "rotation_z_degrees": 0
+    },
+    {
+      "asset": "CampusLantern",
+      "name": "Lantern_4.5_6.3",
+      "blender_position": [
+        4.5,
+        6.3,
+        0
+      ],
+      "rotation_z_degrees": 0
+    }
+  ],
+  "interaction_targets_blender": {
+    "studio": [
+      -5.9,
+      1.2,
+      0
+    ],
+    "archive": [
+      0,
+      4.8,
+      0
+    ],
+    "review": [
+      5.9,
+      1.2,
+      0
+    ]
+  },
+  "status": "Source assembly only, navigation and camera clearance require actual Unity checks."
+}
