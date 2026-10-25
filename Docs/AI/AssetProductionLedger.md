@@ -12,6 +12,8 @@ SourceArt/Demo02/Environment/CampusAssembly_v001.blend is a saved source assembl
 
 Observed source preview: three stations and clear central courtyard are visible. Current limitations: wall/portal end joins show dark seams, foliage needs denser and more coherent grouping, room/furniture dressing is sparse, and procedural oak needs an export texture bake. These must be corrected and inspected in the real Unity scene. Navigation clearance, camera, runtime performance and post-Play persistence have not yet been proven.
 
+Unity import: 21 FBX assets, 21 URP palette materials and 21 saved reusable prefabs now exist. Measured imported bounds match metre-scale source intent, including the asymmetric folio, door cabinet and 4m portal. Material remapping was explicit. Prefab creation preserves existing assets. Full scene rendering and collision clearance still need the gameplay assembly.
+
 ## Academic learner pilot
 
 Input: the supplied academic-learner-tpose-v2.png, with exact front/back panel extraction for multiview input. Original source hash and extraction coordinates are in Characters/Learner/Reference/reference-provenance.json. No visual identity was regenerated before model generation. Model created with Meshy 7.1 through Magnific, 30,000 target faces, actual provider report 30,807 triangles. Original GLB is preserved with SHA-256 receipt.
@@ -20,7 +22,11 @@ Native mesh versions preserve inspection and repair history. v001 is the scaled 
 
 The Meshy pilot rig is preserved separately. Working rig v001 fixes imported bone tails that were 100 times the intended length, retaining head positions and bind directions. Body source repair is repeated on the weighted derivative. Provider helper geometry is excluded from production export. Any supplied source action is retained unbound, not played or admitted as animation. The rig has 24 bones and no finger chains. Precise hand/pen/folio contacts require finger controls or a suitable alternate rig before animation acceptance.
 
-Multi-angle mesh renders, geometry audits, rig/rest views and local repair logs are in ignored LocalOnly/Captures/Assets/Learner. A render receipt is not a visual pass. Rest posture and deformation still require explicit reviewed results before motion authoring. Other cast members remain unproduced pending this pilot gate.
+Multi-angle mesh renders, geometry audits, rig/rest views and local repair logs are in ignored LocalOnly/Captures/Assets/Learner. Six rest views and front/side/three-quarter shoulder, reach and knee probes were explicitly inspected. Body posture and deformation are usable for the next authoring step, with no exploding skin or displaced hips/back. Rig v002 adds 30 editable finger bones. The first static grip probe exposed small finger surface tears, so that version is not accepted for animation. Local topology/weight repair is pending. No animation clips have been authored or admitted.
+
+## Colleague and module lead
+
+Both missing meshes were generated from the supplied exact front/back reference crops with Meshy 7.1, 1160 credits each, without retries. Original GLBs, hashes, input crop provenance and native metre-scale Blender sources are preserved. Front, rear, side and oblique views show the intended adult silhouettes, clothing and hair. Surface normals and local folds need the same local cleanup used for the learner. Rig jobs were started at 120 credits each and are not yet accepted. These sources do not establish finished game art or animation quality.
 
 ## Rights and provenance
 
