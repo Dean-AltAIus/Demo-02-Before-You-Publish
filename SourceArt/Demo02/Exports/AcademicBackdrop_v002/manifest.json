@@ -1,0 +1,85 @@
+{
+  "assets": [
+    {
+      "name": "AcademicBackdrop",
+      "source_parts": 215,
+      "export_vertices": 15968,
+      "export_polygons": 14894,
+      "material_slots": 6
+    }
+  ],
+  "materials": [
+    {
+      "name": "D02_BackdropLimestone",
+      "linear_base_color": [
+        0.6899999976158142,
+        0.5,
+        0.30000001192092896,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_BackdropCreamTrim",
+      "linear_base_color": [
+        0.8999999761581421,
+        0.7599999904632568,
+        0.5400000214576721,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_BackdropWarmBrick",
+      "linear_base_color": [
+        0.550000011920929,
+        0.26499998569488525,
+        0.14000000059604645,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_BackdropBlueSlate",
+      "linear_base_color": [
+        0.04500000178813934,
+        0.11999999731779099,
+        0.20000000298023224,
+        1.0
+      ],
+      "roughness": 0.41999998688697815
+    },
+    {
+      "name": "D02_BackdropWindow",
+      "linear_base_color": [
+        0.02500000037252903,
+        0.08500000089406967,
+        0.12999999523162842,
+        1.0
+      ],
+      "roughness": 0.2800000011920929
+    },
+    {
+      "name": "D02_BackdropInset",
+      "linear_base_color": [
+        0.20999999344348907,
+        0.11999999731779099,
+        0.06499999761581421,
+        1.0
+      ],
+      "roughness": 0.6499999761581421
+    },
+    {
+      "name": "D02_BackdropBrass",
+      "linear_base_color": [
+        0.5899999737739563,
+        0.36000001430511475,
+        0.05999999865889549,
+        1.0
+      ],
+      "roughness": 0.30000001192092896
+    }
+  ],
+  "source": "Native editable geometry based on supplied campus architecture, no third-party mesh",
+  "validation": "Source preview pending, Unity placement pending"
+}
