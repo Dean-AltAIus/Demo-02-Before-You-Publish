@@ -2,7 +2,7 @@
 
 ## Scope and checkpoint
 
-The user requested project/repository setup and a full reference review first. Stop with this project open for Dean to install MCP for Unity and start its server. Do not install MCP for him or continue the game buildout before that handoff.
+The setup handoff is complete. On 25 October 2026 Dean reported that Unity MCP and Blender MCP were started and explicitly requested continuation through the full buildout. The active chat goal covers full implementation, production assets, gameplay and visual validation, and verified delivery on dev. Follow Docs/AI/Demo02-Implementation-Plan.md and its scoped progress ledger. Do not treat setup, a passing unit suite or a functional greybox as completion.
 
 Read Docs/AI/UnityProjectContext.md and the ignored LocalOnly/ReferenceReview.md on continuation. Revalidate the actual Git branch, editor process and reference hashes. Source summaries are navigation aids; reopen the exact source and item recipe before implementation.
 
