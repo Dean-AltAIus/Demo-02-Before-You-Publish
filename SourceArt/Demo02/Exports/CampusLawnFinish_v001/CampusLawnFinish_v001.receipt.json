@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "original_source": "SourceArt/Demo02/Environment/DressingKit_v001.blend",
+  "original_source_sha256": "1a345a994be2af544363f16d0e7772c2de983ea9c3f5def05d9dfe014786e4a6",
+  "native_source": "SourceArt/Demo02/Environment/CampusLawnFinish_v001.blend",
+  "original_palette_linear_rgba": [
+    0.23999999463558197,
+    0.3400000035762787,
+    0.10000000149011612,
+    1.0
+  ],
+  "tile_size_m": 4,
+  "resolution": [
+    1024,
+    1024
+  ],
+  "texture": "SourceArt/Demo02/Exports/CampusLawnFinish_v001/CampusLawn_Albedo_v001.png",
+  "texture_sha256": "4fe4aa61abd3eb9d95dcdd672f57aee624aa67986361e3a11e7feddf541c86b7",
+  "colour_space": "sRGB colour texture, bake from linear shader; use white Unity base tint",
+  "unity_import": "Repeat wrap, mipmaps on, anisotropic 4, preserve alpha disabled; one albedo only",
+  "source_nodes": "Editable periodic 4D noise and colour ramps, packed baked texture",
+  "geometry_scope": "Original DressingKit and CampusGround geometry unchanged; separate preview plane is not a game export",
+  "runtime_status": "Native material candidate. Unity admission, scale, seam and final camera validation remain required.",
+  "native_source_sha256": "357697a9d82e151ef21fc9874883b6bac7201cb895117a974c73718df3ec1b15",
+  "node_count": 18,
+  "rebake_byte_identical": true,
+  "linked_libraries": 0,
+  "packed_file_images": 1
+}
