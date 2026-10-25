@@ -4,7 +4,7 @@ No index-finger claim, contact receipt, voice or review authority is generated.
 import bpy, math, json, hashlib
 from pathlib import Path
 from mathutils import Vector, Matrix, Quaternion
-R=Path(r'D:/Altaius/Demo-02-Before-You-Publish')
+R=Path(__file__).resolve().parents[3]
 dest=R/'SourceArt/Demo02/Characters/Colleague/Colleague_Interactions_v001.blend'
 out=R/'LocalOnly/Validation/Production/NPCInteractions_v001/ColleagueSourcePoint'
 if dest.exists() or (out.exists() and any(out.iterdir())):raise RuntimeError('Preserve authored version')

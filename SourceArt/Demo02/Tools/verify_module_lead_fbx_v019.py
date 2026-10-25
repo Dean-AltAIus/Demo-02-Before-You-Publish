@@ -5,11 +5,12 @@ from mathutils import Vector,Quaternion
 from mathutils.kdtree import KDTree
 sys.path.insert(0,str(Path(__file__).parent))
 from npc_contact_math import NativeNpcRig
-R=Path(r'D:/Altaius/Demo-02-Before-You-Publish');version='v019'
+R=Path(__file__).resolve().parents[3];version='v019'
 folder=R/'SourceArt/Demo02/Exports/NPCInteractions_v001'
 source=R/'SourceArt/Demo02/Characters/ModuleLead'/('ModuleLead_Interactions_'+version+'.blend');fbx=folder/('ModuleLead_Interactions_'+version+'.fbx')
 out=R/'LocalOnly/Validation/Production/NPCInteractions_v001'/('LeadInteractions_'+version)/'fbx-roundtrip.json'
 if out.exists():raise RuntimeError('Preserve existing roundtrip evidence')
+out.parent.mkdir(parents=True,exist_ok=True)
 tracks=json.loads((folder/('ModuleLead_Interactions_'+version+'.packet-tracks.json')).read_text())
 bpy.ops.wm.open_mainfile(filepath=str(source));s=bpy.data.scenes['Demo02_ModuleLeadRig_v001'];bpy.context.window.scene=s
 a=bpy.data.objects['ModuleLead_EditableRig'];body=bpy.data.objects['ModuleLead_WeightedMesh'];folio=bpy.data.objects['Folio'];hinge=bpy.data.objects['FolioCoverHinge'];rig=NativeNpcRig(a,body,{})

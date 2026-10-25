@@ -3,7 +3,7 @@ The exported FBX remains a Unity validation candidate until actual playback chec
 """
 import bpy,json,hashlib
 from pathlib import Path
-R=Path(r'D:/Altaius/Demo-02-Before-You-Publish')
+R=Path(__file__).resolve().parents[3]
 source=R/'SourceArt/Demo02/Characters/Colleague/Colleague_Interactions_v001.blend'
 out=R/'SourceArt/Demo02/Exports/NPCInteractions_v001'
 fbx=out/'Colleague_Interactions_v001.fbx'

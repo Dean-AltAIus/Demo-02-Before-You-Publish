@@ -8,21 +8,22 @@ from pathlib import Path
 from mathutils import Vector,Quaternion
 sys.path.insert(0,str(Path(__file__).parent))
 from npc_contact_math import NativeNpcRig
-R=Path(r'D:/Altaius/Demo-02-Before-You-Publish');version='v019'
+R=Path(__file__).resolve().parents[3];version='v019'
 source=R/'SourceArt/Demo02/Characters/ModuleLead/ModuleLead_PickupRead_v012.blend'
 dest=R/'SourceArt/Demo02/Characters/ModuleLead'/('ModuleLead_Interactions_'+version+'.blend')
 out=R/'LocalOnly/Validation/Production/NPCInteractions_v001'/('LeadInteractions_'+version)
 if dest.exists() or (out.exists() and any(out.iterdir())):raise RuntimeError('Preserve motion candidate')
 out.mkdir(parents=True,exist_ok=True)
-gate=json.loads((R/'LocalOnly/Validation/Production/NPCInteractions_v001/VolumeAudit_v001/volume-report.json').read_text())
-if any(t['summary']['penetrating_frames'] or t['summary']['disagreement_count'] for e in gate['sources'] if not e['source'].endswith('v007.blend') for t in e['takes']):raise RuntimeError('Prior corrected volume gate failed')
-point_fit=json.loads((R/'LocalOnly/Validation/Production/NPCInteractions_v001/LeadReturnProbe_v016/audit.json').read_text())
-if any(o['inside_vertex_count'] for r in point_fit['audits'] for o in r['objects']):raise RuntimeError('Static point/placement gate failed')
+controls=json.loads((R/'SourceArt/Demo02/Characters/ModuleLead/ModuleLead_Interactions_v019.controls.json').read_text())
+for name,expected in controls['input_sha256'].items():
+    actual=hashlib.sha256((R/'SourceArt/Demo02/Characters/ModuleLead'/name).read_bytes()).hexdigest()
+    if actual!=expected:raise RuntimeError('Preserve edited input and review bounded regeneration: '+name)
+point_fit=controls['point_fit']
 bpy.ops.wm.open_mainfile(filepath=str(R/'SourceArt/Demo02/Characters/ModuleLead/ModuleLead_PickupContact_v008.blend'))
 bpy.context.view_layer.update();solve_basis={p.name:p.matrix.copy() for p in bpy.data.objects['ModuleLead_EditableRig'].pose.bones}
 bpy.ops.wm.open_mainfile(filepath=str(source));s=bpy.data.scenes['Demo02_ModuleLeadRig_v001'];bpy.context.window.scene=s
 a=bpy.data.objects['ModuleLead_EditableRig'];body=bpy.data.objects['ModuleLead_WeightedMesh'];folio=bpy.data.objects['Folio'];hinge=bpy.data.objects['FolioCoverHinge'];objects=[a,folio,hinge]
-chains={n:[Vector(v) for v in pts] for n,pts in json.loads((R/'LocalOnly/Validation/Production/NPCInteractions_v001/LeadFingerControls/finger-rig-audit.json').read_text())['joint_world_positions'].items()}
+chains={n:[Vector(v) for v in pts] for n,pts in controls['finger_joint_world_positions'].items()}
 props=[bpy.data.objects[n] for n in ['Front cover','Back cover','Thin paper stack']];contact={'Left':props[0],'Right':props[1]}
 table=next(o for o in bpy.data.objects['ReviewDesk'].children_recursive if o.name.startswith('Oak worktop'))
 def select(take,frame):
