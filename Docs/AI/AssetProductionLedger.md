@@ -66,6 +66,12 @@ Existing local Mixamo gesture sources were considered read-only for reuse. No or
 
 The character references were supplied by Dean as the design pack for this project. They are used for this authorized build. The generated mesh and rig are AI-generated derivatives, not manually sculpted originals. Magnific's paid subscription was active at generation. Its current terms assign the provider's output rights to subscribers, subject to the input rights and incorporated provider terms. Sources: [Magnific AI terms](https://www.magnific.com/legal/ai-products), [Meshy terms](https://www.meshy.ai/terms-of-use). No unrelated stock or third-party university screenshot is being shipped as art. Preserve these provenance links and original files with derivatives.
 
+## Bulk foliage and physical cast integration
+
+FoliageKit_v002 preserves a new native Blender source and five FBX derivatives. Rounded, bowed leaf meshes replace the earlier angular foliage in 31 saved instances. Twelve earlier additive tree crowns and all 31 replaced instances remain inactive and editable. The new complete tree has nine renderer parts instead of the older 178-part tree plus a separate crown. The actual saved scene's active renderer count decreased from 6,833 to 4,793; this is an object count, not a frame-rate claim. Outside-Play capture reference-campus-foliage-v005.png was inspected, confirming rounded ivy, planters and coherent tree crowns. Final lighting, color balance and gameplay performance remain open.
+
+The existing Colleague and ModuleLead prefabs now contain simple editable body capsules, 1.80m and 1.65m high with a 0.23m radius. All four station arrival capsules remain clear in the saved scene after placement. The scene has nine roots, three active skinned cast renderers and zero missing scripts. Motion/contact refinement remains deferred; actual traversal and post-Play persistence of this art batch belong to the next integrated walkthrough validation. No paid generation, player build or GitHub workflow was used.
+
 ## Target and acceptance
 
 Observed computer: Intel Core i7-1255U with Intel Iris Xe integrated graphics. Rendering budget must be measured in the completed Unity slice. No frame-rate or memory acceptance is claimed. Keep URP and current installed packages. No player or GitHub builds have been run for these asset operations.
