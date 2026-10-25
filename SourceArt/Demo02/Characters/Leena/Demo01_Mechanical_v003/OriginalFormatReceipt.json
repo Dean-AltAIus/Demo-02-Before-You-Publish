@@ -1,0 +1,31 @@
+{
+  "role": "LEENA",
+  "source_sha256": "68447e58fc54b0f53bf135db06413465cac7a12d67fcb73d1b23e0a50e6d75e6",
+  "source": "ArtSources\\Stage2\\provider\\LEENA_TRIPO_ORIGINAL.glb",
+  "native_master": "ArtSources\\Stage3\\FormatOnly\\LEENA_UNREFINED_FORMAT_v001.blend",
+  "export": "Assets\\Demo01\\Art\\Characters\\Unrefined\\LEENA\\LEENA_UNREFINED_FORMAT_v001.fbx",
+  "height_m": 1.32,
+  "source_bounds": {
+    "low": [
+      -0.07788211852312088,
+      -0.10652393847703934,
+      -0.1500461846590042
+    ],
+    "high": [
+      0.07784484326839447,
+      0.10652775317430496,
+      0.14995382726192474
+    ]
+  },
+  "uniform_scale": 4.399999825159716,
+  "meshes": {
+    "tripo_node_3fe93a03-0abc-4367-9ff6-c1fd514e5626": 51721
+  },
+  "triangles": 95606,
+  "bones": 0,
+  "mesh_edits": 0,
+  "pose_edits": 0,
+  "animations_added": 0,
+  "excluded_importer_display_helpers": [],
+  "status": "Unrefined format derivative, engine fidelity and final character acceptance pending"
+}

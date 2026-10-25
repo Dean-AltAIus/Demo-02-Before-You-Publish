@@ -1,0 +1,30 @@
+{
+  "source": "ArtSources/Stage3/FormatOnly/LEENA_UNREFINED_FORMAT_v001.blend",
+  "sourceSha256": "7e3d5769ca34bb51d4ef157e5687a025399f206e9b0873c58941b5c684d85d4e",
+  "blender": "5.2.0 LTS",
+  "vertices": 51721,
+  "polygons": 95606,
+  "bones": [
+    "Root",
+    "Body",
+    "Head"
+  ],
+  "blendedNeckVertices": 3247,
+  "actions": [
+    "Leena_PresenceAttention_v001",
+    "Leena_PanelAttentionLeft_v001",
+    "Leena_PanelAttentionRight_v001"
+  ],
+  "topologyChanges": 0,
+  "textureChanges": 0,
+  "status": "Assigned to saved HUD after native portrait and eight-angle limit review",
+  "scope": "Head and body mechanical controls. Existing canonical side shells preserved with body. No independent arms, facial visemes or service activation.",
+  "controller": "Assets/Demo01/Art/Characters/LeenaMechanical_v003/LeenaAttention_v003.controller",
+  "prefab": "Assets/Demo01/Prefabs/Characters/LeenaHudMechanical_v003.prefab",
+  "evidence": [
+    "Documentation/QA/Captures/LeenaMechanical_v003/PORTRAIT_REPORT.json",
+    "Documentation/QA/Captures/LeenaMechanicalLimits_v004",
+    "Documentation/QA/AMBIENT_PRESENCE_PLAY_v004.xml"
+  ],
+  "review": "Native 255-frame presence loop captured, eight phases inspected, three pose limits reviewed from eight angles. Canonical topology and textures preserved. Head motion advances, freezes on pause, restores rest under reduced motion. Final scene hash unchanged across focused Play test. This does not claim continuous human video viewing or delivered coaching services."
+}

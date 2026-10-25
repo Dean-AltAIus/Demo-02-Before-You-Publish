@@ -1,0 +1,67 @@
+{
+  "package": "Altaius canonical Leena mechanical v003",
+  "destination_relative": "SourceArt\\Demo02\\Characters\\Leena\\Demo01_Mechanical_v003",
+  "source_root": "D:\\Altaius\\Demo-01-The-Right-Screen",
+  "files": [
+    {
+      "destination": "LEENA_MECHANICAL_v003.blend",
+      "source_project": "Demo-01-The-Right-Screen",
+      "source_relative": "ArtSources/Stage3/LeenaMechanical_v003/LEENA_MECHANICAL_v003.blend",
+      "bytes": 6861339,
+      "sha256": "f998f98faedd62afc16370593a4d5cccbfb67a5018d9631aa0229703de620aff"
+    },
+    {
+      "destination": "LEENA_MECHANICAL_v003.fbx",
+      "source_project": "Demo-01-The-Right-Screen",
+      "source_relative": "Assets/Demo01/Art/Characters/LeenaMechanical_v003/LEENA_MECHANICAL_v003.fbx",
+      "bytes": 4018508,
+      "sha256": "6935d09a91429fc4d236ce81b1dd3644a9baea514cd2ba20d77f3c588c545474"
+    },
+    {
+      "destination": "LEENA_Texture_0.png",
+      "source_project": "Demo-01-The-Right-Screen",
+      "source_relative": "Assets/Demo01/Art/Characters/Unrefined/LEENA/LEENA_Texture_0.png",
+      "bytes": 11817816,
+      "sha256": "38cb1fe49ca099dc6b8ad22a4fec0ab70ec86c0f0b71bfaa21552b213b618b0e"
+    },
+    {
+      "destination": "OriginalRigReceipt.json",
+      "source_project": "Demo-01-The-Right-Screen",
+      "source_relative": "ArtSources/Stage3/LeenaMechanical_v003/RIG_RECEIPT.json",
+      "bytes": 1544,
+      "sha256": "17e82368855015d5476d61271e6a2e4814579a66b33e124f229df9b265607f5f"
+    },
+    {
+      "destination": "OriginalReopenAudit.json",
+      "source_project": "Demo-01-The-Right-Screen",
+      "source_relative": "ArtSources/Stage3/LeenaMechanical_v003/REOPEN_AUDIT.json",
+      "bytes": 6371,
+      "sha256": "c588232d0281de2d55574b58188de4f07fe754eca8e22a04a692d2a0d6541630"
+    },
+    {
+      "destination": "OriginalFormatReceipt.json",
+      "source_project": "Demo-01-The-Right-Screen",
+      "source_relative": "ArtSources/Stage3/FormatOnly/LEENA_FORMAT_RECEIPT_v001.json",
+      "bytes": 1003,
+      "sha256": "ebe9f2156d66694563dd32030c9dbdb60e4a2d520459a29d5e077991af725db6"
+    }
+  ],
+  "rights_basis": "Same owner canonical character, generated through paid Magnific Premium with Tripo H3.1, then locally authored mechanical rig. Existing provider-rights record inspected and current provider terms rechecked. No separate free Tripo account, Mixamo or voice files involved.",
+  "rights_record_sha256": "6065880f3128c81693d5696edde612b7250b4e0f67ba76d50567eddcf20d09f7",
+  "rights_sources": [
+    "https://www.magnific.com/legal/ai-products",
+    "https://www.tripo3d.ai/terms"
+  ],
+  "canonical_sha256": "9bbe87bb6803e3a0114c0787bc9c7d034057772e4558539bdc319fce2613c74c",
+  "provenance": "AI-generated mesh, native mechanical rig by project authoring. No claim of wholly hand-sculpted creation.",
+  "native_audit": "LocalOnly/Validation/Production/leena-reuse-source-audit.json",
+  "constraints": [
+    "Preserve exact canonical identity. Unseen rear construction is an existing generated interpretation.",
+    "Root/Body/Head only; independent arm gestures are not yet authored.",
+    "No external transport, voice or assessment authority.",
+    "Copied source integrity does not prove Demo 2 import, rendering or animation acceptance."
+  ],
+  "scope": "Existing full-build and editable-asset authorization. Bounded local copy only, source project unchanged.",
+  "catalog_tool": "game-dev command unavailable; inspected project-native authored package with closed hash roster instead of installing a tool or migrating unrelated content.",
+  "result": "Six source/export/receipt files copied and independently rehashed. Engine admission pending."
+}
