@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2221783480471905208}
   - component: {fileID: 2528924105284130174}
   - component: {fileID: 1972880012158268700}
+  - component: {fileID: 2237747946931029566}
   m_Layer: 0
   m_Name: Mark
   m_TagString: Untagged
@@ -56,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 994006f9540292d40ae0ad2d4aede765, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,6 +101,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4280357891
+--- !u!114 &2237747946931029566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643834165411048562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ad3b1183dd25a44999265162c541cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3230528403589560460
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,6 +124,7 @@ GameObject:
   - component: {fileID: 1895811193273866778}
   - component: {fileID: 7295616959204015947}
   - component: {fileID: 1636329505858223426}
+  - component: {fileID: 60811476013352209}
   m_Layer: 0
   m_Name: Criterion
   m_TagString: Untagged
@@ -156,7 +170,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 994006f9540292d40ae0ad2d4aede765, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -200,6 +214,18 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4280357891
+--- !u!114 &60811476013352209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3230528403589560460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5ad3b1183dd25a44999265162c541cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8382067423061038069
 GameObject:
   m_ObjectHideFlags: 0

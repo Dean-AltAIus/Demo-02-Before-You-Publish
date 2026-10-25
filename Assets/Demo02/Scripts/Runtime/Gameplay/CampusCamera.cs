@@ -49,7 +49,7 @@ namespace Altaius.Demo02.Gameplay
             r = Quaternion.Euler(Pitch, Yaw, 0); var origin = FollowTarget.position + Vector3.up * Height;
             var offset = r * new Vector3(0, 0, -Distance);
             if (Physics.SphereCast(origin, .18f, offset.normalized, out var hit, Distance, CollisionLayers, QueryTriggerInteraction.Ignore))
-                offset = offset.normalized * Mathf.Max(.5f, hit.distance - .12f);
+                offset = offset.normalized * Mathf.Max(0f, hit.distance - .12f);
             p = origin + offset;
         }
     }

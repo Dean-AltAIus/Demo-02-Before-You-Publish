@@ -59,7 +59,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 42fc68b34749ca3479564e8b8fb5942b, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: cc209a22a07149745bc4f8ab427476f2, type: 2}
+      objectReference: {fileID: 2100000, guid: 45235977440c0c744a5eafed9f0398e0, type: 2}
     - target: {fileID: 919132149155446097, guid: 42fc68b34749ca3479564e8b8fb5942b, type: 3}
       propertyPath: m_Name
       value: StoneWall_2m

@@ -1,0 +1,214 @@
+{
+  "assets": [
+    {
+      "name": "GardenWall_2m",
+      "source_parts": 14,
+      "vertices": 736,
+      "triangles": 1416,
+      "materials": [
+        "D02_MasonryTrim",
+        "D02_LimestoneBaked",
+        "D02_MasonryMortar"
+      ],
+      "min": [
+        -1.0,
+        -0.23000000417232513,
+        -2.9802322387695312e-08
+      ],
+      "max": [
+        1.0,
+        0.23000000417232513,
+        2.384999990463257
+      ]
+    },
+    {
+      "name": "GardenCornerPost",
+      "source_parts": 4,
+      "vertices": 224,
+      "triangles": 432,
+      "materials": [
+        "D02_MasonryTrim",
+        "D02_LimestoneBaked"
+      ],
+      "min": [
+        -0.33000001311302185,
+        -0.33000001311302185,
+        0.0
+      ],
+      "max": [
+        0.33000001311302185,
+        0.33000001311302185,
+        2.5999999046325684
+      ]
+    },
+    {
+      "name": "RoomRoof_6x4m",
+      "source_parts": 4,
+      "vertices": 186,
+      "triangles": 356,
+      "materials": [
+        "D02_ClosureSlate",
+        "D02_MasonryTrim",
+        "D02_ClosurePlaster"
+      ],
+      "min": [
+        -3.2916722297668457,
+        -2.291297435760498,
+        3.4800000190734863
+      ],
+      "max": [
+        3.2916722297668457,
+        2.291297435760498,
+        4.572499752044678
+      ]
+    },
+    {
+      "name": "FrontWindowBay_1m",
+      "source_parts": 26,
+      "vertices": 1419,
+      "triangles": 2717,
+      "materials": [
+        "D02_ClosureIron",
+        "D02_ClosureGlass",
+        "D02_MasonryTrim",
+        "D02_LimestoneBaked"
+      ],
+      "min": [
+        -0.5000000596046448,
+        -0.33000001311302185,
+        -2.146229149957435e-08
+      ],
+      "max": [
+        0.5,
+        0.2150000035762787,
+        3.5999999046325684
+      ]
+    },
+    {
+      "name": "CourtyardGate_4m",
+      "source_parts": 46,
+      "vertices": 2576,
+      "triangles": 4968,
+      "materials": [
+        "D02_ClosureGate",
+        "D02_ClosureBrass",
+        "D02_ClosureSlate",
+        "D02_MasonryTrim",
+        "D02_LimestoneBaked",
+        "D02_ClosureIron"
+      ],
+      "min": [
+        -2.325000047683716,
+        -0.3400000035762787,
+        0.0
+      ],
+      "max": [
+        2.325000047683716,
+        0.3400000035762787,
+        3.359999895095825
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "D02_MasonryTrim",
+      "linear_base_color": [
+        0.8199999928474426,
+        0.699999988079071,
+        0.5099999904632568,
+        1.0
+      ],
+      "roughness": 0.7599999904632568,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_LimestoneBaked",
+      "linear_base_color": [
+        0.6800000071525574,
+        0.5699999928474426,
+        0.41999998688697815,
+        1.0
+      ],
+      "roughness": 0.800000011920929,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_MasonryMortar",
+      "linear_base_color": [
+        0.38999998569488525,
+        0.3400000035762787,
+        0.25999999046325684,
+        1.0
+      ],
+      "roughness": 0.9200000166893005,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ClosureSlate",
+      "linear_base_color": [
+        0.04500000178813934,
+        0.10999999940395355,
+        0.17000000178813934,
+        1.0
+      ],
+      "roughness": 0.6800000071525574,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ClosurePlaster",
+      "linear_base_color": [
+        0.7599999904632568,
+        0.6800000071525574,
+        0.5299999713897705,
+        1.0
+      ],
+      "roughness": 0.8500000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ClosureIron",
+      "linear_base_color": [
+        0.024000000208616257,
+        0.04600000008940697,
+        0.05999999865889549,
+        1.0
+      ],
+      "roughness": 0.44999998807907104,
+      "metallic": 0.25
+    },
+    {
+      "name": "D02_ClosureGlass",
+      "linear_base_color": [
+        0.11999999731779099,
+        0.2800000011920929,
+        0.36000001430511475,
+        1.0
+      ],
+      "roughness": 0.3199999928474426,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ClosureGate",
+      "linear_base_color": [
+        0.017999999225139618,
+        0.2199999988079071,
+        0.23499999940395355,
+        1.0
+      ],
+      "roughness": 0.6299999952316284,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_ClosureBrass",
+      "linear_base_color": [
+        0.49000000953674316,
+        0.30000001192092896,
+        0.07000000029802322,
+        1.0
+      ],
+      "roughness": 0.4000000059604645,
+      "metallic": 0.550000011920929
+    }
+  ],
+  "status": "Native source and export candidates. Actual Unity placement and multi-angle review required."
+}
