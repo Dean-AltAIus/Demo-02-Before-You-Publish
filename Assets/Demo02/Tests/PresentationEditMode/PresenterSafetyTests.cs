@@ -3,8 +3,10 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Reflection;
 using Altaius.Demo02.Domain;
+using Altaius.Demo02.Gameplay;
 using Altaius.Demo02.UI;
 using Altaius.Demo02.Integration;
+using Altaius.Demo02.Presentation;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -87,6 +89,52 @@ namespace Altaius.Demo02.Tests
         [Test] public void WorkbenchNativeRebindStopsEvenWhenKindAndDraftTextAreIdentical()
         {
             Runner();Start(Sequence("[{\"Kind\":6,\"Station\":\"studio\"},{\"Kind\":1,\"Control\":\"Inspect.D02.rubric.v1.naming\"},{\"Kind\":1,\"Control\":\"Primary\"},{\"Kind\":6,\"Station\":\"experiment\"},{\"Kind\":1,\"Control\":\"Work.W_LIST\"},{\"Kind\":1,\"Control\":\"Criterion.naming\"},{\"Kind\":5,\"Control\":\"Mark.Marks\",\"Text\":\"10\",\"CharactersPerSecond\":1}]"));for(int i=0;i<7;i++)Call(runner,"Tick",.1f);Assert.That(ui.Workbench.ViewId,Is.EqualTo("mark"));ui.Workbench.OpenMark("W_LIST","naming");Call(runner,"Tick",.1f);Assert.That((bool)Get(runner,"Active"),Is.False);Assert.That((string)Get(runner,"LastError"),Does.Contain("changed"));
+        }
+
+        void OriginalListMark()
+        {
+            ui.Host.Session.Inspect("D02.rubric.v1.naming",InspectionLocation.Studio);ui.Gameplay.DirectRoute("experiment");ui.Workbench.OpenWork("W_LIST");ui.Workbench.OpenMark("W_LIST","naming");ui.Workbench.SetFieldText("Mark.Marks","7");ui.Workbench.SetFieldText("Mark.Rationale","My original W_LIST marking draft.");
+        }
+        void PresenterSelectsPitchAndReturns()
+        {
+            Runner();Start(Sequence("[{\"Kind\":6,\"Station\":\"experiment\"},{\"Kind\":1,\"Control\":\"Work.W_PITCH\"},{\"Kind\":0,\"Dwell\":20}]"));Call(runner,"Tick",.1f);Call(runner,"Tick",.1f);
+            Assert.That(ui.Workbench.SelectedWork,Is.EqualTo("W_PITCH"));Assert.That(ui.Gameplay.SelectedSpecimenId,Is.EqualTo("W_PITCH"));Call(runner,"Cancel");
+        }
+        string RequestedHelpScope()
+        {ui.OpenCoach();ui.RequestHelp(HelpIntent.Controls);return ui.Surfaces.Single(s=>s.SurfaceId=="coach").Rows.Find("Coach.Identity").Body.text;}
+        [Test] public void HandbackRestoresDisplayedMarkAndBothOriginalWorkSelections()
+        {
+            OriginalListMark();var original=ui.Host.Session;var before=original.Snapshot;PresenterSelectsPitchAndReturns();
+            {Assert.That(ui.Host.Session,Is.SameAs(original));Assert.That(ui.Workbench.ViewId,Is.EqualTo("mark"));Assert.That(ui.Host.Workbench.Mark.Work.SourceId,Is.EqualTo("W_LIST"));Assert.That(ui.Workbench.Rows.Find("Mark.Marks").Input.text,Is.EqualTo("7"));Assert.That(ui.Workbench.Rows.Find("Mark.Rationale").Input.text,Is.EqualTo("My original W_LIST marking draft."));Assert.That(ui.Workbench.SelectedWork,Is.EqualTo("W_LIST"));Assert.That(ui.Gameplay.SelectedSpecimenId,Is.EqualTo("W_LIST"));Assert.That(original.Snapshot.WorldRevision,Is.EqualTo(before.WorldRevision));Assert.That(original.Snapshot.Notebook.Select(p=>p.Reference.SourceId),Is.EquivalentTo(before.Notebook.Select(p=>p.Reference.SourceId)));Assert.That(original.Snapshot.Audit.Count,Is.EqualTo(before.Audit.Count));}
+        }
+        [Test] public void RestoredMarkEscapeAndCoachUseTheOriginalWorkOpportunity()
+        {
+            OriginalListMark();var before=ui.Host.Session.Snapshot;PresenterSelectsPitchAndReturns();
+            ui.Gameplay.HandleEscape();Assert.That(ui.Workbench.ViewId,Is.EqualTo("work"));Assert.That(ui.Workbench.Heading.text,Does.StartWith("W_LIST"));Assert.That(ui.Workbench.SelectedWork,Is.EqualTo("W_LIST"));Assert.That(ui.Gameplay.SelectedSpecimenId,Is.EqualTo("W_LIST"));Assert.That(ui.Host.Session.Snapshot.WorldRevision,Is.EqualTo(before.WorldRevision));Assert.That(ui.Host.Session.Snapshot.Notebook.Select(p=>p.Reference.SourceId),Is.EquivalentTo(before.Notebook.Select(p=>p.Reference.SourceId)));Assert.That(RequestedHelpScope(),Does.Contain("Opportunity "+WorkbenchModel.OpportunityForWork("W_LIST")));
+        }
+        [Test] public void RestoredMarkCoachRequestIsScopedToTheOriginalWork()
+        {
+            OriginalListMark();PresenterSelectsPitchAndReturns();Assert.That(RequestedHelpScope(),Does.Contain("Opportunity "+WorkbenchModel.OpportunityForWork("W_LIST")));
+        }
+        [TestCase("world")] [TestCase("task")]
+        public void HandbackRestoresNullSelectionWithoutInspectingPresenterWork(string surface)
+        {
+            if(surface=="task"){ui.Host.Session.Inspect("D02.task.v1.Q1",InspectionLocation.Studio);ui.Host.Session.Inspect("D02.task.v1.Q2",InspectionLocation.Studio);ui.Gameplay.DirectRoute("studio");ui.Workbench.OpenTask();ui.Workbench.SetFieldText("Task.Context","My original unselected task draft.");}
+            var before=ui.Host.Session.Snapshot;Assert.That(ui.Workbench.SelectedWork,Is.Null);Assert.That(ui.Gameplay.SelectedSpecimenId,Is.Null);PresenterSelectsPitchAndReturns();
+            {Assert.That(ui.Workbench.SelectedWork,Is.Null);Assert.That(ui.Gameplay.SelectedSpecimenId,Is.Null);if(surface=="task"){Assert.That(ui.Workbench.ViewId,Is.EqualTo("task"));Assert.That(ui.Workbench.Rows.Find("Task.Context").Input.text,Is.EqualTo("My original unselected task draft."));}Assert.That(ui.Host.Session.Snapshot.WorldRevision,Is.EqualTo(before.WorldRevision));Assert.That(ui.Host.Session.Snapshot.Notebook.Select(p=>p.Reference.SourceId),Is.EquivalentTo(before.Notebook.Select(p=>p.Reference.SourceId)));Assert.That(RequestedHelpScope(),Does.Contain("Opportunity "+LocalAuthority.PublicationOpportunity));}
+        }
+        [TestCase("world")] [TestCase("task")]
+        public void HandbackRestoresPriorSelectionOnOtherOriginalSurfaces(string surface)
+        {
+            ui.Gameplay.DirectRoute("experiment");ui.Workbench.OpenWork("W_COMPARE");ui.Workbench.CloseWindow();
+            if(surface=="task"){ui.Host.Session.Inspect("D02.task.v1.Q1",InspectionLocation.Studio);ui.Host.Session.Inspect("D02.task.v1.Q2",InspectionLocation.Studio);ui.Gameplay.DirectRoute("studio");ui.Workbench.OpenTask();}
+            var before=ui.Host.Session.Snapshot;PresenterSelectsPitchAndReturns();
+            {Assert.That(ui.Workbench.SelectedWork,Is.EqualTo("W_COMPARE"));Assert.That(ui.Gameplay.SelectedSpecimenId,Is.EqualTo("W_COMPARE"));Assert.That(ui.Host.Session.Snapshot.WorldRevision,Is.EqualTo(before.WorldRevision));Assert.That(ui.Host.Session.Snapshot.Notebook.Select(p=>p.Reference.SourceId),Is.EquivalentTo(before.Notebook.Select(p=>p.Reference.SourceId)));Assert.That(RequestedHelpScope(),Does.Contain("Opportunity "+WorkbenchModel.OpportunityForWork("W_COMPARE")));}
+        }
+        [Test] public void WorkSurfaceHandbackPreservesIndependentSelectionOwnersWithoutNewInspections()
+        {
+            ui.Gameplay.DirectRoute("experiment");ui.Workbench.OpenWork("W_COMPARE");ui.Workbench.OpenWork("W_LIST");ui.Gameplay.SelectInspectedWork("W_COMPARE");var before=ui.Host.Session.Snapshot;PresenterSelectsPitchAndReturns();
+            {Assert.That(ui.Workbench.ViewId,Is.EqualTo("work"));Assert.That(ui.Workbench.Heading.text,Does.StartWith("W_LIST"));Assert.That(ui.Workbench.SelectedWork,Is.EqualTo("W_LIST"));Assert.That(ui.Gameplay.SelectedSpecimenId,Is.EqualTo("W_COMPARE"));Assert.That(ui.Host.Session.Snapshot.WorldRevision,Is.EqualTo(before.WorldRevision));Assert.That(ui.Host.Session.Snapshot.Notebook.Select(p=>p.Reference.SourceId),Is.EquivalentTo(before.Notebook.Select(p=>p.Reference.SourceId)));}
         }
 
     }

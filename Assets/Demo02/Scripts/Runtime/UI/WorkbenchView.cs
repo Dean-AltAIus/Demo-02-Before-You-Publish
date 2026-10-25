@@ -165,6 +165,18 @@ namespace Altaius.Demo02.UI
         {
             var passage = Gameplay.InspectPassage(work); SelectedWork = work;
             Gameplay.SelectInspectedWork(work);
+            ShowWork(work,passage);
+        }
+        // Restore the saved context before rendering. Neither operation inspects or selects new work.
+        public void RestoreSelectedWork(string work) { SelectedWork=work; }
+        public void RestoreWorkSurface(string work)
+        {
+            var passage=S.Notebook.SingleOrDefault(p=>p.Reference.SourceId==work);
+            if(passage==null)throw new InvalidOperationException("The original inspected work is unavailable.");
+            ShowWork(work,passage);
+        }
+        void ShowWork(string work,Passage passage)
+        {
             Begin("work",work + " | current marking");
             Text("Work.Literal","Literal work | v"+passage.Reference.Version,passage.DisplayText);
             Text("Work.Total","Saved draft total: " + S.DraftTotal(work) + " / 20", (S.Mode==SessionMode.Presenter?"Authored demonstration hypothesis.":"Learner hypothesis.")+" Evaluation is unverified. Offline evaluation is unavailable for arbitrary prose.");

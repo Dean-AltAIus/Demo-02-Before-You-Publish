@@ -101,6 +101,8 @@ namespace Altaius.Demo02.Gameplay
             if(!SessionHost.Session.Snapshot.Notebook.Any(p=>p.Reference.SourceId==sourceId)) throw new InvalidOperationException("Inspect work before selecting it.");
             SelectedSpecimenId=sourceId;
         }
+        // Composition-only handback of an existing context, including null. This admits no passage.
+        public void RestoreSelectedSpecimen(string sourceId) { SelectedSpecimenId=sourceId; }
         public void DriveMovement(Vector2 movement) { presenterMove = Vector2.ClampMagnitude(movement,1); }
         public void DriveLook(Vector2 delta) { if (CanUseWorld(Workspace?.IsOpen ?? false, Typing, IsComposing)) CameraRig.Look(delta); }
         public void ReleasePresenter() { presenterMove = Vector2.zero; PresenterOwnsInput = false; }

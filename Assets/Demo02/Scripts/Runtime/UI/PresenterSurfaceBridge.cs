@@ -16,7 +16,7 @@ namespace Altaius.Demo02.UI
     }
     public sealed class PresenterWorkspaceBookmark
     {
-        internal AttemptLifecycle Lifecycle;internal string Surface,View,Work,Criterion,Focus,Passage;
+        internal AttemptLifecycle Lifecycle;internal string Surface,View,Work,Specimen,MarkedWork,Criterion,Focus,Passage;
         internal CampusStation Station;internal ActorRole Role;internal string Summary,Time,Defect,HoldTime,Next,Help,Kind;
         internal ActorRole Owner;internal HoldDefectBasis Basis;internal CommandEnvelope Pending;internal AuthorityReply Reply;
         internal bool RetainedWorkbench;internal LocalPresentationPreferences Settings;internal int SettingsTab;internal string SettingsCaller;
@@ -38,7 +38,7 @@ namespace Altaius.Demo02.UI
         public PresenterWorkspaceBookmark CapturePresenterWorkspace()
         {
             var selected=EventSystem.current?EventSystem.current.currentSelectedGameObject:null;var row=selected?selected.GetComponentInParent<NativeRow>():null;
-            return new PresenterWorkspaceBookmark{Lifecycle=Lifecycle,Surface=SurfaceId,View=Workbench.ViewId,Work=Workbench.SelectedWork,Criterion=Host.Workbench.Mark?.CriterionId,Focus=current&&selected==current.Composer?.gameObject?"Composer":row?row.ControlId:null,Passage=Workbench.Heading.text,Station=Gameplay.ActiveStation,Role=ConversationRole,Summary=ReviewSummary,Time=ReviewTime,Defect=HoldDefect,HoldTime=HoldTime,Next=HoldNextAction,Help=HelpDraft,Owner=HoldOwner,Basis=HoldBasis,Pending=Pending,Reply=LastAuthorityReply,Kind=confirmationKind,RetainedWorkbench=suspendedWorkbench||Workbench.IsOpen,Settings=Staged?.Copy(),SettingsTab=settingsTab,SettingsCaller=settingsCaller};
+            return new PresenterWorkspaceBookmark{Lifecycle=Lifecycle,Surface=SurfaceId,View=Workbench.ViewId,Work=Workbench.SelectedWork,Specimen=Gameplay.SelectedSpecimenId,MarkedWork=Host.Workbench.Mark?.Work.SourceId,Criterion=Host.Workbench.Mark?.CriterionId,Focus=current&&selected==current.Composer?.gameObject?"Composer":row?row.ControlId:null,Passage=Workbench.Heading.text,Station=Gameplay.ActiveStation,Role=ConversationRole,Summary=ReviewSummary,Time=ReviewTime,Defect=HoldDefect,HoldTime=HoldTime,Next=HoldNextAction,Help=HelpDraft,Owner=HoldOwner,Basis=HoldBasis,Pending=Pending,Reply=LastAuthorityReply,Kind=confirmationKind,RetainedWorkbench=suspendedWorkbench||Workbench.IsOpen,Settings=Staged?.Copy(),SettingsTab=settingsTab,SettingsCaller=settingsCaller};
         }
         public void EnterPresenterSession()
         {
@@ -48,7 +48,8 @@ namespace Altaius.Demo02.UI
         public void InvalidatePresenterDeliveries(){deliveries.Clear();Lifecycle?.Dispatch.Clear();}
         public void RestorePresenterWorkspace(PresenterWorkspaceBookmark b)
         {
-            if(b==null)return;deliveries.Clear();suspendedWorkbench=false;suspendedFocus=null;Workbench.CloseWindow();CloseSurface(false);Lifecycle=b.Lifecycle;
+            if(b==null)return;Workbench.RestoreSelectedWork(b.Work);Gameplay.RestoreSelectedSpecimen(b.Specimen);
+            deliveries.Clear();suspendedWorkbench=false;suspendedFocus=null;Workbench.CloseWindow();CloseSurface(false);Lifecycle=b.Lifecycle;
             ReviewSummary=b.Summary;ReviewTime=b.Time;HoldDefect=b.Defect;HoldTime=b.HoldTime;HoldNextAction=b.Next;HelpDraft=b.Help;HoldOwner=b.Owner;HoldBasis=b.Basis;Pending=b.Pending;LastAuthorityReply=b.Reply;confirmationKind=b.Kind;
             if(b.Station)Gameplay.Inspect(b.Station);
             if(b.Surface!="world"&&b.RetainedWorkbench)RestoreWorkbenchView(b);
@@ -71,7 +72,7 @@ namespace Altaius.Demo02.UI
             switch(b.View)
             {
                 case "task":Workbench.OpenTask();break;case "rubric":Workbench.OpenRubric();break;case "preview":Workbench.RestorePendingPreview();break;
-                case "work":Workbench.OpenWork(b.Work);break;case "mark":Workbench.OpenMark(b.Work,b.Criterion);break;
+                case "work":Workbench.RestoreWorkSurface(b.Work);break;case "mark":Workbench.OpenMark(b.MarkedWork??b.Work,b.Criterion);break;
                 case "notebook":Workbench.OpenNotebook();break;case "history":Workbench.OpenHistory();break;case "routes":Workbench.OpenRoutes();break;
                 case "passage":Workbench.OpenPassage(b.Passage,b.Station?"sources":"notebook");break;
                 case "sources":if(b.Station)Workbench.OpenSourceList();break;case "works":if(b.Station)Workbench.OpenWorkList();break;
