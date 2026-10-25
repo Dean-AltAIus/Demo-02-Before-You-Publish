@@ -1,0 +1,159 @@
+{
+  "assets": [
+    {
+      "name": "PottedPlant",
+      "source_mesh_parts": 36,
+      "export_vertices": 5964,
+      "materials": [
+        "D02_PropsLeafFresh",
+        "D02_PropsLeaf",
+        "D02_PropsSoil",
+        "D02_PropsCeramic"
+      ]
+    },
+    {
+      "name": "DeskLamp",
+      "source_mesh_parts": 5,
+      "export_vertices": 1124,
+      "materials": [
+        "D02_PropsBrass",
+        "D02_PropsPaper",
+        "D02_PropsTeal"
+      ]
+    },
+    {
+      "name": "ReferenceBooks",
+      "source_mesh_parts": 16,
+      "export_vertices": 1536,
+      "materials": [
+        "D02_PropsCobalt",
+        "D02_PropsTeal",
+        "D02_PropsGold",
+        "D02_PropsPaper"
+      ]
+    },
+    {
+      "name": "CampusBanner",
+      "source_mesh_parts": 14,
+      "export_vertices": 3634,
+      "materials": [
+        "D02_PropsInk",
+        "D02_PropsPaper",
+        "D02_PropsCobalt"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "D02_PropsLeafFresh",
+      "linear_base_color": [
+        0.10499999672174454,
+        0.2800000011920929,
+        0.054999999701976776,
+        1.0
+      ],
+      "roughness": 0.7799999713897705,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsLeaf",
+      "linear_base_color": [
+        0.03500000014901161,
+        0.1599999964237213,
+        0.04500000178813934,
+        1.0
+      ],
+      "roughness": 0.7799999713897705,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsSoil",
+      "linear_base_color": [
+        0.054999999701976776,
+        0.03200000151991844,
+        0.017999999225139618,
+        1.0
+      ],
+      "roughness": 0.949999988079071,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsCeramic",
+      "linear_base_color": [
+        0.8100000023841858,
+        0.7200000286102295,
+        0.550000011920929,
+        1.0
+      ],
+      "roughness": 0.3199999928474426,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsBrass",
+      "linear_base_color": [
+        0.5099999904632568,
+        0.3100000023841858,
+        0.10000000149011612,
+        1.0
+      ],
+      "roughness": 0.3199999928474426,
+      "metallic": 0.75
+    },
+    {
+      "name": "D02_PropsPaper",
+      "linear_base_color": [
+        0.8399999737739563,
+        0.7900000214576721,
+        0.6299999952316284,
+        1.0
+      ],
+      "roughness": 0.8500000238418579,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsTeal",
+      "linear_base_color": [
+        0.014999999664723873,
+        0.3100000023841858,
+        0.33000001311302185,
+        1.0
+      ],
+      "roughness": 0.4000000059604645,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsCobalt",
+      "linear_base_color": [
+        0.014000000432133675,
+        0.10999999940395355,
+        0.4300000071525574,
+        1.0
+      ],
+      "roughness": 0.41999998688697815,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsGold",
+      "linear_base_color": [
+        0.6800000071525574,
+        0.41999998688697815,
+        0.07000000029802322,
+        1.0
+      ],
+      "roughness": 0.44999998807907104,
+      "metallic": 0.0
+    },
+    {
+      "name": "D02_PropsInk",
+      "linear_base_color": [
+        0.017999999225139618,
+        0.02800000086426735,
+        0.03799999877810478,
+        1.0
+      ],
+      "roughness": 0.41999998688697815,
+      "metallic": 0.25
+    }
+  ],
+  "status": "Native source dressing only. Unity visual acceptance pending."
+}

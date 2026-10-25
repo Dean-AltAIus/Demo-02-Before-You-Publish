@@ -1,0 +1,112 @@
+{
+  "assets": [
+    {
+      "name": "PavingA_2m",
+      "native_mesh_parts": 11,
+      "export_vertices": 968,
+      "export_polygons": 986,
+      "materials": [
+        "D02_MasonryMortar",
+        "D02_LimestoneBaked"
+      ]
+    },
+    {
+      "name": "PavingB_2m",
+      "native_mesh_parts": 11,
+      "export_vertices": 968,
+      "export_polygons": 986,
+      "materials": [
+        "D02_MasonryMortar",
+        "D02_LimestoneBaked"
+      ]
+    },
+    {
+      "name": "PavingC_2m",
+      "native_mesh_parts": 12,
+      "export_vertices": 1064,
+      "export_polygons": 1084,
+      "materials": [
+        "D02_MasonryMortar",
+        "D02_LimestoneBaked"
+      ]
+    },
+    {
+      "name": "StoneWall_2m",
+      "native_mesh_parts": 43,
+      "export_vertices": 4128,
+      "export_polygons": 4214,
+      "materials": [
+        "D02_MasonryTrim",
+        "D02_LimestoneBaked",
+        "D02_MasonryMortar"
+      ]
+    },
+    {
+      "name": "Awning_4m",
+      "native_mesh_parts": 5,
+      "export_vertices": 480,
+      "export_polygons": 490,
+      "materials": [
+        "D02_CanopyCanvas",
+        "D02_CanopyIron"
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "D02_LimestoneBaked",
+      "linear_base_color": [
+        0.6800000071525574,
+        0.5699999928474426,
+        0.41999998688697815,
+        1.0
+      ],
+      "roughness": 0.800000011920929
+    },
+    {
+      "name": "D02_MasonryTrim",
+      "linear_base_color": [
+        0.8199999928474426,
+        0.699999988079071,
+        0.5099999904632568,
+        1.0
+      ],
+      "roughness": 0.7599999904632568
+    },
+    {
+      "name": "D02_MasonryMortar",
+      "linear_base_color": [
+        0.38999998569488525,
+        0.3400000035762787,
+        0.25999999046325684,
+        1.0
+      ],
+      "roughness": 0.9200000166893005
+    },
+    {
+      "name": "D02_CanopyCanvas",
+      "linear_base_color": [
+        0.012000000104308128,
+        0.3100000023841858,
+        0.3400000035762787,
+        1.0
+      ],
+      "roughness": 0.8199999928474426
+    },
+    {
+      "name": "D02_CanopyIron",
+      "linear_base_color": [
+        0.02500000037252903,
+        0.04800000041723251,
+        0.061000000685453415,
+        1.0
+      ],
+      "roughness": 0.47999998927116394
+    }
+  ],
+  "textures": {
+    "Limestone_BaseColor.png": "bd8d08c74b47d7b7d763aeeb4201010a383634b04e01cc8b9a0a88dd34a2bfb6",
+    "Limestone_Normal.png": "9303db32957bcae876617778479904778bf6cd767112e94b71faf49154012f95"
+  },
+  "status": "Native sources and derivative textures. Unity acceptance pending."
+}
