@@ -1,0 +1,13 @@
+{
+  "creation_id": "LwVEgppswO",
+  "source_rig": "DoL3yl2pcl",
+  "library_action_id": 1,
+  "library_action_name": "Walking_Woman",
+  "library_source": "https://docs.meshy.ai/en/api/animation-library",
+  "fps": 30,
+  "credits": 120,
+  "bytes": 4765560,
+  "sha256": "494c8f06b4369e362fe0b90be426a666002655c8c8bb0949f937148eecb036c1",
+  "download_registered": true,
+  "admission": "Source only, corrected target rig inspection pending"
+}
