@@ -484,5 +484,87 @@
         ]
       }
     ]
+  },
+  "native_skinning_contract": {
+    "deform_influence_counts": {
+      "3": 1832,
+      "2": 3208,
+      "1": 372,
+      "4": 4706,
+      "5": 1006,
+      "6": 1228,
+      "7": 628,
+      "10": 557,
+      "9": 719,
+      "8": 439,
+      "11": 216,
+      "12": 117,
+      "15": 79,
+      "13": 97,
+      "16": 44,
+      "14": 61
+    },
+    "vertices_over_four": 5191,
+    "maximum_discarded_weight_at_four": 0.24391787724380265,
+    "four_influence_comparison": [
+      {
+        "take": "SeatedIdle",
+        "frame": 1,
+        "max_four_influence_delta_m": 0.014269680514970904,
+        "vertices_over_0_1_mm": 1378,
+        "vertices_over_1_mm": 370,
+        "worst_vertex": {
+          "vertex": 10232,
+          "delta_m": 0.014269680514970904,
+          "rest": [
+            -0.1454792469739914,
+            0.005429766606539488,
+            1.1252660751342773
+          ]
+        }
+      },
+      {
+        "take": "ReadPacket",
+        "frame": 37,
+        "max_four_influence_delta_m": 0.014234340686223828,
+        "vertices_over_0_1_mm": 1675,
+        "vertices_over_1_mm": 430,
+        "worst_vertex": {
+          "vertex": 10232,
+          "delta_m": 0.014234340686223828,
+          "rest": [
+            -0.1454792469739914,
+            0.005429766606539488,
+            1.1252660751342773
+          ]
+        }
+      },
+      {
+        "take": "PointCurrentPair",
+        "frame": 16,
+        "max_four_influence_delta_m": 0.015212948487164474,
+        "vertices_over_0_1_mm": 1778,
+        "vertices_over_1_mm": 502,
+        "worst_vertex": {
+          "vertex": 10144,
+          "delta_m": 0.015212948487164474,
+          "rest": [
+            -0.15175440907478333,
+            0.02166268788278103,
+            1.1653987169265747
+          ]
+        }
+      }
+    ],
+    "requirement": "Preserve source influences through importer and effective runtime quality, then verify actual baked skin against native. Bone-head agreement alone is insufficient.",
+    "visible_fleck_cause": "Not established. Do not infer that the influence mismatch explains all visible seam artefacts.",
+    "full_local_diagnostic": "LocalOnly/Validation/Production/NPCUnity_v001/native-topology-influences.json",
+    "native_unity_comparison_fixture": {
+      "index": "LocalOnly/Validation/Production/NPCUnity_v001/NativeSkinFixture_v001/index.json",
+      "source_sha256": "01e59cdaa0c4587ae54cde75de36c9ce32042590a57742f6813659bd9b81ad31",
+      "sample_count": 7,
+      "vertices_per_sample": 15309,
+      "unity_comparison": "Pending actual Task5 BakeMesh validation"
+    }
   }
 }
