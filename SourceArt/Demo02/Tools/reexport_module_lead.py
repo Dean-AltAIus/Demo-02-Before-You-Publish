@@ -4,18 +4,23 @@ Run in isolated Blender background mode. Default export paths are immutable;
 use an explicit new output directory after intentional native edits. The native
 blend is read only. All prop tracks and boundaries are sampled afresh.
 """
-import argparse,bpy,hashlib,json,sys
+import argparse,bpy,hashlib,json,math,re,sys
 from pathlib import Path
 from mathutils import Vector
 sys.path.insert(0,str(Path(__file__).parent))
 from npc_contact_math import NativeNpcRig
 
-R=Path(__file__).resolve().parents[3];version='v019'
+R=Path(__file__).resolve().parents[3]
 parser=argparse.ArgumentParser()
+parser.add_argument('--version',default='v019',help='Explicit saved source/action version, for example v020')
+parser.add_argument('--gesture-substeps',type=int,choices=[1,2,4,8],default=1,
+                    help='Sample point and recovery between keys for contact and rotation continuity')
 parser.add_argument('--validate-only',action='store_true')
 parser.add_argument('--output-dir',type=Path)
 parser.add_argument('--evidence-dir',type=Path,required=True)
 args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+version=args.version
+if not re.fullmatch(r'v[0-9]{3}',version):raise RuntimeError('Expected a bounded source version such as v019')
 source=R/'SourceArt/Demo02/Characters/ModuleLead'/('ModuleLead_Interactions_'+version+'.blend')
 controls=json.loads(source.with_suffix('.controls.json').read_text())
 out=(args.output_dir or R/'SourceArt/Demo02/Exports/NPCInteractions_v001').resolve()
@@ -59,9 +64,28 @@ boundaries=[]
 for start,end in zip(controls['cycle'],controls['cycle'][1:]):boundaries.append({'from':start,'to':end,'maximum_world_matrix_error':matrix_error(ends[start]['last'],ends[end]['first'])})
 for take in ['SeatedIdle','SeatedListen','SeatedSpeak']:
     for endpoint in ['first','last']:boundaries.append({'from':take+'.'+endpoint,'to':'SeatedIdle.first','maximum_world_matrix_error':matrix_error(ends[take][endpoint],ends['SeatedIdle']['first'])})
-validation={'source':source.relative_to(R).as_posix(),'source_sha256':before,'takes':rows,'failures':bad,'max_foot_drift_m':max_foot,'boundaries':boundaries,'source_unchanged':hashlib.sha256(source.read_bytes()).hexdigest()==before,'input_scope':'Saved native source and tracked controls only; no LocalOnly fixture is read.','status':'Native sampled checks, not Unity gameplay or continuous collision acceptance.'}
+interpolation={'substeps':args.gesture_substeps,'sample_rate_hz':controls['fps']*args.gesture_substeps,'samples':0,'failed_samples':0,'maximum_bone_rotation_step_degrees':0,'maximum_bone_rotation_speed_degrees_per_second':0,'failures':[]}
+if args.gesture_substeps>1:
+    for take in ['PointCurrentPair','RecoverPoint']:
+        for obj,suffix in zip(objects,['','_PacketRoot','_Cover']):
+            action=bpy.data.actions['D02_ModuleLead_'+take+suffix+'_'+version];obj.animation_data.action=action;obj.animation_data.action_slot=action.slots[0]
+        first,last=map(int,a.animation_data.action.frame_range);previous=None
+        for step in range((last-first)*args.gesture_substeps+1):
+            frame=first+step/args.gesture_substeps;s.frame_set(int(frame),subframe=frame-int(frame));bpy.context.view_layer.update()
+            pose={p.name:p.matrix.to_quaternion().normalized() for p in a.pose.bones}
+            if previous is not None:
+                angle=max(math.degrees(2*math.acos(min(1,abs(q.dot(previous[n]))))) for n,q in pose.items())
+                interpolation['maximum_bone_rotation_step_degrees']=max(interpolation['maximum_bone_rotation_step_degrees'],angle)
+            previous=pose
+            checks=rig.audit_objects(props)+rig.audit_objects([table],ids=all_ids,penetration_only=True)
+            failures=[r for r in checks if r['inside_vertex_count'] or r['ray_disagreements']]
+            interpolation['samples']+=1
+            if failures:interpolation['failed_samples']+=1;interpolation['failures'].append({'take':take,'frame':frame,'checks':failures})
+    interpolation['maximum_bone_rotation_speed_degrees_per_second']=interpolation['maximum_bone_rotation_step_degrees']*interpolation['sample_rate_hz']
+    interpolation['speed_gate_note']='3000 degrees/second is an interpolation-spike diagnostic ceiling, not a visual or biomechanical quality verdict.'
+validation={'source':source.relative_to(R).as_posix(),'source_sha256':before,'takes':rows,'failures':bad,'max_foot_drift_m':max_foot,'boundaries':boundaries,'gesture_interpolation':interpolation,'source_unchanged':hashlib.sha256(source.read_bytes()).hexdigest()==before,'input_scope':'Saved native source and tracked controls only; no LocalOnly fixture is read.','status':'Native sampled checks, not Unity gameplay or continuous collision acceptance.'}
 (evidence/'saved-source-validation.json').write_text(json.dumps(validation,indent=2)+'\n',encoding='utf-8')
-if bad or max_foot>1e-5 or any(b['maximum_world_matrix_error']>.0001 for b in boundaries) or not validation['source_unchanged']:raise RuntimeError('Saved-source validation failed')
+if bad or interpolation['failed_samples'] or interpolation['maximum_bone_rotation_speed_degrees_per_second']>3000 or max_foot>1e-5 or any(b['maximum_world_matrix_error']>.0001 for b in boundaries) or not validation['source_unchanged']:raise RuntimeError('Saved-source validation failed')
 packet={'source':validation['source'],'source_sha256':before,'coordinates':'Blender native metres, Z up, actor faces negative Y. Positions relative to actor origin. Quaternion arrays XYZW.','point_target_native_m':controls['point_target_native_m'],'tracks':tracks,'ownership_notes':controls['ownership_notes'],'authority':'Presentation only. No animation callback supplies a domain decision, receipt, approval, evidence or request.'}
 (evidence/'sampled-packet-tracks.json').write_text(json.dumps(packet,indent=2)+'\n',encoding='utf-8')
 if args.validate_only:

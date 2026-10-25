@@ -8,6 +8,7 @@ import argparse
 import collections
 import hashlib
 import json
+import re
 import struct
 import sys
 from pathlib import Path
@@ -37,10 +38,23 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--role', choices=PROFILES, required=True)
     parser.add_argument('--source', type=Path, help='Optional edited native source, retaining the named rig/actions')
+    parser.add_argument('--version', help='Explicit source/action version; default is the role production profile')
+    parser.add_argument('--sample', action='append', default=[], metavar='TAKE:FRAME',
+                        help='Additional pose sample, repeatable; named action and frame must exist')
     parser.add_argument('--output-dir', type=Path, required=True)
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
     profile = PROFILES[args.role]
-    role, version = profile['role'], profile['version']
+    role, version = profile['role'], args.version or profile['version']
+    if not re.fullmatch(r'v[0-9]{3}', version):
+        raise RuntimeError('Expected a bounded source version such as v019')
+    poses = list(profile['poses'])
+    for sample in args.sample:
+        take, separator, frame = sample.rpartition(':')
+        if not separator or not take or not frame.isdigit():
+            raise RuntimeError('Expected TAKE:FRAME for additional sample: ' + sample)
+        pose = (take, int(frame))
+        if pose not in poses:
+            poses.append(pose)
     source = args.source or Path(f'SourceArt/Demo02/Characters/{role}/{role}_Interactions_{version}.blend')
     if not source.is_absolute():
         source = ROOT / source
@@ -60,7 +74,7 @@ def main():
     if (modifier.object != rig or not modifier.use_vertex_groups or modifier.use_bone_envelopes
             or modifier.vertex_group or modifier.use_deform_preserve_volume):
         raise RuntimeError('Unsupported skinning mode; verify the changed native contract before exporting')
-    for take, frame in profile['poses']:
+    for take, frame in poses:
         action = bpy.data.actions[f'D02_{role}_{take}_{version}']
         if not action.frame_range[0] <= frame <= action.frame_range[1]:
             raise RuntimeError(f'Sample outside action range: {take}:{frame}')
@@ -106,7 +120,7 @@ def main():
     scene.frame_set(1)
     capture('Rest')
     rig.data.pose_position = 'POSE'
-    for take, frame in profile['poses']:
+    for take, frame in poses:
         action = bpy.data.actions[f'D02_{role}_{take}_{version}']
         rig.animation_data.action = action
         rig.animation_data.action_slot = action.slots[0]

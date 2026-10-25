@@ -1,14 +1,21 @@
 """Independent read-only FBX roundtrip for all reviewer bone samples and skin."""
-import bpy,json,math,hashlib,sys
+import argparse,bpy,json,math,hashlib,re,sys
 from pathlib import Path
 from mathutils import Vector,Quaternion
 from mathutils.kdtree import KDTree
 sys.path.insert(0,str(Path(__file__).parent))
 from npc_contact_math import NativeNpcRig
-R=Path(__file__).resolve().parents[3];version='v019'
-folder=R/'SourceArt/Demo02/Exports/NPCInteractions_v001'
+R=Path(__file__).resolve().parents[3]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--version',default='v019')
+parser.add_argument('--export-dir',type=Path)
+parser.add_argument('--output',type=Path)
+args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+version=args.version
+if not re.fullmatch(r'v[0-9]{3}',version):raise RuntimeError('Expected a bounded source version such as v019')
+folder=(args.export_dir or R/'SourceArt/Demo02/Exports/NPCInteractions_v001').resolve()
 source=R/'SourceArt/Demo02/Characters/ModuleLead'/('ModuleLead_Interactions_'+version+'.blend');fbx=folder/('ModuleLead_Interactions_'+version+'.fbx')
-out=R/'LocalOnly/Validation/Production/NPCInteractions_v001'/('LeadInteractions_'+version)/'fbx-roundtrip.json'
+out=(args.output or R/'LocalOnly/Validation/Production/NPCInteractions_v001'/('LeadInteractions_'+version)/'fbx-roundtrip.json').resolve()
 if out.exists():raise RuntimeError('Preserve existing roundtrip evidence')
 out.parent.mkdir(parents=True,exist_ok=True)
 tracks=json.loads((folder/('ModuleLead_Interactions_'+version+'.packet-tracks.json')).read_text())
@@ -20,6 +27,7 @@ for take in tracks['tracks']:
     for obj,suffix in [(a,''),(folio,'_PacketRoot'),(hinge,'_Cover')]:
         act=bpy.data.actions['D02_ModuleLead_'+name+suffix+'_'+version];obj.animation_data.action=act;obj.animation_data.action_slot=act.slots[0]
     frames=take['frames'];selected={1,len(frames),1+(len(frames)-1)//2}
+    if name in ['PointCurrentPair','RecoverPoint']:selected=set(range(1,len(frames)+1))
     for row in frames:
         s.frame_set(row['frame']);bpy.context.view_layer.update();native[name].append({n:(a.matrix_world@a.pose.bones[n].head).copy() for n in bone_names})
         max_position_error=max(max_position_error,(folio.location-Vector(row['packet_position'])).length)

@@ -1,0 +1,235 @@
+{
+  "schema": 1,
+  "package": "ModuleLead_Interactions_v023",
+  "source_sha256": "cbc6a229b288c659b16f55eab4f55c83a1c49c8250713f9c8f8b4c477bd58b71",
+  "fbx_sha256": "252f65d258657bf537c9698b4df5a5682ce86ad4c4aad50d477e4f1906d46b31",
+  "fps": 30,
+  "takes": [
+    {
+      "take": "SeatedIdle",
+      "frames": 121,
+      "failed_frames": 0
+    },
+    {
+      "take": "SeatedListen",
+      "frames": 121,
+      "failed_frames": 0
+    },
+    {
+      "take": "PickupPacket",
+      "frames": 34,
+      "failed_frames": 0
+    },
+    {
+      "take": "ReadPacket",
+      "frames": 37,
+      "failed_frames": 0
+    },
+    {
+      "take": "PlaceOpen",
+      "frames": 13,
+      "failed_frames": 0
+    },
+    {
+      "take": "PointCurrentPair",
+      "frames": 16,
+      "failed_frames": 0
+    },
+    {
+      "take": "RecoverPoint",
+      "frames": 16,
+      "failed_frames": 0
+    },
+    {
+      "take": "ReturnPacket",
+      "frames": 16,
+      "failed_frames": 0
+    },
+    {
+      "take": "RecoverToReady",
+      "frames": 19,
+      "failed_frames": 0
+    },
+    {
+      "take": "SeatedSpeak",
+      "frames": 91,
+      "failed_frames": 0
+    }
+  ],
+  "native_integer_samples": 484,
+  "failed_integer_samples": 0,
+  "gesture_interpolation": {
+    "substeps": 4,
+    "sample_rate_hz": 120,
+    "samples": 122,
+    "failed_samples": 0,
+    "maximum_bone_rotation_step_degrees": 13.167183709930558,
+    "maximum_bone_rotation_speed_degrees_per_second": 1580.062045191667,
+    "failures": [],
+    "speed_gate_note": "3000 degrees/second is an interpolation-spike diagnostic ceiling, not a visual or biomechanical quality verdict."
+  },
+  "max_foot_drift_m": 0,
+  "max_boundary_world_matrix_error": 1.0132789611816406e-06,
+  "unchanged_action_count": 28,
+  "skin_and_tracks": {
+    "old_source": "SourceArt\\Demo02\\Characters\\ModuleLead\\ModuleLead_Interactions_v019.blend",
+    "new_source": "SourceArt/Demo02/Characters/ModuleLead/ModuleLead_Interactions_v023.blend",
+    "rest_byte_identical": true,
+    "weights_byte_identical": true,
+    "weight_bone_names_identical": true,
+    "all_packet_tracks_identical": true,
+    "surfaces": [
+      {
+        "surface": "Rest.f32",
+        "byte_identical": true,
+        "max_vertex_difference_m": 0.0
+      },
+      {
+        "surface": "SeatedIdle_1.f32",
+        "byte_identical": true,
+        "max_vertex_difference_m": 0.0
+      },
+      {
+        "surface": "PickupPacket_34.f32",
+        "byte_identical": true,
+        "max_vertex_difference_m": 0.0
+      },
+      {
+        "surface": "ReadPacket_19.f32",
+        "byte_identical": true,
+        "max_vertex_difference_m": 0.0
+      },
+      {
+        "surface": "ReadPacket_37.f32",
+        "byte_identical": true,
+        "max_vertex_difference_m": 0.0
+      },
+      {
+        "surface": "PointCurrentPair_16.f32",
+        "byte_identical": false,
+        "max_vertex_difference_m": 2.421152116249788e-07
+      },
+      {
+        "surface": "ReturnPacket_8.f32",
+        "byte_identical": true,
+        "max_vertex_difference_m": 0.0
+      }
+    ]
+  },
+  "independent_fbx_roundtrip": {
+    "source_sha256": "cbc6a229b288c659b16f55eab4f55c83a1c49c8250713f9c8f8b4c477bd58b71",
+    "fbx_sha256": "252f65d258657bf537c9698b4df5a5682ce86ad4c4aad50d477e4f1906d46b31",
+    "bones": 54,
+    "clips": [
+      {
+        "take": "SeatedIdle",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_SeatedIdle_v023",
+        "frames": 121,
+        "bone_samples": 6534,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.5884945696598152e-06
+      },
+      {
+        "take": "SeatedListen",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_SeatedListen_v023",
+        "frames": 121,
+        "bone_samples": 6534,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.5884945696598152e-06
+      },
+      {
+        "take": "PickupPacket",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_PickupPacket_v023",
+        "frames": 34,
+        "bone_samples": 1836,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.7682223187875934e-06
+      },
+      {
+        "take": "ReadPacket",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_ReadPacket_v023",
+        "frames": 37,
+        "bone_samples": 1998,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.7565681673659128e-06
+      },
+      {
+        "take": "PlaceOpen",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_PlaceOpen_v023",
+        "frames": 13,
+        "bone_samples": 702,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.6761654251240543e-06
+      },
+      {
+        "take": "PointCurrentPair",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_PointCurrentPair_v023",
+        "frames": 16,
+        "bone_samples": 864,
+        "max_bone_head_error_m": 2.1212052880852516e-06,
+        "skin_sample_frames": 16,
+        "max_hand_skin_error_m": 2.4991338705149246e-06
+      },
+      {
+        "take": "RecoverPoint",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_RecoverPoint_v023",
+        "frames": 16,
+        "bone_samples": 864,
+        "max_bone_head_error_m": 2.0624520592122436e-06,
+        "skin_sample_frames": 16,
+        "max_hand_skin_error_m": 2.3916247755551012e-06
+      },
+      {
+        "take": "ReturnPacket",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_ReturnPacket_v023",
+        "frames": 16,
+        "bone_samples": 864,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.8192237121184007e-06
+      },
+      {
+        "take": "RecoverToReady",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_RecoverToReady_v023",
+        "frames": 19,
+        "bone_samples": 1026,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.8042100009552087e-06
+      },
+      {
+        "take": "SeatedSpeak",
+        "action": "ModuleLead_EditableRig|ModuleLead_EditableRig|D02_ModuleLead_SeatedSpeak_v023",
+        "frames": 91,
+        "bone_samples": 4914,
+        "max_bone_head_error_m": 1.5283136819245045e-06,
+        "skin_sample_frames": 3,
+        "max_hand_skin_error_m": 1.5884945696598152e-06
+      }
+    ],
+    "maximum_packet_position_error_m": 0,
+    "maximum_packet_quaternion_error_degrees": 0,
+    "maximum_bone_head_error_m": 2.1212052880852516e-06,
+    "maximum_sampled_hand_skin_error_m": 2.4991338705149246e-06,
+    "status": "Native FBX reimport proof only. Actual Unity gameplay acceptance remains separate."
+  },
+  "source_dependencies": {
+    "linked_libraries": 0,
+    "file_images": [
+      {
+        "name": "Image_0",
+        "packed": true
+      },
+      {
+        "name": "Image_0.001",
+        "packed": true
+      }
+    ]
+  },
+  "runtime_status": "Native candidate only. Actual v023 Unity skin, playback, contact, interruption, reset and saved persistence acceptance remains required."
+}
