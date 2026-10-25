@@ -83,3 +83,16 @@ The next source-only campus batch contains three paving variants, staggered lime
 Reopened native-source versus FBX-import audits pass for all ten candidates, with maximum bound discrepancy below 0.000001m. Source previews were inspected. These checks establish editable source retention, export scale and visible source corrections, not Unity appearance or runtime performance. Import/placement waits for the presenter Editor handoff. The new static export meshes are combined derivatives; their source parts remain editable in Blender.
 
 Observed computer: Intel Core i7-1255U with Intel Iris Xe integrated graphics. Rendering budget must be measured in the completed Unity slice. No frame-rate or memory acceptance is claimed. Keep URP and current installed packages. No player or GitHub builds have been run for these asset operations.
+
+
+## Bulk campus and canonical Leena import
+
+The normalized MasonryKit_v003 exports, AcademicProps_v001 and FullPlanter_v004 were imported into ten reusable Unity prefabs with explicit URP material mapping. The editable Blender files, stone texture sources and export manifests remain preserved. All ten imported bounds match their expected scale and orientation. The saved scene now uses 108 staggered paving tiles, 17 stone wall replacements, one deeper teal canopy and 12 corrected planters. All 138 prior instances and 12 superseded additive planter crowns remain inactive for recovery. Eighteen nested, editable academic details add plants, lamps, books and four campus banners. Their parent furniture and lantern transforms remain editable.
+
+Actual Unity capture reference-campus-bulk-v007.png was inspected. The new canopy initially obscured the source archive label; the existing live label and plaques were moved below it, the roof foliage was fitted to its edge and two banners turned inward. Current materials, composition and character lighting remain candidates for the final art pass, not a final reference-fidelity claim.
+
+Outside-Play validation records ten roots, 9343 authored objects, 802 active renderers, three active skinned characters, one player, one presenter and zero missing scripts. All four station arrival capsules are clear; interaction distances are 1.671 to 1.768 metres. The active-renderer reduction from 4793 is structural evidence, not an FPS result. Current saved content matched the unsaved comparison copy before clearing incidental dirty state. Post-Play traversal and final persistence remain part of the integrated validation.
+
+Canonical Leena is now also available as Assets/Demo02/Prefabs/LeenaMechanical_v003/LeenaCanonical.prefab, backed by the verified copied native source and original receipts. The imported Generic Avatar is valid, height is 1.3200m and all three existing eight-second, 30fps attention clips are present. The engine texture is limited to 2048 pixels while the original 4096-pixel texture is preserved. The canonical shell material and controller are editable. This is asset import coverage only: the current gameplay HUD still uses the canonical PNG, and the saved 3D stage, delivered-help/debrief graph and actual motion acceptance remain Task 5.
+
+The actual guarded Unity batch scripts are preserved under SourceArt/Demo02/Tools/UnityBatches/BulkCampus_v006. No paid generation, player build, live service or GitHub push occurred.
