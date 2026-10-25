@@ -1,0 +1,37 @@
+{
+  "source": "C:\\Users\\mokde\\Desktop\\AltAIus\\Sims\\Demos\\Developer_Reference_Packs_v6_0_2026-10-17\\02\\visual-reference-pack-v1_2026-10-24\\visuals\\generated\\colleague-tpose-v2.png",
+  "source_sha256": "40f45c21c1890ac1347cbbb5452945eda995a94aff34403f22d838905c002e7e",
+  "operation": "Lossless panel extraction only. No synthesized or retouched pixels.",
+  "views": [
+    {
+      "character": "Colleague",
+      "side": "front",
+      "path": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\Colleague\\Reference\\Colleague-front.png",
+      "box": [
+        0,
+        0,
+        836,
+        941
+      ],
+      "sha256": "61d595ba48dbdb7e15c027db797c8df89dfbfe13e737bcc5a836c2c49a0f3d14",
+      "upload_path": "temp-files/f2330eb1-357b-4f87-80fd-6fe7cb571da4.png",
+      "fileName": "Colleague-front.png",
+      "http_status": 200
+    },
+    {
+      "character": "Colleague",
+      "side": "back",
+      "path": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\Colleague\\Reference\\Colleague-back.png",
+      "box": [
+        836,
+        0,
+        1672,
+        941
+      ],
+      "sha256": "0dc14690026fbee5b4f273284a810f0adff07f4b1c2e22ae256da8d97f0b1eb6",
+      "upload_path": "temp-files/aaf90e06-6776-40f6-a44b-2254a33e47e4.png",
+      "fileName": "Colleague-back.png",
+      "http_status": 200
+    }
+  ]
+}

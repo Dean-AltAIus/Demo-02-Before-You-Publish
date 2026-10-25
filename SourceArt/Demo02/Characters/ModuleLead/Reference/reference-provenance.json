@@ -1,0 +1,37 @@
+{
+  "source": "C:\\Users\\mokde\\Desktop\\AltAIus\\Sims\\Demos\\Developer_Reference_Packs_v6_0_2026-10-17\\02\\visual-reference-pack-v1_2026-10-24\\visuals\\generated\\module-lead-v1.png",
+  "source_sha256": "6287899eb1a3848c8da213e5e6cb7f2b0fe67c102670a47bebd0a8b9930c63a4",
+  "operation": "Lossless panel extraction only. No synthesized or retouched pixels.",
+  "views": [
+    {
+      "character": "ModuleLead",
+      "side": "front",
+      "path": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\ModuleLead\\Reference\\ModuleLead-front.png",
+      "box": [
+        0,
+        0,
+        720,
+        1024
+      ],
+      "sha256": "820b307407477a346e2d951511a180275863c2048f698a9284edb2275868bd40",
+      "upload_path": "temp-files/0134d15f-61e1-4723-97df-0d9ada7672bb.png",
+      "fileName": "ModuleLead-front.png",
+      "http_status": 200
+    },
+    {
+      "character": "ModuleLead",
+      "side": "back",
+      "path": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\ModuleLead\\Reference\\ModuleLead-back.png",
+      "box": [
+        856,
+        0,
+        1536,
+        1024
+      ],
+      "sha256": "111131e54de8625bc1ef44a68e61e571997a87e80cb6be3bcc432f4428666be8",
+      "upload_path": "temp-files/67105da8-7130-4996-84ca-428bd4d84008.png",
+      "fileName": "ModuleLead-back.png",
+      "http_status": 200
+    }
+  ]
+}

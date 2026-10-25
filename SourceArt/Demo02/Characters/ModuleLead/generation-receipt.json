@@ -1,0 +1,44 @@
+{
+  "asset": "ModuleLead",
+  "purpose": "Missing existing cast mesh using supplied exact front/back construction views",
+  "settings": {
+    "views": {
+      "front": "YM5yy93WeC",
+      "back": "O68KKxPynm"
+    },
+    "model": "meshy-7.1",
+    "faceLimit": 30000
+  },
+  "cost": {
+    "credits": 1160,
+    "isUnlimited": false,
+    "certainty": "exact"
+  },
+  "job": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Next step: Queued. Results are not displayed automatically. You can call `creations_show` with these newly-created identifiers: `8a7nYPaIrU` to display them inline, then use `creations_wait` to check completion. `creations_wait` accepts 1–8 identifiers per call and blocks until they finish. These are output identifiers; source identifiers refer to the original inputs. Another generation call would create additional results. No folderReference was passed, so results land in the user's Personal project. If the user named a target project, you can use its `folderReference` from `folders_list` on subsequent generation or edit calls."
+      },
+      {
+        "type": "text",
+        "text": "{\"creation\":{\"identifier\":\"8a7nYPaIrU\",\"status\":\"processing\",\"expectTime\":88,\"tool\":\"image-to-3d\",\"credits\":1160},\"instruction\":\"Queued. Results are not displayed automatically. You can call `creations_show` with these newly-created identifiers: `8a7nYPaIrU` to display them inline, then use `creations_wait` to check completion. `creations_wait` accepts 1–8 identifiers per call and blocks until they finish. These are output identifiers; source identifiers refer to the original inputs. Another generation call would create additional results. No folderReference was passed, so results land in the user's Personal project. If the user named a target project, you can use its `folderReference` from `folders_list` on subsequent generation or edit calls.\"}"
+      }
+    ],
+    "structuredContent": {
+      "creation": {
+        "identifier": "8a7nYPaIrU",
+        "status": "processing",
+        "expectTime": 88,
+        "tool": "image-to-3d",
+        "credits": 1160
+      },
+      "instruction": "Queued. Results are not displayed automatically. You can call `creations_show` with these newly-created identifiers: `8a7nYPaIrU` to display them inline, then use `creations_wait` to check completion. `creations_wait` accepts 1–8 identifiers per call and blocks until they finish. These are output identifiers; source identifiers refer to the original inputs. Another generation call would create additional results. No folderReference was passed, so results land in the user's Personal project. If the user named a target project, you can use its `folderReference` from `folders_list` on subsequent generation or edit calls. When replying to the user, use names, titles, webUrl, and plain descriptions — do not quote internal identifiers (UUIDs, folder references, session or request ids) unless they explicitly ask."
+    },
+    "isError": false
+  },
+  "attempt": 1,
+  "automaticCorrectiveRetries": 0,
+  "pilotBasis": "Academic learner model inspected in six views, local geometry/shading repair and static body deformation probes. Same missing-asset method; each new mesh still needs its own acceptance.",
+  "status": "submitted, no rig or animation acceptance"
+}
