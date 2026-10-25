@@ -1,0 +1,1 @@
+{"name":"Altaius.Demo02.UI","rootNamespace":"Altaius.Demo02.UI","references":["Altaius.Demo02.Domain","Altaius.Demo02.Gameplay","Unity.InputSystem","Unity.ugui"],"autoReferenced":true}
