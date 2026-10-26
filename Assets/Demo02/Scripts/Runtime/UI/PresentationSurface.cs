@@ -22,6 +22,7 @@ namespace Altaius.Demo02.UI
         public bool Wide;
         public bool RoomComposition;
         public bool TitleComposition;
+        public TitleMenuLayout TitleLayout;
         public NativeSettingRow[] SettingRows;
         public Slider MasterSlider;public Text MasterValue;
         public Toggle SilentToggle,MotionToggle,ContrastToggle;public Dropdown TextSizeDropdown;
@@ -36,6 +37,7 @@ namespace Altaius.Demo02.UI
         }
         public void ApplyScale(float scale)
         {
+            if(TitleLayout){appliedScale=scale;TitleLayout.Apply(scale);var titleCanvas=Frame.GetComponentInParent<Canvas>();if(titleCanvas){lastWidth=((RectTransform)titleCanvas.transform).rect.width;lastHeight=((RectTransform)titleCanvas.transform).rect.height;}return;}
             bool large=scale>=1.5f;var canvas=Frame.GetComponentInParent<Canvas>();var viewport=canvas?(RectTransform)canvas.transform:null;
             float width=viewport?viewport.rect.width:1280,height=viewport?viewport.rect.height:720;appliedScale=scale;lastWidth=width;lastHeight=height;
             bool shortPanel=SurfaceId=="pause"||SurfaceId=="confirmation"||SurfaceId=="loading"||SurfaceId=="title"||SurfaceId=="conversation"||SurfaceId=="settings";

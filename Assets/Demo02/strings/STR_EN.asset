@@ -1773,3 +1773,15 @@ MonoBehaviour:
     English: 'Draft hypothesis: {s_drafttotal_work} / 20'
   - Key: workbenchview.updatestatus.assign.hudstatus.text.offline
     English: '{pair}   |   {s_clockminute_60_00}:{s_clockminute_60_00_4}   |   Offline'
+  - Key: title.walkthrough
+    English: Watch walkthrough
+  - Key: title.subtitle
+    English: 'Explore, question and refine
+
+      before you publish.'
+  - Key: title.disclosure
+    English: Fictional practice. No real student data.
+  - Key: title.leena.identity
+    English: Leena | AI coach
+  - Key: title.leena.status
+    English: Offline | Help and controls

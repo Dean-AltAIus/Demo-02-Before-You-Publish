@@ -19,6 +19,8 @@ namespace Altaius.Demo02.UI
         public GameObject Overlay;public PresentationSurface[] Surfaces;
         public Button TalkLauncher,CoachLauncher;public DisconnectedIntegrationSettings Integration;
         public bool ShowTitleOnStart=true;
+        public TitleScenePresentation TitleStage;
+        bool titleHelp;
         public string SurfaceId { get; private set; }="world";
         public AttemptLifecycle Lifecycle { get; private set; }
         public LocalPresentationPreferences Applied { get; private set; }
@@ -91,6 +93,8 @@ namespace Altaius.Demo02.UI
         {
             if(Gameplay.IsComposing)throw new InvalidOperationException(E.Get("presentationview.afterrendered.afterrendered.message.finish.composing.before.changing.this.surface","Finish composing before changing this surface."));
             if(Workbench.IsOpen){suspendedWorkbench=true;suspendedFocus=EventSystem.current?EventSystem.current.currentSelectedGameObject:null;if(!suspendedFocus||!suspendedFocus.transform.IsChildOf(Workbench.Window.transform))suspendedFocus=Workbench.Rows.Find(Workbench.LastEditedControl)?.Input?.gameObject;Workbench.Window.SetActive(false);}
+            if(id!="title"&&TitleStage)TitleStage.Release();
+            Workbench.LeenaDock.gameObject.SetActive(id!="title");TalkLauncher.gameObject.SetActive(false);
             SurfaceId=id;Overlay.SetActive(true);current=Surfaces.Single(s=>s.SurfaceId==id);
             // The companion passage belongs to the suspended work surface, not the system overlay.
             if(Workbench.MarkContextPanel)Workbench.MarkContextPanel.SetActive(false);
@@ -125,10 +129,11 @@ namespace Altaius.Demo02.UI
         {if(Gameplay.IsComposing){if(current)current.Status.text=E.Get("presentationview.guard.assign.current.status.text.finish.composing.before.submitting","Finish composing before submitting.");return;}try{action();}catch(Exception ex){if(current)current.Status.text=ex.Message;}}
         public void OpenTitle()
         {
-            Lifecycle.Pause(false);Begin("title",E.Get("presentationview.opentitle.opentitle.heading.before.you.publish","Before You Publish"));
-            Text("Title.Intro",E.Get("presentationview.opentitle.title.intro.heading.fictional.practice","Fictional practice"),E.Get("presentationview.opentitle.title.intro.body.inspect.mark.revise.and.seek.exact","Inspect, mark, revise and seek exact-pair review or an owned hold."));
-            if(PresenterControls!=null)Action("Title.Presenter",E.Get("presentationview.opentitle.title.presenter.caption.watch.the.authored.gameplay.walkthrough","Watch the authored gameplay walkthrough"),PresenterControls.ShowBrief);
-            Button(current.Primary,E.Get("presentationview.opentitle.opentitle.caption.begin.practice","Begin practice"),OpenBrief);Button(current.Secondary,E.Get("presentationview.opentitle.opentitle.caption.settings","Settings"),()=>OpenSettings("title"));Button(current.Tertiary,E.Get("presentationview.opentitle.opentitle.caption.exit","Exit"),()=>ConfirmLifecycle("exit"));Finish(E.Get("presentationview.opentitle.opentitle.status.authored.offline.english.available.arabic.and","Authored offline. English available. Arabic and voice unavailable."));
+            titleHelp=false;Lifecycle.Pause(false);Begin("title",E.Get("presentationview.opentitle.opentitle.heading.before.you.publish","Before You Publish"));
+            if(TitleStage)TitleStage.Enter();
+            if(PresenterControls!=null)Action("Title.Presenter",E.Get("title.walkthrough","Watch walkthrough"),PresenterControls.ShowBrief);
+            if(current.TitleLayout){current.TitleLayout.RefreshLabels();Button(current.TitleLayout.CompanionHelp,E.Get("title.leena.identity","Leena | AI coach"),()=>{titleHelp=true;OpenCoach();});}
+            Button(current.Primary,E.Get("presentationview.opentitle.opentitle.caption.begin.practice","Begin practice"),OpenBrief);Button(current.Secondary,E.Get("presentationview.opentitle.opentitle.caption.settings","Settings"),()=>OpenSettings("title"));Button(current.Tertiary,E.Get("presentationview.opentitle.opentitle.caption.exit","Exit"),()=>ConfirmLifecycle("exit"));Finish(E.Get("title.disclosure","Fictional practice. No real student data."));
         }
         public void OpenBrief()
         {
@@ -384,15 +389,16 @@ namespace Altaius.Demo02.UI
         public void OpenRoutes(){CloseSurface(false);Workbench.OpenRoutes();}
         public void Back()
         {
+            if(titleHelp&&SurfaceId=="coach"){OpenTitle();return;}
             if(!Overlay.activeSelf){Workbench.Back();return;}
             if(SurfaceId=="settings"){ReturnSettings();return;}
-            if(SurfaceId=="confirmation"){if(Pending!=null){if(confirmationKind=="hold")OpenHold();else if(confirmationKind=="review")OpenReviewRequest();else OpenReview();}else Pause();return;}
+            if(SurfaceId=="confirmation"){if(Pending!=null){if(confirmationKind=="hold")OpenHold();else if(confirmationKind=="review")OpenReviewRequest();else OpenReview();}else if(confirmationReturn=="title")OpenTitle();else Pause();return;}
             if(SurfaceId=="title"){return;}if(SurfaceId=="brief"||SurfaceId=="loading"){OpenTitle();return;}
             if(S.Mode==SessionMode.Replay){EnterReplay();return;}if(SurfaceId=="pause"){Resume();return;}
             if(SurfaceId=="reviewRequest"||SurfaceId=="hold"||SurfaceId=="receipt"){OpenReview();return;}if(Lifecycle.Paused){Pause();return;}CloseSurface();
         }
         public void CloseSurface(bool restoreWorkbench=true)
-        {Overlay.SetActive(false);SurfaceId="world";EventSystem.current?.SetSelectedGameObject(null);bool restoring=restoreWorkbench&&suspendedWorkbench;if(restoring){Workbench.Window.SetActive(true);suspendedWorkbench=false;}else if(restoreWorkbench)Gameplay.CloseInspection();else{suspendedWorkbench=false;suspendedFocus=null;}Workbench.ApplyInterfaceScale();if(restoring&&suspendedFocus&&suspendedFocus.activeInHierarchy){EventSystem.current?.SetSelectedGameObject(suspendedFocus);if(suspendedFocus.TryGetComponent<InputField>(out var field)){field.Select();field.ActivateInputField();}Workbench.Focus.EnsureVisible(suspendedFocus);}if(restoring)suspendedFocus=null;}
+        {if(TitleStage)TitleStage.Release();Workbench.LeenaDock.gameObject.SetActive(true);Overlay.SetActive(false);SurfaceId="world";EventSystem.current?.SetSelectedGameObject(null);bool restoring=restoreWorkbench&&suspendedWorkbench;if(restoring){Workbench.Window.SetActive(true);suspendedWorkbench=false;}else if(restoreWorkbench)Gameplay.CloseInspection();else{suspendedWorkbench=false;suspendedFocus=null;}Workbench.ApplyInterfaceScale();if(restoring&&suspendedFocus&&suspendedFocus.activeInHierarchy){EventSystem.current?.SetSelectedGameObject(suspendedFocus);if(suspendedFocus.TryGetComponent<InputField>(out var field)){field.Select();field.ActivateInputField();}Workbench.Focus.EnsureVisible(suspendedFocus);}if(restoring)suspendedFocus=null;}
         void ReturnToCampus(){suspendedWorkbench=false;Workbench.CloseWindow();CloseSurface(false);}
         public bool SetFieldText(string id,string text)
         {
