@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System;
 using System.Linq;
 using Altaius.Demo02.Domain;
@@ -44,9 +45,7 @@ namespace Altaius.Demo02.UI
             observedSnapshot=s;
             Requests.Observe(s);
             // The packet describes its immutable active request, even if the documents change meanwhile.
-            if(PairLabel)PairLabel.text=Busy
-                ? "Requested Task "+pairTask+" / Rubric "+pairRubric+((pairTask!=s.Task.Version||pairRubric!=s.Rubric.Version)?"\nCurrent "+s.Task.Version+" / "+s.Rubric.Version:"")
-                : "Task "+s.Task.Version+" / Rubric "+s.Rubric.Version+(PresentationStatus.Length>0?"\n"+PresentationStatus:"");
+            if(PairLabel)PairLabel.text=((Busy)?E.Format("npcinteractiondirector.lateupdate.assign.pairlabel.text.requested.task.rubric.current.requested.task.rubric","Requested Task {pairtask} / Rubric {pairrubric}{value4}","pairtask",pairTask,"pairrubric",pairRubric,"value4",(((pairTask!=s.Task.Version||pairRubric!=s.Rubric.Version))?E.Format("npcinteractiondirector.lateupdate.assign.pairlabel.text.requested.task.rubric.current.value4.current.current","\nCurrent {s_task_version} / {s_rubric_version}","s_task_version",s.Task.Version,"s_rubric_version",s.Rubric.Version):"")):E.Format("npcinteractiondirector.lateupdate.assign.pairlabel.text.task.rubric.task.rubric","Task {s_task_version} / Rubric {s_rubric_version}{value4}","s_task_version",s.Task.Version,"s_rubric_version",s.Rubric.Version,"value4",((PresentationStatus.Length>0)?(("\n")+(PresentationStatus)):"")));
             if(Paused)return;
             PrepareNext();
             if(!Busy)BeginCycle();
@@ -54,7 +53,7 @@ namespace Altaius.Demo02.UI
             ObserveColleague(dt);ObserveLeadConversation(dt);
             if(Busy)
             {
-                if(Reduced){Requests.Complete("Reduced motion: recorded request retained without packet handling.");PresentationStatus="Recorded request; motion reduced.";ResetPose(false);return;}
+                if(Reduced){Requests.Complete("Reduced motion: recorded request retained without packet handling.");PresentationStatus=E.Get("review.packet.reduced","Recorded request; motion reduced.");ResetPose(false);return;}
                 var take=LeadLibrary.Find(Cycle[step]);time+=rewind?-dt:dt;
                 SampleLead(take,Mathf.Clamp(time,0,take.Clip.length));
                 if(rewind&&time<=0){if(--step<0){ResetPose(false);return;}time=LeadLibrary.Find(Cycle[step]).Clip.length;}
@@ -124,7 +123,7 @@ namespace Altaius.Demo02.UI
             if(UI&&UI.Host&&UI.Host.Session!=null)
             {
                 int before=Requests.TotalSettled;Requests.SettleAll(UI.Host.Session.Snapshot,reason);
-                if(Requests.TotalSettled>before)PresentationStatus="Handling stopped; requests retained.";
+                if(Requests.TotalSettled>before)PresentationStatus=E.Get("review.packet.interrupted","Handling stopped; requests retained.");
             }
         }
         public void Cancel(){SettleRequests("Cancelled presentation; domain request retained.");if(Busy)rewind=true;}

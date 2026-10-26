@@ -1,0 +1,1 @@
+{"name":"Altaius.Demo02.Validation","references":["Altaius.Demo02.Domain","Altaius.Demo02.Gameplay","Altaius.Demo02.UI","Altaius.Demo02.Presentation","Unity.ugui","Unity.RenderPipelines.Core.Runtime"],"autoReferenced":true}

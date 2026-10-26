@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Altaius.Demo02.UI
         public string SelectedWorkId {get;private set;}
         public string PairIdentity {get;private set;}
         public bool CurrentSelection {get;private set;}
+        public string LiteralValue {get;private set;}
         Guid attempt;string signature;
         void LateUpdate(){Refresh();}
         public void Refresh()
@@ -22,15 +24,16 @@ namespace Altaius.Demo02.UI
             var s=Workbench.Host.Session.Snapshot;var model=Workbench.Host.Workbench;var m=model.Mark;
             if(attempt!=s.AttemptId){attempt=s.AttemptId;SelectedCriterionId=null;SelectedWorkId=null;PairIdentity=null;signature=null;}
             bool live=m!=null&&model.MarkIsCurrent&&s.Notebook.Any(p=>p.Reference.SourceId==m.Work.SourceId&&p.Reference.Version==m.Work.Version&&p.Reference.Sha256==m.Work.Sha256&&p.Reference.PassageId==m.Work.PassageId);
-            if(live){SelectedCriterionId=m.CriterionId;SelectedWorkId=m.Work.SourceId;PairIdentity="Task "+m.TaskVersion+" / Rubric "+m.RubricVersion;}
+            if(live){SelectedCriterionId=m.CriterionId;SelectedWorkId=m.Work.SourceId;PairIdentity=E.Format("selectedcriterionlane.refresh.assign.pairidentity.task.rubric","Task {m_taskversion} / Rubric {m_rubricversion}","m_taskversion",m.TaskVersion,"m_rubricversion",m.RubricVersion);}
             CurrentSelection=live;
             var criterion=live?s.Rubric.Criteria.Single(c=>c.Id==m.CriterionId):null;
             var annotation=live?s.CurrentAnnotations.LastOrDefault(a=>a.Content.SpecimenId==SelectedWorkId&&a.Content.CriterionId==SelectedCriterionId):null;
             var next=s.AttemptId+"/"+s.WorldRevision+"/"+SelectedWorkId+"/"+SelectedCriterionId+"/"+live;
             if(next==signature)return;signature=next;
-            Identity.text=SelectedCriterionId==null?"SELECT A CRITERION LANE":(live?"SELECTED LANE  ":"EARLIER SELECTION  ")+SelectedCriterionId+"\n"+SelectedWorkId+"\n"+PairIdentity;
-            LiteralCriterion.text=criterion==null?"Choose a criterion\nin the work controls.":Wrap(criterion.QuestionId+" | Maximum "+criterion.Marks+"\n"+criterion.Description,38);
-            Mark.text=!live?"No current mark":annotation==null?"Unmarked | maximum "+criterion.Marks:"Draft hypothesis: "+annotation.Content.Marks+" / "+criterion.Marks;
+            Identity.text=((SelectedCriterionId==null)?E.Get("selectedcriterionlane.refresh.assign.identity.text.select.a.criterion.lane.select.a.criterion.lane","SELECT A CRITERION LANE"):((((live)?E.Get("selectedcriterionlane.refresh.assign.identity.text.selected.lane.earlier.selection.value0.selected.lane.selected.lane","SELECTED LANE  "):E.Get("selectedcriterionlane.refresh.assign.identity.text.selected.lane.earlier.selection.value0.earlier.selection.earlier.selection","EARLIER SELECTION  ")))+(SelectedCriterionId)+("\n")+(SelectedWorkId)+("\n")+(PairIdentity)));
+            LiteralValue=criterion==null?E.Get("lane.empty","Choose a criterion\nin the work controls."):E.Format("lane.literal","{question} | Maximum {maximum}\n{description}","question",criterion.QuestionId,"maximum",criterion.Marks,"description",criterion.Description);
+            LiteralCriterion.richText=false;LiteralCriterion.text=SoftWrap(LiteralValue,38);
+            Mark.text=((!live)?E.Get("selectedcriterionlane.refresh.assign.mark.text.no.current.mark.no.current.mark","No current mark"):((annotation==null)?E.Format("selectedcriterionlane.refresh.assign.mark.text.unmarked.maximum.draft.hypothesis.unmarked.maximum.unmarked.maximum","Unmarked | maximum {criterion_marks}","criterion_marks",criterion.Marks):E.Format("selectedcriterionlane.refresh.assign.mark.text.unmarked.maximum.draft.hypothesis.draft.hypothesis.draft.hypothesis","Draft hypothesis: {annotation_content_marks} / {criterion_marks}","annotation_content_marks",annotation.Content.Marks,"criterion_marks",criterion.Marks)));
             FitLabels();
         }
         public void FitLabels(){Fit(Identity,.44f,.055f);Fit(LiteralCriterion,.44f,.10f);Fit(Mark,.44f,.026f);}
@@ -41,11 +44,14 @@ namespace Altaius.Demo02.UI
             longest=Mathf.Max(longest,current);float linePixels=(float)text.font.lineHeight*text.fontSize/Mathf.Max(1,text.font.fontSize);
             text.characterSize=Mathf.Min(.006f,width*10/Mathf.Max(1,longest),height*10/Mathf.Max(1,lines*linePixels));
         }
-        static string Wrap(string value,int width)
+        // Layout-only line insertion. Every original character and whitespace remains in order.
+        // The full literal value remains separately available and in the native reading panel.
+        public static string SoftWrap(string value,int width)
         {
+            if(value==null)return "";if(width<1)throw new ArgumentOutOfRangeException(nameof(width));
             var b=new StringBuilder();int column=0;
-            foreach(var word in value.Replace("\r","").Split(' '))
-            {if(column>0&&column+word.Length>width){b.Append('\n');column=0;}if(column>0){b.Append(' ');column++;}b.Append(word);int line=word.LastIndexOf('\n');column=line>=0?word.Length-line-1:column+word.Length;}
+            for(int i=0;i<value.Length;i++)
+            {char c=value[i];if(c=='\r'||c=='\n'){b.Append(c);column=0;continue;}if(column>=width&&char.IsWhiteSpace(c)){b.Append(c);b.Append('\n');column=0;continue;}b.Append(c);column++;}
             return b.ToString();
         }
     }

@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace Altaius.Demo02.Integration
         public string Text { get; }
         public bool Available { get; }
         public IReadOnlyList<PassageRef> Sources { get; }
-        public string Provenance => "Authored offline reply. No language interpretation or semantic evaluation.";
+        public string Provenance => E.Get("conversationcontracts.initialization.return.authored.offline.reply.no.language.interpretation","Authored offline reply. No language interpretation or semantic evaluation.");
         public ConversationReply(ConversationRequest request, string text, bool available, IEnumerable<PassageRef> sources=null)
         { RequestId=request.Id; AttemptId=request.AttemptId; Recipient=request.Recipient; Pair=request.Pair; Text=text; Available=available; Sources=(sources??Enumerable.Empty<PassageRef>()).ToArray(); }
     }

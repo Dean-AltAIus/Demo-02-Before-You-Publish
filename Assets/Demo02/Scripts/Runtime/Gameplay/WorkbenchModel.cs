@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -23,10 +24,10 @@ namespace Altaius.Demo02.Gameplay
         {
             var s = Session.Snapshot;
             var passage = s.Notebook.SingleOrDefault(p => p.Reference.SourceId == specimenId);
-            if (passage == null) throw new InvalidOperationException("Inspect this work at the experiment table first.");
+            if (passage == null) throw new InvalidOperationException(E.Get("workbenchmodel.openmark.openmark.message.inspect.this.work.at.the.experiment","Inspect this work at the experiment table first."));
             var criterion = s.Rubric.Criteria.SingleOrDefault(c => c.Id == criterionId);
             if (criterion == null || !s.Notebook.Any(p => p.Reference.SourceId == CriterionSource(s, criterionId)))
-                throw new InvalidOperationException("Inspect the current criterion at the task and rubric folios first.");
+                throw new InvalidOperationException(E.Get("workbenchmodel.openmark.openmark.message.inspect.the.current.criterion.at.the","Inspect the current criterion at the task and rubric folios first."));
             var key = s.Task.Version + "/" + s.Rubric.Version + "/" + specimenId + "/" + criterionId;
             if (!markDrafts.TryGetValue(key, out var draft))
             {
@@ -41,11 +42,11 @@ namespace Altaius.Demo02.Gameplay
         public static string CriterionSource(SessionSnapshot s, string id) => "D02.rubric.v" + s.Rubric.Version + "." + id;
         public string MarkProblem()
         {
-            if (Mark == null) return "Select an inspected work passage and criterion.";
-            if (!MarkIsCurrent) return "This draft belongs to an earlier pair. Reopen the work against the current criteria.";
+            if (Mark == null) return E.Get("workbenchmodel.markproblem.return.select.an.inspected.work.passage.and","Select an inspected work passage and criterion.");
+            if (!MarkIsCurrent) return E.Get("workbenchmodel.markproblem.return.this.draft.belongs.to.an.earlier","This draft belongs to an earlier pair. Reopen the work against the current criteria.");
             if (!int.TryParse(Mark.Marks, NumberStyles.Integer, CultureInfo.InvariantCulture, out var n) || n < 0 || n > Mark.Maximum)
-                return "Enter a whole-number mark from 0 to " + Mark.Maximum + ".";
-            if (string.IsNullOrWhiteSpace(Mark.Rationale)) return "Write your own rationale before saving.";
+                return E.Format("workbenchmodel.markproblem.return.enter.a.whole.number.mark.from","Enter a whole-number mark from 0 to {mark_maximum}.","mark_maximum",Mark.Maximum);
+            if (string.IsNullOrWhiteSpace(Mark.Rationale)) return E.Get("workbenchmodel.markproblem.return.write.your.own.rationale.before.saving","Write your own rationale before saving.");
             return null;
         }
         public CommandEnvelope StageMark(bool refresh = false)
@@ -63,7 +64,7 @@ namespace Altaius.Demo02.Gameplay
         public static string OpportunityForWork(string sourceId)
         {
             switch (sourceId) { case "W_LIST": return "D02.counterexample.W_LIST"; case "W_COMPARE": return "D02.retest.W_COMPARE";
-                case "W_PITCH": return "D02.retest.W_PITCH"; default: throw new ArgumentException("Unknown authored work opportunity."); }
+                case "W_PITCH": return "D02.retest.W_PITCH"; default: throw new ArgumentException(E.Get("workbenchmodel.opportunityforwork.opportunityforwork.message.unknown.authored.work.opportunity","Unknown authored work opportunity.")); }
         }
         public TaskDraft OpenTask(bool fresh = false)
         {
@@ -76,41 +77,41 @@ namespace Altaius.Demo02.Gameplay
         public CommandEnvelope PreviewTask()
         {
             var d = OpenTask(); var s = Session.Snapshot;
-            if (d.BaseVersion != s.Task.Version) throw new InvalidOperationException("Task draft is historical. Keep a copy of your text, then load the current task explicitly.");
+            if (d.BaseVersion != s.Task.Version) throw new InvalidOperationException(E.Get("workbenchmodel.previewtask.previewtask.message.task.draft.is.historical.keep.a","Task draft is historical. Keep a copy of your text, then load the current task explicitly."));
             var refs = s.Notebook.Where(p => d.SourceIds.Contains(p.Reference.SourceId)).Select(p => p.Reference).ToArray();
-            if (refs.Length != d.SourceIds.Count) throw new InvalidOperationException("Inspect selected source attachments at the archive first.");
+            if (refs.Length != d.SourceIds.Count) throw new InvalidOperationException(E.Get("workbenchmodel.previewtask.previewtask.message.inspect.selected.source.attachments.at.the","Inspect selected source attachments at the archive first."));
             var q = d.Questions.Select(x => new Question(x.Id, x.Text, WholeNumber(x.Marks), Outcomes(x.Outcomes))).ToArray();
             if (q.Sum(x => (long)x.Marks) != 20 || q.Any(x => x.Marks < 0 || string.IsNullOrWhiteSpace(x.Text)))
-                throw new InvalidOperationException("Both question texts are required. Marks must be nonnegative and total 20.");
+                throw new InvalidOperationException(E.Get("workbenchmodel.previewtask.previewtask.message.both.question.texts.are.required.marks","Both question texts are required. Marks must be nonnegative and total 20."));
             if (!d.SourceIds.SetEquals(new[] { "S_A", "S_B" }) || string.IsNullOrWhiteSpace(d.Context))
-                throw new InvalidOperationException("Attach inspected S_A and S_B and write your decision context.");
+                throw new InvalidOperationException(E.Get("workbenchmodel.previewtask.previewtask.message.attach.inspected.s.a.and.s","Attach inspected S_A and S_B and write your decision context."));
             var cmd = new EditTask(d.BaseVersion, q, refs, d.Context);
-            if (d.IsUnchanged(s.Task)) throw new InvalidOperationException("Change the task before creating a new edition.");
+            if (d.IsUnchanged(s.Task)) throw new InvalidOperationException(E.Get("workbenchmodel.previewtask.previewtask.message.change.the.task.before.creating.a","Change the task before creating a new edition."));
             Pending = Session.Stage(cmd, "D02.revision.task"); PendingKind = "task"; return Pending;
         }
         public CommandEnvelope PreviewRubric()
         {
             var d = OpenRubric(); var s = Session.Snapshot;
-            if (d.BaseVersion != s.Rubric.Version) throw new InvalidOperationException("Rubric draft is historical. Keep a copy of your text, then load the current rubric explicitly.");
+            if (d.BaseVersion != s.Rubric.Version) throw new InvalidOperationException(E.Get("workbenchmodel.previewrubric.previewrubric.message.rubric.draft.is.historical.keep.a","Rubric draft is historical. Keep a copy of your text, then load the current rubric explicitly."));
             var criteria = d.Rows.Select(x => new Criterion(x.Id, x.QuestionId, WholeNumber(x.Marks), x.Text, Outcomes(x.Outcomes))).ToArray();
             if (criteria.Length == 0 || criteria.Any(c => string.IsNullOrWhiteSpace(c.Id) || string.IsNullOrWhiteSpace(c.Description) || c.Marks < 0))
-                throw new InvalidOperationException("Every criterion needs a unique ID, description and nonnegative whole-number mark.");
-            if (criteria.Select(x => x.Id).Distinct().Count() != criteria.Length) throw new InvalidOperationException("Criterion IDs must be unique.");
+                throw new InvalidOperationException(E.Get("workbenchmodel.previewrubric.previewrubric.message.every.criterion.needs.a.unique.id","Every criterion needs a unique ID, description and nonnegative whole-number mark."));
+            if (criteria.Select(x => x.Id).Distinct().Count() != criteria.Length) throw new InvalidOperationException(E.Get("workbenchmodel.previewrubric.previewrubric.message.criterion.ids.must.be.unique","Criterion IDs must be unique."));
             foreach (var q in s.Task.Questions)
             {
                 if (criteria.Where(c => c.QuestionId == q.Id).Sum(c => (long)c.Marks) != q.Marks)
-                    throw new InvalidOperationException(q.Id + " criteria must total " + q.Marks + ", as in the current task.");
+                    throw new InvalidOperationException(E.Format("workbenchmodel.previewrubric.previewrubric.message.criteria.must.total.as.in.the","{q_id} criteria must total {q_marks}, as in the current task.","q_id",q.Id,"q_marks",q.Marks));
             }
             if (criteria.Sum(c => (long)c.Marks) != 20 || criteria.Any(c => c.QuestionId != "Q1" && c.QuestionId != "Q2"))
-                throw new InvalidOperationException("Use Q1 or Q2 and reconcile the total to 20.");
+                throw new InvalidOperationException(E.Get("workbenchmodel.previewrubric.previewrubric.message.use.q1.or.q2.and.reconcile","Use Q1 or Q2 and reconcile the total to 20."));
             if (criteria.Any(c => c.OutcomeIds.Any(o => !s.Task.Questions.Single(q => q.Id == c.QuestionId).OutcomeIds.Contains(o))))
-                throw new InvalidOperationException("Each criterion outcome must belong to its current question.");
-            if (ContentDigest.Of(criteria) == ContentDigest.Of(s.Rubric.Criteria)) throw new InvalidOperationException("Change the rubric before creating a new edition.");
+                throw new InvalidOperationException(E.Get("workbenchmodel.previewrubric.previewrubric.message.each.criterion.outcome.must.belong.to","Each criterion outcome must belong to its current question."));
+            if (ContentDigest.Of(criteria) == ContentDigest.Of(s.Rubric.Criteria)) throw new InvalidOperationException(E.Get("workbenchmodel.previewrubric.previewrubric.message.change.the.rubric.before.creating.a","Change the rubric before creating a new edition."));
             Pending = Session.Stage(new EditRubric(d.BaseVersion, criteria), "D02.revision.rubric"); PendingKind = "rubric"; return Pending;
         }
         public CommandReceipt ConfirmPending()
         {
-            if (Pending == null) throw new InvalidOperationException("Preview the change first.");
+            if (Pending == null) throw new InvalidOperationException(E.Get("workbenchmodel.confirmpending.confirmpending.message.preview.the.change.first","Preview the change first."));
             // Submit exactly the existing envelope. Retry must never silently restage it.
             LastReceipt = Session.FindReceipt(Pending.CommandId) ?? Session.Submit(Pending);
             return LastReceipt;
@@ -118,12 +119,12 @@ namespace Altaius.Demo02.Gameplay
         public CommandReceipt RetryOriginal() => ConfirmPending();
         public void CancelPreview() { /* Deliberately retains free drafts and their exact staged identity. */ }
         public static int WholeNumber(string value)
-        { if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var n)) throw new InvalidOperationException("Use whole numbers for marks."); return n; }
+        { if (!int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out var n)) throw new InvalidOperationException(E.Get("workbenchmodel.wholenumber.wholenumber.message.use.whole.numbers.for.marks","Use whole numbers for marks.")); return n; }
         public static string[] Outcomes(string value)
         {
             var ids = (value ?? "").Split(new[] { ',', ' ', ';' }, StringSplitOptions.RemoveEmptyEntries);
             if (ids.Length == 0 || ids.Distinct().Count() != ids.Length || ids.Any(x => x != "O1" && x != "O2"))
-                throw new InvalidOperationException("Outcomes must be O1, O2, or O1,O2 without duplicates.");
+                throw new InvalidOperationException(E.Get("workbenchmodel.outcomes.outcomes.message.outcomes.must.be.o1.o2.or","Outcomes must be O1, O2, or O1,O2 without duplicates."));
             return ids;
         }
     }

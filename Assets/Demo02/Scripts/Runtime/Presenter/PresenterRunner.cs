@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System;
 using System.Linq;
 using Altaius.Demo02.Domain;
@@ -21,7 +22,7 @@ namespace Altaius.Demo02.Presenter
         public PresenterStep CurrentStep=>frozen&&StepIndex<frozen.Steps.Length?frozen.Steps[StepIndex]:null;
         PresenterSequence frozen,source;PresenterScenarioScope scope;PresenterInputLease lease;CampusSessionState original;PresenterWorkspaceBookmark bookmark;
         Vector3 originalPosition,lastPosition;Quaternion originalFacing;float yaw,pitch,timeScale,elapsed,typed,phraseWait;bool originalMotion,direct,entered,actionDone,showCommentary,bindings;
-        string digest,identity,taskDigest,rubricDigest,fieldExpected;int world,epoch;InputField typingField;PresenterRoute route;
+        string digest,identity,taskDigest,rubricDigest,fieldExpected;int world,epoch;InputField typingField;PresenterRoute route;bool shuttingDown;
         AuthorityReply authority;CommandReceipt findingReceipt;Guid findingDelivery;bool findingAcknowledged;
         CampusGameplayFacade Game=>UI.Gameplay;SessionSnapshot S=>UI.Host.Session.Snapshot;
         void Start(){BindButtons();if(Dock)Dock.SetActive(false);}
@@ -35,8 +36,8 @@ namespace Altaius.Demo02.Presenter
         public void ShowBrief()=>UI.ShowPresenterBrief(()=>StartSequence(Sequence,false),()=>StartSequence(Sequence,true),UI.OpenTitle);
         public void StartSequence(PresenterSequence sequence,bool useDirectRoutes)
         {
-            if(!UI||!sequence)throw new InvalidOperationException("Bind the saved presenter sequence and native campus UI.");
-            if(Game.IsComposing)throw new InvalidOperationException("Finish text composition before starting the walkthrough.");
+            if(!UI||!sequence)throw new InvalidOperationException(E.Get("presenterrunner.startsequence.startsequence.message.bind.the.saved.presenter.sequence.and","Bind the saved presenter sequence and native campus UI."));
+            if(Game.IsComposing)throw new InvalidOperationException(E.Get("presenterrunner.startsequence.startsequence.message.finish.text.composition.before.starting.the","Finish text composition before starting the walkthrough."));
             if(Active)Cancel();BindButtons();original=UI.Host.CaptureState();bookmark=UI.CapturePresenterWorkspace();originalPosition=Game.Motor.transform.position;originalFacing=Game.Motor.CharacterVisual?Game.Motor.CharacterVisual.rotation:Quaternion.identity;yaw=Game.CameraRig.Yaw;pitch=Game.CameraRig.Pitch;timeScale=Time.timeScale;originalMotion=Game.CameraRig.ReducedMotion;
             source=sequence;digest=source.Digest;frozen=Instantiate(sequence);frozen.hideFlags=HideFlags.HideAndDontSave;
             direct=useDirectRoutes||UI.Applied?.ReducedMotion==true;showCommentary=frozen.BuyerCommentary;StepIndex=0;PresentedSeconds=TravelledMetres=0;LastError=null;Completed=Paused=false;ResetStep();epoch++;
@@ -54,12 +55,12 @@ namespace Altaius.Demo02.Presenter
             {
                 lease?.Apply();AcceptOwnedAuthorityChange();
                 if(source.Digest!=digest||S.AttemptId!=AttemptId||S.Mode!=SessionMode.Presenter||S.Task.Digest!=taskDigest||S.Rubric.Digest!=rubricDigest||S.WorldRevision!=world||UI.NativeSurfaceIdentity!=identity)
-                    throw new InvalidOperationException("The authored sequence, document, attempt or native surface changed. Walkthrough stopped safely.");
-                if(typingField&&typingField.text!=fieldExpected)throw new InvalidOperationException("The automated native draft changed outside its input driver.");
+                    throw new InvalidOperationException(E.Get("presenterrunner.tick.tick.message.the.authored.sequence.document.attempt.or","The authored sequence, document, attempt or native surface changed. Walkthrough stopped safely."));
+                if(typingField&&typingField.text!=fieldExpected)throw new InvalidOperationException(E.Get("presenterrunner.tick.tick.message.the.automated.native.draft.changed.outside","The automated native draft changed outside its input driver."));
                 if(Game.IsComposing){Pause();return;}if(Paused||Completed){Game.DriveMovement(Vector2.zero);return;}
                 var displacement=Game.Motor.transform.position-lastPosition;displacement.y=0;TravelledMetres+=displacement.magnitude;lastPosition=Game.Motor.transform.position;
                 PresentedSeconds+=Mathf.Max(0,deltaTime);var step=CurrentStep;if(step==null){Completed=true;Game.DriveMovement(Vector2.zero);RefreshDock();return;}
-                if(step.TaskVersion>0&&S.Task.Version!=step.TaskVersion||step.RubricVersion>0&&S.Rubric.Version!=step.RubricVersion)throw new InvalidOperationException("The presenter step's required version guard changed.");
+                if(step.TaskVersion>0&&S.Task.Version!=step.TaskVersion||step.RubricVersion>0&&S.Rubric.Version!=step.RubricVersion)throw new InvalidOperationException(E.Get("presenterrunner.tick.tick.message.the.presenter.step.s.required.version","The presenter step's required version guard changed."));
                 float dt=Mathf.Max(0,deltaTime)*Mathf.Max(.1f,frozen.Pace);
                 if(!entered){entered=true;Enter(step);Checkpoint();lease?.Apply();}
                 elapsed+=dt;
@@ -67,15 +68,15 @@ namespace Altaius.Demo02.Presenter
                 else if(step.Kind==PresenterStepKind.MoveStation&&!actionDone)
                 {
                     if(route.Tick(Mathf.Max(.001f,deltaTime)))
-                    {Game.DriveMovement(Vector2.zero);if(!Game.TryInspectNearest()||Game.ActiveStation.StationId!=step.Station)throw new InvalidOperationException("Actual range inspection did not reach the intended saved station.");actionDone=true;elapsed=0;Checkpoint();}
-                    else if(elapsed>90*frozen.Pace)throw new InvalidOperationException("Movement did not reach the saved station. Check the collision route.");
+                    {Game.DriveMovement(Vector2.zero);if(!Game.TryInspectNearest()||Game.ActiveStation.StationId!=step.Station)throw new InvalidOperationException(E.Get("presenterrunner.tick.tick.message.actual.range.inspection.did.not.reach","Actual range inspection did not reach the intended saved station."));actionDone=true;elapsed=0;Checkpoint();}
+                    else if(elapsed>90*frozen.Pace)throw new InvalidOperationException(E.Get("presenterrunner.tick.tick.message.movement.did.not.reach.the.saved","Movement did not reach the saved station. Check the collision route."));
                 }
                 else if(step.Kind==PresenterStepKind.Await&&!actionDone)
-                {actionDone=Ready(step.Control);if(elapsed>45)throw new InvalidOperationException("The actual rendered reply was not delivered. No synthetic authority was inferred.");}
+                {actionDone=Ready(step.Control);if(elapsed>45)throw new InvalidOperationException(E.Get("presenterrunner.tick.tick.message.the.actual.rendered.reply.was.not","The actual rendered reply was not delivered. No synthetic authority was inferred."));}
                 if(actionDone&&elapsed>=step.Dwell){StepIndex++;ResetStep();}
                 RefreshDock();
             }
-            catch(Exception error){LastError=error.Message;Cancel();UI.ShowPresenterStopNotice("Walkthrough stopped safely: "+LastError);}
+            catch(Exception error){LastError=error.Message;Cancel();UI.ShowPresenterStopNotice(E.Format("presenterrunner.tick.walkthrough.stopped.safely.lasterror.status.walkthrough.stopped.safely","Walkthrough stopped safely: {lasterror}","lasterror",LastError));}
         }
         void Enter(PresenterStep step)
         {
@@ -89,14 +90,14 @@ namespace Altaius.Demo02.Presenter
                 case PresenterStepKind.OpenConversation:UI.OpenConversation(step.Role);actionDone=true;break;
                 case PresenterStepKind.TypePresentation:case PresenterStepKind.TypeWorkbench:
                     typingField=step.Kind==PresenterStepKind.TypePresentation?UI.FindPresenterField(step.Control):UI.Workbench.Rows.Find(step.Control)?.Input;
-                    if(!typingField)throw new InvalidOperationException("The expected native field is unavailable: "+step.Control);SetText(step,"");break;
+                    if(!typingField)throw new InvalidOperationException(E.Format("presenterrunner.enter.enter.message.the.expected.native.field.is.unavailable","The expected native field is unavailable: {step_control}","step_control",step.Control));SetText(step,"");break;
                 case PresenterStepKind.MoveStation:
                     CloseWorkspace();var station=Game.Stations.Single(s=>s.StationId==step.Station);
                     if(direct){Require(Game.DirectRoute(step.Station),step.Station);lastPosition=Game.Motor.transform.position;actionDone=true;}
                     else route=new PresenterRoute(Game,RouteNodes,station);break;
                 case PresenterStepKind.CloseWorkspace:CloseWorkspace();actionDone=true;break;
                 case PresenterStepKind.ObserveBaseline:
-                    UI.ShowPresenterObservation("W_LIST | full-mark counterexample",S.DraftTotal("W_LIST")+" / 20 saved authored hypothesis under Task "+S.Task.Version+" / Rubric "+S.Rubric.Version+".\nCurrent evaluations: "+S.CurrentEvaluations.Count+". Naming and listing do not require comparison or a justified decision. O2 evaluation remains unobserved.\nAnnotation receipts: "+string.Join(", ",S.CurrentAnnotations.Select(a=>a.Id.ToString())));actionDone=true;break;
+                    UI.ShowPresenterObservation(E.Get("presenterrunner.enter.w.list.full.mark.counterexample.heading.w.list.full.mark.counterexample","W_LIST | full-mark counterexample"),E.Format("presenterrunner.enter.w.list.full.mark.counterexample.body.20.saved.authored.hypothesis.under.task","{s_drafttotal_w_list} / 20 saved authored hypothesis under Task {s_task_version} / Rubric {s_rubric_version}.\nCurrent evaluations: {s_currentevaluations}. Naming and listing do not require comparison or a justified decision. O2 evaluation remains unobserved.\nAnnotation receipts: {value8}","s_drafttotal_w_list",S.DraftTotal("W_LIST"),"s_task_version",S.Task.Version,"s_rubric_version",S.Rubric.Version,"s_currentevaluations",S.CurrentEvaluations.Count,"value8",string.Join(", ",S.CurrentAnnotations.Select(a=>a.Id.ToString()))));actionDone=true;break;
                 case PresenterStepKind.Finding:ShowFinding(step.Control);actionDone=true;break;
                 case PresenterStepKind.ReviewDecision:
                     var request=S.ReviewHistory.Last();authority=UI.Lifecycle.Authority.PreparePresenterDecision(scope.DecisionScope(S,request.Id),ReviewDecision.Approved,scope.ReviewReason);UI.ShowAuthority(authority);actionDone=true;break;
@@ -109,7 +110,7 @@ namespace Altaius.Demo02.Presenter
         }
         void Type(PresenterStep step,float deltaTime)
         {
-            if(actionDone)return;if(EventSystem.current&&EventSystem.current.currentSelectedGameObject!=typingField.gameObject)throw new InvalidOperationException("Native typing focus changed. The draft was preserved.");
+            if(actionDone)return;if(EventSystem.current&&EventSystem.current.currentSelectedGameObject!=typingField.gameObject)throw new InvalidOperationException(E.Get("presenterrunner.type.type.message.native.typing.focus.changed.the.draft","Native typing focus changed. The draft was preserved."));
             if(phraseWait>0){phraseWait-=deltaTime;return;}typed+=deltaTime*Mathf.Max(1,step.CharactersPerSecond);int count=Mathf.Min(step.Text?.Length??0,Mathf.FloorToInt(typed));
             if(count>fieldExpected.Length)
             {
@@ -124,7 +125,7 @@ namespace Altaius.Demo02.Presenter
         void ShowFinding(string work)
         {
             var command=scope.PrepareEvaluation(S,work);var envelope=UI.Host.Session.Stage(command,WorkbenchModel.OpportunityForWork(work));int ownerEpoch=epoch;findingReceipt=null;findingAcknowledged=false;findingDelivery=Guid.NewGuid();
-            var content=new[]{S.Notebook.Single(p=>p.Reference.SourceId==work).DisplayText+"\nSource "+work+" v1 | SHA-256 "+S.Notebook.Single(p=>p.Reference.SourceId==work).Reference.Sha256+"\nTask 2 / Rubric 2 | submitted "+string.Join(", ",command.SubmittedAnnotationIds)}.Concat(command.Findings.Select(f=>{var a=S.CurrentAnnotations.Single(x=>x.Id==f.AnnotationId);var c=S.Rubric.Criteria.Single(x=>x.Id==f.CriterionId);return c.Id+" | "+a.Content.Marks+" / "+c.Marks+" authored marking hypothesis\nCriterion: "+c.Description+"\nDisplayed rationale: "+a.Content.Rationale+"\nScoped finding: "+f.Decision+". "+f.Reason;})).ToArray();
+            var content=new[]{E.Format("presenter.finding.source","{passage}\nSource {source} v1 | SHA-256 {sha}\nTask 2 / Rubric 2 | submitted {submitted}","passage",S.Notebook.Single(p=>p.Reference.SourceId==work).DisplayText,"source",work,"sha",S.Notebook.Single(p=>p.Reference.SourceId==work).Reference.Sha256,"submitted",string.Join(", ",command.SubmittedAnnotationIds))}.Concat(command.Findings.Select(f=>{var a=S.CurrentAnnotations.Single(x=>x.Id==f.AnnotationId);var c=S.Rubric.Criteria.Single(x=>x.Id==f.CriterionId);return E.Format("presenter.finding.detail","{criterion} | {mark} / {maximum} authored marking hypothesis\nCriterion: {description}\nDisplayed rationale: {rationale}\nScoped finding: {decision}. {reason}","criterion",c.Id,"mark",a.Content.Marks,"maximum",c.Marks,"description",c.Description,"rationale",a.Content.Rationale,"decision",f.Decision,"reason",f.Reason);})).ToArray();
             UI.ShowPresenterFinding(work,content,findingDelivery,()=>
             {
                 if(!Active||Paused||epoch!=ownerEpoch||findingAcknowledged)return;
@@ -137,7 +138,7 @@ namespace Altaius.Demo02.Presenter
             if(condition=="authority")return authority!=null&&authority.Displayed&&authority.Receipt?.Status==ReceiptStatus.Accepted;
             if(condition=="finding")return findingReceipt?.Status==ReceiptStatus.Accepted;
             if(condition=="conversation"){var reply=UI.Lifecycle.Conversation.History.LastOrDefault();return reply!=null&&(reply.State==ReplyState.Shown||reply.State==ReplyState.Unavailable);}
-            throw new InvalidOperationException("Unknown presenter guard: "+condition);
+            throw new InvalidOperationException(E.Format("presenterrunner.ready.ready.message.unknown.presenter.guard","Unknown presenter guard: {condition}","condition",condition));
         }
         void AcceptOwnedAuthorityChange()
         {
@@ -159,11 +160,11 @@ namespace Altaius.Demo02.Presenter
         }
         void RefreshDock()
         {
-            LayoutDock();string label=Completed?"Complete. Return to your practice.":Paused?"Paused. Draft and step retained.":CurrentStep?.Label??"Starting";if(label.Length>39)label=label.Substring(0,36)+"...";
-            if(Status)Status.text="SYNTHETIC / AUTHORED / OFFLINE\n"+label+"\n"+(Paused||Completed?PresentedSeconds.ToString("0.0")+"s | "+TravelledMetres.ToString("0.0")+"m | ":"")+"No learner evidence";
-            if(Status&&UI.Workbench.TextScale>1)Status.text=Paused?"AUTHORED / OFFLINE\nPaused. Draft retained.\nNo learner evidence":"AUTHORED / OFFLINE | no evidence";
-            if(PauseButton)PauseButton.GetComponentInChildren<Text>().text=Paused?"Resume":"Pause";
-            if(Commentary){bool shown=showCommentary&&!string.IsNullOrEmpty(CurrentStep?.BuyerCommentary)&&typingField==null&&!UI.IsOpen;Commentary.gameObject.SetActive(shown);var backing=Commentary.GetComponent<PresenterCaptionBacking>();if(backing&&backing.Backing)backing.Backing.SetActive(shown);Commentary.text="Buyer commentary\n"+CurrentStep?.BuyerCommentary;}
+            LayoutDock();string label=((Completed)?E.Get("presenterrunner.refreshdock.assign.string.label.complete.return.to.your.practice.complete.return.to.your.practice","Complete. Return to your practice."):((Paused)?E.Get("presenterrunner.refreshdock.assign.string.label.paused.draft.and.step.retained.paused.draft.and.step.retained.paused.draft.and.step.retained","Paused. Draft and step retained."):((CurrentStep?.Label != null)?CurrentStep?.Label:E.Get("presenter.starting","Starting"))));if(label.Length>39)label=label.Substring(0,36)+"...";
+            if(Status)Status.text=E.Format("presenterrunner.refreshdock.assign.status.text.synthetic.authored.offline.no.learner.evidence","SYNTHETIC / AUTHORED / OFFLINE\n{label}\n{value3}No learner evidence","label",label,"value3",((Paused||Completed)?E.Format("presenterrunner.refreshdock.assign.status.text.value3.s.m.s.m","{presentedseconds_0_0}s | {travelledmetres_0_0}m | ","presentedseconds_0_0",PresentedSeconds.ToString("0.0"),"travelledmetres_0_0",TravelledMetres.ToString("0.0")):""));
+            if(Status&&UI.Workbench.TextScale>1)Status.text=((Paused)?E.Get("presenterrunner.refreshdock.assign.status.text.authored.offline.paused.draft.retained.authored.offline.paused.draft.retained.no","AUTHORED / OFFLINE\nPaused. Draft retained.\nNo learner evidence"):E.Get("presenterrunner.refreshdock.assign.status.text.authored.offline.no.evidence.authored.offline.no.evidence","AUTHORED / OFFLINE | no evidence"));
+            if(PauseButton)PauseButton.GetComponentInChildren<Text>().text=((Paused)?E.Get("presenterrunner.refreshdock.assign.text.resume.resume","Resume"):E.Get("presenter.pause","Pause"));
+            if(Commentary){bool shown=showCommentary&&!string.IsNullOrEmpty(CurrentStep?.BuyerCommentary)&&typingField==null&&!UI.IsOpen;Commentary.gameObject.SetActive(shown);var backing=Commentary.GetComponent<PresenterCaptionBacking>();if(backing&&backing.Backing)backing.Backing.SetActive(shown);Commentary.text=E.Format("presenterrunner.refreshdock.assign.commentary.text.buyer.commentary","Buyer commentary\n{currentstep_buyercommentary}","currentstep_buyercommentary",CurrentStep?.BuyerCommentary);}
         }
         void LayoutDock()
         {
@@ -180,8 +181,19 @@ namespace Altaius.Demo02.Presenter
         }
         static void Place(RectTransform rect,float x,float y,float width,float height)
         {rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(x,-y);rect.sizeDelta=new Vector2(width,height);}
-        static void Require(bool valid,string control){if(!valid)throw new InvalidOperationException("The expected native control or response is unavailable: "+control);}
-        void OnDisable(){if(Active)Cancel();}
-        void OnDestroy(){if(Active)Cancel();}
+        static void Require(bool valid,string control){if(!valid)throw new InvalidOperationException(E.Format("presenterrunner.require.require.message.the.expected.native.control.or.response","The expected native control or response is unavailable: {control}","control",control));}
+        void OnApplicationQuit(){shuttingDown=true;AbandonDestroyedWorkspace();}
+        void AbandonDestroyedWorkspace()
+        {
+            if(!Active)return;Active=false;Paused=false;epoch++;Time.timeScale=timeScale;lease=null;scope=null;
+            if(frozen){if(Application.isPlaying)Destroy(frozen);else DestroyImmediate(frozen);}frozen=null;
+        }
+        void OnDisable()
+        {
+            if(!Active)return;
+            if(shuttingDown||!UI||!UI.Gameplay||!UI.Gameplay.CameraRig||!UI.Gameplay.Motor||!UI.Workbench)AbandonDestroyedWorkspace();
+            else Cancel();
+        }
+        void OnDestroy(){OnDisable();}
     }
 }

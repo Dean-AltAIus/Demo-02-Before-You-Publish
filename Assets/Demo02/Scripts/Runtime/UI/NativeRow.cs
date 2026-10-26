@@ -27,11 +27,16 @@ namespace Altaius.Demo02.UI
             Caption.supportRichText=false;Caption.text = title; Action.onClick.RemoveAllListeners(); Action.interactable = available;
             if (action != null) Action.onClick.AddListener(() => action()); ApplyScale(scale);
         }
-        public void BindInput(string title, string value, Action<string> changed, float scale, bool multiline)
+        public void BindInput(string title, string value, Action<string> changed, float scale, bool multiline, string placeholder = null)
         {
             BindingGeneration++;
             Caption.supportRichText=false;Caption.text = title; Input.onValueChanged.RemoveAllListeners(); Input.onEndEdit.RemoveAllListeners();
+            // A pooled row may now represent another field with a different line mode.
+            // End the previous native edit before rebinding its value and caret geometry.
+            Input.DeactivateInputField();Input.caretPosition=0;
             Input.lineType = multiline ? InputField.LineType.MultiLineNewline : InputField.LineType.SingleLine;
+            Input.textComponent.supportRichText=false;
+            if(Input.placeholder is Text prompt){prompt.supportRichText=false;prompt.text=placeholder??InputPrompts.For(ControlId);}
             latestDraft=value??"";cancellationHandled=Input.wasCanceled;
             Input.SetTextWithoutNotify(latestDraft);
             Input.onValueChanged.AddListener(v =>

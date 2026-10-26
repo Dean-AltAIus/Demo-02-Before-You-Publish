@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -26,9 +27,9 @@ namespace Altaius.Demo02.Gameplay
             var s=Host.Session.Snapshot;
             if(attempt==s.AttemptId&&revision==s.WorldRevision && selected==Gameplay.SelectedSpecimenId)return;
             attempt=s.AttemptId;revision=s.WorldRevision;selected=Gameplay.SelectedSpecimenId;
-            WorkLabel.text=selected==null?"SELECT WORK AT TABLE":selected+" | inspected";
-            TotalLabel.text=selected==null?"No marks assigned": "Draft hypothesis\n"+s.DraftTotal(selected)+" / 20 | unverified";
-            PairLabel.text="Task "+s.Task.Version+" / Rubric "+s.Rubric.Version;
+            WorkLabel.text=((selected==null)?E.Get("campusexperimentprojection.lateupdate.assign.worklabel.text.select.work.at.table.select.work.at.table","SELECT WORK AT TABLE"):E.Format("campusexperimentprojection.lateupdate.assign.worklabel.text.inspected.inspected","{selected} | inspected","selected",selected));
+            TotalLabel.text=((selected==null)?E.Get("campusexperimentprojection.lateupdate.assign.totallabel.text.no.marks.assigned.no.marks.assigned","No marks assigned"):E.Format("campusexperimentprojection.lateupdate.assign.totallabel.text.draft.hypothesis.20.unverified.draft.hypothesis.20.unverified","Draft hypothesis\n{s_drafttotal_selected} / 20 | unverified","s_drafttotal_selected",s.DraftTotal(selected)));
+            PairLabel.text=E.Format("campusexperimentprojection.lateupdate.assign.pairlabel.text.task.rubric","Task {s_task_version} / Rubric {s_rubric_version}","s_task_version",s.Task.Version,"s_rubric_version",s.Rubric.Version);
             var lanes=AuthoredLanes.Concat(additional).ToList();
             while(lanes.Count<s.Rubric.Criteria.Count)
             {
@@ -47,7 +48,7 @@ namespace Altaius.Demo02.Gameplay
                 else if(i<AuthoredLanes.Count&&savedPositions!=null){lanes[i].transform.SetPositionAndRotation(savedPositions[i],savedRotations[i]);lanes[i].transform.localScale=savedScales[i];}
                 var criterion=s.Rubric.Criteria[i];var mark=s.CurrentAnnotations.SingleOrDefault(a=>a.Content.SpecimenId==selected && a.Content.CriterionId==criterion.Id);
                 lanes[i].CriterionLabel.text=criterion.QuestionId+" | "+criterion.Id;
-                lanes[i].MarkLabel.text=(mark==null?"Unmarked":mark.Content.Marks.ToString())+" / "+criterion.Marks;
+                lanes[i].MarkLabel.text=((((mark==null)?E.Get("campusexperimentprojection.lateupdate.assign.lanes.i.marklabel.text.value0.unmarked.unmarked","Unmarked"):mark.Content.Marks.ToString()))+(" / ")+(criterion.Marks));
                 lanes[i].FitLabels();
                 lanes[i].PassageProxy.SetActive(mark!=null);
             }

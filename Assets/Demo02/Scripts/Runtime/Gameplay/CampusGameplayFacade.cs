@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System;
 using System.Linq;
 using Altaius.Demo02.Domain;
@@ -63,7 +64,7 @@ namespace Altaius.Demo02.Gameplay
             if (WorldPrompt && !(Workspace?.IsOpen ?? false))
             {
                 var station = Nearest();
-                WorldPrompt.text = station != null ? "E  Inspect " + station.DisplayName + "    |    Tab  Direct routes" : "WASD  Move    |    Hold right mouse  Look    |    Tab  Direct routes";
+                WorldPrompt.text = ((station != null)?E.Format("campusgameplayfacade.update.assign.worldprompt.text.e.inspect.tab.direct.routes.e.inspect.tab.direct.routes","E  Inspect {station_displayname}    |    Tab  Direct routes","station_displayname",station.DisplayName):E.Get("campusgameplayfacade.update.assign.worldprompt.text.wasd.move.hold.right.mouse.wasd.move.hold.right.mouse.look","WASD  Move    |    Hold right mouse  Look    |    Tab  Direct routes"));
             }
         }
         public void HandleEscape()
@@ -98,13 +99,13 @@ namespace Altaius.Demo02.Gameplay
         public Passage InspectPassage(string sourceId)
         {
             if (!ActiveStation || ActiveStation.DistanceTo(Motor.transform.position) > ActiveStation.InteractionRange)
-                throw new InvalidOperationException("Return to the station to inspect this passage.");
+                throw new InvalidOperationException(E.Get("campusgameplayfacade.directroute.directroute.message.return.to.the.station.to.inspect","Return to the station to inspect this passage."));
             var p = SessionHost.Session.Inspect(sourceId, ActiveStation.Location); SessionHost.NotifyChanged(); return p;
         }
         public void CloseInspection() { ActiveStation = null; CameraRig.ExitInspection(); }
         public void SelectInspectedWork(string sourceId)
         {
-            if(!SessionHost.Session.Snapshot.Notebook.Any(p=>p.Reference.SourceId==sourceId)) throw new InvalidOperationException("Inspect work before selecting it.");
+            if(!SessionHost.Session.Snapshot.Notebook.Any(p=>p.Reference.SourceId==sourceId)) throw new InvalidOperationException(E.Get("campusgameplayfacade.selectinspectedwork.selectinspectedwork.message.inspect.work.before.selecting.it","Inspect work before selecting it."));
             SelectedSpecimenId=sourceId;
         }
         // Composition-only handback of an existing context, including null. This admits no passage.

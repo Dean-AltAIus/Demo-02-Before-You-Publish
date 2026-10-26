@@ -1,0 +1,1775 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316453ba37f247241a5bc293af777b87, type: 3}
+  m_Name: STR_EN
+  m_EditorClassIdentifier: 
+  Entries:
+  - Key: attemptlifecycle.boundedobservation.return.authored.demonstration.w.list.received.under.task.1.rubric.1.those
+    English: '{value0} under Task 1 / Rubric 1. Those marks are marking hypotheses.
+      They do not establish that O2 evaluation was observed. Annotation IDs: {value2}'
+  - Key: attemptlifecycle.boundedobservation.return.authored.demonstration.w.list.received.value0.authored.demonstration.w.list.received.authored.demonstration.w.list.received.full
+    English: 'Authored demonstration: W_LIST received full 20 draft marks'
+  - Key: attemptlifecycle.boundedobservation.return.authored.demonstration.w.list.received.value0.recorded.w.list.received.your.recorded.w.list.received.your.full
+    English: 'Recorded: W_LIST received your full 20 draft marks'
+  - Key: attemptlifecycle.boundedobservation.return.the.most.recent.baseline.w.the.most.recent.baseline.w.list
+    English: The most recent baseline W_LIST annotations do not form a complete 20-mark
+      total. Earlier annotations, if any, remain in the timeline. No counterexample
+      explanation or independent evaluation skill is inferred.
+  - Key: attemptlifecycle.outcome.return.active.risk.recorded.incident.s
+    English: 'Active risk: {s_activerisks} recorded incident(s).'
+  - Key: attemptlifecycle.outcome.return.exact.current.pair.release.recorded
+    English: Exact current-pair release recorded.
+  - Key: attemptlifecycle.outcome.return.owned.unresolved.a.verified.defect.and
+    English: 'Owned unresolved: a verified defect and actual owner acceptance are
+      recorded.'
+  - Key: attemptlifecycle.outcome.return.partial.practice.no.current.approved.release
+    English: Partial practice. No current approved release or verified accepted hold
+      is recorded.
+  - Key: attemptlifecycle.outcome.return.self.owned.commitment.recorded.defect.interpretation
+    English: Self-owned commitment recorded. Defect interpretation remains unverified.
+  - Key: authority.details.hide
+    English: Hide exact reply details
+  - Key: authority.details.show
+    English: View exact reply details
+  - Key: authority.local.decision.disclosure
+    English: Authored offline decision for the exact requested pair. No live service
+      is connected.
+  - Key: authority.synthetic.decision.disclosure
+    English: Authored offline demonstration. This decision covers only the exact
+      synthetic pair. No live service is connected.
+  - Key: campusexperimentprojection.lateupdate.assign.lanes.i.marklabel.text.value0.unmarked.unmarked
+    English: Unmarked
+  - Key: campusexperimentprojection.lateupdate.assign.pairlabel.text.task.rubric
+    English: Task {s_task_version} / Rubric {s_rubric_version}
+  - Key: campusexperimentprojection.lateupdate.assign.totallabel.text.draft.hypothesis.20.unverified.draft.hypothesis.20.unverified
+    English: 'Draft hypothesis
+
+      {s_drafttotal_selected} / 20 | unverified'
+  - Key: campusexperimentprojection.lateupdate.assign.totallabel.text.no.marks.assigned.no.marks.assigned
+    English: No marks assigned
+  - Key: campusexperimentprojection.lateupdate.assign.worklabel.text.inspected.inspected
+    English: '{selected} | inspected'
+  - Key: campusexperimentprojection.lateupdate.assign.worklabel.text.select.work.at.table.select.work.at.table
+    English: SELECT WORK AT TABLE
+  - Key: campusgameplayfacade.directroute.directroute.message.return.to.the.station.to.inspect
+    English: Return to the station to inspect this passage.
+  - Key: campusgameplayfacade.selectinspectedwork.selectinspectedwork.message.inspect.work.before.selecting.it
+    English: Inspect work before selecting it.
+  - Key: campusgameplayfacade.update.assign.worldprompt.text.e.inspect.tab.direct.routes.e.inspect.tab.direct.routes
+    English: E  Inspect {station_displayname}    |    Tab  Direct routes
+  - Key: campusgameplayfacade.update.assign.worldprompt.text.wasd.move.hold.right.mouse.wasd.move.hold.right.mouse.look
+    English: WASD  Move    |    Hold right mouse  Look    |    Tab  Direct routes
+  - Key: conversationcontracts.initialization.return.authored.offline.reply.no.language.interpretation
+    English: Authored offline reply. No language interpretation or semantic evaluation.
+  - Key: conversationcoordinator.acknowledge.assign.record.error.the.prepared.reply.is.historical.because
+    English: The prepared reply is historical because its version or source scope
+      changed before display.
+  - Key: conversationcoordinator.complete.assign.record.error.the.version.or.admitted.sources.changed
+    English: The version or admitted sources changed. The original question is preserved;
+      inspect the current pair before a fresh request.
+  - Key: conversationcoordinator.compose.assign.answer.a.current.exact.pair.approval.a.current.exact.pair.approval.is
+    English: 'A current exact-pair approval is recorded: {current_currentapproval_receiptid}.
+      Inspect its scope before requesting release.'
+  - Key: conversationcoordinator.compose.assign.answer.a.grounded.response.to.those.a.grounded.response.to.those.a.grounded.response.to.those.words
+    English: A grounded response to those words is unavailable offline. No review
+      decision or approval has been created. Use the exact-pair review controls for
+      a scoped request.
+  - Key: conversationcoordinator.compose.assign.answer.a.grounded.response.to.those.i.cannot.verify.that.reasoning.i.cannot.verify.that.reasoning.with
+    English: I cannot verify that reasoning with this offline adapter. Your marks
+      remain your hypothesis; there is no semantic finding from this reply.
+  - Key: conversationcoordinator.compose.assign.answer.i.brought.the.publication.request.i.brought.the.publication.request.i
+    English: I brought the publication request. I can discuss the practical context,
+      but I cannot approve the task or rubric.
+  - Key: conversationcoordinator.compose.assign.answer.i.cannot.interpret.that.question.i.cannot.interpret.that.question.in
+    English: I cannot interpret that question in this authored offline conversation.
+      Your words are preserved. I have made no change or commitment.
+  - Key: conversationcoordinator.compose.assign.answer.i.own.exact.pair.publication.i.examine.recorded.work.and.i.examine.recorded.work.and.criteria
+    English: I examine recorded work and criteria. My findings are separate from
+      publication approval, and arbitrary free-text evaluation is unavailable offline.
+  - Key: conversationcoordinator.compose.assign.answer.i.own.exact.pair.publication.i.own.exact.pair.publication.i.own.exact.pair.publication.review
+    English: I own exact-pair publication review. A scheduled slot is separate from
+      my decision. This local adapter cannot semantically approve arbitrary wording.
+  - Key: conversationcoordinator.compose.assign.answer.no.current.exact.pair.approval.no.current.exact.pair.approval.is
+    English: No current exact-pair approval is recorded. A request, a conversation
+      or a total of 20 cannot supply that receipt.
+  - Key: conversationcoordinator.compose.assign.answer.no.source.inspection.is.recorded.no.source.inspection.is.recorded.in
+    English: No source inspection is recorded in this attempt.
+  - Key: conversationcoordinator.compose.assign.answer.publication.is.due.at.14.publication.is.due.at.14.00
+    English: Publication is due at 14:00. Only an accepted scheduling response changes
+      the logical clock.
+  - Key: conversationcoordinator.compose.assign.answer.the.notebook.records.v.opening.the.notebook.records.opening.a.source
+    English: 'The notebook records: {value1}. Opening a source does not prove understanding.'
+  - Key: conversationcoordinator.compose.assign.answer.the.notebook.records.v.opening.value1.item.v
+    English: '{p_sourceid} v{p_version}'
+  - Key: conversationcoordinator.compose.assign.answer.the.request.is.to.publish.the.request.is.to.publish.before
+    English: The request is to publish before 14:00. There is no automatic time penalty
+      while you read, type or think.
+  - Key: conversationcoordinator.process.assign.record.error.the.local.reply.could.not.be
+    English: The local reply could not be prepared. Your draft and original request
+      are retained.
+  - Key: conversationcoordinator.requirerole.requirerole.message.choose.a.conversation.role.not.an
+    English: Choose a conversation role, not an authority or evaluator identity.
+  - Key: conversationcoordinator.setdraft.setdraft.message.reconcile.or.cancel.the.original.request
+    English: Reconcile or cancel the original request before sending again.
+  - Key: conversationcoordinator.setdraft.setdraft.message.replay.is.read.only
+    English: Replay is read-only.
+  - Key: conversationcoordinator.setdraft.setdraft.message.write.a.question.before.sending
+    English: Write a question before sending.
+  - Key: conversationdispatchqueue.schedule.schedule.message.a.captured.pending.conversation.request.is
+    English: A captured pending conversation request is required.
+  - Key: helpcoordinator.assistancesummary.return.assistance.history.is.unavailable.independent.assistance.history.is.unavailable.independent.or
+    English: Assistance history is unavailable. Independent or no-help status cannot
+      be verified.
+  - Key: helpcoordinator.assistancesummary.return.linked.practice.retains.historical.assistance.complete.local.ledger.no.help.actual.help.deliveries.recorded.strategic.actual.help.deliveries.recorded.strategic.see
+    English: '{s_assistance} actual help deliveries recorded; {s_assistance_a_a_strategic}
+      strategic. See delivery and opportunity IDs in the timeline.'
+  - Key: helpcoordinator.assistancesummary.return.linked.practice.retains.historical.assistance.complete.local.ledger.no.help.complete.local.ledger.no.help.complete.local.ledger.no.help.has
+    English: 'Complete local ledger: no help has been shown.'
+  - Key: helpcoordinator.assistancesummary.return.linked.practice.retains.historical.assistance.linked.practice.retains.historical.assistance.linked.practice.retains.historical.assistance.and
+    English: Linked practice retains historical assistance and is assisted practice.
+  - Key: helpcoordinator.request.assign.help.text.a.grounded.strategy.response.to.your
+    English: A grounded strategy response to your request is unavailable in this
+      offline adapter. Your own question is retained. You can continue independently
+      or inspect your recorded attempt.
+  - Key: helpcoordinator.request.assign.help.text.this.attempt.records.inspected.passages.saved
+    English: 'This attempt records {s_notebook} inspected passages, {s_annotationhistory}
+      saved marking hypotheses and {s_audit} command records. Current grounded evaluations:
+      {s_currentevaluations}. Review and assistance IDs are in the timeline. These
+      records do not establish competence.'
+  - Key: helpcoordinator.request.assign.help.text.wasd.moves.with.world.focus.hold
+    English: WASD moves with world focus. Hold right mouse to look. E inspects. Tab
+      opens direct routes. Enter or Space activates a button. Escape goes back. Text
+      fields keep your own draft. Preview, save and publish are separate actions.
+  - Key: helpcoordinator.request.assign.help.text.what.does.the.work.you.marked
+    English: What does the work you marked actually demonstrate under the criterion
+      you chose? Compare the actual passage with that criterion before deciding your
+      next action.
+  - Key: input.allocation.integer
+    English: Enter whole-number marks
+  - Key: input.criterion.id
+    English: Enter a unique criterion ID
+  - Key: input.hold.defect
+    English: Describe the specific unresolved defect...
+  - Key: input.hold.next
+    English: Describe the owner's next action...
+  - Key: input.mark.integer
+    English: Enter a whole number from 0 to the maximum
+  - Key: input.mark.rationale
+    English: Explain your marking in your own words...
+  - Key: input.outcomes
+    English: Enter O1, O2 or O1,O2
+  - Key: input.prose
+    English: Write in your own words...
+  - Key: input.question.id
+    English: Enter Q1 or Q2
+  - Key: input.review.summary
+    English: Describe the changes you want reviewed...
+  - Key: input.task.context
+    English: Describe your decision context...
+  - Key: input.time
+    English: Enter a same-day time, HH:MM
+  - Key: lane.empty
+    English: 'Choose a criterion
+
+      in the work controls.'
+  - Key: lane.literal
+    English: '{question} | Maximum {maximum}
+
+      {description}'
+  - Key: localauthority.acknowledge.assign.reply.status.scheduled.owner.accepted.owner.accepted.owner.accepted.owner.accepted
+    English: Owner accepted
+  - Key: localauthority.acknowledge.assign.reply.status.scheduled.owner.accepted.scheduled.scheduled.scheduled
+    English: Scheduled
+  - Key: localauthority.initialization.return.authored.offline.role.response.no.live
+    English: Authored offline role response. No live service or semantic approval.
+  - Key: localauthority.prepareowneracceptance.requestid.body.review.at.next.action.this.holds
+    English: '{value0}Review at {hold_proposal_reviewat}. Next action: {hold_proposal_nextaction}.
+      This holds the work unresolved; it is not publication approval.'
+  - Key: localauthority.prepareowneracceptance.requestid.body.self.ownership.needs.your.explicit.confirmation
+    English: Self-ownership needs your explicit confirmation. This is not an NPC
+      acceptance.
+  - Key: localauthority.prepareowneracceptance.requestid.body.the.proposed.owner.cannot.verify.arbitrary
+    English: The proposed owner cannot verify arbitrary defect prose with this offline
+      adapter. The proposal is retained; no acceptance has been recorded.
+  - Key: localauthority.prepareowneracceptance.requestid.body.this.hold.proposal.has.no.pending
+    English: This hold proposal has no pending current owner response.
+  - Key: localauthority.prepareowneracceptance.requestid.body.value0.i.accept.ownership.of.this.i.accept.ownership.of.this.structurally
+    English: 'I accept ownership of this structurally verified defect. '
+  - Key: localauthority.prepareowneracceptance.requestid.body.value0.i.can.own.that.concrete.i.can.own.that.concrete.follow
+    English: 'I can own that concrete follow-up. '
+  - Key: localauthority.prepareowneracceptance.requestid.status.owner.acceptance.ready
+    English: Owner acceptance ready
+  - Key: localauthority.prepareowneracceptance.requestid.status.owner.response.unavailable
+    English: Owner response unavailable
+  - Key: localauthority.prepareowneracceptance.requestid.status.self.confirmation.required
+    English: Self confirmation required
+  - Key: localauthority.preparepresenterdecision.preparepresenterdecision.message.exact.isolated.authored.presenter.scope.required
+    English: Exact isolated authored presenter scope required.
+  - Key: localauthority.preparepresenterdecision.scope.requestid.body.synthetic.authored.scenario
+    English: 'Synthetic authored scenario: {authoredreason}'
+  - Key: localauthority.preparepresenterdecision.scope.requestid.status.authored.response.ready
+    English: '{decision} authored response ready'
+  - Key: localauthority.preparereviewdecision.assign.string.reason.returned.after.a.structural.check.no
+    English: 'Returned after a structural check: {defect} No semantic alignment judgement
+      has been made.'
+  - Key: localauthority.preparereviewdecision.requestid.body.a.current.accepted.schedule.is.required
+    English: A current accepted schedule is required before a separate review decision.
+  - Key: localauthority.preparereviewdecision.requestid.body.a.semantic.review.of.your.own
+    English: A semantic review of your own task, criteria and rationale is unavailable
+      in this offline adapter. The pair remains scheduled and unapproved. No approval
+      is inferred from arithmetic or polished wording.
+  - Key: localauthority.preparereviewdecision.requestid.status.returned.response.ready
+    English: Returned response ready
+  - Key: localauthority.preparereviewdecision.requestid.status.review.unavailable
+    English: Review unavailable
+  - Key: localauthority.preparescheduling.requestid.body.scheduling.cannot.be.reconciled.for.this
+    English: Scheduling cannot be reconciled for this current request. Inspect the
+      original receipt and exact pair.
+  - Key: localauthority.preparescheduling.requestid.body.the.local.module.lead.accepted.the
+    English: The local module lead accepted the requested {time_request_minute} slot
+      for Task {s_task_version} / Rubric {s_rubric_version}. This is scheduling only.
+      No publication approval is recorded.
+  - Key: localauthority.preparescheduling.requestid.status.scheduling.response.ready
+    English: Scheduling response ready
+  - Key: localauthority.preparescheduling.requestid.status.unknown
+    English: Unknown
+  - Key: localauthority.stageselfacceptance.stageselfacceptance.message.a.current.self.owned.proposal.is
+    English: A current self-owned proposal is required.
+  - Key: localauthority.structuralproblem.return.rubric.marks.do.not.reconcile.for
+    English: Rubric marks do not reconcile for each question.
+  - Key: localauthority.structuralproblem.return.the.task.does.not.attach.both
+    English: The task does not attach both source passages.
+  - Key: localauthority.structuralproblem.return.the.task.has.no.decision.context
+    English: The task has no decision context.
+  - Key: npcinteractiondirector.lateupdate.assign.pairlabel.text.requested.task.rubric.current.requested.task.rubric
+    English: Requested Task {pairtask} / Rubric {pairrubric}{value4}
+  - Key: npcinteractiondirector.lateupdate.assign.pairlabel.text.requested.task.rubric.current.value4.current.current
+    English: '
+
+      Current {s_task_version} / {s_rubric_version}'
+  - Key: npcinteractiondirector.lateupdate.assign.pairlabel.text.task.rubric.task.rubric
+    English: Task {s_task_version} / Rubric {s_rubric_version}{value4}
+  - Key: offlinesession.initialise.initialise.message.pinned.learner.passage.integrity.failure
+    English: Pinned learner passage integrity failure.
+  - Key: offlinesession.stage.stage.message.an.explicit.opportunity.id.is.required
+    English: An explicit opportunity ID is required.
+  - Key: pair.label
+    English: Task {task} / Rubric {rubric}
+  - Key: pair.unavailable
+    English: Exact pair unavailable
+  - Key: presentationview.afterrendered.afterrendered.message.finish.composing.before.changing.this.surface
+    English: Finish composing before changing this surface.
+  - Key: presentationview.beginpractice.beginpractice.caption.cancel
+    English: Cancel
+  - Key: presentationview.beginpractice.beginpractice.heading.preparing.local.practice
+    English: Preparing local practice
+  - Key: presentationview.beginpractice.beginpractice.status.preparing.a.fresh.temporary.attempt
+    English: Preparing a fresh temporary attempt.
+  - Key: presentationview.beginpractice.loading.state.body.only.the.admitted.local.catalogue.is
+    English: Only the admitted local catalogue is loaded. No network service is being
+      contacted.
+  - Key: presentationview.beginpractice.loading.state.heading.checking.the.local.session
+    English: Checking the local session
+  - Key: presentationview.cancelorinspectconversation.cancelorinspectconversation.caption.back.to.conversation
+    English: Back to conversation
+  - Key: presentationview.cancelorinspectconversation.cancelorinspectconversation.caption.view.timeline
+    English: View timeline
+  - Key: presentationview.cancelorinspectconversation.cancelorinspectconversation.heading.conversation.receipt
+    English: Conversation receipt
+  - Key: presentationview.cancelorinspectconversation.cancelorinspectconversation.status.conversation.receipts.remain.separate.from.domain
+    English: Conversation receipts remain separate from domain review, evaluation
+      and release authority.
+  - Key: presentationview.cancelorinspectconversation.conversation.detail.reply.body.value0.no.reply.displayed.no.reply.displayed
+    English: No reply displayed.
+  - Key: presentationview.cancelorinspectconversation.conversation.detail.reply.body.value2.no.response.received.no.response.received
+    English: No response received.
+  - Key: presentationview.cancelorinspectconversation.conversation.detail.reply.heading.actual.reply.and.provenance
+    English: Actual reply and provenance
+  - Key: presentationview.cancelorinspectconversation.conversation.detail.state.body.original.request.attempt.task.rubric.world
+    English: 'Original request {record_request_id}
+
+      Attempt {record_request_attemptid}
+
+      Task
+      {record_request_pair_taskversion} / Rubric {record_request_pair_rubricversion}
+      | world revision {record_request_worldrevision}
+
+      Task SHA-256 {record_request_pair_taskdigest}
+
+      Rubric
+      SHA-256 {record_request_pair_rubricdigest}
+
+      Display acknowledgment {value15}'
+  - Key: presentationview.cancelorinspectconversation.conversation.detail.state.body.value15.not.recorded.not.recorded
+    English: Not recorded
+  - Key: presentationview.cancelorinspectconversation.conversation.detail.words.heading.your.original.words
+    English: Your original words
+  - Key: presentationview.commitdomain.commitdomain.message.preview.the.request.first
+    English: Preview the request first.
+  - Key: presentationview.confirmlifecycle.confirmlifecycle.caption.keep.playing
+    English: Keep playing
+  - Key: presentationview.confirmlifecycle.confirmlifecycle.caption.leave.start.a.new.attempt.leave.leave
+    English: Leave
+  - Key: presentationview.confirmlifecycle.confirmlifecycle.caption.leave.start.a.new.attempt.start.a.new.attempt.start.a.new.attempt
+    English: Start a new attempt
+  - Key: presentationview.confirmlifecycle.confirmlifecycle.heading.leave.the.simulation.start.again.leave.the.simulation.leave.the.simulation
+    English: Leave the simulation?
+  - Key: presentationview.confirmlifecycle.confirmlifecycle.heading.leave.the.simulation.start.again.start.again.start.again
+    English: Start again?
+  - Key: presentationview.confirmlifecycle.confirmlifecycle.heading.start.linked.practice.start.linked.practice
+    English: Start linked practice?
+  - Key: presentationview.confirmlifecycle.confirmlifecycle.status.this.action.requires.your.explicit.confirmation
+    English: This action requires your explicit confirmation.
+  - Key: presentationview.confirmlifecycle.reset.explanation.body.dialogue.drafts.evidence.and.linked.dialogue.drafts.evidence.and.linked.retry
+    English: Dialogue, drafts, evidence and linked retry data will be cleared. Pending
+      replies cannot change the new attempt. Anonymous presentation settings remain
+      local.
+  - Key: presentationview.confirmlifecycle.reset.explanation.body.your.original.history.and.actual.your.original.history.and.actual.assistance
+    English: Your original history and actual assistance remain read-only. Current
+      marks, approvals, drafts and pending responses do not become new results. This
+      is assisted rehearsal, not an unseen transfer test.
+  - Key: presentationview.confirmlifecycle.reset.explanation.heading.new.attempt.linked.to.this.new.attempt.linked.to.this.practice
+    English: New attempt linked to this practice
+  - Key: presentationview.confirmlifecycle.reset.explanation.heading.your.current.attempt.ends.clear.clear.this.attempt.and.linked.clear.this.attempt.and.linked.practice
+    English: Clear this attempt and linked practice
+  - Key: presentationview.confirmlifecycle.reset.explanation.heading.your.current.attempt.ends.clear.your.current.attempt.ends.your.current.attempt.ends
+    English: Your current attempt ends
+  - Key: presentationview.enterreplay.enterreplay.caption.new.linked.practice
+    English: New linked practice
+  - Key: presentationview.enterreplay.enterreplay.heading.read.only.replay
+    English: Read-only replay
+  - Key: presentationview.enterreplay.enterreplay.status.read.only.no.new.marks.communications
+    English: Read-only. No new marks, communications, help or learner evidence.
+  - Key: presentationview.enterreplay.replay.scope.body.attempt.replay.cannot.mutate.this.attempt
+    English: '{attemptlifecycle_outcome_lifecycle_replaysnapshot}
+
+      Attempt
+      {lifecycle_replaysnapshot_attemptid}
+
+      Replay cannot mutate this attempt.
+      New practice requires an explicit reset.'
+  - Key: presentationview.enterreplay.replay.scope.heading.historical.scope
+    English: Historical scope
+  - Key: presentationview.guard.assign.current.status.text.finish.composing.before.submitting
+    English: Finish composing before submitting.
+  - Key: presentationview.openbrief.brief.fiction.body.your.actual.actions.and.delivered.assistance
+    English: Your actual actions and delivered assistance are retained for this local
+      debrief. No real student data is used. This rehearsal does not measure student
+      learning or universal teaching competence.
+  - Key: presentationview.openbrief.brief.fiction.heading.this.is.a.fictional.practice.scenario
+    English: This is a fictional practice scenario.
+  - Key: presentationview.openbrief.brief.modes.body.independent.strategy.only.when.you.request
+    English: 'Independent: strategy only when you request it. Coached: source-bounded
+      assistance may be offered within the assistance limits. Controls support is
+      always optional.'
+  - Key: presentationview.openbrief.brief.modes.heading.choose.how.to.practice
+    English: Choose how to practice
+  - Key: presentationview.openbrief.mode.coached.caption.coached
+    English: '{value0}Coached'
+  - Key: presentationview.openbrief.mode.independent.caption.independent
+    English: '{value0}Independent'
+  - Key: presentationview.openbrief.mode.independent.caption.value0.selected.selected
+    English: 'Selected: '
+  - Key: presentationview.openbrief.mode.presenter.caption.authored.synthetic.presenter.walkthrough
+    English: Authored synthetic presenter walkthrough
+  - Key: presentationview.openbrief.openbrief.caption.back
+    English: Back
+  - Key: presentationview.openbrief.openbrief.caption.continue
+    English: Continue
+  - Key: presentationview.openbrief.openbrief.heading.before.you.begin
+    English: Before you begin
+  - Key: presentationview.openbrief.openbrief.status.help.is.optional.opening.or.requesting
+    English: Help is optional. Opening or requesting help is different from actual
+      delivery.
+  - Key: presentationview.opencoach.coach.history.heading.actual.delivered.help
+    English: Actual delivered help
+  - Key: presentationview.opencoach.coach.onramp.caption.reopen.optional.controls
+    English: Reopen optional controls
+  - Key: presentationview.opencoach.coach.scope.body.controls.review.of.your.recorded.attempt
+    English: Controls, review of your recorded attempt and requested strategy are
+      separate. Leena cannot approve publication, reveal hidden sources or prefill
+      a successful repair.
+  - Key: presentationview.opencoach.coach.scope.heading.source.bounded.help
+    English: Source-bounded help
+  - Key: presentationview.opencoach.opencoach.heading.leena.ai.coach
+    English: Leena | AI coach
+  - Key: presentationview.opencoach.opencoach.status.offline.voice.unavailable.free.text.strategy
+    English: Offline. Voice unavailable. Free-text strategy responses may be unavailable.
+  - Key: presentationview.openconversation.write.in.your.own.words.label.write.in.your.own.words
+    English: Write in your own words...
+  - Key: presentationview.opendebrief.debrief.assistance.heading.actual.assistance
+    English: Actual assistance
+  - Key: presentationview.opendebrief.debrief.observation.body.semantic.evaluation.of.arbitrary.prose.is
+    English: '{attemptlifecycle_boundedobservation_s}
+
+      Semantic evaluation
+      of arbitrary prose is unavailable offline. No measured learning or universal
+      competence claim is available.'
+  - Key: presentationview.opendebrief.debrief.observation.heading.observed.action.and.consequence
+    English: Observed action and consequence
+  - Key: presentationview.opendebrief.debrief.outcome.heading.actual.outcome
+    English: Actual outcome
+  - Key: presentationview.opendebrief.debrief.presenter.body.current.task.rubric.current.approval.historical
+    English: 'Current Task {s_task_version} / Rubric {s_rubric_version}. Current
+      approval: {value5}.
+
+      Historical approval: {value7}.
+
+      Last release
+      request: {value9}.
+
+      Publication: {s_publication}. Accepted hold: {value13}.
+      Learner evidence records: {s_evidence}.
+
+      The shown repair, hypotheses
+      and scoped findings are authored demonstration content. Seek review of the
+      current pair before release.'
+  - Key: presentationview.opendebrief.debrief.presenter.body.value7.task.rubric.task.rubric
+    English: Task {approval_pair_taskversion} / Rubric {approval_pair_rubricversion}
+      | {approval_receiptid}
+  - Key: presentationview.opendebrief.debrief.presenter.body.value9.not.attempted.not.attempted
+    English: Not attempted
+  - Key: presentationview.opendebrief.debrief.presenter.heading.exact.authored.run.records
+    English: Exact authored run records
+  - Key: presentationview.opendebrief.opendebrief.caption.linked.practice
+    English: Linked practice
+  - Key: presentationview.opendebrief.opendebrief.heading.practice.record
+    English: Practice record
+  - Key: presentationview.opendebrief.opendebrief.status.synthetic.presenter.records.no.learner.synthetic.presenter.records.no.learner.evidence
+    English: Synthetic presenter records. No learner evidence.
+  - Key: presentationview.opendebrief.opendebrief.status.this.debrief.describes.only.the.this.debrief.describes.only.the.recorded
+    English: This debrief describes only the recorded local attempt.
+  - Key: presentationview.openhold.hold.basis.caption.defect.basis.change
+    English: 'Defect basis: {holdbasis} | Change'
+  - Key: presentationview.openhold.hold.basisscope.body.a.structural.basis.requires.inspected.current
+    English: A structural basis requires inspected current task/rubric passages and
+      an actual matching defect. Free defect prose remains unverified. Proposal,
+      owner acceptance and release are different states.
+  - Key: presentationview.openhold.hold.basisscope.heading.structural.checks.use.actual.anchors
+    English: Structural checks use actual anchors
+  - Key: presentationview.openhold.hold.defect.label.specific.defect.in.your.own.words
+    English: Specific defect, in your own words
+  - Key: presentationview.openhold.hold.nextaction.label.owner.s.next.action
+    English: Owner's next action
+  - Key: presentationview.openhold.hold.owner.caption.owner.change
+    English: 'Owner: {holdowner} | Change'
+  - Key: presentationview.openhold.hold.time.label.future.same.day.review.time.hh
+    English: Future same-day review time (HH:MM)
+  - Key: presentationview.openhold.openhold.caption.preview.proposal
+    English: Preview proposal
+  - Key: presentationview.openhold.openhold.heading.hold.proposal
+    English: Hold proposal
+  - Key: presentationview.openhold.openhold.status.no.owner.acceptance.has.been.inferred
+    English: No owner acceptance has been inferred.
+  - Key: presentationview.openonramp.onramp.keys.heading.controls.you.can.reopen
+    English: Controls you can reopen
+  - Key: presentationview.openonramp.onramp.step1.body.e.opens.the.selected.work.you
+    English: E opens the selected work. You can return without changing it. Open
+      the studio and inspect a current version label.
+  - Key: presentationview.openonramp.onramp.step1.heading.inspect.a.selected.folio
+    English: Inspect a selected folio
+  - Key: presentationview.openonramp.onramp.step2.body.at.the.experiment.table.inspect.work
+    English: At the experiment table, inspect work and an inspected criterion. Your
+      own explanation stays editable.
+  - Key: presentationview.openonramp.onramp.step2.heading.open.an.empty.annotation
+    English: Open an empty annotation
+  - Key: presentationview.openonramp.onramp.step3.body.staging.is.reversible.saving.and.publishing
+    English: Staging is reversible. Saving and publishing are different actions.
+      These controls carry no assessment credit.
+  - Key: presentationview.openonramp.onramp.step3.heading.stage.a.mark.then.cancel
+    English: Stage a mark, then cancel
+  - Key: presentationview.openonramp.onramp.studio.caption.open.studio.controls
+    English: Open studio controls
+  - Key: presentationview.openonramp.openonramp.caption.continue.to.campus
+    English: Continue to campus
+  - Key: presentationview.openonramp.openonramp.caption.skip.controls
+    English: Skip controls
+  - Key: presentationview.openonramp.openonramp.heading.optional.controls
+    English: Optional controls
+  - Key: presentationview.openonramp.openonramp.status.you.can.reopen.controls.from.leena
+    English: You can reopen controls from Leena at any time.
+  - Key: presentationview.openreview.hold.accept.caption.check.actual.owner.response.check.actual.owner.response
+    English: Check actual owner response
+  - Key: presentationview.openreview.hold.accept.caption.confirm.my.self.owned.commitment.confirm.my.self.owned.commitment
+    English: Confirm my self-owned commitment
+  - Key: presentationview.openreview.hold.current.body.owner.review.next.action.acceptance.defect
+    English: '{hold_proposal_defect}
+
+      Owner {rolename_hold_proposal_owner}
+      | Review {hold_proposal_reviewat}
+
+      Next action: {hold_proposal_nextaction}
+
+      Acceptance
+      {value8} | Defect verified {hold_defectverified} | Self-owned {hold_selfowned}'
+  - Key: presentationview.openreview.hold.current.heading.hold.for
+    English: Hold for {receiptcopy_pair_hold_pair}
+  - Key: presentationview.openreview.openreview.caption.back.to.campus
+    English: Back to campus
+  - Key: presentationview.openreview.openreview.caption.check.review.decision
+    English: Check review decision
+  - Key: presentationview.openreview.openreview.caption.check.review.time
+    English: Check review time
+  - Key: presentationview.openreview.openreview.caption.debrief
+    English: Debrief
+  - Key: presentationview.openreview.openreview.caption.preview.release
+    English: Preview release
+  - Key: presentationview.openreview.openreview.caption.request.current.review
+    English: Request review
+  - Key: presentationview.openreview.openreview.caption.view.release.history
+    English: View release history
+  - Key: presentationview.openreview.openreview.heading.review.and.publication
+    English: Review and publication
+  - Key: presentationview.openreview.openreview.status.scheduling.review.decisions.and.release.are
+    English: Scheduling, review decisions and release are separate receipts. Arbitrary
+      semantic review is unavailable offline.
+  - Key: presentationview.openreview.review.conversation.caption.talk.to.module.reviewer
+    English: Talk to module reviewer
+  - Key: presentationview.openreview.review.decision.caption.request.separate.review.decision
+    English: Request separate review decision
+  - Key: presentationview.openreview.review.details.caption.hide.exact.provenance.hide.exact.provenance
+    English: Hide exact provenance
+  - Key: presentationview.openreview.review.details.caption.view.exact.provenance.view.exact.provenance
+    English: View exact provenance
+  - Key: presentationview.openreview.review.gate.body.current.approval.is.recorded.release.current.approval.is.recorded.release.current.approval.is.recorded.release.is
+    English: Current approval is recorded. Release is a separate request.
+  - Key: presentationview.openreview.review.gate.body.current.approval.is.recorded.release.no.exact.current.approval.is.no.exact.current.approval.is.recorded
+    English: No exact current approval is recorded. Publication remains closed.
+  - Key: presentationview.openreview.review.gate.body.the.exact.current.pair.is.the.exact.current.pair.is.released
+    English: The exact current pair is released.
+  - Key: presentationview.openreview.review.gate.heading.publication
+    English: 'Publication: {publicationlabel_s_publication}'
+  - Key: presentationview.openreview.review.hold.caption.propose.an.owned.hold
+    English: Propose an owned hold
+  - Key: presentationview.openreview.review.original.body.review.requested.time
+    English: 'Review: {latest_status} | Requested time {localauthority_time_latest_minute}
+
+      {latest_changesummary}{value6}'
+  - Key: presentationview.openreview.review.original.heading.requested
+    English: Requested {receiptcopy_pair_latest_pair}
+  - Key: presentationview.openreview.review.pair.heading.current
+    English: Current {receiptcopy_pair_s_pair}
+  - Key: presentationview.openreview.review.provenance.body.task.sha.256.rubric.sha.256
+    English: 'Task SHA-256 {s_task_digest}
+
+      Rubric SHA-256 {s_rubric_digest}
+
+      World
+      revision {s_worldrevision} | Clock revision {s_clockrevision}
+
+      Approval
+      receipt {value9}
+
+      Latest review request {value11}'
+  - Key: presentationview.openreview.review.provenance.heading.read.only.provenance
+    English: Read-only provenance
+  - Key: presentationview.openreview.review.release.caption.preview.current.pair.release
+    English: Preview current-pair release{value1}
+  - Key: presentationview.openreview.review.release.caption.value1.current.approval.missing.current.approval.missing
+    English: ' | current approval missing'
+  - Key: presentationview.openreview.review.request.caption.request.an.exact.pair.review.time
+    English: Request an exact-pair review time
+  - Key: presentationview.openreview.review.schedule.caption.check.local.scheduling.response
+    English: Check local scheduling response
+  - Key: presentationview.openreview.review.timeline.caption.inspect.authority.and.receipt.history
+    English: Inspect authority and receipt history
+  - Key: presentationview.openreviewrequest.openreviewrequest.caption.keep.draft
+    English: Keep draft
+  - Key: presentationview.openreviewrequest.openreviewrequest.caption.preview.request
+    English: Preview request
+  - Key: presentationview.openreviewrequest.openreviewrequest.heading.request.review.time
+    English: Request review time
+  - Key: presentationview.openreviewrequest.openreviewrequest.status.the.current.pair.and.exact.readset
+    English: The current pair and exact readset will be captured in the preview.
+  - Key: presentationview.openreviewrequest.review.summary.label.authored.demonstration.change.summary.authored.demonstration.change.summary
+    English: Authored demonstration change summary
+  - Key: presentationview.openreviewrequest.review.summary.label.your.change.summary.your.change.summary
+    English: Your change summary
+  - Key: presentationview.openreviewrequest.review.time.label.requested.time.hh.mm
+    English: Requested time (HH:MM)
+  - Key: presentationview.openreviewrequest.schedule.clock.body.review.window.to.14.00.publication
+    English: 'Review window: {localauthority_time_mathf_max_s_clockminute_820} to
+      14:00. Publication due 14:00. A proposal does not guarantee a slot or advance
+      time.'
+  - Key: presentationview.openreviewrequest.schedule.clock.heading.simulation.time
+    English: Simulation time {localauthority_time_s_clockminute}
+  - Key: presentationview.opentimeline.opentimeline.caption.back.to.record
+    English: Back to record
+  - Key: presentationview.opentimeline.opentimeline.caption.enter.read.only.replay
+    English: Enter read-only replay
+  - Key: presentationview.opentimeline.opentimeline.heading.read.only.timeline
+    English: Read-only timeline
+  - Key: presentationview.opentimeline.opentimeline.status.history.is.attributed.to.its.exact
+    English: History is attributed to its exact attempt, source versions and receipt
+      IDs.
+  - Key: presentationview.opentimeline.timeline.command.a.sequence.body.receipt
+    English: '{a_receipt_status} | {a_receipt_reasoncode}
+
+      Receipt {a_receipt_requestid}
+
+      {displaydisclosure_a_receipt}'
+  - Key: presentationview.opentimeline.timeline.command.a.sequence.heading.command
+    English: Command {a_sequence} | {a_receipt_action}
+  - Key: presentationview.opentimeline.timeline.conversation.r.request.id.body.value4.no.reply.displayed.no.reply.displayed
+    English: No reply displayed
+  - Key: presentationview.opentimeline.timeline.conversation.r.request.id.body.value6.original.request.retained.original.request.retained
+    English: Original request retained
+  - Key: presentationview.opentimeline.timeline.help.h.id.body.opportunity.strategic.requested
+    English: '{h_id}
+
+      Opportunity {h_opportunityid} | Strategic {h_strategic}
+      | Requested {h_requested}
+
+      {h_text}'
+  - Key: presentationview.opentimeline.timeline.help.h.id.heading.help.actually.delivered
+    English: Help actually delivered
+  - Key: presentationview.opentimeline.timeline.hold.h.id.h.revision.body.owner.self.owned.verified.defect
+    English: '{h_id}
+
+      {h_proposal_defect}
+
+      Owner {h_proposal_owner} |
+      {h_proposal_reviewat} | {h_proposal_nextaction}
+
+      Self-owned {h_selfowned}
+      | Verified defect {h_defectverified}'
+  - Key: presentationview.opentimeline.timeline.hold.h.id.h.revision.heading.hold.acceptance
+    English: Hold | acceptance {value1}
+  - Key: presentationview.opentimeline.timeline.linked.linked.attemptid.body.delivered.help
+    English: '{linked_attemptid}
+
+      {attemptlifecycle_outcome_linked}
+
+      Delivered
+      help {linked_assistance}'
+  - Key: presentationview.opentimeline.timeline.linked.linked.attemptid.heading.historical.linked.attempt
+    English: Historical linked attempt
+  - Key: presentationview.opentimeline.timeline.review.r.id.r.revision.body.task.rubric.request.decision.receipt
+    English: 'Task {r_pair_taskversion} / Rubric {r_pair_rubricversion} | Request
+      {r_id}
+
+      {value7}
+
+      Decision receipt {value9}'
+  - Key: presentationview.opentimeline.timeline.review.r.id.r.revision.heading.review
+    English: Review | {r_status}
+  - Key: presentationview.opentimeline.timeline.rolereply.reply.id.body.original.request.reply.attempt.actually.displayed
+    English: '{reply_text}
+
+      Original request {reply_originalrequestid}
+
+      Reply
+      {reply_id} | Attempt {reply_attemptid}
+
+      Actually displayed {reply_displayed}
+
+      {reply_provenance}'
+  - Key: presentationview.opentimeline.timeline.scope.body.mode.this.view.cannot.create.marks
+    English: 'Mode {s_mode} | {attemptlifecycle_outcome_s}
+
+      This view cannot
+      create marks, approvals or evidence.'
+  - Key: presentationview.opentimeline.timeline.scope.heading.current.attempt
+    English: Current attempt {s_attemptid}
+  - Key: presentationview.opentitle.opentitle.caption.begin.practice
+    English: Begin practice
+  - Key: presentationview.opentitle.opentitle.caption.exit
+    English: Exit
+  - Key: presentationview.opentitle.opentitle.caption.settings
+    English: Settings
+  - Key: presentationview.opentitle.opentitle.heading.before.you.publish
+    English: Before You Publish
+  - Key: presentationview.opentitle.opentitle.status.authored.offline.english.available.arabic.and
+    English: Authored offline. English available. Arabic and voice unavailable.
+  - Key: presentationview.opentitle.title.intro.body.inspect.mark.revise.and.seek.exact
+    English: Inspect, mark, revise and seek exact-pair review or an owned hold.
+  - Key: presentationview.opentitle.title.intro.heading.fictional.practice
+    English: Fictional practice
+  - Key: presentationview.opentitle.title.presenter.caption.watch.the.authored.gameplay.walkthrough
+    English: Watch the authored gameplay walkthrough
+  - Key: presentationview.pause.pause.debrief.caption.view.practice.record
+    English: View practice record
+  - Key: presentationview.pause.pause.exit.caption.leave.the.simulation
+    English: Leave the simulation
+  - Key: presentationview.pause.pause.heading.paused
+    English: Paused
+  - Key: presentationview.pause.pause.linked.caption.start.linked.practice
+    English: Start linked practice
+  - Key: presentationview.pause.pause.reset.caption.full.reset
+    English: Full reset
+  - Key: presentationview.pause.pause.state.body.reading.typing.and.pausing.do.not
+    English: Reading, typing and pausing do not advance the logical clock. Pending
+      local responses wait. Your drafts and original request IDs stay in this attempt.
+  - Key: presentationview.pause.pause.state.heading.local.practice.is.paused
+    English: Local practice is paused
+  - Key: presentationview.pause.pause.status.simulation.time.no.countdown.or.time
+    English: Simulation time {localauthority_time_s_clockminute}. No countdown or
+      time grade.
+  - Key: presentationview.previewdomain.confirm.change.body.current.approval.is.missing.confirming.current.approval.is.missing.confirming.submits
+    English: Current approval is missing. Confirming submits an actual release request
+      to the gate. The cabinet stays closed unless this exact pair has accepted authority.
+  - Key: presentationview.previewdomain.confirm.change.body.i.accept.the.stated.next.action
+    English: I accept the stated next action and future time as the learner owner.
+      This is self-owned, not an NPC response. Unverified defect prose remains unverified.
+  - Key: presentationview.previewdomain.confirm.change.body.owner.next.action.basis.inspected.anchors
+    English: '{hold_defect}
+
+      Owner {hold_owner} | {hold_reviewat}
+
+      Next
+      action: {hold_nextaction}
+
+      Basis {hold_basis} | inspected anchors {hold_anchors}'
+  - Key: presentationview.previewdomain.confirm.change.body.requested.a.request.does.not.schedule
+    English: '{review_changesummary}
+
+      Requested {review_reviewby}. A request
+      does not schedule or approve.'
+  - Key: presentationview.previewdomain.confirm.change.body.this.will.request.publication.using.this.will.request.publication.using.the
+    English: This will request publication using the current exact approval receipt.
+      A changed pair or stale readset will reject the action.
+  - Key: presentationview.previewdomain.confirm.change.heading.release.this.exact.pair
+    English: Release this exact pair
+  - Key: presentationview.previewdomain.confirm.change.heading.review.proposal
+    English: Review proposal
+  - Key: presentationview.previewdomain.confirm.change.heading.your.explicit.commitment
+    English: Your explicit commitment
+  - Key: presentationview.previewdomain.confirm.scope.body.request.attempt.world.revision.task.sha
+    English: 'Request {envelope_commandid}
+
+      Attempt {envelope_attemptid}
+
+      World
+      revision {envelope_expectedworldrevision}
+
+      Task SHA-256 {s_task_digest}
+
+      Rubric
+      SHA-256 {s_rubric_digest}'
+  - Key: presentationview.previewdomain.confirm.scope.heading.exact.task.rubric
+    English: Exact Task {s_task_version} / Rubric {s_rubric_version}
+  - Key: presentationview.previewdomain.previewdomain.caption.i.confirm.my.commitment.i.confirm.my.commitment
+    English: I confirm my commitment
+  - Key: presentationview.previewdomain.previewdomain.caption.keep.editing
+    English: Keep editing
+  - Key: presentationview.previewdomain.previewdomain.heading.confirm.confirm
+    English: Confirm {kind}
+  - Key: presentationview.previewdomain.previewdomain.heading.confirm.self.ownership.confirm.self.ownership
+    English: Confirm self-ownership
+  - Key: presentationview.previewdomain.previewdomain.status.confirming.submits.this.original.staged.request
+    English: Confirming submits this original staged request once. Changed content
+      needs an explicit fresh preview.
+  - Key: presentationview.publicationlabel.return.hold.committed.unverified.hold.committed.hold.committed.unverified.hold.committed.unverified
+    English: 'Hold committed
+
+      Unverified'
+  - Key: presentationview.publicationlabel.return.hold.committed.unverified.hold.committed.hold.committed.unverified.hold.committed.unverified.inline
+    English: Hold committed (unverified)
+  - Key: presentationview.publicationlabel.return.hold.requested.hold.requested.hold.requested
+    English: Hold requested
+  - Key: presentationview.renderconversation.conversation.error.record.request.id.heading.preserved.request
+    English: Preserved request
+  - Key: presentationview.renderconversation.conversation.own.record.request.id.heading.authored.presenter.input.authored.presenter.input
+    English: Authored presenter input
+  - Key: presentationview.renderconversation.conversation.scope.body.ask.in.your.own.words.source
+    English: Ask in your own words. Source-bounded authored replies are available
+      for role, inspected sources, publication time and current approval. Unsupported
+      questions receive an unavailable reply. Conversation cannot grant approval.
+  - Key: presentationview.renderconversation.conversation.scope.heading.authored.offline
+    English: '{rolename_conversationrole} | authored offline'
+  - Key: presentationview.requesthelp.assign.current.status.text.help.shown.delivery.recorded.help.shown.delivery.recorded
+    English: 'Help shown. Delivery recorded: {help_id}'
+  - Key: presentationview.requesthelp.assign.current.status.text.unavailable.response.shown.no.strategy.unavailable.response.shown.no.strategy.supplied
+    English: Unavailable response shown. No strategy supplied.
+  - Key: presentationview.requesthelp.coach.identity.body.delivery.opportunity
+    English: 'Delivery {help_id}
+
+      Opportunity {help_opportunityid}
+
+      {value5}'
+  - Key: presentationview.requesthelp.coach.identity.body.value5.controls.or.recorded.facts.no.controls.or.recorded.facts.no.competence
+    English: Controls or recorded facts. No competence claim.
+  - Key: presentationview.requesthelp.coach.identity.body.value5.strategic.help.attributed.only.when.strategic.help.attributed.only.when.displayed
+    English: Strategic help, attributed only when displayed.
+  - Key: presentationview.requesthelp.coach.identity.heading.delivery.scope
+    English: Delivery scope
+  - Key: presentationview.requesthelp.coach.onramp.caption.reopen.controls
+    English: Reopen controls
+  - Key: presentationview.requesthelp.coach.reply.heading.help.unavailable.help.unavailable
+    English: Help unavailable
+  - Key: presentationview.requesthelp.coach.reply.heading.leena.requested.help.leena.requested.help
+    English: Leena | requested help
+  - Key: presentationview.requesthelp.requesthelp.status.requested.actual.rendering.is.acknowledged.separately
+    English: Requested. Actual rendering is acknowledged separately.
+  - Key: presentationview.rolename.return.colleague.colleague
+    English: Colleague
+  - Key: presentationview.rolename.return.module.reviewer.experiment.reviewer.experiment.reviewer.experiment.reviewer
+    English: Experiment reviewer
+  - Key: presentationview.rolename.return.module.reviewer.experiment.reviewer.module.reviewer.module.reviewer
+    English: Module reviewer
+  - Key: presentationview.sendconversation.sendconversation.message.resume.before.sending
+    English: Resume before sending.
+  - Key: presentationview.showauthority.authority.identity.body.original.request.reply.attempt
+    English: '{reply_provenance}
+
+      Original request {reply_originalrequestid}
+
+      Reply
+      {reply_id}
+
+      Attempt {reply_attemptid}'
+  - Key: presentationview.showauthority.authority.identity.heading.scoped.offline.reply
+    English: Scoped offline reply
+  - Key: presentationview.showauthority.showauthority.status.response.prepared.role.authority.is.admitted
+    English: Response prepared. Role authority is admitted only after actual display.
+  - Key: presentationview.showcommandreceipt.receipt.details.caption.hide.exact.receipt.details.hide.exact.receipt.details
+    English: Hide exact receipt details
+  - Key: presentationview.showcommandreceipt.receipt.details.caption.view.exact.receipt.details.view.exact.receipt.details
+    English: View exact receipt details
+  - Key: presentationview.showcommandreceipt.receipt.provenance.body.request.revision.to.task.sha.256
+    English: '{receipt_action} | {receipt_status} | {receipt_reasoncode}
+
+      Request
+      {receipt_requestid}
+
+      Revision {receipt_beforerevision} to {receipt_afterrevision}
+
+      Task
+      SHA-256 {context_pair_taskdigest}
+
+      Rubric SHA-256 {context_pair_rubricdigest}
+
+      Authority
+      {receipt_authority}
+
+      {displaydisclosure_receipt}'
+  - Key: presentationview.showcommandreceipt.receipt.provenance.heading.read.only.original.receipt
+    English: Read-only original receipt
+  - Key: presentationview.showcommandreceipt.showcommandreceipt.caption.return.to.preserved.draft.return.to.preserved.draft
+    English: Return to preserved draft
+  - Key: presentationview.showcommandreceipt.showcommandreceipt.status.authored.synthetic.demonstration.no.learner.authored.synthetic.demonstration.no.learner.evidence
+    English: Authored synthetic demonstration. No learner evidence.
+  - Key: presentationview.showcommandreceipt.showcommandreceipt.status.original.request.retained.operational.acceptance.original.request.retained.operational.acceptance.is
+    English: The original request is kept in your read-only history.
+  - Key: presentationview.showsettingstab.setting.access.body.visible.keyboard.focus.text.status.labels
+    English: Visible keyboard focus, text status labels and non-colour cues stay
+      on. All dialogue is readable text. Audio captions are unavailable because no
+      voice or sound cues are provided. Direct routes avoid travel precision.
+  - Key: presentationview.showsettingstab.setting.access.heading.required.accessibility.cues
+    English: Required accessibility cues
+  - Key: presentationview.showsettingstab.setting.audiogate.body.no.admitted.music.effects.or.voice
+    English: No admitted music, effects or voice clips are loaded by this UI. Separate
+      effects volume and voice playback are unavailable. Silent mode preserves all
+      text and status meaning.
+  - Key: presentationview.showsettingstab.setting.audiogate.heading.music.effects.and.voice
+    English: Music, effects and voice
+  - Key: presentationview.showsettingstab.setting.device.body.x.the.editor.controls.the.current
+    English: '{screen_width} x {screen_height} | {screen_fullscreenmode}
+
+      The
+      Editor controls the current viewport. Resolution, window-mode and brightness
+      overrides are unavailable here. No source-approved rendering default is invented.'
+  - Key: presentationview.showsettingstab.setting.device.heading.current.device.rendering
+    English: Current device rendering
+  - Key: presentationview.showsettingstab.setting.displaypolicy.body.camera.shake.and.head.bob.are
+    English: Camera shake and head bob are not used. Reduced motion is available
+      in Accessibility.
+  - Key: presentationview.showsettingstab.setting.displaypolicy.heading.stable.presentation
+    English: Stable presentation
+  - Key: presentationview.showsettingstab.setting.input.body.wasd.move.hold.right.mouse.look
+    English: 'WASD: move. Hold right mouse: look. E: inspect. Tab: direct routes
+      or next UI focus. Shift+Tab: previous focus. Enter or Space: activate. Escape:
+      back or pause. Wheel: focused scroll. Text Enter inserts a line break; use
+      Send to submit.'
+  - Key: presentationview.showsettingstab.setting.input.heading.keyboard.and.mouse
+    English: Keyboard and mouse
+  - Key: presentationview.showsettingstab.setting.language.body.english.is.the.current.interface.language
+    English: English is the current interface language. Arabic is pending terminology,
+      RTL, font, input and intent review. Arabic and voice input are unavailable.
+  - Key: presentationview.showsettingstab.setting.language.heading.english.available
+    English: English | Available
+  - Key: presentationview.showsettingstab.setting.remapgate.body.this.local.slice.uses.the.source
+    English: This local slice uses the source bindings. Remapping, controller input,
+      speech input and pointer pan are unavailable. Direct routes and native numeric
+      fields use the same domain commands.
+  - Key: presentationview.showsettingstab.setting.remapgate.heading.binding.changes.unavailable
+    English: Binding changes unavailable
+  - Key: presentationview.showsettingstab.showsettingstab.caption.reset.defaults
+    English: Reset defaults
+  - Key: presentationview.showsettingstab.showsettingstab.heading.settings
+    English: Settings | {value1}
+  - Key: presentationview.showsettingstab.showsettingstab.status.changes.are.staged.across.tabs.apply
+    English: Changes are staged across tabs. Apply saves anonymous device preferences
+      only. Cancel discards all staged changes.
+  - Key: presentationview.sidebarstate.return.task.rubric
+    English: 'Task {s_task_version} / Rubric {s_rubric_version}
+
+      {publicationlabel_s_publication_true}
+
+      {localauthority_time_s_clockminute}'
+  - Key: presentationview.start.write.your.own.help.request.label.write.your.own.help.request
+    English: Write your own help request...
+  - Key: presentationview.update.assign.workbench.leenastatus.text.offline
+    English: Offline | {value1}
+  - Key: presentationview.update.assign.workbench.leenastatus.text.value1.ask.leena.ask.leena
+    English: Ask Leena
+  - Key: presentationview.update.assign.workbench.leenastatus.text.value1.help.open.help.open
+    English: Help open
+  - Key: presentationview.updateconversationstatus.assign.current.status.text.task.rubric.offline.voice.unavailable
+    English: '{value0} | Task {s_task_version} / Rubric {s_rubric_version} | Offline.
+      Voice unavailable.'
+  - Key: presentationview.updateconversationstatus.assign.current.status.text.value0.draft.only.draft.only
+    English: Draft only
+  - Key: presentationview.updateconversationstatus.assign.current.status.text.value0.draft.retained.draft.retained
+    English: '{last_state}. Draft retained'
+  - Key: presentationview.updateconversationstatus.assign.text.receipt.receipt
+    English: Receipt
+  - Key: presenter.finding.detail
+    English: '{criterion} | {mark} / {maximum} authored marking hypothesis
+
+      Criterion:
+      {description}
+
+      Displayed rationale: {rationale}
+
+      Scoped finding:
+      {decision}. {reason}'
+  - Key: presenter.finding.source
+    English: '{passage}
+
+      Source {source} v1 | SHA-256 {sha}
+
+      Task 2 /
+      Rubric 2 | submitted {submitted}'
+  - Key: presenter.pause
+    English: Pause
+  - Key: presenter.starting
+    English: Starting
+  - Key: presenterroute.initialization.initialization.message.no.clear.collision.route.connects.the
+    English: No clear collision route connects the saved presenter anchors to {target_stationid}.
+      Inspect the authored route.
+  - Key: presenterrunner.enter.enter.message.the.expected.native.field.is.unavailable
+    English: 'The expected native field is unavailable: {step_control}'
+  - Key: presenterrunner.enter.w.list.full.mark.counterexample.body.20.saved.authored.hypothesis.under.task
+    English: '{s_drafttotal_w_list} / 20 saved authored hypothesis under Task {s_task_version}
+      / Rubric {s_rubric_version}.
+
+      Current evaluations: {s_currentevaluations}.
+      Naming and listing do not require comparison or a justified decision. O2 evaluation
+      remains unobserved.
+
+      Annotation receipts: {value8}'
+  - Key: presenterrunner.enter.w.list.full.mark.counterexample.heading.w.list.full.mark.counterexample
+    English: W_LIST | full-mark counterexample
+  - Key: presenterrunner.ready.ready.message.unknown.presenter.guard
+    English: 'Unknown presenter guard: {condition}'
+  - Key: presenterrunner.refreshdock.assign.commentary.text.buyer.commentary
+    English: 'Buyer commentary
+
+      {currentstep_buyercommentary}'
+  - Key: presenterrunner.refreshdock.assign.status.text.authored.offline.no.evidence.authored.offline.no.evidence
+    English: AUTHORED / OFFLINE | no evidence
+  - Key: presenterrunner.refreshdock.assign.status.text.authored.offline.paused.draft.retained.authored.offline.paused.draft.retained.no
+    English: 'AUTHORED / OFFLINE
+
+      Paused. Draft retained.
+
+      No learner
+      evidence'
+  - Key: presenterrunner.refreshdock.assign.status.text.synthetic.authored.offline.no.learner.evidence
+    English: 'SYNTHETIC / AUTHORED / OFFLINE
+
+      {label}
+
+      {value3}No learner
+      evidence'
+  - Key: presenterrunner.refreshdock.assign.status.text.value3.s.m.s.m
+    English: '{presentedseconds_0_0}s | {travelledmetres_0_0}m | '
+  - Key: presenterrunner.refreshdock.assign.string.label.complete.return.to.your.practice.complete.return.to.your.practice
+    English: Complete. Return to your practice.
+  - Key: presenterrunner.refreshdock.assign.string.label.paused.draft.and.step.retained.paused.draft.and.step.retained.paused.draft.and.step.retained
+    English: Paused. Draft and step retained.
+  - Key: presenterrunner.refreshdock.assign.text.resume.resume
+    English: Resume
+  - Key: presenterrunner.require.require.message.the.expected.native.control.or.response
+    English: 'The expected native control or response is unavailable: {control}'
+  - Key: presenterrunner.startsequence.startsequence.message.bind.the.saved.presenter.sequence.and
+    English: Bind the saved presenter sequence and native campus UI.
+  - Key: presenterrunner.startsequence.startsequence.message.finish.text.composition.before.starting.the
+    English: Finish text composition before starting the walkthrough.
+  - Key: presenterrunner.tick.tick.message.actual.range.inspection.did.not.reach
+    English: Actual range inspection did not reach the intended saved station.
+  - Key: presenterrunner.tick.tick.message.movement.did.not.reach.the.saved
+    English: Movement did not reach the saved station. Check the collision route.
+  - Key: presenterrunner.tick.tick.message.the.actual.rendered.reply.was.not
+    English: The actual rendered reply was not delivered. No synthetic authority
+      was inferred.
+  - Key: presenterrunner.tick.tick.message.the.authored.sequence.document.attempt.or
+    English: The authored sequence, document, attempt or native surface changed.
+      Walkthrough stopped safely.
+  - Key: presenterrunner.tick.tick.message.the.automated.native.draft.changed.outside
+    English: The automated native draft changed outside its input driver.
+  - Key: presenterrunner.tick.tick.message.the.presenter.step.s.required.version
+    English: The presenter step's required version guard changed.
+  - Key: presenterrunner.tick.walkthrough.stopped.safely.lasterror.status.walkthrough.stopped.safely
+    English: 'Walkthrough stopped safely: {lasterror}'
+  - Key: presenterrunner.type.type.message.native.typing.focus.changed.the.draft
+    English: Native typing focus changed. The draft was preserved.
+  - Key: presenterscenarioscope.validate.validate.message.display.both.exact.authored.retests.before
+    English: Display both exact authored retests before the separate publication
+      decision.
+  - Key: presenterscenarioscope.validate.validate.message.the.exact.authored.presenter.document.scope
+    English: The exact authored presenter document scope changed. No synthetic response
+      was admitted.
+  - Key: presenterscenarioscope.validate.validate.message.the.exact.authored.work.annotation.or
+    English: The exact authored work, annotation or rationale scope changed. Findings
+      are unavailable.
+  - Key: presentersurfacebridge.displaydisclosure.return.authored.synthetic.enactment.through.the.authored.synthetic.enactment.through.the.command
+    English: Authored synthetic enactment through the {receipt_authority} command
+      route. No learner action or evidence.
+  - Key: presentersurfacebridge.showpresenterbrief.presenter.disclosure.body.this.run.operates.the.same.movement
+    English: This run operates the same movement, native fields, previews and commands
+      as manual practice. Its repair, marks, findings and role decisions are authored
+      demonstration content, never your work or learner evidence. No AI or live service
+      is connected.
+  - Key: presentersurfacebridge.showpresenterbrief.presenter.disclosure.heading.synthetic.authored.and.offline
+    English: Synthetic, authored and offline
+  - Key: presentersurfacebridge.showpresenterbrief.presenter.handback.body.the.walkthrough.uses.a.fresh.isolated
+    English: The walkthrough uses a fresh isolated Presenter session. Returning restores
+      your own session, drafts and prior workspace. Direct routes preserve the same
+      decisions and receipts.
+  - Key: presentersurfacebridge.showpresenterbrief.presenter.handback.heading.your.current.local.work.is.preserved
+    English: Your current local work is preserved
+  - Key: presentersurfacebridge.showpresenterbrief.presenter.pacing.body.the.source.presentation.target.is.90
+    English: The source presentation target is 90 seconds. Full progressive typing,
+      readable replies and campus travel take longer. Pace and dwell are editable
+      in the saved Walkthrough asset. Pause, return to your practice, restart and
+      exit remain available throughout.
+  - Key: presentersurfacebridge.showpresenterbrief.presenter.pacing.heading.full.visible.causal.sequence
+    English: Full visible causal sequence
+  - Key: presentersurfacebridge.showpresenterbrief.showpresenterbrief.caption.direct.reduced.motion
+    English: Direct / reduced motion
+  - Key: presentersurfacebridge.showpresenterbrief.showpresenterbrief.caption.start.walkthrough
+    English: Start walkthrough
+  - Key: presentersurfacebridge.showpresenterbrief.showpresenterbrief.heading.authored.gameplay.walkthrough
+    English: Authored gameplay walkthrough
+  - Key: presentersurfacebridge.showpresenterbrief.showpresenterbrief.status.authored.demonstration.no.learner.evidence.or
+    English: Authored demonstration. No learner evidence or measured learning claim.
+  - Key: presentersurfacebridge.showpresenterfinding.presenter.finding.i.heading.exact.authored.demonstration
+    English: '{work} | exact authored demonstration'
+  - Key: presentersurfacebridge.showpresenterfinding.showpresenterfinding.heading.experiment.reviewer.authored.finding
+    English: Experiment reviewer | authored finding
+  - Key: presentersurfacebridge.showpresenterfinding.showpresenterfinding.status.prepared.synthetic.finding.actual.display.is
+    English: Prepared synthetic finding. Actual display is acknowledged separately.
+      This is not publication approval.
+  - Key: presentersurfacebridge.showpresenterobservation.presenter.observation.heading.authored.demonstration.actual.local.records
+    English: Authored demonstration | actual local records
+  - Key: presentersurfacebridge.showpresenterobservation.showpresenterobservation.status.synthetic.presenter.content.no.learner.evidence
+    English: Synthetic presenter content. No learner evidence. Inspect the exact
+      recorded IDs and versions.
+  - Key: publicationcabinetprojection.lateupdate.assign.status.text.task.rubric
+    English: 'Task {s_task_version} / Rubric {s_rubric_version}
+
+      {value5}'
+  - Key: publicationcabinetprojection.lateupdate.assign.status.text.value5.locked.earlier.approval.locked.unknown.locked.earlier.approval.locked.earlier.approval
+    English: Locked | earlier approval
+  - Key: publicationcabinetprojection.lateupdate.assign.status.text.value5.locked.earlier.approval.locked.unknown.locked.unknown.hold.closed.publication.hold.closed.publication.locked.hold.closed.hold.closed
+    English: Hold | closed
+  - Key: publicationcabinetprojection.lateupdate.assign.status.text.value5.locked.earlier.approval.locked.unknown.locked.unknown.hold.closed.publication.hold.closed.publication.locked.publication.locked.publication.locked
+    English: Publication locked
+  - Key: publicationcabinetprojection.lateupdate.assign.status.text.value5.locked.earlier.approval.locked.unknown.locked.unknown.hold.closed.publication.locked.unknown.locked.unknown
+    English: Locked | unknown
+  - Key: publicationcabinetprojection.lateupdate.assign.status.text.value5.released.released
+    English: Released
+  - Key: receipt.accepted.body
+    English: The operational request for {pair} was accepted. No additional semantic
+      or competence claim is implied.
+  - Key: receipt.accepted.heading
+    English: Request recorded
+  - Key: receipt.attention
+    English: Request needs attention
+  - Key: receipt.hold.accept.body
+    English: The response concerns {pair}. Inspect the actual hold state and its
+      owner, time and next action. A hold is not publication approval.
+  - Key: receipt.hold.owner.heading
+    English: Owner response recorded
+  - Key: receipt.hold.request.body
+    English: The hold proposal for {pair} was recorded. Owner acceptance is still
+      separate. Publication has not been approved.
+  - Key: receipt.hold.request.heading
+    English: Hold proposed
+  - Key: receipt.hold.self.heading
+    English: Your commitment recorded
+  - Key: receipt.hold.time.future
+    English: Choose a hold review time later than the current logical time. Your
+      draft is retained.
+  - Key: receipt.pair.mismatch
+    English: This request refers to a different task or rubric version. The original
+      request is for {pair}. Your draft is retained.
+  - Key: receipt.rejected
+    English: The request for {pair} was not accepted. Your draft and original request
+      are retained. Inspect the exact receipt details before creating a fresh preview.
+  - Key: receipt.release.body
+    English: Publication was accepted for the exact approved {pair}. This release
+      is retained in the read-only history.
+  - Key: receipt.release.different.approval
+    English: Release was not accepted for {pair}. The recorded approval covers {approved_pair}.
+      Obtain a separate review of the exact current pair before release.
+  - Key: receipt.release.heading
+    English: Release recorded
+  - Key: receipt.release.no.approval
+    English: Release was not accepted for {pair}. No exact current approval is recorded.
+  - Key: receipt.review.approved.heading
+    English: Requested pair approved
+  - Key: receipt.review.decision.body
+    English: 'This decision applies to {pair}.
+
+      {reason}'
+  - Key: receipt.review.request.body
+    English: Your review request for {pair} was recorded. A time slot and a review
+      decision are separate responses. No approval has been granted.
+  - Key: receipt.review.request.heading
+    English: Review requested
+  - Key: receipt.review.returned.heading
+    English: Requested pair returned
+  - Key: receipt.review.summary.required
+    English: Add your change summary before requesting review. Your draft is retained.
+  - Key: receipt.review.time.window
+    English: Choose a review time from 13:40 to 14:00, no earlier than the current
+      logical time. Your draft is retained.
+  - Key: receipt.schedule.accepted.body
+    English: The review of {pair} is scheduled for {time}. Scheduling grants no publication
+      approval.
+  - Key: receipt.schedule.accepted.heading
+    English: Review time accepted
+  - Key: receipt.schedule.denied.body
+    English: The requested slot for {pair} was declined. No time slot or approval
+      was recorded.
+  - Key: receipt.schedule.denied.heading
+    English: Review time declined
+  - Key: receipt.schedule.unavailable.body
+    English: A review slot for {pair} was unavailable. No time slot or approval was
+      recorded.
+  - Key: receipt.schedule.unavailable.heading
+    English: Review time unavailable
+  - Key: receipt.unresolved
+    English: Request outcome unresolved
+  - Key: receipt.unresolved.body
+    English: The outcome for {pair} is not confirmed. Keep the original request and
+      inspect its details before retrying.
+  - Key: record.recorded
+    English: Recorded
+  - Key: review.approved.body
+    English: This exact current pair has an approval. Preview release to submit the
+      separate publication request.
+  - Key: review.denied.body
+    English: The review request was declined. No time slot or approval was recorded.
+  - Key: review.held.body
+    English: The work is held with an accepted owner, review time and next action.
+      The defect remains unresolved. Publication is closed.
+  - Key: review.hold.requested.body
+    English: A hold has been proposed. Inspect the actual owner response or confirm
+      your own commitment. No acceptance or publication approval is inferred.
+  - Key: review.packet.interrupted
+    English: Handling stopped; requests retained.
+  - Key: review.packet.reduced
+    English: Recorded request; motion reduced.
+  - Key: review.pending.body
+    English: The current pair has been requested for review. A slot is not yet accepted
+      and no approval is recorded.
+  - Key: review.released.body
+    English: Release is recorded for this exact current pair. Its approval and release
+      receipts remain in the read-only history.
+  - Key: review.returned.body
+    English: The requested pair was returned. Read the actual reason, revise the
+      documents and request a review of the new exact pair.
+  - Key: review.scheduled.body
+    English: A review time is accepted for the current pair. The review decision
+      is separate. No publication approval is recorded.
+  - Key: review.self.hold.body
+    English: Your self-owned commitment is recorded. The stated defect remains unverified.
+      This is not an NPC acceptance or publication approval.
+  - Key: review.stale.approval.body
+    English: The approval covers {approved_pair}. The current {current_pair} requires
+      a separate review before release.
+  - Key: review.stale.body
+    English: The current documents need a new exact-pair review. Earlier review records
+      remain in history.
+  - Key: review.unavailable.body
+    English: A review response is unavailable. The original request is retained.
+      No approval is inferred.
+  - Key: review.unknown.body
+    English: The review outcome is not confirmed. Inspect the original request and
+      receipt before retrying.
+  - Key: review.unrequested.body
+    English: Request a review of the exact current task and rubric. Scheduling, review
+      decisions and release are separate actions.
+  - Key: role.colleague
+    English: Colleague
+  - Key: role.experiment.reviewer
+    English: Experiment reviewer
+  - Key: role.learner
+    English: Learner
+  - Key: role.module.reviewer
+    English: Module reviewer
+  - Key: saved.coach.clear
+    English: Cancel request
+  - Key: saved.coach.send
+    English: Send
+  - Key: saved.coach.tab.controls
+    English: Controls
+  - Key: saved.coach.tab.recorded.attempt
+    English: Recorded attempt
+  - Key: saved.coach.tab.requested.strategy
+    English: Requested strategy
+  - Key: saved.conversation.send
+    English: Send
+  - Key: saved.conversation.tab.colleague
+    English: Colleague
+  - Key: saved.conversation.tab.experiment.reviewer
+    English: Experiment reviewer
+  - Key: saved.conversation.tab.module.reviewer
+    English: Module reviewer
+  - Key: saved.hud.history
+    English: History
+  - Key: saved.hud.notebook
+    English: Notebook
+  - Key: saved.hud.pause
+    English: Pause
+  - Key: saved.hud.routes
+    English: Routes
+  - Key: saved.hud.title
+    English: Before You Publish
+  - Key: saved.leena.identity
+    English: Leena | AI coach
+  - Key: saved.setting.contrast
+    English: High contrast labels
+  - Key: saved.setting.master
+    English: Master volume
+  - Key: saved.setting.motion
+    English: Reduce motion
+  - Key: saved.setting.silent
+    English: Silent mode
+  - Key: saved.setting.textSize
+    English: Text size
+  - Key: saved.setting.toggle
+    English: On / off
+  - Key: saved.settings.tab.accessibility
+    English: Accessibility
+  - Key: saved.settings.tab.audio
+    English: Audio
+  - Key: saved.settings.tab.display
+    English: Display
+  - Key: saved.settings.tab.input
+    English: Input
+  - Key: saved.settings.tab.language
+    English: Language
+  - Key: saved.station.archive
+    English: Source archive
+  - Key: saved.station.experiment
+    English: Experiment table
+  - Key: saved.station.review
+    English: Review and publication
+  - Key: saved.station.studio
+    English: Task and rubric folios
+  - Key: saved.surface.close
+    English: Back
+  - Key: saved.talk.launcher
+    English: Talk to a role
+  - Key: saved.workspace.close
+    English: X
+  - Key: saved.world.assessment.studio.sign
+    English: Assessment studio
+  - Key: saved.world.review.publication.sign
+    English: Module lead
+  - Key: saved.world.source.archive.sign
+    English: SOURCE ARCHIVE
+  - Key: selectedcriterionlane.refresh.assign.identity.text.select.a.criterion.lane.select.a.criterion.lane
+    English: SELECT A CRITERION LANE
+  - Key: selectedcriterionlane.refresh.assign.identity.text.selected.lane.earlier.selection.value0.earlier.selection.earlier.selection
+    English: 'EARLIER SELECTION  '
+  - Key: selectedcriterionlane.refresh.assign.identity.text.selected.lane.earlier.selection.value0.selected.lane.selected.lane
+    English: 'SELECTED LANE  '
+  - Key: selectedcriterionlane.refresh.assign.mark.text.no.current.mark.no.current.mark
+    English: No current mark
+  - Key: selectedcriterionlane.refresh.assign.mark.text.unmarked.maximum.draft.hypothesis.draft.hypothesis.draft.hypothesis
+    English: 'Draft hypothesis: {annotation_content_marks} / {criterion_marks}'
+  - Key: selectedcriterionlane.refresh.assign.mark.text.unmarked.maximum.draft.hypothesis.unmarked.maximum.unmarked.maximum
+    English: Unmarked | maximum {criterion_marks}
+  - Key: selectedcriterionlane.refresh.assign.pairidentity.task.rubric
+    English: Task {m_taskversion} / Rubric {m_rubricversion}
+  - Key: settings.apply
+    English: Apply
+  - Key: settings.tab.accessibility
+    English: Accessibility
+  - Key: settings.tab.audio
+    English: Audio
+  - Key: settings.tab.display
+    English: Display
+  - Key: settings.tab.input
+    English: Input
+  - Key: settings.tab.language
+    English: Language
+  - Key: snapshots.initialization.assign.status.unverified.learner.hypothesis.or.operational.act
+    English: Unverified learner hypothesis or operational act
+  - Key: speaker.you
+    English: You
+  - Key: state.ActorRole.Colleague
+    English: Colleague
+  - Key: state.ActorRole.ExperimentReviewer
+    English: Experiment Reviewer
+  - Key: state.ActorRole.GroundedEvaluator
+    English: Grounded Evaluator
+  - Key: state.ActorRole.Learner
+    English: Learner
+  - Key: state.ActorRole.ModuleLead
+    English: Module Lead
+  - Key: state.ActorRole.RecipientChannel
+    English: Recipient Channel
+  - Key: state.ActorRole.ScenarioController
+    English: Scenario Controller
+  - Key: state.HoldDefectBasis.MissingDecisionContext
+    English: Missing Decision Context
+  - Key: state.HoldDefectBasis.MissingSourceAttachments
+    English: Missing Source Attachments
+  - Key: state.HoldDefectBasis.PerQuestionMarksMismatch
+    English: Per Question Marks Mismatch
+  - Key: state.HoldDefectBasis.ReviewedInterpretation
+    English: Reviewed Interpretation
+  - Key: state.HoldDefectBasis.Unverified
+    English: Unverified
+  - Key: state.PublicationStatus.Draft
+    English: Draft
+  - Key: state.PublicationStatus.Held
+    English: Held
+  - Key: state.PublicationStatus.HoldCommittedUnverified
+    English: Hold Committed Unverified
+  - Key: state.PublicationStatus.HoldRequested
+    English: Hold Requested
+  - Key: state.PublicationStatus.Released
+    English: Released
+  - Key: state.PublicationStatus.Stale
+    English: Stale
+  - Key: state.ReplyState.Cancelled
+    English: Cancelled
+  - Key: state.ReplyState.Failed
+    English: Failed
+  - Key: state.ReplyState.Ready
+    English: Ready
+  - Key: state.ReplyState.Sending
+    English: Sending
+  - Key: state.ReplyState.Shown
+    English: Shown
+  - Key: state.ReplyState.Stale
+    English: Stale
+  - Key: state.ReplyState.Unavailable
+    English: Unavailable
+  - Key: state.ReviewStatus.Approved
+    English: Approved
+  - Key: state.ReviewStatus.Denied
+    English: Denied
+  - Key: state.ReviewStatus.Pending
+    English: Pending
+  - Key: state.ReviewStatus.Returned
+    English: Returned
+  - Key: state.ReviewStatus.Scheduled
+    English: Scheduled
+  - Key: state.ReviewStatus.Stale
+    English: Stale
+  - Key: state.ReviewStatus.Unavailable
+    English: Unavailable
+  - Key: state.ReviewStatus.Unknown
+    English: Unknown
+  - Key: state.ReviewStatus.Unrequested
+    English: Unrequested
+  - Key: workbenchmodel.confirmpending.confirmpending.message.preview.the.change.first
+    English: Preview the change first.
+  - Key: workbenchmodel.markproblem.return.enter.a.whole.number.mark.from
+    English: Enter a whole-number mark from 0 to {mark_maximum}.
+  - Key: workbenchmodel.markproblem.return.select.an.inspected.work.passage.and
+    English: Select an inspected work passage and criterion.
+  - Key: workbenchmodel.markproblem.return.this.draft.belongs.to.an.earlier
+    English: This draft belongs to an earlier pair. Reopen the work against the current
+      criteria.
+  - Key: workbenchmodel.markproblem.return.write.your.own.rationale.before.saving
+    English: Write your own rationale before saving.
+  - Key: workbenchmodel.openmark.openmark.message.inspect.the.current.criterion.at.the
+    English: Inspect the current criterion at the task and rubric folios first.
+  - Key: workbenchmodel.openmark.openmark.message.inspect.this.work.at.the.experiment
+    English: Inspect this work at the experiment table first.
+  - Key: workbenchmodel.opportunityforwork.opportunityforwork.message.unknown.authored.work.opportunity
+    English: Unknown authored work opportunity.
+  - Key: workbenchmodel.outcomes.outcomes.message.outcomes.must.be.o1.o2.or
+    English: Outcomes must be O1, O2, or O1,O2 without duplicates.
+  - Key: workbenchmodel.previewrubric.previewrubric.message.change.the.rubric.before.creating.a
+    English: Change the rubric before creating a new edition.
+  - Key: workbenchmodel.previewrubric.previewrubric.message.criteria.must.total.as.in.the
+    English: '{q_id} criteria must total {q_marks}, as in the current task.'
+  - Key: workbenchmodel.previewrubric.previewrubric.message.criterion.ids.must.be.unique
+    English: Criterion IDs must be unique.
+  - Key: workbenchmodel.previewrubric.previewrubric.message.each.criterion.outcome.must.belong.to
+    English: Each criterion outcome must belong to its current question.
+  - Key: workbenchmodel.previewrubric.previewrubric.message.every.criterion.needs.a.unique.id
+    English: Every criterion needs a unique ID, description and nonnegative whole-number
+      mark.
+  - Key: workbenchmodel.previewrubric.previewrubric.message.rubric.draft.is.historical.keep.a
+    English: Rubric draft is historical. Keep a copy of your text, then load the
+      current rubric explicitly.
+  - Key: workbenchmodel.previewrubric.previewrubric.message.use.q1.or.q2.and.reconcile
+    English: Use Q1 or Q2 and reconcile the total to 20.
+  - Key: workbenchmodel.previewtask.previewtask.message.attach.inspected.s.a.and.s
+    English: Attach inspected S_A and S_B and write your decision context.
+  - Key: workbenchmodel.previewtask.previewtask.message.both.question.texts.are.required.marks
+    English: Both question texts are required. Marks must be nonnegative and total
+      20.
+  - Key: workbenchmodel.previewtask.previewtask.message.change.the.task.before.creating.a
+    English: Change the task before creating a new edition.
+  - Key: workbenchmodel.previewtask.previewtask.message.inspect.selected.source.attachments.at.the
+    English: Inspect selected source attachments at the archive first.
+  - Key: workbenchmodel.previewtask.previewtask.message.task.draft.is.historical.keep.a
+    English: Task draft is historical. Keep a copy of your text, then load the current
+      task explicitly.
+  - Key: workbenchmodel.wholenumber.wholenumber.message.use.whole.numbers.for.marks
+    English: Use whole numbers for marks.
+  - Key: workbenchview.applyinterfacescale.assign.text.read.context
+    English: Read context
+  - Key: workbenchview.applyinterfacescale.assign.text.text
+    English: Text {mathf_roundtoint_scale_100}%
+  - Key: workbenchview.commitpreview.assign.secondarytext.text.inspect.current.edition
+    English: Inspect current edition
+  - Key: workbenchview.guard.assign.message.text.finish.composing.text.before.this.action
+    English: Finish composing text before this action.
+  - Key: workbenchview.input.assign.message.text.draft.retained.locally.preview.before.committing
+    English: Draft retained locally. Preview before committing.
+  - Key: workbenchview.openhistory.history.annotation.a.id.body.task.rubric.revision.mark
+    English: 'Task {a_pair_taskversion} / Rubric {a_pair_rubricversion} | revision
+      {a_revision} | mark {a_content_marks}
+
+      {a_content_rationale}'
+  - Key: workbenchview.openhistory.history.annotation.a.id.heading.value0.current.hypothesis.current.hypothesis
+    English: Current hypothesis
+  - Key: workbenchview.openhistory.history.annotation.a.id.heading.value0.historical.annotation.historical.annotation
+    English: Historical annotation
+  - Key: workbenchview.openhistory.history.current.body.publication.review.current.annotations.current.grounded
+    English: 'Publication: {s_publication}. Review: {s_reviewstatus}. Current annotations:
+      {s_currentannotations}. Current grounded evaluations: {s_currentevaluations}.'
+  - Key: workbenchview.openhistory.history.current.heading.current.task.rubric
+    English: Current Task {s_task_version} / Rubric {s_rubric_version}
+  - Key: workbenchview.openhistory.history.rubric.r.version.body.item.marks
+    English: '{c_id} | {c_questionid} | {c_marks} marks | {value6}'
+  - Key: workbenchview.openhistory.history.rubric.r.version.body.item.value6.not.inspected.open.at.the.not.inspected.open.at.the.rubric
+    English: Not inspected. Open at the rubric folios.
+  - Key: workbenchview.openhistory.history.rubric.r.version.heading.rubric
+    English: Rubric {r_version}{value2}
+  - Key: workbenchview.openhistory.history.task.t.version.body.context
+    English: '{value0}
+
+      Context: {value2}'
+  - Key: workbenchview.openhistory.history.task.t.version.body.value0.item.marks
+    English: '{q_id} | {q_marks} marks | {value4}'
+  - Key: workbenchview.openhistory.history.task.t.version.body.value0.item.value4.not.inspected.open.at.the.not.inspected.open.at.the.task
+    English: Not inspected. Open at the task folios.
+  - Key: workbenchview.openhistory.history.task.t.version.body.value2.not.supplied.not.supplied
+    English: Not supplied
+  - Key: workbenchview.openhistory.history.task.t.version.heading.task
+    English: Task {t_version}{value2}
+  - Key: workbenchview.openhistory.history.task.t.version.heading.value2.current.current
+    English: ' | Current'
+  - Key: workbenchview.openhistory.history.task.t.version.heading.value2.historical.historical
+    English: ' | Historical'
+  - Key: workbenchview.openhistory.history.total.work.body.your.marking.hypothesis.a.full.total
+    English: Your marking hypothesis. A full total does not establish evaluation
+      or publication approval.
+  - Key: workbenchview.openhistory.history.total.work.heading.current.saved.draft.total.20
+    English: '{work} | current saved draft total {s_drafttotal_work} / 20'
+  - Key: workbenchview.openhistory.openhistory.heading.current.pair.and.immutable.history
+    English: Current pair and immutable history
+  - Key: workbenchview.openmark.criterion.questionid.criterionid.maximum.criterion.marks.heading.maximum
+    English: '{criterion_questionid} | {criterionid} | maximum {criterion_marks}'
+  - Key: workbenchview.openmark.mark.criterion.heading.current.criterion.maximum
+    English: Current criterion | maximum {criterion_marks}
+  - Key: workbenchview.openmark.mark.marks.label.value0.authored.numeric.mark.0.to.authored.numeric.mark.0.to
+    English: 'Authored numeric mark, 0 to '
+  - Key: workbenchview.openmark.mark.marks.label.value0.your.numeric.mark.0.to.your.numeric.mark.0.to
+    English: 'Your numeric mark, 0 to '
+  - Key: workbenchview.openmark.mark.rationale.label.authored.demonstration.rationale.authored.demonstration.rationale
+    English: Authored demonstration rationale
+  - Key: workbenchview.openmark.mark.rationale.label.your.rationale.your.rationale
+    English: Your rationale
+  - Key: workbenchview.openmark.mark.scope.body.saving.records.your.exact.passage.criterion
+    English: Saving records your exact passage, criterion, mark and own rationale.
+      It does not validate evaluation or approve publication.
+  - Key: workbenchview.openmark.mark.scope.heading.draft.hypothesis
+    English: Draft hypothesis
+  - Key: workbenchview.openmark.openmark.heading.assign.passage.and.mark
+    English: Assign passage and mark
+  - Key: workbenchview.openmark.openmark.primary.caption.save.annotation
+    English: Save annotation
+  - Key: workbenchview.openmark.openmark.secondary.caption.back.to.work
+    English: Back to work
+  - Key: workbenchview.openmark.work.inspected.passage.heading.inspected.passage
+    English: '{work} | inspected passage'
+  - Key: workbenchview.opennotebook.notebook.intro.body.these.are.your.inspected.passages.these.are.your.inspected.passages.with
+    English: These are your inspected passages, with their original identities. Earlier
+      document editions remain labelled by version.
+  - Key: workbenchview.opennotebook.notebook.intro.body.your.notebook.is.empty.inspect.your.notebook.is.empty.inspect.a
+    English: Your notebook is empty. Inspect a passage at a campus station.
+  - Key: workbenchview.opennotebook.notebook.intro.heading.permitted.content.only
+    English: Permitted content only
+  - Key: workbenchview.opennotebook.notebook.passage.reference.sourceid.heading.v
+    English: '{passage_reference_sourceid} | v{passage_reference_version}'
+  - Key: workbenchview.opennotebook.opennotebook.heading.inspected.notebook
+    English: Inspected notebook
+  - Key: workbenchview.openreview.review.history.caption.inspect.current.pair.and.history
+    English: Inspect current pair and history
+  - Key: workbenchview.openreview.review.scope.body.task.rubric.review.publication.the.cabinet
+    English: 'Task {s_task_version} / Rubric {s_rubric_version}
+
+      Review: {s_reviewstatus}
+
+      Publication:
+      {s_publication}
+
+      The cabinet stays closed until an accepted current release.
+      Offline authority dialogue is not available in this slice.'
+  - Key: workbenchview.openreview.review.scope.heading.current.pair
+    English: Current pair
+  - Key: workbenchview.openroutes.openroutes.heading.campus.routes
+    English: Campus routes
+  - Key: workbenchview.openroutes.openroutes.primary.caption.return.to.campus
+    English: Return to campus
+  - Key: workbenchview.openroutes.route.history.caption.open.version.history
+    English: Open version history
+  - Key: workbenchview.openroutes.route.notebook.caption.open.inspected.notebook
+    English: Open inspected notebook
+  - Key: workbenchview.openroutes.routes.intro.body.direct.routes.reach.the.same.station
+    English: Direct routes reach the same station, inspection and controls. Travel
+      carries no assessment credit.
+  - Key: workbenchview.openroutes.routes.intro.heading.choose.a.destination
+    English: Choose a destination
+  - Key: workbenchview.openrubric.key.id.label.criterion.id
+    English: Criterion ID
+  - Key: workbenchview.openrubric.key.marks.label.maximum.marks
+    English: Maximum marks
+  - Key: workbenchview.openrubric.key.outcomes.label.outcome.ids
+    English: Outcome IDs
+  - Key: workbenchview.openrubric.key.question.label.question.id.q1.or.q2
+    English: Question ID (Q1 or Q2)
+  - Key: workbenchview.openrubric.key.remove.caption.remove.criterion
+    English: Remove criterion {c_id}
+  - Key: workbenchview.openrubric.key.text.label.criterion.description
+    English: Criterion description
+  - Key: workbenchview.openrubric.openrubric.heading.rubric.editor.authored.demonstration.rubric.editor.authored.demonstration
+    English: Rubric editor | authored demonstration
+  - Key: workbenchview.openrubric.openrubric.heading.rubric.editor.own.draft.rubric.editor.own.draft
+    English: Rubric editor | own draft
+  - Key: workbenchview.openrubric.openrubric.message.open.each.current.criterion.passage.before
+    English: Open each current criterion passage before editing.
+  - Key: workbenchview.openrubric.openrubric.primary.caption.preview.rubric
+    English: Preview rubric
+  - Key: workbenchview.openrubric.rubric.add.caption.add.empty.criterion
+    English: Add empty criterion
+  - Key: workbenchview.openrubric.rubric.allocation.body.total.20
+    English: '{value0} | Total 20'
+  - Key: workbenchview.openrubric.rubric.allocation.heading.current.task.allocation
+    English: Current task allocation
+  - Key: workbenchview.openrubric.rubric.base.body.free.descriptions.and.allocations.each.question
+    English: 'Free descriptions and allocations. Each question must reconcile to
+      its current task marks. Outcomes: O1, O2 or O1,O2.'
+  - Key: workbenchview.openrubric.rubric.base.heading.editing.rubric
+    English: Editing Rubric {d_baseversion}
+  - Key: workbenchview.openrubric.rubric.reload.caption.load.current.rubric.replace.this.local
+    English: Load current rubric (replace this local draft)
+  - Key: workbenchview.opensourcelist.editor.rubric.caption.edit.full.rubric
+    English: Edit full rubric
+  - Key: workbenchview.opensourcelist.editor.task.caption.edit.full.task
+    English: Edit full task
+  - Key: workbenchview.opensourcelist.inspect.id.caption.value1.inspected.inspected
+    English: '  |  Inspected'
+  - Key: workbenchview.opensourcelist.inspect.id.caption.value1.open.open
+    English: '  |  Open'
+  - Key: workbenchview.opensourcelist.sources.intro.body.only.the.passage.you.open.is
+    English: Only the passage you open is admitted to your notebook. Inspection itself
+      is not evidence of understanding.
+  - Key: workbenchview.opensourcelist.sources.intro.heading.inspect.a.literal.passage
+    English: Inspect a literal passage
+  - Key: workbenchview.opensourcelist.studio.experiment.caption.go.to.the.experiment.table
+    English: Go to the experiment table
+  - Key: workbenchview.opentask.opentask.heading.task.editor.authored.demonstration.task.editor.authored.demonstration
+    English: Task editor | authored demonstration
+  - Key: workbenchview.opentask.opentask.heading.task.editor.own.draft.task.editor.own.draft
+    English: Task editor | own draft
+  - Key: workbenchview.opentask.opentask.message.open.both.current.task.passages.before
+    English: Open both current task passages before editing.
+  - Key: workbenchview.opentask.opentask.primary.caption.preview.task
+    English: Preview task
+  - Key: workbenchview.opentask.opentask.secondary.caption.cancel.keep.draft
+    English: Cancel / keep draft
+  - Key: workbenchview.opentask.task.archive.caption.inspect.sources.at.archive.draft.retained
+    English: Inspect sources at archive (draft retained)
+  - Key: workbenchview.opentask.task.attach.id.caption.value0.attached.attached
+    English: 'Attached: '
+  - Key: workbenchview.opentask.task.attach.id.caption.value0.not.attached.not.attached
+    English: 'Not attached: '
+  - Key: workbenchview.opentask.task.attach.id.caption.value2.inspect.at.archive.first.inspect.at.archive.first
+    English: ' | Inspect at archive first'
+  - Key: workbenchview.opentask.task.attach.id.caption.value2.toggle.toggle
+    English: ' | Toggle'
+  - Key: workbenchview.opentask.task.base.body.full.replacement.of.q1.and.q2
+    English: Full replacement of Q1 and Q2. Per-question marks must sum to 20. Accepted
+      arithmetic is not semantic approval.
+  - Key: workbenchview.opentask.task.base.heading.editing.task
+    English: Editing Task {d_baseversion}
+  - Key: workbenchview.opentask.task.context.label.authored.demonstration.decision.context.authored.demonstration.decision.context
+    English: Authored demonstration decision context
+  - Key: workbenchview.opentask.task.context.label.decision.context.in.your.own.decision.context.in.your.own.words
+    English: Decision context, in your own words
+  - Key: workbenchview.opentask.task.q.id.marks.label.marks
+    English: '{q_id} | marks'
+  - Key: workbenchview.opentask.task.q.id.outcomes.label.outcomes.o1.o2
+    English: '{q_id} | outcomes (O1, O2)'
+  - Key: workbenchview.opentask.task.q.id.text.label.question.text
+    English: '{q_id} | question text'
+  - Key: workbenchview.opentask.task.reload.caption.load.current.task.replace.this.local
+    English: Load current task (replace this local draft)
+  - Key: workbenchview.openworklist.openworklist.heading.experiment.table
+    English: Experiment table
+  - Key: workbenchview.openworklist.work.folios.caption.inspect.current.task.and.rubric.folios
+    English: Inspect current task and rubric folios
+  - Key: workbenchview.openworklist.work.history.caption.compare.current.marks.and.history
+    English: Compare current marks and history
+  - Key: workbenchview.openworklist.work.id.caption.inspect
+    English: Inspect {id}
+  - Key: workbenchview.openworklist.work.intro.body.open.the.literal.work.before.assigning
+    English: Open the literal work before assigning its passage to an inspected criterion.
+      Marks and rationale are your hypothesis.
+  - Key: workbenchview.openworklist.work.intro.heading.choose.fictional.work
+    English: Choose fictional work
+  - Key: workbenchview.pause.pause.info.body.reading.typing.and.pausing.do.not
+    English: Reading, typing and pausing do not advance the logical clock. Drafts
+      stay in this session.
+  - Key: workbenchview.pause.pause.info.heading.offline.local.session
+    English: Offline local session
+  - Key: workbenchview.readmarkcontext.assign.message.text.read.the.inspected.passage.and.criterion
+    English: Read the inspected passage and criterion above. Your marking draft is
+      retained below.
+  - Key: workbenchview.receipttext.return.saved.authored.hypothesis.evaluation.unverified.saved
+    English: Saved. {value1}
+  - Key: workbenchview.receipttext.return.saved.authored.hypothesis.evaluation.unverified.value1.authored.hypothesis.evaluation.unverified.learner.authored.hypothesis.evaluation.unverified.authored.hypothesis.evaluation.unverified
+    English: Authored hypothesis; evaluation unverified.
+  - Key: workbenchview.receipttext.return.saved.authored.hypothesis.evaluation.unverified.value1.authored.hypothesis.evaluation.unverified.learner.learner.hypothesis.evaluation.unverified.learner.hypothesis.evaluation.unverified
+    English: Learner hypothesis; evaluation unverified.
+  - Key: workbenchview.receipttext.return.saved.authored.hypothesis.evaluation.unverified.value1.new.edition.accepted.earlier.annotations.new.edition.accepted.earlier.annotations.and
+    English: New edition accepted. Earlier annotations and approvals are historical.
+  - Key: workbenchview.receipttext.return.your.draft.and.original.request.your.draft.and.original.request.are
+    English: '{r_status}: {r_reasoncode}. Your draft and original request are retained.
+      Reconcile or explicitly preview a fresh change.'
+  - Key: workbenchview.refreshmarkavailability.assign.message.text.ready.to.save.your.marking.ready.to.save.your.marking.hypothesis
+    English: Ready to save your marking hypothesis.
+  - Key: workbenchview.renderpassage.assign.string.title.rubric.criterion.work.source.rubric.criterion.rubric.criterion
+    English: Rubric {passage_reference_version} | Criterion {item}
+  - Key: workbenchview.renderpassage.assign.string.title.rubric.criterion.work.source.work.source.source.source
+    English: Source {source}
+  - Key: workbenchview.renderpassage.assign.string.title.rubric.criterion.work.source.work.source.work.work
+    English: Work {source}
+  - Key: workbenchview.renderpassage.assign.string.title.task.question.task.question
+    English: Task {passage_reference_version} | Question {item}
+  - Key: workbenchview.renderpassage.passage.body.heading.current.criterion.literal.passage.current.criterion.current.criterion
+    English: Current criterion
+  - Key: workbenchview.renderpassage.passage.body.heading.current.criterion.literal.passage.literal.passage.literal.passage
+    English: Literal passage
+  - Key: workbenchview.renderpassage.passage.body.heading.question.question
+    English: Question {item}
+  - Key: workbenchview.renderpassage.passage.identity.body.version.passage
+    English: '{source} | Version {passage_reference_version}
+
+      Passage {passage_reference_passageid}'
+  - Key: workbenchview.renderpassage.passage.identity.heading.inspected.source
+    English: Inspected source
+  - Key: workbenchview.renderpassage.passage.provenance.heading.exact.sha.256
+    English: Exact SHA-256
+  - Key: workbenchview.restorependingpreview.restorependingpreview.message.no.original.task.or.rubric.preview
+    English: No original task or rubric preview is retained.
+  - Key: workbenchview.restoreworksurface.restoreworksurface.message.the.original.inspected.work.is.unavailable
+    English: The original inspected work is unavailable.
+  - Key: workbenchview.saveannotation.assign.message.text.fresh.annotation.preview.staged.save.to
+    English: Fresh annotation preview staged. Save to submit it.
+  - Key: workbenchview.saveannotation.mark.refresh.caption.refresh.staged.annotation.after.a.stale
+    English: Refresh staged annotation after a stale result
+  - Key: workbenchview.settextscale.assign.textsizelabel.text.text
+    English: Text {mathf_roundtoint_textscale_100}%
+  - Key: workbenchview.showpendingpreview.preview.after.c.id.heading.after
+    English: After | {c_id}
+  - Key: workbenchview.showpendingpreview.preview.after.q.id.body.marks.outcomes
+    English: '{q_text}
+
+      Marks {q_marks} | Outcomes {value4}'
+  - Key: workbenchview.showpendingpreview.preview.after.q.id.heading.after
+    English: '{q_id} | after'
+  - Key: workbenchview.showpendingpreview.preview.before.c.id.body.marks
+    English: '{c_questionid} | {c_marks} marks | {value4}
+
+      {c_description}'
+  - Key: workbenchview.showpendingpreview.preview.before.c.id.heading.before
+    English: Before | {c_id}
+  - Key: workbenchview.showpendingpreview.preview.before.q.id.body.marks.outcomes
+    English: '{before_text}
+
+      Marks {before_marks} | Outcomes {value4}'
+  - Key: workbenchview.showpendingpreview.preview.before.q.id.heading.before
+    English: '{q_id} | before'
+  - Key: workbenchview.showpendingpreview.preview.context.body.after
+    English: '{value0}
+
+      After: {t_decisioncontext}'
+  - Key: workbenchview.showpendingpreview.preview.context.body.value0.no.context.no.context
+    English: No context
+  - Key: workbenchview.showpendingpreview.preview.context.heading.decision.context.before.after
+    English: Decision context before / after
+  - Key: workbenchview.showpendingpreview.preview.scope.body.saving.creates.one.immutable.next.edition
+    English: Saving creates one immutable next edition. Existing annotations and
+      approval become historical. No semantic review is implied.
+  - Key: workbenchview.showpendingpreview.preview.scope.heading.exact.staged.change
+    English: Exact staged change
+  - Key: workbenchview.showpendingpreview.preview.sources.body.item.v
+    English: '{x_sourceid} v{x_version}'
+  - Key: workbenchview.showpendingpreview.preview.sources.heading.attached.sources
+    English: Attached sources
+  - Key: workbenchview.showpendingpreview.showpendingpreview.heading.before.after.preview
+    English: Before / after preview
+  - Key: workbenchview.showpendingpreview.showpendingpreview.primary.caption.save.new.edition
+    English: Save new edition
+  - Key: workbenchview.showwork.criterion.c.id.caption.max
+    English: '{c_questionid} | {c_id} | max {c_marks}{value5}'
+  - Key: workbenchview.showwork.criterion.c.id.caption.value5.assign.passage.assign.passage
+    English: ' | Assign passage'
+  - Key: workbenchview.showwork.criterion.c.id.caption.value5.inspect.at.folios.first.inspect.at.folios.first
+    English: ' | Inspect at folios first'
+  - Key: workbenchview.showwork.showwork.heading.current.marking
+    English: '{work} | current marking'
+  - Key: workbenchview.showwork.showwork.primary.caption.other.work.rerun
+    English: Other work / rerun
+  - Key: workbenchview.showwork.work.folios.caption.go.to.task.and.rubric.folios
+    English: Go to task and rubric folios
+  - Key: workbenchview.showwork.work.literal.heading.literal.work.v
+    English: Literal work | v{passage_reference_version}
+  - Key: workbenchview.showwork.work.total.body.evaluation.is.unverified.offline.evaluation.is
+    English: '{value0} Evaluation is unverified. Offline evaluation is unavailable
+      for arbitrary prose.'
+  - Key: workbenchview.showwork.work.total.body.value0.authored.demonstration.hypothesis.authored.demonstration.hypothesis
+    English: Authored demonstration hypothesis.
+  - Key: workbenchview.showwork.work.total.body.value0.learner.hypothesis.learner.hypothesis
+    English: Learner hypothesis.
+  - Key: workbenchview.showwork.work.total.heading.draft.hypothesis.20
+    English: 'Draft hypothesis: {s_drafttotal_work} / 20'
+  - Key: workbenchview.updatestatus.assign.hudstatus.text.offline
+    English: '{pair}   |   {s_clockminute_60_00}:{s_clockminute_60_00_4}   |   Offline'

@@ -1,3 +1,4 @@
+using E=Altaius.Demo02.Domain.EnglishCopy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Altaius.Demo02.Presenter
                 for(int j=0;j<points.Length;j++)if(!used[j]&&Clear(points[at],points[j]))
                 {float candidate=cost[at]+Vector3.Distance(points[at],points[j]);if(candidate<cost[j]){cost[j]=candidate;previous[j]=at;}}
             }
-            int end=points.Length-1;if(float.IsPositiveInfinity(cost[end]))throw new InvalidOperationException("No clear collision route connects the saved presenter anchors to "+target.StationId+". Inspect the authored route.");
+            int end=points.Length-1;if(float.IsPositiveInfinity(cost[end]))throw new InvalidOperationException(E.Format("presenterroute.initialization.initialization.message.no.clear.collision.route.connects.the","No clear collision route connects the saved presenter anchors to {target_stationid}. Inspect the authored route.","target_stationid",target.StationId));
             var path=new List<Vector3>();for(int at=end;at>0;at=previous[at])path.Add(points[at]);path.Reverse();route=path.ToArray();
         }
         bool Clear(Vector3 from,Vector3 to)
