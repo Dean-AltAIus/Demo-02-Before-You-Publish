@@ -2,7 +2,7 @@
 
 The [CSV matrix](ProductionAcceptanceMatrix.csv) maps all 155 source-manifest items to saved content or explicitly scoped preparation, relevant states and observed evidence. It preserves the distinction between a candidate path and accepted content. The private local JSON additionally retains source and content hashes and the original candidate annotations.
 
-There are 147 required items, one conditional item, three optional items and four gated future items. At this checkpoint, 146 required content rows pass their stated checks; the world row retains a failed rendered-performance gate. The conditional texture workflow and two authored buyer surfaces pass. Optional ambience and four gated Arabic/voice items remain unverified by design. The first Player diagnostic failed its rendering guard. A separately authorized isolated-desktop run rendered successfully, but courtyard and marking still failed the frame-time target. These counts are not an all-gates release claim.
+There are 147 required items, one conditional item, three optional items and four gated future items. At this checkpoint, 146 required content rows pass their stated checks; the world row retains a failed rendered-performance gate. The conditional texture workflow and two authored buyer surfaces pass. Optional ambience and four gated Arabic/voice items remain unverified by design. The first Player diagnostic failed its rendering guard. A separately authorized isolated-desktop run rendered successfully, but courtyard and marking still failed the frame-time target. A later bounded Editor comparison reduced draw and batch counts with GPU Resident Drawer, but all three candidate p95 values still failed and the candidate was restored. Dean chose current image quality with the measured performance limitation documented. This is a delivery direction with an explicit failed engineering gate, not all-gates acceptance.
 
 | Group | Scope of evidence |
 | --- | --- |
@@ -11,9 +11,9 @@ There are 147 required items, one conditional item, three optional items and fou
 | N | Editable colleague and reviewer, exact surface fidelity, actual conversation and single-packet review playback. |
 | H | Canonical Leena source and HUD rendition, saved gestures, actual attributed assistance and silent text. |
 | V | Non-authoritative status/learning cues and exact cabinet state, including reduced/static equivalents. |
-| U | Native compact UI, literal text/inputs, exact receipt states, keyboard focus, three resolutions and optional 200% reflow. |
+| U | Native compact UI, saved title plaque and workroom shot, four title actions, literal text/inputs, exact receipt states, keyboard focus, three resolutions and optional 200% reflow. |
 | T | Actual learner commands, immutable records, retest/reset/replay, full spatial presenter and restoration, and final regression status. |
-| E | Editable English catalogue, literal single-pass slots, stable control identities, additive authoring and manual-edit persistence. |
+| E | Current 702-entry editable English catalogue with 54 scene bindings, literal single-pass slots, stable control identities, additive authoring and manual-edit persistence. |
 | F | Source Serif 4 font sources and OFL notice, current English readability. Arabic remains gated. |
 | S | Verified existing preparation sources only, not runtime data copies, a populated backend or a live adapter. |
 | B | Saved disabled integration configuration and actual unavailable behavior. |

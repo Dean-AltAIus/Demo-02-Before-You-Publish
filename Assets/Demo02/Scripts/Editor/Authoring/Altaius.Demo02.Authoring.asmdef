@@ -1,1 +1,21 @@
-{"name":"Altaius.Demo02.Authoring","references":["Altaius.Demo02.Domain","Altaius.Demo02.Gameplay","Altaius.Demo02.UI","Altaius.Demo02.Integration","Altaius.Demo02.Presentation","Altaius.Demo02.Presenter","Unity.InputSystem","Unity.ugui","Unity.RenderPipelines.Universal.Runtime","Unity.RenderPipelines.Core.Runtime","Unity.Collections"],"includePlatforms":["Editor"],"autoReferenced":true}
+{
+  "name": "Altaius.Demo02.Authoring",
+  "references": [
+    "Altaius.Demo02.Domain",
+    "Altaius.Demo02.Gameplay",
+    "Altaius.Demo02.UI",
+    "Altaius.Demo02.Integration",
+    "Altaius.Demo02.Presentation",
+    "Altaius.Demo02.Presenter",
+    "Unity.InputSystem",
+    "Unity.ugui",
+    "Unity.RenderPipelines.Universal.Runtime",
+    "Unity.RenderPipelines.Core.Runtime",
+    "Unity.Collections",
+    "Unity.RenderPipelines.GPUDriven.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "autoReferenced": true
+}

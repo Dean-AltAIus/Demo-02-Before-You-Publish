@@ -9,6 +9,22 @@ namespace Altaius.Demo02.Tests
 {
     public sealed class NativeAcceptanceTests
     {
+        [UnityTest,Timeout(1200000),Explicit("One original-profile buffered baseline before any batching candidate.")]
+        public IEnumerator BatchingBaseline()
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity");yield return new EnterPlayMode();yield return null;
+            string output=Path.GetFullPath(Path.Combine(UnityEngine.Application.dataPath,"../LocalOnly/Validation/Acceptance/BatchingComparison_v002/Baseline"));
+            try{yield return Task6RuntimeAcceptance.BatchingComparison(output,false);Assert.That(Task6RuntimeAcceptance.Result,Does.StartWith("PASS"));}finally{Task6RuntimeAcceptance.Cleanup();}
+            yield return new ExitPlayMode();
+        }
+        [UnityTest,Timeout(1200000),Explicit("One conditional GPU Resident Drawer comparison with restoration.")]
+        public IEnumerator BatchingCandidate()
+        {
+            UnityEditor.SceneManagement.EditorSceneManager.OpenScene("Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity");yield return new EnterPlayMode();yield return null;
+            string output=Path.GetFullPath(Path.Combine(UnityEngine.Application.dataPath,"../LocalOnly/Validation/Acceptance/BatchingComparison_v002/CandidateValidated"));
+            try{yield return Task6RuntimeAcceptance.BatchingComparison(output,true);Assert.That(Task6RuntimeAcceptance.Result,Does.StartWith("PASS"));}finally{Task6RuntimeAcceptance.Cleanup();}
+            yield return new ExitPlayMode();
+        }
         [UnityTest,Timeout(120000),Explicit("Arrow-key world movement, literal typing and UI focus ownership.")]
         public IEnumerator ArrowMovementAndFocus()
         {
