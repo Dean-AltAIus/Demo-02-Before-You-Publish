@@ -90,7 +90,7 @@ namespace Altaius.Demo02.Authoring
             var help=Panel("World controls",canvasObject.transform,new Color(.035f,.11f,.22f,.94f));var helpR=(RectTransform)help.transform;
             view.WorldHelp=helpR;
             helpR.anchorMin=new Vector2(.29f,0);helpR.anchorMax=new Vector2(.99f,0);helpR.pivot=new Vector2(.5f,0);helpR.anchoredPosition=new Vector2(0,12);helpR.sizeDelta=new Vector2(0,48);
-            gameplay.WorldPrompt=Label("Control hint",help.transform,"WASD Move | Right mouse Look | E Inspect | Tab Routes",18,Color.white);Stretch(gameplay.WorldPrompt.rectTransform,14,14,6,6);gameplay.WorldPrompt.alignment=TextAnchor.MiddleLeft;
+            gameplay.WorldPrompt=Label("Control hint",help.transform,"Arrow keys Move | Right mouse Look | E Inspect | Tab Routes",18,Color.white);Stretch(gameplay.WorldPrompt.rectTransform,14,14,6,6);gameplay.WorldPrompt.alignment=TextAnchor.MiddleLeft;
             CreateLeena(canvasObject.transform,view);
             var window=Panel("Editable workspace",canvasObject.transform,Cream);view.Window=window;
             var wr=(RectTransform)window.transform;wr.anchorMin=new Vector2(.30f,0);wr.anchorMax=new Vector2(.99f,1);wr.offsetMin=new Vector2(0,76);wr.offsetMax=new Vector2(0,-90);

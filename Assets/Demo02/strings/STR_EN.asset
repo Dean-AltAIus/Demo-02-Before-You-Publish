@@ -67,7 +67,7 @@ MonoBehaviour:
   - Key: campusgameplayfacade.update.assign.worldprompt.text.e.inspect.tab.direct.routes.e.inspect.tab.direct.routes
     English: E  Inspect {station_displayname}    |    Tab  Direct routes
   - Key: campusgameplayfacade.update.assign.worldprompt.text.wasd.move.hold.right.mouse.wasd.move.hold.right.mouse.look
-    English: WASD  Move    |    Hold right mouse  Look    |    Tab  Direct routes
+    English: Arrow keys  Move | Right mouse  Look | Tab  Direct routes
   - Key: conversationcontracts.initialization.return.authored.offline.reply.no.language.interpretation
     English: Authored offline reply. No language interpretation or semantic evaluation.
   - Key: conversationcoordinator.acknowledge.assign.record.error.the.prepared.reply.is.historical.because
@@ -146,7 +146,7 @@ MonoBehaviour:
       {s_currentevaluations}. Review and assistance IDs are in the timeline. These
       records do not establish competence.'
   - Key: helpcoordinator.request.assign.help.text.wasd.moves.with.world.focus.hold
-    English: WASD moves with world focus. Hold right mouse to look. E inspects. Tab
+    English: Arrow keys move with world focus. Hold right mouse to look. E inspects. Tab
       opens direct routes. Enter or Space activates a button. Escape goes back. Text
       fields keep your own draft. Preview, save and publish are separate actions.
   - Key: helpcoordinator.request.assign.help.text.what.does.the.work.you.marked
@@ -886,7 +886,7 @@ MonoBehaviour:
   - Key: presentationview.showsettingstab.setting.displaypolicy.heading.stable.presentation
     English: Stable presentation
   - Key: presentationview.showsettingstab.setting.input.body.wasd.move.hold.right.mouse.look
-    English: 'WASD: move. Hold right mouse: look. E: inspect. Tab: direct routes
+    English: 'Arrow keys: move. Hold right mouse: look. E: inspect. Tab: direct routes
       or next UI focus. Shift+Tab: previous focus. Enter or Space: activate. Escape:
       back or pause. Wheel: focused scroll. Text Enter inserts a line break; use
       Send to submit.'
@@ -898,7 +898,7 @@ MonoBehaviour:
   - Key: presentationview.showsettingstab.setting.language.heading.english.available
     English: English | Available
   - Key: presentationview.showsettingstab.setting.remapgate.body.this.local.slice.uses.the.source
-    English: This local slice uses the source bindings. Remapping, controller input,
+    English: This demo uses fixed keyboard controls. Remapping, controller input,
       speech input and pointer pan are unavailable. Direct routes and native numeric
       fields use the same domain commands.
   - Key: presentationview.showsettingstab.setting.remapgate.heading.binding.changes.unavailable

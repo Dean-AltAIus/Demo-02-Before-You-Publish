@@ -57,14 +57,14 @@ namespace Altaius.Demo02.Gameplay
             var movement = Vector2.zero;
             if (PresenterOwnsInput) movement = presenterMove;
             else if (WorldOwnsInput && keyboard != null)
-                movement = new Vector2((keyboard.dKey.isPressed ? 1 : 0) - (keyboard.aKey.isPressed ? 1 : 0),
-                    (keyboard.wKey.isPressed ? 1 : 0) - (keyboard.sKey.isPressed ? 1 : 0));
+                movement = new Vector2((keyboard.rightArrowKey.isPressed ? 1 : 0) - (keyboard.leftArrowKey.isPressed ? 1 : 0),
+                    (keyboard.upArrowKey.isPressed ? 1 : 0) - (keyboard.downArrowKey.isPressed ? 1 : 0));
             if(!ContactOwnsInput)Motor.Move(movement, Time.unscaledDeltaTime);
             if (WorldOwnsInput && mouse != null && mouse.rightButton.isPressed) CameraRig.Look(mouse.delta.ReadValue());
             if (WorldPrompt && !(Workspace?.IsOpen ?? false))
             {
                 var station = Nearest();
-                WorldPrompt.text = ((station != null)?E.Format("campusgameplayfacade.update.assign.worldprompt.text.e.inspect.tab.direct.routes.e.inspect.tab.direct.routes","E  Inspect {station_displayname}    |    Tab  Direct routes","station_displayname",station.DisplayName):E.Get("campusgameplayfacade.update.assign.worldprompt.text.wasd.move.hold.right.mouse.wasd.move.hold.right.mouse.look","WASD  Move    |    Hold right mouse  Look    |    Tab  Direct routes"));
+                WorldPrompt.text = ((station != null)?E.Format("campusgameplayfacade.update.assign.worldprompt.text.e.inspect.tab.direct.routes.e.inspect.tab.direct.routes","E  Inspect {station_displayname}    |    Tab  Direct routes","station_displayname",station.DisplayName):E.Get("campusgameplayfacade.update.assign.worldprompt.text.wasd.move.hold.right.mouse.wasd.move.hold.right.mouse.look","Arrow keys  Move | Right mouse  Look | Tab  Direct routes"));
             }
         }
         public void HandleEscape()

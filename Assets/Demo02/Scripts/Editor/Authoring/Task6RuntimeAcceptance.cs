@@ -57,7 +57,7 @@ namespace Altaius.Demo02.Authoring
             ui.Applied.TextScale=1;ui.Applied.ReducedMotion=false;ui.Applied.Silent=false;Apply();ui.OpenTitle();yield return Shot("title-1280");
             U("Primary");yield return Shot("brief-1280");U("Primary");yield return Until(()=>ui.SurfaceId=="onramp",10,"native loading");U("Secondary");yield return Frames(5);
             Check(!ui.IsOpen,"Optional controls return to campus with canonical Leena");Check(view.LeenaDock.gameObject.activeInHierarchy,"Leena persists");
-            var start=ui.Gameplay.Motor.transform.position;input.Keys=new[]{Key.W};yield return Seconds(.7f);input.Keys=Array.Empty<Key>();yield return Frames(3);Check(Vector3.Distance(start,ui.Gameplay.Motor.transform.position)>.2f,"Native W moves actual CharacterController");
+            var start=ui.Gameplay.Motor.transform.position;input.Keys=new[]{Key.UpArrow};yield return Seconds(.7f);input.Keys=Array.Empty<Key>();yield return Frames(3);Check(Vector3.Distance(start,ui.Gameplay.Motor.transform.position)>.2f,"Native Up arrow moves actual CharacterController");
             yield return Route("studio");
             foreach(var source in new[]{"D02.outcome.O1","D02.outcome.O2","D02.task.v1.Q1","D02.task.v1.Q2","D02.rubric.v1.naming","D02.rubric.v1.listing"})
             {W("Inspect."+source);yield return Frames(3);if(source.EndsWith("Q1"))yield return Shot("literal-task-1280");W("Primary");}

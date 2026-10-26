@@ -33,8 +33,8 @@ namespace Altaius.Demo02.Authoring
             view=UnityEngine.Object.FindFirstObjectByType<WorkbenchView>();game=view.Gameplay;steps.Clear();log.Clear();Running=true;
             probeInput=game.gameObject.AddComponent<CampusProbeInput>();probeInput.Begin();
             Add(()=> {CampusDiagnostics.GameSize(1280,720);view.CloseWindow();initial=game.Motor.transform.position;Log("Start: explicitly stepped Editor playback. Native InputSystem keyboard and uGUI Submit/ProcessEvent. No OS input or direct domain writes. This does not establish realtime motion or performance.");},.5);
-            Add(()=>QueueKeys(Key.W),.7);Add(()=>QueueKeys(),.2);
-            Add(()=>Check(Vector3.Distance(initial,game.Motor.transform.position)>.5f,"W moves the learner through CharacterController"));
+            Add(()=>QueueKeys(Key.UpArrow),.7);Add(()=>QueueKeys(),.2);
+            Add(()=>Check(Vector3.Distance(initial,game.Motor.transform.position)>.5f,"Up arrow moves the learner through CharacterController"));
             Add(()=>Shot("play-campus-1280.png"),.3);
             Add(()=>{if(keyboardEdges)QueueKeys(Key.Tab);else Submit(view.RoutesButton);},.2);Add(()=>QueueKeys(),.2);
             Add(()=>Check(view.ViewId=="routes",keyboardEdges?"Tab opens direct routes":"Native uGUI Submit opens direct routes. Tab edge remains unverified in stepped Editor."));
