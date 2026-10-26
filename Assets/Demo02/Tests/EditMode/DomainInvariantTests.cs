@@ -44,6 +44,30 @@ namespace Altaius.Demo02.Tests
             Inspect("D02.rubric.v" + s.Snapshot.Rubric.Version + "." + criterion, InspectionLocation.Studio);
             return Commit(new Annotate("W_LIST", 1, criterion, new[] { work }, marks, rationale, s.Snapshot.Task.Version, s.Snapshot.Rubric.Version)).RequestId;
         }
+        [Test] public void RejectedAcceptedAndStaleReleaseReceiptsRetainOriginalScopeAcrossRetryAndReset()
+        {
+            var firstPair=s.Snapshot.Pair;var first=s.Stage(new RequestRelease(1,1,Guid.Empty),"release-history");var rejected=s.Submit(first);
+            Assert.That(rejected.Status,Is.EqualTo(ReceiptStatus.Rejected));
+            RepairPair();var approval=Approve();var approvedPair=s.Snapshot.Pair;
+            var acceptedEnvelope=s.Stage(new RequestRelease(2,2,approval),"release-history");var accepted=s.Submit(acceptedEnvelope);
+            Assert.That(accepted.Status,Is.EqualTo(ReceiptStatus.Accepted));
+            var staleEnvelope=s.Stage(new RequestRelease(2,2,approval),"release-history");
+            Commit(new EditRubric(2,Rubric()));var stale=s.Submit(staleEnvelope);
+            Assert.That(stale.ReasonCode,Is.EqualTo("StaleWorldRevision"));
+            Assert.That(s.Submit(first),Is.SameAs(rejected));Assert.That(s.Submit(acceptedEnvelope),Is.SameAs(accepted));
+            Assert.That(rejected.Scope.Pair.TaskDigest,Is.EqualTo(firstPair.TaskDigest));Assert.That(rejected.Scope.Pair.RubricDigest,Is.EqualTo(firstPair.RubricDigest));
+            foreach(var receipt in new[]{accepted,stale})
+            {Assert.That(receipt.Scope.Pair.TaskVersion,Is.EqualTo(2));Assert.That(receipt.Scope.Pair.RubricVersion,Is.EqualTo(2));Assert.That(receipt.Scope.Pair.RubricDigest,Is.EqualTo(approvedPair.RubricDigest));Assert.That(((RequestRelease)receipt.Scope.Envelope.Command).ApprovalReceiptId,Is.EqualTo(approval));}
+            Assert.That(stale.Scope.Envelope,Is.SameAs(staleEnvelope));Assert.That(s.Snapshot.CurrentApproval,Is.Null);Assert.That(s.Snapshot.Publication,Is.Not.EqualTo(PublicationStatus.Released));
+            var attempt=s.Snapshot.AttemptId;s.Reset(true);var linked=s.Snapshot.LinkedHistory.Single();
+            Assert.That(linked.Audit.First(a=>a.Receipt.RequestId==first.CommandId).Receipt,Is.SameAs(rejected));Assert.That(rejected.Scope.Envelope.AttemptId,Is.EqualTo(attempt));Assert.That(s.Snapshot.Audit,Is.Empty);
+            s.Reset(false);Assert.That(s.Snapshot.LinkedHistory,Is.Empty);Assert.That(s.FindReceipt(first.CommandId),Is.Null);
+        }
+        [Test] public void UnavailableRequestedDocumentNeverBorrowsCurrentDigest()
+        {
+            var receipt=s.Submit(s.Stage(new RequestRelease(99,98,Guid.Empty),"release-history"));
+            Assert.That(receipt.Status,Is.EqualTo(ReceiptStatus.Rejected));Assert.That(receipt.Scope.Pair.TaskVersion,Is.EqualTo(99));Assert.That(receipt.Scope.Pair.RubricVersion,Is.EqualTo(98));Assert.That(receipt.Scope.Pair.TaskDigest,Is.Null);Assert.That(receipt.Scope.Pair.RubricDigest,Is.Null);
+        }
         private void RejectedWithoutMutation(DomainCommand command)
         {
             var before = s.Snapshot; var r = s.Submit(s.Stage(command, "test-op"));

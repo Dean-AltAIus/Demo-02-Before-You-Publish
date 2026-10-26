@@ -121,10 +121,11 @@ namespace Altaius.Demo02.Domain
         {
             var before = world;
             var digest = ContentDigest.Of(new { Envelope = envelope, Actor = actor, Disclosure = disclosure });
+            var scope = CaptureScope(envelope);
             CommandReceipt Result(ReceiptStatus status, string reason, IEnumerable<string> changed = null)
             {
                 var r = new CommandReceipt(envelope?.CommandId ?? Guid.Empty, digest, status, before, world, reason, actor, disclosure,
-                    envelope?.Command?.Action, mode == SessionMode.Presenter || actor != ActorRole.Learner, changed);
+                    envelope?.Command?.Action, mode == SessionMode.Presenter || actor != ActorRole.Learner, changed, scope);
                 if (mode != SessionMode.Replay) audit.Add(new AuditRecord(audit.Count + 1, r));
                 return r;
             }
@@ -172,6 +173,25 @@ namespace Altaius.Demo02.Domain
             catch (DomainRejection e) { finish = Result(ReceiptStatus.Rejected, e.Message); }
             receipts.Add(envelope.CommandId, finish);
             return finish;
+        }
+        private CommandScope CaptureScope(CommandEnvelope envelope)
+        {
+            if (envelope == null) return null;
+            int? taskVersion = envelope.Readset.TryGetValue("task_version", out var t) ? t : null;
+            int? rubricVersion = envelope.Readset.TryGetValue("rubric_version", out var r) ? r : null;
+            // Explicit requested versions take precedence over readset pins, including malformed or stale requests.
+            if (envelope.Command is Annotate a) { taskVersion = a.TaskVersion; rubricVersion = a.RubricVersion; }
+            else if (envelope.Command is RequestReview q) { taskVersion = q.TaskVersion; rubricVersion = q.RubricVersion; }
+            else if (envelope.Command is ScheduleReply s) { taskVersion = s.TaskVersion; rubricVersion = s.RubricVersion; }
+            else if (envelope.Command is DecideReview d) { taskVersion = d.TaskVersion; rubricVersion = d.RubricVersion; }
+            else if (envelope.Command is RequestRelease release) { taskVersion = release.TaskVersion; rubricVersion = release.RubricVersion; }
+            else if (envelope.Command is AcceptHold h) { taskVersion = h.TaskVersion; rubricVersion = h.RubricVersion; }
+            var historical = linkedHistory.FirstOrDefault(x => x.AttemptId == envelope.AttemptId);
+            IEnumerable<TaskDocument> taskHistory = envelope.AttemptId == attempt ? tasks : historical?.TaskHistory ?? Enumerable.Empty<TaskDocument>();
+            IEnumerable<RubricDocument> rubricHistory = envelope.AttemptId == attempt ? rubrics : historical?.RubricHistory ?? Enumerable.Empty<RubricDocument>();
+            var pair = taskVersion.HasValue && rubricVersion.HasValue ? new DocumentPair(taskVersion.Value, rubricVersion.Value,
+                taskHistory.FirstOrDefault(x => x.Version == taskVersion)?.Digest, rubricHistory.FirstOrDefault(x => x.Version == rubricVersion)?.Digest) : null;
+            return new CommandScope(envelope, pair);
         }
         private static IEnumerable<string> ChangedResources(DomainCommand c)
         { yield return c.Action; yield return "world_revision"; if (c is EditTask || c is EditRubric) { yield return "approval_revision"; yield return "experiment_revision"; } }

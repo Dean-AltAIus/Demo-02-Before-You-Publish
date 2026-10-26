@@ -46,7 +46,7 @@ namespace Altaius.Demo02.UI
             Frame.sizeDelta=new Vector2(loading?(large?Mathf.Min(width-28,680):(Style?Style.PanelWidth:430)):(large?width-28:(Style?Style.PanelWidth:430)),loading?(large?Mathf.Min(height-126,390):Mathf.Min(245,height-150)):(large?height-126:Mathf.Min(shortPanel?(Style?Style.ShortPanelHeight:390):(Style?Style.PanelHeight:500),height-150)));
             Heading.fontSize=Mathf.RoundToInt((TitleComposition?(Style?Style.TitleFont:24):(Style?Style.HeadingFont:20))*scale);Status.fontSize=Mathf.RoundToInt((Style?Style.SecondaryFont:12)*scale);
             Heading.alignment=TextAnchor.MiddleLeft;Heading.color=new Color(1,.97f,.87f);
-            Heading.rectTransform.offsetMin=new Vector2(large?52:42,large?-62:-38);Heading.rectTransform.offsetMax=new Vector2(large?-100:-72,-6);
+            Heading.rectTransform.offsetMin=new Vector2(loading?12+22*scale+12:(large?52:42),large?-62:-38);Heading.rectTransform.offsetMax=new Vector2(large?-100:-72,-6);
             Paper.offsetMin=new Vector2(4,4);Paper.offsetMax=new Vector2(-4,large?-70:-44);
             var close=(RectTransform)Close.transform;close.sizeDelta=new Vector2(large?88:60,30*scale);close.anchoredPosition=new Vector2(-8,-7);var closeLabel=Close.GetComponentInChildren<Text>();closeLabel.fontSize=Mathf.RoundToInt((Style?Style.ControlFont:13)*scale);closeLabel.rectTransform.offsetMin=Vector2.zero;closeLabel.rectTransform.offsetMax=Vector2.zero;
             Icon.color=NativeUiPalette.Gold;Icon.rectTransform.anchorMin=Icon.rectTransform.anchorMax=new Vector2(0,1);Icon.rectTransform.pivot=new Vector2(0,1);Icon.rectTransform.anchoredPosition=new Vector2(12,-12);Icon.rectTransform.sizeDelta=new Vector2(22*scale,22*scale);

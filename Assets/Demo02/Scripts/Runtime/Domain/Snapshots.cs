@@ -4,17 +4,26 @@ using System.Linq;
 
 namespace Altaius.Demo02.Domain
 {
+    /// <summary>Original immutable request and historical document pins, retained even for rejection.
+    /// Missing historical digests stay unavailable; current documents cannot fill them.</summary>
+    public sealed class CommandScope
+    {
+        public CommandEnvelope Envelope { get; }
+        public DocumentPair Pair { get; }
+        internal CommandScope(CommandEnvelope envelope, DocumentPair pair) { Envelope = envelope; Pair = pair; }
+    }
     public sealed class CommandReceipt
     {
         public Guid RequestId { get; } public string PayloadDigest { get; } public ReceiptStatus Status { get; }
         public int BeforeRevision { get; } public int AfterRevision { get; } public string ReasonCode { get; }
         public ActorRole Authority { get; } public string AuthorityDisclosure { get; } public string Action { get; }
         public bool Synthetic { get; } public IReadOnlyList<string> ChangedResources { get; }
+        public CommandScope Scope { get; }
         public string RuleVersion => LearnerCatalogue.RuleVersion;
         internal CommandReceipt(Guid id, string digest, ReceiptStatus status, int before, int after, string reason,
-            ActorRole actor, string disclosure, string action, bool synthetic, IEnumerable<string> changed = null)
+            ActorRole actor, string disclosure, string action, bool synthetic, IEnumerable<string> changed = null, CommandScope scope = null)
         { RequestId = id; PayloadDigest = digest; Status = status; BeforeRevision = before; AfterRevision = after; ReasonCode = reason;
-          Authority = actor; AuthorityDisclosure = disclosure; Action = action; Synthetic = synthetic; ChangedResources = status == ReceiptStatus.Unknown ? null : Frozen.List(changed); }
+          Authority = actor; AuthorityDisclosure = disclosure; Action = action; Synthetic = synthetic; ChangedResources = status == ReceiptStatus.Unknown ? null : Frozen.List(changed); Scope = scope; }
     }
     public sealed class AuditRecord
     {

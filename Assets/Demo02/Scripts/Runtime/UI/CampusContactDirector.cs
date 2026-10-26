@@ -30,6 +30,7 @@ namespace Altaius.Demo02.UI
         readonly Queue<Job> queue=new Queue<Job>();
         readonly Dictionary<Transform,Pose> initial=new Dictionary<Transform,Pose>();
         readonly Dictionary<string,bool> endStates=new Dictionary<string,bool>();
+        readonly HashSet<Guid> projectedReceipts=new HashSet<Guid>();
         Job active;Pose actionStart;float elapsed,travelElapsed,stalled,lastDistance;
         bool rewind;Guid attempt;int auditSequence,lastTaskVersion,lastRubricVersion;ulong generation;string lastView,lastWork,lastCriterion,lastFolio;
         bool Paused=>UI&&UI.Lifecycle?.Paused==true;
@@ -101,7 +102,7 @@ namespace Altaius.Demo02.UI
             var s=Gameplay.SessionHost.Session.Snapshot;
             if(attempt!=s.AttemptId)
             {
-                ImmediateHandback(true);attempt=s.AttemptId;auditSequence=s.Audit.Count==0?0:s.Audit.Max(x=>x.Sequence);
+                ImmediateHandback(true);attempt=s.AttemptId;auditSequence=s.Audit.Count==0?0:s.Audit.Max(x=>x.Sequence);projectedReceipts.Clear();
                 generation=0;lastView=null;lastWork=null;lastCriterion=null;lastFolio=null;lastTaskVersion=lastRubricVersion=0;
             }
             if(Workbench.IsOpen&&generation!=Workbench.BindingGeneration)
@@ -136,11 +137,20 @@ namespace Altaius.Demo02.UI
             }
             foreach(var item in s.Audit.Where(x=>x.Sequence>auditSequence))
             {
-                auditSequence=Math.Max(auditSequence,item.Sequence);var r=item.Receipt;if(r.Status!=ReceiptStatus.Accepted)continue;
-                if(r.Action=="experiment.annotate"&&Workbench.IsOpen&&Workbench.ViewId=="mark"&&Gameplay.SessionHost.Workbench.MarkIsCurrent)
-                {Ensure("WorkOpen",false);Request("MarkPoint");}
-                if((r.Action=="task.edit"||r.Action=="rubric.edit")&&IsAtEnd("PlacePassage"))
-                {Ensure("WorkOpen",true);Ensure("EditionSlide",true);}
+                var r=item.Receipt;
+                if(r.Status==ReceiptStatus.Accepted&&!projectedReceipts.Contains(r.RequestId))
+                {
+                    if(r.Action=="experiment.annotate"&&Workbench.IsOpen&&Workbench.ViewId=="mark"&&Gameplay.SessionHost.Workbench.MarkIsCurrent)
+                    {
+                        // Leave an unseen receipt behind the cursor until capacity exists. Retried arrivals share its identity.
+                        if(queue.Count>=8)break;
+                        Ensure("WorkOpen",false);if(queue.Count>=8)break;Request("MarkPoint");
+                    }
+                    if((r.Action=="task.edit"||r.Action=="rubric.edit")&&IsAtEnd("PlacePassage"))
+                    {Ensure("WorkOpen",true);Ensure("EditionSlide",true);}
+                    projectedReceipts.Add(r.RequestId);
+                }
+                auditSequence=Math.Max(auditSequence,item.Sequence);
                 // Review packet preparation is scheduled by NpcInteractionDirector with its exact request identity.
             }
         }
@@ -222,7 +232,14 @@ namespace Altaius.Demo02.UI
             if(VisiblePhase=="Recovery")return;rewind=true;
         }
         void RestoreActionStart(){if(active?.Binding.Prop){active.Binding.Prop.position=actionStart.Position;active.Binding.Prop.rotation=actionStart.Rotation;}}
-        void ClearQueued(){while(queue.Count>0){var job=queue.Dequeue();if(job.RequestId!=Guid.Empty)PacketPresentationSettled?.Invoke(job.RequestId,false);}}
+        void ClearQueued()
+        {
+            while(queue.Count>0){var job=queue.Dequeue();if(job.RequestId!=Guid.Empty)PacketPresentationSettled?.Invoke(job.RequestId,false);}
+            var snapshot=Gameplay?.SessionHost?.Session?.Snapshot;
+            if(snapshot!=null&&snapshot.AttemptId==attempt)
+                foreach(var audit in snapshot.Audit.Where(a=>a.Sequence>auditSequence))
+                {if(audit.Receipt.Status==ReceiptStatus.Accepted)projectedReceipts.Add(audit.Receipt.RequestId);auditSequence=audit.Sequence;}
+        }
         void Release(bool completed=false)
         {
             var requestId=active?.RequestId??Guid.Empty;active=null;rewind=false;VisiblePhase="Idle";Gameplay?.SetContactInput(false);

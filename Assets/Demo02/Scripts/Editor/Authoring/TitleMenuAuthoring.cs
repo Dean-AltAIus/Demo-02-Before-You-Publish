@@ -17,6 +17,9 @@ namespace Altaius.Demo02.Authoring
             if(EditorApplication.isPlaying)throw new InvalidOperationException("Stop before saved authoring.");
             var ui=UnityEngine.Object.FindFirstObjectByType<PresentationView>();
             if(!ui||ui.gameObject.scene.path!="Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity")throw new InvalidOperationException("Exact Demo2 scene required.");
+            var existingStage=ui.GetComponent<TitleScenePresentation>();
+            if((!existingStage||!existingStage.Shot)&&ui.Gameplay.transform.Cast<Transform>().Count(t=>t.name=="Title workroom shot | saved editable composition")>1)
+                throw new InvalidOperationException("Ambiguous saved title shot. Restore its explicit reference before authoring.");
             var table=ui.Workbench.English;
             Add(table,"title.walkthrough","Watch walkthrough");Add(table,"title.subtitle","Explore, question and refine\nbefore you publish.");Add(table,"title.disclosure","Fictional practice. No real student data.");Add(table,"title.leena.identity","Leena | AI coach");Add(table,"title.leena.status","Offline | Help and controls");
             table.Invalidate();EditorUtility.SetDirty(table);AssetDatabase.SaveAssets();
@@ -50,15 +53,24 @@ namespace Altaius.Demo02.Authoring
             finally{PrefabUtility.UnloadPrefabContents(prefab);}
             var title=ui.Surfaces.First(s=>s.SurfaceId=="title");
             title.ApplyScale(1);title.TitleLayout.RefreshLabels();title.Status.text=table.Get("title.disclosure");
-            var stage=ui.GetComponent<TitleScenePresentation>();if(!stage)stage=ui.gameObject.AddComponent<TitleScenePresentation>();
-            stage.Rig=ui.Gameplay.CameraRig;stage.HiddenLearnerRenderers=stage.Rig.LocalBodyRenderers;stage.FieldOfView=58;
-            var shot=ui.Gameplay.CameraRig.transform.parent?.Find("Title workroom shot");
-            if(!stage.Shot){var shotObject=new GameObject("Title workroom shot | saved editable composition");stage.Shot=shotObject.transform;stage.Shot.SetParent(ui.Gameplay.transform,false);stage.Shot.position=new Vector3(-4.9f,1.72f,.85f);stage.Shot.rotation=Quaternion.LookRotation(new Vector3(-6.15f,1.1f,-2.35f)-stage.Shot.position);}
+            var stage=ui.GetComponent<TitleScenePresentation>();if(!stage){stage=ui.gameObject.AddComponent<TitleScenePresentation>();stage.FieldOfView=58;}
+            stage.Rig=ui.Gameplay.CameraRig;stage.HiddenLearnerRenderers=stage.Rig.LocalBodyRenderers;
+            EnsureShot(stage,ui.Gameplay.transform);
             ui.TitleStage=stage;
             foreach(var c in new UnityEngine.Object[]{ui,stage,title,title.TitleLayout}){EditorUtility.SetDirty(c);PrefabUtility.RecordPrefabInstancePropertyModifications(c);}
             foreach(var rect in title.GetComponentsInChildren<RectTransform>(true))PrefabUtility.RecordPrefabInstancePropertyModifications(rect);
             EditorSceneManager.MarkSceneDirty(ui.gameObject.scene);EditorSceneManager.SaveScene(ui.gameObject.scene);AssetDatabase.SaveAssets();
             return new{saved=ui.gameObject.scene.path,title=TitlePath,shot=stage.Shot.position.ToString()};
+        }
+        public static void EnsureShot(TitleScenePresentation stage,Transform parent)
+        {
+            if(stage.Shot)return;
+            const string name="Title workroom shot | saved editable composition";
+            var matches=parent.Cast<Transform>().Where(t=>t.name==name).ToArray();
+            if(matches.Length>1)throw new InvalidOperationException("Ambiguous saved title shot. Restore its explicit reference before authoring.");
+            if(matches.Length==1){stage.Shot=matches[0];return;}
+            var shotObject=new GameObject(name);stage.Shot=shotObject.transform;stage.Shot.SetParent(parent,false);
+            stage.Shot.position=new Vector3(-4.9f,1.72f,.85f);stage.Shot.rotation=Quaternion.LookRotation(new Vector3(-6.15f,1.1f,-2.35f)-stage.Shot.position);
         }
         static T Get<T>(GameObject go) where T:Component {var c=go.GetComponent<T>();return c?c:go.AddComponent<T>();}
         static RectTransform Rect(string name,Transform parent){var found=parent.Find(name);if(found)return (RectTransform)found;var go=new GameObject(name,typeof(RectTransform));go.transform.SetParent(parent,false);return (RectTransform)go.transform;}

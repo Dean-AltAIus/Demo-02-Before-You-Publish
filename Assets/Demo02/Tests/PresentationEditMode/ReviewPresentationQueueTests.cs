@@ -69,5 +69,33 @@ namespace Altaius.Demo02.Tests
             Assert.That(seen.Distinct().Count(), Is.EqualTo(70)); Assert.That(queue.TotalSettled, Is.EqualTo(70));
             Assert.That(queue.RecentSettlements.Count(), Is.EqualTo(64)); Assert.That(queue.PendingCount, Is.Zero);
         }
+        [Test] public void SameReceiptBeforeDuringAndAfterPresentationProjectsOnce()
+        {
+            var envelope=session.Stage(new RequestReview(1,1,"Exact original request.","13:40"),"retry");
+            var original=session.Submit(envelope);session.Submit(envelope);queue.Observe(session.Snapshot);
+            Assert.That(queue.PendingCount,Is.EqualTo(1));Ready(original.RequestId);queue.StartReady();
+            session.Submit(envelope);queue.Observe(session.Snapshot);Assert.That(queue.PendingCount,Is.Zero);
+            queue.Complete("Presented");session.Submit(envelope);queue.Observe(session.Snapshot);
+            Assert.That(queue.PendingCount,Is.Zero);Assert.That(queue.TotalSettled,Is.EqualTo(1));
+            Assert.That(session.Snapshot.Audit.Count,Is.EqualTo(4));Assert.That(session.Snapshot.ReviewHistory.Count,Is.EqualTo(1));
+        }
+        [TestCase("Cancelled")] [TestCase("Reduced motion")]
+        public void FullQueueAndDeferredRetriesSettleEachIdentityOnce(string reason)
+        {
+            var envelopes=Enumerable.Range(0,12).Select(_=>{var e=session.Stage(new RequestReview(1,1,"Distinct request.","13:40"),"retry");session.Submit(e);session.Submit(e);return e;}).ToArray();
+            queue.Observe(session.Snapshot);Assert.That(queue.PendingCount,Is.EqualTo(8));Assert.That(queue.DeferredCount(session.Snapshot),Is.EqualTo(4));
+            Ready(envelopes[0].CommandId);queue.StartReady();queue.SettleAll(session.Snapshot,reason);
+            foreach(var e in envelopes)session.Submit(e);queue.Observe(session.Snapshot);queue.SettleAll(session.Snapshot,reason);
+            Assert.That(queue.TotalSettled,Is.EqualTo(12));Assert.That(queue.PendingCount,Is.Zero);Assert.That(queue.Ready(envelopes[1].CommandId),Is.False);
+            Assert.That(session.Snapshot.ReviewHistory.Count,Is.EqualTo(12));Assert.That(session.Snapshot.Audit.Count,Is.EqualTo(36));
+        }
+        [Test] public void ResetAllowsReusedIdentityOnlyInTheNewAttemptAndIgnoresLinkedAudit()
+        {
+            var e=session.Stage(new RequestReview(1,1,"Original","13:40"),"retry");session.Submit(e);queue.Observe(session.Snapshot);queue.SettleAll(session.Snapshot,"Reset");
+            session.Reset(true);queue.Observe(session.Snapshot);Assert.That(queue.TotalSettled,Is.Zero);Assert.That(queue.PendingCount,Is.Zero);
+            var fresh=session.Stage(new RequestReview(1,1,"New attempt","13:40"),"retry",e.CommandId);session.Submit(fresh);queue.Observe(session.Snapshot);
+            Assert.That(queue.PendingCount,Is.EqualTo(1));Ready(e.CommandId);queue.StartReady();queue.Complete("Reduced motion");
+            session.Submit(fresh);queue.Observe(session.Snapshot);Assert.That(queue.TotalSettled,Is.EqualTo(1));Assert.That(queue.PendingCount,Is.Zero);
+        }
     }
 }

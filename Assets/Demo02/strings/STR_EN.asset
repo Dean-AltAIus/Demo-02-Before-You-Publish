@@ -146,9 +146,9 @@ MonoBehaviour:
       {s_currentevaluations}. Review and assistance IDs are in the timeline. These
       records do not establish competence.'
   - Key: helpcoordinator.request.assign.help.text.wasd.moves.with.world.focus.hold
-    English: Arrow keys move with world focus. Hold right mouse to look. E inspects. Tab
-      opens direct routes. Enter or Space activates a button. Escape goes back. Text
-      fields keep your own draft. Preview, save and publish are separate actions.
+    English: Arrow keys move with world focus. Hold right mouse to look. E inspects.
+      Tab opens direct routes. Enter or Space activates a button. Escape goes back.
+      Text fields keep your own draft. Preview, save and publish are separate actions.
   - Key: helpcoordinator.request.assign.help.text.what.does.the.work.you.marked
     English: What does the work you marked actually demonstrate under the criterion
       you chose? Compare the actual passage with that criterion before deciding your
@@ -279,8 +279,8 @@ MonoBehaviour:
   - Key: presentationview.beginpractice.loading.state.heading.checking.the.local.session
     English: Getting ready
   - Key: presentationview.loading.unavailable.body
-    English: The practice content is missing. No new attempt was started. Return to
-      the brief.
+    English: The practice content is missing. No new attempt was started. Return
+      to the brief.
   - Key: presentationview.loading.unavailable.detail.heading
     English: Practice content missing
   - Key: presentationview.loading.unavailable.heading
@@ -1791,3 +1791,38 @@ MonoBehaviour:
     English: Leena | AI coach
   - Key: title.leena.status
     English: Offline | Help and controls
+  - Key: history.commands
+    English: View original command receipts
+  - Key: history.receipt
+    English: Original command receipt
+  - Key: history.scope.details
+    English: 'Attempt {attempt}
+
+      Original {pair}
+
+      Task SHA-256 {task}
+
+      Rubric
+      SHA-256 {rubric}
+
+      Payload SHA-256 {payload}
+
+      Expected revision
+      {expected} | Recorded revision {before} to {after}
+
+      Contract {rule} |
+      Fixture SHA-256 {fixture}
+
+      Linked approval/request {link}
+
+      Causation
+      {cause} | Opportunity {opportunity}
+
+      Readset
+
+      {readset}
+
+      Source
+      pins
+
+      {sources}'

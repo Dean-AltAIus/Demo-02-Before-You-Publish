@@ -16,6 +16,24 @@ namespace Altaius.Demo02.Tests
     {
         const string ScenePath = "Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity";
         const string PrefabPath = "Assets/Demo02/Prefabs/UI/Presentation/title.prefab";
+        [Test] public void ClearedShotBindingRecoversUniqueCorrectParentAndPreservesManualPose()
+        {
+            var preview=EditorSceneManager.OpenPreviewScene(ScenePath);
+            try
+            {
+                var view=preview.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<PresentationView>(true)).Single();var stage=view.TitleStage;var shot=stage.Shot;
+                shot.localPosition+=new Vector3(.17f,.23f,.31f);shot.localRotation=Quaternion.Euler(11,22,33);shot.localScale=new Vector3(1.1f,1.2f,1.3f);stage.FieldOfView=61;
+                var position=shot.localPosition;var rotation=shot.localRotation;var scale=shot.localScale;stage.Shot=null;
+                TitleMenuAuthoring.EnsureShot(stage,view.Gameplay.transform);
+                Assert.That(stage.Shot,Is.SameAs(shot));Assert.That(shot.localPosition,Is.EqualTo(position));Assert.That(shot.localRotation,Is.EqualTo(rotation));Assert.That(shot.localScale,Is.EqualTo(scale));Assert.That(stage.FieldOfView,Is.EqualTo(61));
+                var duplicate=new GameObject(shot.name);duplicate.transform.SetParent(view.Gameplay.transform,false);stage.Shot=null;
+                Assert.Throws<System.InvalidOperationException>(()=>TitleMenuAuthoring.EnsureShot(stage,view.Gameplay.transform));
+                Assert.That(view.Gameplay.transform.Cast<Transform>().Count(t=>t.name==shot.name),Is.EqualTo(2));Assert.That(stage.Shot,Is.Null);
+                Object.DestroyImmediate(duplicate);var other=new GameObject(shot.name);other.transform.SetParent(view.transform,false);
+                TitleMenuAuthoring.EnsureShot(stage,view.Gameplay.transform);Assert.That(stage.Shot,Is.SameAs(shot));
+            }
+            finally{EditorSceneManager.ClosePreviewScene(preview);}
+        }
 
         [Test]
         public void SavedTitleHasOneEditableShotAndCompleteNativeControls()

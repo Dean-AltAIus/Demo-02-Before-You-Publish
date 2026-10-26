@@ -73,7 +73,7 @@ namespace Altaius.Demo02.Domain
         public InspectionLocation Location { get; }
         internal string ExactText { get; }
         internal Passage(PassageRef reference, string exactText, InspectionLocation location)
-        { Reference = reference; ExactText = exactText; DisplayText = exactText.Replace("\u2013", " to ").Replace("\u2014", ", "); Location = location; }
+        { Reference = reference; ExactText = exactText; DisplayText = exactText; Location = location; }
     }
     public sealed class Question
     {
@@ -122,6 +122,8 @@ namespace Altaius.Demo02.Domain
         public string RubricDigest { get; }
         internal DocumentPair(TaskDocument task, RubricDocument rubric)
         { TaskVersion = task.Version; RubricVersion = rubric.Version; TaskDigest = task.Digest; RubricDigest = rubric.Digest; }
+        internal DocumentPair(int taskVersion, int rubricVersion, string taskDigest, string rubricDigest)
+        { TaskVersion = taskVersion; RubricVersion = rubricVersion; TaskDigest = taskDigest; RubricDigest = rubricDigest; }
         internal bool Same(DocumentPair other) => other != null && TaskVersion == other.TaskVersion && RubricVersion == other.RubricVersion && TaskDigest == other.TaskDigest && RubricDigest == other.RubricDigest;
     }
     public sealed class CriterionFinding

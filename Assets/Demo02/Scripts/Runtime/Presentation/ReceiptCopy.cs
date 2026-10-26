@@ -20,6 +20,17 @@ namespace Altaius.Demo02.Presentation
     }
     public static class ReceiptCopy
     {
+        public static string ScopeDetails(CommandReceipt receipt)
+        {
+            var scope=receipt.Scope;var e=scope?.Envelope;
+            if(e==null)return E.Get("pair.unavailable","Exact pair unavailable");
+            string unavailable=E.Get("pair.unavailable","Exact pair unavailable");
+            string commandLink=e.Command is RequestRelease release?release.ApprovalReceiptId.ToString():e.Command is ScheduleReply schedule?schedule.RequestId.ToString():e.Command is DecideReview decision?decision.RequestId.ToString():e.Command is AcceptHold hold?hold.RequestId.ToString():"";
+            return E.Format("history.scope.details","Attempt {attempt}\nOriginal {pair}\nTask SHA-256 {task}\nRubric SHA-256 {rubric}\nPayload SHA-256 {payload}\nExpected revision {expected} | Recorded revision {before} to {after}\nContract {rule} | Fixture SHA-256 {fixture}\nLinked approval/request {link}\nCausation {cause} | Opportunity {opportunity}\nReadset\n{readset}\nSource pins\n{sources}",
+                "attempt",e.AttemptId,"pair",Pair(scope.Pair),"task",scope.Pair?.TaskDigest??unavailable,"rubric",scope.Pair?.RubricDigest??unavailable,"payload",receipt.PayloadDigest,
+                "expected",e.ExpectedWorldRevision,"before",receipt.BeforeRevision,"after",receipt.AfterRevision,"rule",e.ScenarioVersion,"fixture",e.FixtureSha256,"link",commandLink,"cause",e.CausationId,"opportunity",e.OpportunityId,
+                "readset",string.Join("\n",e.Readset.Select(p=>p.Key+" = "+p.Value)),"sources",string.Join("\n",e.SourceRefs.Where(p=>p!=null).Select(p=>p.SourceId+" / "+p.Version+" / "+p.PassageId+" / "+p.Sha256)));
+        }
         public static string Pair(DocumentPair pair)=>pair==null?E.Get("pair.unavailable","Exact pair unavailable"):E.Format("pair.label","Task {task} / Rubric {rubric}","task",pair.TaskVersion,"rubric",pair.RubricVersion);
         public static ReceiptWords Describe(CommandReceipt receipt,ReceiptContext context,SessionSnapshot current)
         {

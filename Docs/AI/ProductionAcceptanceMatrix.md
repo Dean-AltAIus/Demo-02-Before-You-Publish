@@ -13,7 +13,7 @@ There are 147 required items, one conditional item, three optional items and fou
 | V | Non-authoritative status/learning cues and exact cabinet state, including reduced/static equivalents. |
 | U | Native compact UI, saved title plaque and workroom shot, four title actions, focused compact loading/cancel/unavailable proof, literal text/inputs, exact receipt states, keyboard focus, three resolutions and optional 200% reflow. The optional buyer card remains unverified. |
 | T | Actual learner commands, immutable records, retest/reset/replay, full spatial presenter and restoration, and final regression status. The optional buyer projection remains unverified. |
-| E | Current 705-entry editable English catalogue with 54 scene bindings, literal single-pass slots, stable control identities, additive authoring and manual-edit persistence. |
+| E | Current 708-entry editable English catalogue with 54 scene bindings, literal single-pass slots, stable control identities, additive authoring and manual-edit persistence. |
 | F | Source Serif 4 font sources and OFL notice, current English readability. Arabic remains gated. |
 | S | Verified existing preparation sources only, not runtime data copies, a populated backend or a live adapter. |
 | B | Saved disabled integration configuration and actual unavailable behavior. |

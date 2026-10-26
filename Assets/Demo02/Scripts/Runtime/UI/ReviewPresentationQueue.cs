@@ -26,6 +26,8 @@ namespace Altaius.Demo02.UI
         public const int Capacity = 8, HistoryCapacity = 64;
         readonly Queue<Job> pending = new Queue<Job>();
         readonly Queue<Settlement> history = new Queue<Settlement>();
+        readonly HashSet<Guid> observed = new HashSet<Guid>();
+        Guid attempt;
         public Job Active { get; private set; }
         public Job Next => pending.Count == 0 ? null : pending.Peek();
         public int PendingCount => pending.Count;
@@ -35,16 +37,23 @@ namespace Altaius.Demo02.UI
         public event Action<Settlement> Settled;
 
         static bool IsRequest(AuditRecord audit) => audit.Receipt.Status == ReceiptStatus.Accepted && audit.Receipt.Action == "review.request";
-        public int DeferredCount(SessionSnapshot snapshot) => snapshot.Audit.Count(a => a.Sequence > Cursor && IsRequest(a));
+        public int DeferredCount(SessionSnapshot snapshot) => snapshot.Audit.Where(a => a.Sequence > Cursor && IsRequest(a) && !observed.Contains(a.Receipt.RequestId)).Select(a => a.Receipt.RequestId).Distinct().Count();
+        void BindAttempt(SessionSnapshot snapshot)
+        {
+            if (attempt == snapshot.AttemptId) return;
+            attempt = snapshot.AttemptId; pending.Clear(); history.Clear(); observed.Clear(); Active = null; Cursor = 0; TotalSettled = 0;
+        }
         public void Observe(SessionSnapshot snapshot)
         {
+            BindAttempt(snapshot);
             foreach (var audit in snapshot.Audit.Where(a => a.Sequence > Cursor).OrderBy(a => a.Sequence))
             {
-                if (IsRequest(audit))
+                if (IsRequest(audit) && !observed.Contains(audit.Receipt.RequestId))
                 {
                     if (pending.Count == Capacity) break;
                     var request = snapshot.ReviewHistory.First(r => r.Id == audit.Receipt.RequestId);
                     pending.Enqueue(new Job(request));
+                    observed.Add(request.Id);
                 }
                 Cursor = audit.Sequence;
             }
@@ -76,12 +85,13 @@ namespace Altaius.Demo02.UI
         }
         public void SettleAll(SessionSnapshot snapshot, string reason)
         {
+            BindAttempt(snapshot);
             Complete(reason);
             while (pending.Count > 0) Record(pending.Dequeue().Id, reason);
             // Explicit interruption settles even accepted requests not yet loaded due to backpressure.
             foreach (var audit in snapshot.Audit.Where(a => a.Sequence > Cursor).OrderBy(a => a.Sequence))
             {
-                if (IsRequest(audit)) Record(audit.Receipt.RequestId, reason);
+                if (IsRequest(audit) && observed.Add(audit.Receipt.RequestId)) Record(audit.Receipt.RequestId, reason);
                 Cursor = audit.Sequence;
             }
         }
