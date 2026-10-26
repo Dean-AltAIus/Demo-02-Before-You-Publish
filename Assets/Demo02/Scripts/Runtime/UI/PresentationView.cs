@@ -162,8 +162,10 @@ namespace Altaius.Demo02.UI
             Text("Onramp.Step1",E.Get("presentationview.openonramp.onramp.step1.heading.inspect.a.selected.folio","Inspect a selected folio"),E.Get("presentationview.openonramp.onramp.step1.body.e.opens.the.selected.work.you","E opens the selected work. You can return without changing it. Open the studio and inspect a current version label."));
             Text("Onramp.Step2",E.Get("presentationview.openonramp.onramp.step2.heading.open.an.empty.annotation","Open an empty annotation"),E.Get("presentationview.openonramp.onramp.step2.body.at.the.experiment.table.inspect.work","At the experiment table, inspect work and an inspected criterion. Your own explanation stays editable."));
             Text("Onramp.Step3",E.Get("presentationview.openonramp.onramp.step3.heading.stage.a.mark.then.cancel","Stage a mark, then cancel"),E.Get("presentationview.openonramp.onramp.step3.body.staging.is.reversible.saving.and.publishing","Staging is reversible. Saving and publishing are different actions. These controls carry no assessment credit."));
-            Action("Onramp.Studio",E.Get("presentationview.openonramp.onramp.studio.caption.open.studio.controls","Open studio controls"),()=>{CloseSurface(false);Gameplay.DirectRoute("studio");});
-            Button(current.Primary,E.Get("presentationview.openonramp.openonramp.caption.continue.to.campus","Continue to campus"),ReturnToCampus);Button(current.Secondary,E.Get("presentationview.openonramp.openonramp.caption.skip.controls","Skip controls"),ReturnToCampus);Finish(E.Get("presentationview.openonramp.openonramp.status.you.can.reopen.controls.from.leena","You can reopen controls from Leena at any time."));
+            if(!titleHelp)Action("Onramp.Studio",E.Get("presentationview.openonramp.onramp.studio.caption.open.studio.controls","Open studio controls"),()=>{CloseSurface(false);Gameplay.DirectRoute("studio");});
+            if(titleHelp)Button(current.Primary,E.Get("presentationview.openbrief.openbrief.caption.back","Back"),OpenTitle);
+            else{Button(current.Primary,E.Get("presentationview.openonramp.openonramp.caption.continue.to.campus","Continue to campus"),ReturnToCampus);Button(current.Secondary,E.Get("presentationview.openonramp.openonramp.caption.skip.controls","Skip controls"),ReturnToCampus);}
+            Finish(E.Get("presentationview.openonramp.openonramp.status.you.can.reopen.controls.from.leena","You can reopen controls from Leena at any time."));
             AfterRendered(helpRow.Body,help.Id,()=>{Lifecycle.Help.Acknowledge(help);Host.NotifyChanged();},true);
         }
         public void OpenConversation(ActorRole role)
@@ -389,7 +391,7 @@ namespace Altaius.Demo02.UI
         public void OpenRoutes(){CloseSurface(false);Workbench.OpenRoutes();}
         public void Back()
         {
-            if(titleHelp&&SurfaceId=="coach"){OpenTitle();return;}
+            if(titleHelp&&(SurfaceId=="coach"||SurfaceId=="onramp")){OpenTitle();return;}
             if(!Overlay.activeSelf){Workbench.Back();return;}
             if(SurfaceId=="settings"){ReturnSettings();return;}
             if(SurfaceId=="confirmation"){if(Pending!=null){if(confirmationKind=="hold")OpenHold();else if(confirmationKind=="review")OpenReviewRequest();else OpenReview();}else if(confirmationReturn=="title")OpenTitle();else Pause();return;}
@@ -398,7 +400,7 @@ namespace Altaius.Demo02.UI
             if(SurfaceId=="reviewRequest"||SurfaceId=="hold"||SurfaceId=="receipt"){OpenReview();return;}if(Lifecycle.Paused){Pause();return;}CloseSurface();
         }
         public void CloseSurface(bool restoreWorkbench=true)
-        {if(TitleStage)TitleStage.Release();Workbench.LeenaDock.gameObject.SetActive(true);Overlay.SetActive(false);SurfaceId="world";EventSystem.current?.SetSelectedGameObject(null);bool restoring=restoreWorkbench&&suspendedWorkbench;if(restoring){Workbench.Window.SetActive(true);suspendedWorkbench=false;}else if(restoreWorkbench)Gameplay.CloseInspection();else{suspendedWorkbench=false;suspendedFocus=null;}Workbench.ApplyInterfaceScale();if(restoring&&suspendedFocus&&suspendedFocus.activeInHierarchy){EventSystem.current?.SetSelectedGameObject(suspendedFocus);if(suspendedFocus.TryGetComponent<InputField>(out var field)){field.Select();field.ActivateInputField();}Workbench.Focus.EnsureVisible(suspendedFocus);}if(restoring)suspendedFocus=null;}
+        {titleHelp=false;if(TitleStage)TitleStage.Release();Workbench.LeenaDock.gameObject.SetActive(true);Overlay.SetActive(false);SurfaceId="world";EventSystem.current?.SetSelectedGameObject(null);bool restoring=restoreWorkbench&&suspendedWorkbench;if(restoring){Workbench.Window.SetActive(true);suspendedWorkbench=false;}else if(restoreWorkbench)Gameplay.CloseInspection();else{suspendedWorkbench=false;suspendedFocus=null;}Workbench.ApplyInterfaceScale();if(restoring&&suspendedFocus&&suspendedFocus.activeInHierarchy){EventSystem.current?.SetSelectedGameObject(suspendedFocus);if(suspendedFocus.TryGetComponent<InputField>(out var field)){field.Select();field.ActivateInputField();}Workbench.Focus.EnsureVisible(suspendedFocus);}if(restoring)suspendedFocus=null;}
         void ReturnToCampus(){suspendedWorkbench=false;Workbench.CloseWindow();CloseSurface(false);}
         public bool SetFieldText(string id,string text)
         {

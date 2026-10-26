@@ -104,6 +104,54 @@ namespace Altaius.Demo02.Tests
         }
 
         [UnityTest, Timeout(120000)]
+        public IEnumerator TitleHelpControlsCannotBypassPracticeSetupOrLeakCoachReturn()
+        {
+            EditorSceneManager.OpenScene(ScenePath);
+            yield return new EnterPlayMode();
+            yield return null;
+            var view = Object.FindFirstObjectByType<PresentationView>();
+            var title = view.Surfaces.Single(x => x.SurfaceId == "title");
+            var coach = view.Surfaces.Single(x => x.SurfaceId == "coach");
+            var onramp = view.Surfaces.Single(x => x.SurfaceId == "onramp");
+            var beforeAttempt = view.Host.Session.Snapshot.AttemptId;
+            var beforeEvidence = view.Host.Session.Snapshot.Evidence.Count;
+
+            title.TitleLayout.CompanionHelp.onClick.Invoke();
+            Assert.That(view.SurfaceId, Is.EqualTo("coach"));
+            coach.Rows.Find("Coach.Onramp").Action.onClick.Invoke();
+            Assert.That(view.SurfaceId, Is.EqualTo("onramp"));
+            Assert.That(onramp.Primary.GetComponentInChildren<UnityEngine.UI.Text>().text, Is.EqualTo("Back"));
+            Assert.That(onramp.Secondary.gameObject.activeInHierarchy, Is.False);
+            Assert.That(onramp.Rows.AuthoredRows.Any(r => r.ControlId == "Onramp.Studio" && r.gameObject.activeInHierarchy), Is.False);
+            onramp.Primary.onClick.Invoke();
+            Assert.That(view.SurfaceId, Is.EqualTo("title"));
+            Assert.That(view.TitleStage.Owned, Is.True);
+            Assert.That(view.Host.Session.Snapshot.AttemptId, Is.EqualTo(beforeAttempt));
+            Assert.That(view.Host.Session.Snapshot.Evidence.Count, Is.EqualTo(beforeEvidence));
+
+            title.TitleLayout.CompanionHelp.onClick.Invoke();
+            coach.Rows.Find("Coach.Onramp").Action.onClick.Invoke();
+            view.Back();
+            Assert.That(view.SurfaceId, Is.EqualTo("title"), "Back from title-origin controls must return to title.");
+            Assert.That(view.Host.Session.Snapshot.AttemptId, Is.EqualTo(beforeAttempt));
+
+            title.Primary.onClick.Invoke();
+            view.Surfaces.Single(x => x.SurfaceId == "brief").Primary.onClick.Invoke();
+            for (var i = 0; i < 3; i++) yield return null;
+            Assert.That(view.SurfaceId, Is.EqualTo("onramp"));
+            Assert.That(onramp.Primary.GetComponentInChildren<UnityEngine.UI.Text>().text, Is.EqualTo("Continue to campus"));
+            onramp.Primary.onClick.Invoke();
+            Assert.That(view.SurfaceId, Is.EqualTo("world"));
+            Assert.That(view.Host.Session.Snapshot.AttemptId, Is.Not.EqualTo(beforeAttempt));
+            Assert.That(view.TitleStage.Owned, Is.False);
+            view.OpenCoach();
+            view.Back();
+            Assert.That(view.SurfaceId, Is.EqualTo("world"), "Later gameplay Coach Back must stay in gameplay.");
+            yield return new ExitPlayMode();
+            Assert.That(EditorSceneManager.GetActiveScene().isDirty, Is.False);
+        }
+
+        [UnityTest, Timeout(120000)]
         public IEnumerator TitleFirstFramesAndNativeKeyboardOwnership()
         {
             EditorSceneManager.OpenScene(ScenePath);
