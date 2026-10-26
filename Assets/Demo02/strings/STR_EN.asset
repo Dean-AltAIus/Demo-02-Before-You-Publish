@@ -271,14 +271,20 @@ MonoBehaviour:
   - Key: presentationview.beginpractice.beginpractice.caption.cancel
     English: Cancel
   - Key: presentationview.beginpractice.beginpractice.heading.preparing.local.practice
-    English: Preparing local practice
+    English: Preparing practice
   - Key: presentationview.beginpractice.beginpractice.status.preparing.a.fresh.temporary.attempt
     English: Preparing a fresh temporary attempt.
   - Key: presentationview.beginpractice.loading.state.body.only.the.admitted.local.catalogue.is
-    English: Only the admitted local catalogue is loaded. No network service is being
-      contacted.
+    English: Your practice stays on this device. No internet connection is needed.
   - Key: presentationview.beginpractice.loading.state.heading.checking.the.local.session
-    English: Checking the local session
+    English: Getting ready
+  - Key: presentationview.loading.unavailable.body
+    English: The practice content is missing. No new attempt was started. Return to
+      the brief.
+  - Key: presentationview.loading.unavailable.detail.heading
+    English: Practice content missing
+  - Key: presentationview.loading.unavailable.heading
+    English: Practice unavailable
   - Key: presentationview.cancelorinspectconversation.cancelorinspectconversation.caption.back.to.conversation
     English: Back to conversation
   - Key: presentationview.cancelorinspectconversation.cancelorinspectconversation.caption.view.timeline

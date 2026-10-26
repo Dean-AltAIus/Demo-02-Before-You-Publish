@@ -41,8 +41,9 @@ namespace Altaius.Demo02.UI
             bool large=scale>=1.5f;var canvas=Frame.GetComponentInParent<Canvas>();var viewport=canvas?(RectTransform)canvas.transform:null;
             float width=viewport?viewport.rect.width:1280,height=viewport?viewport.rect.height:720;appliedScale=scale;lastWidth=width;lastHeight=height;
             bool shortPanel=SurfaceId=="pause"||SurfaceId=="confirmation"||SurfaceId=="loading"||SurfaceId=="title"||SurfaceId=="conversation"||SurfaceId=="settings";
+            bool loading=SurfaceId=="loading";
             Frame.anchorMin=Frame.anchorMax=Frame.pivot=new Vector2(1,1);Frame.anchoredPosition=new Vector2(-14,large?-12:-64);
-            Frame.sizeDelta=new Vector2(large?width-28:(Style?Style.PanelWidth:430),large?height-126:Mathf.Min(shortPanel?(Style?Style.ShortPanelHeight:390):(Style?Style.PanelHeight:500),height-150));
+            Frame.sizeDelta=new Vector2(loading?(large?Mathf.Min(width-28,680):(Style?Style.PanelWidth:430)):(large?width-28:(Style?Style.PanelWidth:430)),loading?(large?Mathf.Min(height-126,390):Mathf.Min(245,height-150)):(large?height-126:Mathf.Min(shortPanel?(Style?Style.ShortPanelHeight:390):(Style?Style.PanelHeight:500),height-150)));
             Heading.fontSize=Mathf.RoundToInt((TitleComposition?(Style?Style.TitleFont:24):(Style?Style.HeadingFont:20))*scale);Status.fontSize=Mathf.RoundToInt((Style?Style.SecondaryFont:12)*scale);
             Heading.alignment=TextAnchor.MiddleLeft;Heading.color=new Color(1,.97f,.87f);
             Heading.rectTransform.offsetMin=new Vector2(large?52:42,large?-62:-38);Heading.rectTransform.offsetMax=new Vector2(large?-100:-72,-6);

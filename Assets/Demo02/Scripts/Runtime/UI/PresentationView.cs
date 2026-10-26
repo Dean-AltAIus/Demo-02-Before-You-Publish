@@ -32,6 +32,7 @@ namespace Altaius.Demo02.UI
         public CommandEnvelope Pending { get; private set; }
         public AuthorityReply LastAuthorityReply { get; private set; }
         PresentationSurface current;SessionMode selectedMode=SessionMode.Independent;
+        int loadingGeneration;
         string settingsCaller="pause",confirmationKind="",confirmationReturn="review";int settingsTab;
         bool suspendedWorkbench;bool conversationRefresh;GameObject suspendedFocus;
         float previousAudioVolume;bool previousAudioPause;
@@ -146,12 +147,22 @@ namespace Altaius.Demo02.UI
         }
         public void BeginPractice()
         {
-            Begin("loading",E.Get("presentationview.beginpractice.beginpractice.heading.preparing.local.practice","Preparing local practice"));Text("Loading.State",E.Get("presentationview.beginpractice.loading.state.heading.checking.the.local.session","Checking the local session"),E.Get("presentationview.beginpractice.loading.state.body.only.the.admitted.local.catalogue.is","Only the admitted local catalogue is loaded. No network service is being contacted."));Button(current.Secondary,E.Get("presentationview.beginpractice.beginpractice.caption.cancel","Cancel"),OpenBrief);Finish(E.Get("presentationview.beginpractice.beginpractice.status.preparing.a.fresh.temporary.attempt","Preparing a fresh temporary attempt."));
-            StartCoroutine(StartLocalPractice());
+            var generation=++loadingGeneration;
+            Begin("loading",E.Get("presentationview.beginpractice.beginpractice.heading.preparing.local.practice","Preparing practice"));Text("Loading.State",E.Get("presentationview.beginpractice.loading.state.heading.checking.the.local.session","Getting ready"),E.Get("presentationview.beginpractice.loading.state.body.only.the.admitted.local.catalogue.is","Your practice stays on this device. No internet connection is needed."));Button(current.Secondary,E.Get("presentationview.beginpractice.beginpractice.caption.cancel","Cancel"),OpenBrief);Finish();
+            StartCoroutine(StartLocalPractice(generation));
         }
-        System.Collections.IEnumerator StartLocalPractice()
+        System.Collections.IEnumerator StartLocalPractice(int generation)
         {
-            yield return null;if(SurfaceId!="loading")yield break;
+            // Keep the saved loading and Cancel surface visible long enough to inspect and use.
+            yield return new WaitForSecondsRealtime(.75f);if(generation!=loadingGeneration||SurfaceId!="loading")yield break;
+            if(!Workbench.English||Workbench.English.Entries==null||Workbench.English.Entries.Length==0||!Host||Host.Session==null)
+            {
+                var heading=E.Get("presentationview.loading.unavailable.heading","Practice unavailable");
+                var body=E.Get("presentationview.loading.unavailable.body","The practice content is missing. No new attempt was started. Return to the brief.");
+                Begin("loading",heading);Text("Loading.Unavailable",E.Get("presentationview.loading.unavailable.detail.heading","Practice content missing"),body);
+                Button(current.Secondary,E.Get("presentationview.beginpractice.beginpractice.caption.cancel","Cancel"),OpenBrief);Finish();
+                yield break;
+            }
             Lifecycle.Reset(false);Host.BeginSession(selectedMode);BindLifecycle();ClearDrafts();CloseSurface(false);OpenOnramp();
         }
         public void OpenOnramp()
