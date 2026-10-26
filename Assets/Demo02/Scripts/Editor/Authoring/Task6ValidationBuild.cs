@@ -29,6 +29,26 @@ namespace Altaius.Demo02.Authoring
             };
             return "Scheduled one validation build at "+output;
         }
+        public static string ScheduleScriptsOnly(string existingOutput,string evidence,string committedRevision)
+        {
+            var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            if(EditorApplication.isPlaying||EditorApplication.isCompiling||BuildPipeline.isBuildingPlayer||scene.isDirty||scene.path!="Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity")throw new InvalidOperationException("Clean stopped campus required.");
+            if(!File.Exists(Path.Combine(existingOutput,"Demo02Validation.exe"))||!Directory.Exists(Path.Combine(existingOutput,"Demo02Validation_Data/Managed"))||Directory.Exists(evidence)||committedRevision.Length!=40)throw new InvalidOperationException("Existing artifact, new evidence directory and exact revision required.");
+            if(EditorUserBuildSettings.activeBuildTarget!=BuildTarget.StandaloneWindows64)throw new InvalidOperationException("Existing Win64 target required.");
+            Directory.CreateDirectory(evidence);File.WriteAllText(Path.Combine(evidence,"started.txt"),DateTime.UtcNow.ToString("O")+"\n"+committedRevision+"\nExactly one same-output scripts-only update; old packed data retained.");
+            File.WriteAllLines(Path.Combine(evidence,"build-settings-before.txt"),EditorBuildSettings.scenes.Select(s=>s.path+"|"+s.enabled));
+            EditorApplication.CallbackFunction callback=null;callback=()=>
+            {
+                EditorApplication.update-=callback;
+                try
+                {
+                    var report=BuildPipeline.BuildPlayer(new BuildPlayerOptions{scenes=new[]{scene.path},locationPathName=Path.Combine(existingOutput,"Demo02Validation.exe"),target=BuildTarget.StandaloneWindows64,targetGroup=BuildTargetGroup.Standalone,options=BuildOptions.Development|BuildOptions.BuildScriptsOnly,extraScriptingDefines=new[]{"DEMO02_VALIDATION"}});
+                    File.WriteAllText(Path.Combine(evidence,"result.json"),JsonUtility.ToJson(new Result{revision=committedRevision,status=report.summary.result.ToString(),errors=report.summary.totalErrors,warnings=report.summary.totalWarnings,seconds=report.summary.totalTime.TotalSeconds,bytes=report.summary.totalSize},true));
+                }
+                catch(Exception e){File.WriteAllText(Path.Combine(evidence,"error.txt"),e.ToString());}
+                finally{File.WriteAllLines(Path.Combine(evidence,"build-settings-after.txt"),EditorBuildSettings.scenes.Select(s=>s.path+"|"+s.enabled));}
+            };EditorApplication.update+=callback;return "Scheduled one scripts-only update";
+        }
         [Serializable]sealed class Result{public string revision,status;public int errors,warnings;public double seconds;public ulong bytes;}
     }
 }

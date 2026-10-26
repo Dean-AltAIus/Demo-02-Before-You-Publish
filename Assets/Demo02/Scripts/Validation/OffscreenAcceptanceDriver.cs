@@ -33,7 +33,11 @@ namespace Altaius.Demo02.Validation
 #if DEMO02_VALIDATION && !UNITY_EDITOR
             var args=Environment.GetCommandLineArgs();int index=Array.IndexOf(args,"-demo2Validation");
             if(index<0)return;
-            if(index+1>=args.Length||!Application.isBatchMode){Application.Quit(2);return;}
+            if(index+1>=args.Length){Application.Quit(2);return;}
+            if(!Application.isBatchMode)
+            {
+                try{ValidateDesktopArguments(args);}catch(Exception e){Debug.LogError(e.Message);Application.Quit(2);return;}
+            }
             var driver=new GameObject("Explicit offscreen acceptance driver").AddComponent<OffscreenAcceptanceDriver>();driver.Output=Path.GetFullPath(args[index+1]);
 #endif
         }
@@ -59,6 +63,8 @@ namespace Altaius.Demo02.Validation
         void Update()
         {
             if(finished)return;
+            if(!Application.isEditor&&!Application.isBatchMode)
+            {try{ValidateDesktopArguments(Environment.GetCommandLineArgs());}catch(Exception e){Finish("FAIL "+e.Message,2);return;}}
             if(Time.realtimeSinceStartupAsDouble-began>600||Time.realtimeSinceStartupAsDouble-lastProgress>150)Finish("FAIL bounded validation timeout, no visible fallback",2);
         }
         IEnumerator Run()
@@ -70,7 +76,7 @@ namespace Altaius.Demo02.Validation
             Require(Screen.width==1920&&Screen.height==1080,"Exact1920x1080 backbuffer required, actual "+Screen.width+"x"+Screen.height);
             hasGraphics=SystemInfo.graphicsDeviceType==GraphicsDeviceType.Direct3D11&&SystemInfo.graphicsDeviceName.Contains("Iris");Require(hasGraphics,"Actual Iris Xe D3D11 graphics device required");
             RenderPipelineManager.beginCameraRendering+=BeginCamera;RenderPipelineManager.endCameraRendering+=EndCamera;
-            File.WriteAllLines(Path.Combine(Output,"conditions.txt"),new[]{DateTime.UtcNow.ToString("O"),"Offscreen Player, not on-screen/compositor/input acceptance",Application.unityVersion,"Development "+Debug.isDebugBuild,"Batch "+Application.isBatchMode,"GPU "+SystemInfo.graphicsDeviceName+" | "+SystemInfo.graphicsDeviceVersion,"CPU "+SystemInfo.processorType,"Quality "+QualitySettings.names[QualitySettings.GetQualityLevel()],"vSync "+QualitySettings.vSyncCount+" target "+Application.targetFrameRate,"Resolution "+Screen.width+"x"+Screen.height,"Skin "+QualitySettings.skinWeights,"Direct routes; normal physical motion; 100percent text; original saved render profile","No capture/readback during timing. GPU timing may be unavailable and is never treated as zero cost."});
+            File.WriteAllLines(Path.Combine(Output,"conditions.txt"),new[]{DateTime.UtcNow.ToString("O"),"Offscreen Player, not on-screen/compositor/input acceptance",Application.unityVersion,"Development "+Debug.isDebugBuild,"Batch "+Application.isBatchMode,"GPU "+SystemInfo.graphicsDeviceName+" | "+SystemInfo.graphicsDeviceVersion,"CPU "+SystemInfo.processorType,"Quality "+QualitySettings.names[QualitySettings.GetQualityLevel()],"vSync "+QualitySettings.vSyncCount+" target "+Application.targetFrameRate,"Resolution "+Screen.width+"x"+Screen.height,"Skin "+QualitySettings.skinWeights,"Direct routes; normal physical motion; 100percent text; original saved render profile","No capture/readback during timing. GPU timing may be unavailable and is never treated as zero cost.",Application.isBatchMode?"Original batch diagnostic":ValidateDesktopArguments(Environment.GetCommandLineArgs()),"Artifact may contain updated runtime scripts with retained e22dc15 packed scene/catalogue data."});
             yield return PrepareCapture("courtyard");yield return Measure("courtyard",null);
             yield return Route("studio");W("Inspect.D02.rubric.v1.naming");W("Primary");yield return Route("experiment");W("Work.W_LIST");yield return Until(()=>!contact.Busy&&contact.QueuedCount==0,30,"work opening");
             yield return PrepareCapture("marking");yield return Measure("marking",()=>W("Criterion.naming"));yield return Until(()=>!contact.Busy&&contact.QueuedCount==0,30,"criterion placement");yield return Capture("marking-after");
@@ -144,6 +150,12 @@ namespace Altaius.Demo02.Validation
         }
         void OnApplicationQuit(){Restore();}
         void OnDestroy(){Restore();}
+        static string ValidateDesktopArguments(string[] args)
+        {
+            int desktop=Array.IndexOf(args,"-demo2IsolatedDesktop"),input=Array.IndexOf(args,"-demo2InputDesktop");
+            if(desktop<0||desktop+1>=args.Length||input<0||input+1>=args.Length)throw new InvalidOperationException("Explicit isolated-desktop arguments required for non-batch validation.");
+            return ValidationDesktopIsolation.Validate(args[desktop+1],args[input+1]);
+        }
     }
 }
 #endif
