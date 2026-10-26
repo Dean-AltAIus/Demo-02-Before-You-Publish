@@ -1,0 +1,420 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7ea0b14d8d48245951db0e62b080ab, type: 3}
+  m_Name: ContactLibrary
+  m_EditorClassIdentifier: 
+  SourceReceipt: SourceArt/Demo02/Exports/ContactLibrary_v023/integration-profile.json
+  Motions:
+  - Id: FolioOpen
+    Approach: {fileID: 7400000, guid: 3496da886232e0348838b857a4763bba, type: 2}
+    Contact: {fileID: 7400000, guid: f7d0350b7f763ee45a47648bdb3c893a, type: 2}
+    Recovery: {fileID: 7400000, guid: 66096ec3cebd1214ba73efd52269f47c, type: 2}
+    ApproachState: D02_Learner_FolioOpenApproach_v013
+    ContactState: D02_Learner_FolioOpen_v013
+    RecoveryState: D02_Learner_FolioOpenRecovery_v013
+    PropKeys:
+    - Time: 0
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0, y: -0, z: -1, w: 0.00000004371139}
+    - Time: 0.033333335
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.020011773, y: -8.7474245e-10, z: -0.9997998, w: 0.000000043702634}
+    - Time: 0.06666667
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.07625497, y: -0.0000000033332106, z: -0.9970884, w: 0.000000043584116}
+    - Time: 0.1
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.16263717, y: -0.0000000071090964, z: -0.98668593, w: 0.000000043129415}
+    - Time: 0.13333334
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.27205634, y: -0.000000011891961, z: -0.96228135, w: 0.000000042062652}
+    - Time: 0.16666667
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.3960798, y: -0.000000017313198, z: -0.9182161, w: 0.000000040136506}
+    - Time: 0.2
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.5251746, y: -0.000000022956112, z: -0.8509945, w: 0.00000003719815}
+    - Time: 0.23333333
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.6495365, y: -0.00000002839214, z: -0.76033044, w: 0.000000033235096}
+    - Time: 0.26666668
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.76033044, y: -0.000000033235096, z: -0.6495365, w: 0.00000002839214}
+    - Time: 0.3
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.8509945, y: -0.00000003719815, z: -0.5251746, w: 0.000000022956112}
+    - Time: 0.33333334
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.9182161, y: -0.000000040136506, z: -0.39607975, w: 0.000000017313196}
+    - Time: 0.36666667
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.96228135, y: -0.00000004206265, z: -0.27205634, w: 0.00000001189196}
+    - Time: 0.4
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.98668593, y: -0.000000043129415, z: -0.16263717, w: 0.0000000071090964}
+    - Time: 0.43333334
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.9970884, y: -0.000000043584116, z: -0.07625497, w: 0.0000000033332106}
+    - Time: 0.46666667
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.9997998, y: -0.000000043702634, z: -0.020011716, w: 8.747399e-10}
+    - Time: 0.5
+      Position: {x: 0.12, y: -0.43, z: 0.831}
+      Rotation: {x: 1, y: 0.00000004371139, z: -0.00000004371139, w: 1.9106855e-15}
+  - Id: FolioClose
+    Approach: {fileID: 7400000, guid: 476db38530bd182408c1a0de5d8471fc, type: 2}
+    Contact: {fileID: 7400000, guid: 801eb7f9777bb8a4493deb0f10e37fa9, type: 2}
+    Recovery: {fileID: 7400000, guid: 9e184fe3860079e43a4a69f081322ef8, type: 2}
+    ApproachState: D02_Learner_FolioCloseApproach_v013
+    ContactState: D02_Learner_FolioClose_v013
+    RecoveryState: D02_Learner_FolioCloseRecovery_v013
+    PropKeys:
+    - Time: 0
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: 1, y: 0.00000004371139, z: -0.00000004371139, w: 1.9106855e-15}
+    - Time: 0.033333335
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.9997998, y: -0.000000043702634, z: -0.020011716, w: 8.747399e-10}
+    - Time: 0.06666667
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.9970884, y: -0.000000043584116, z: -0.07625497, w: 0.0000000033332106}
+    - Time: 0.1
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.98668593, y: -0.000000043129415, z: -0.16263717, w: 0.0000000071090964}
+    - Time: 0.13333334
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.96228135, y: -0.00000004206265, z: -0.27205634, w: 0.00000001189196}
+    - Time: 0.16666667
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.9182161, y: -0.000000040136506, z: -0.39607975, w: 0.000000017313196}
+    - Time: 0.2
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.8509945, y: -0.00000003719815, z: -0.5251746, w: 0.000000022956112}
+    - Time: 0.23333333
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.76033044, y: -0.000000033235096, z: -0.6495365, w: 0.00000002839214}
+    - Time: 0.26666668
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.6495365, y: -0.00000002839214, z: -0.76033044, w: 0.000000033235096}
+    - Time: 0.3
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.5251746, y: -0.000000022956112, z: -0.8509945, w: 0.00000003719815}
+    - Time: 0.33333334
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.3960798, y: -0.000000017313198, z: -0.9182161, w: 0.000000040136506}
+    - Time: 0.36666667
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.27205634, y: -0.000000011891961, z: -0.96228135, w: 0.000000042062652}
+    - Time: 0.4
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.16263717, y: -0.0000000071090964, z: -0.98668593, w: 0.000000043129415}
+    - Time: 0.43333334
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.07625497, y: -0.0000000033332106, z: -0.9970884, w: 0.000000043584116}
+    - Time: 0.46666667
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0.020011773, y: -8.7474245e-10, z: -0.9997998, w: 0.000000043702634}
+    - Time: 0.5
+      Position: {x: -0.12, y: -0.43, z: 0.831}
+      Rotation: {x: -0, y: -0, z: -1, w: 0.00000004371139}
+  - Id: Passage
+    Approach: {fileID: -4977210182361407107, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Contact: {fileID: 3478359819967147419, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Recovery: {fileID: 3304480606461951513, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    ApproachState: D02_Learner_PassageApproach_v013
+    ContactState: D02_Learner_Passage_v013
+    RecoveryState: D02_Learner_PassageRecovery_v013
+    PropKeys:
+    - Time: 0
+      Position: {x: -0.005, y: -0.4215, z: 0.831}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.033333335
+      Position: {x: -0.005, y: -0.4215, z: 0.8398889}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.06666667
+      Position: {x: -0.005, y: -0.4215, z: 0.8621111}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.1
+      Position: {x: -0.005, y: -0.4215, z: 0.891}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.13333334
+      Position: {x: -0.005, y: -0.4215, z: 0.91988885}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.16666667
+      Position: {x: -0.005, y: -0.4215, z: 0.9421111}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.2
+      Position: {x: -0.005, y: -0.4215, z: 0.951}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.23333333
+      Position: {x: -0.022407409, y: -0.41853702, z: 0.9412592}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.26666668
+      Position: {x: -0.065925926, y: -0.41112962, z: 0.91690737}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.3
+      Position: {x: -0.1225, y: -0.4015, z: 0.88525}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.33333334
+      Position: {x: -0.17907406, y: -0.39187038, z: 0.8535926}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.36666667
+      Position: {x: -0.22259259, y: -0.38446295, z: 0.82924074}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.4
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.43333334
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.46666667
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.5
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.53333336
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.56666666
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.6
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+  - Id: PageTurn
+    Approach: {fileID: 8759948641959038513, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Contact: {fileID: 8827367608830457972, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Recovery: {fileID: -3735309565704387048, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    ApproachState: D02_Learner_PageTurnApproach_v013
+    ContactState: D02_Learner_PageTurn_v013
+    RecoveryState: D02_Learner_PageTurnRecovery_v013
+    PropKeys:
+    - Time: 0
+      Position: {x: -0.0050000027, y: -0.4215, z: 0.831}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.033333335
+      Position: {x: -0.0047994703, y: -0.4215, z: 0.83748627}
+      Rotation: {x: 0, y: 0.030901952, z: 0, w: 0.99952245}
+    - Time: 0.06666667
+      Position: {x: -0.0021697134, y: -0.4215, z: 0.85521466}
+      Rotation: {x: 0, y: 0.11609291, z: 0, w: 0.99323833}
+    - Time: 0.1
+      Position: {x: 0.0073982626, y: -0.4215, z: 0.8804966}
+      Rotation: {x: 0, y: 0.24298018, z: 0, w: 0.97003126}
+    - Time: 0.13333334
+      Position: {x: 0.027944624, y: -0.4215, z: 0.9073742}
+      Rotation: {x: 0, y: 0.39607984, z: 0, w: 0.9182161}
+    - Time: 0.16666667
+      Position: {x: 0.060171235, y: -0.4215, z: 0.9281528}
+      Rotation: {x: 0, y: 0.557081, z: 0, w: 0.83045816}
+    - Time: 0.2
+      Position: {x: 0.10000001, y: -0.4215, z: 0.936}
+      Rotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+    - Time: 0.23333333
+      Position: {x: 0.13982877, y: -0.4215, z: 0.9281528}
+      Rotation: {x: 0, y: 0.83045816, z: 0, w: 0.557081}
+    - Time: 0.26666668
+      Position: {x: 0.17205538, y: -0.4215, z: 0.907499}
+      Rotation: {x: 0, y: 0.9182161, z: 0, w: 0.39607975}
+    - Time: 0.3
+      Position: {x: 0.19260174, y: -0.4215, z: 0.88091904}
+      Rotation: {x: 0, y: 0.97003126, z: 0, w: 0.24298023}
+    - Time: 0.33333334
+      Position: {x: 0.20216972, y: -0.4215, z: 0.85599226}
+      Rotation: {x: 0, y: 0.99323833, z: 0, w: 0.11609289}
+    - Time: 0.36666667
+      Position: {x: 0.20479947, y: -0.4215, z: 0.8385615}
+      Rotation: {x: 0, y: 0.99952245, z: 0, w: 0.030901952}
+    - Time: 0.4
+      Position: {x: 0.20500001, y: -0.4215, z: 0.8322}
+      Rotation: {x: -0, y: -1, z: -0, w: 0.00000004371139}
+  - Id: EditionSlide
+    Approach: {fileID: 8377537307277299510, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Contact: {fileID: 6002482992877498758, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Recovery: {fileID: 640628747815828859, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    ApproachState: D02_Learner_EditionSlideApproach_v013
+    ContactState: D02_Learner_EditionSlide_v013
+    RecoveryState: D02_Learner_EditionSlideRecovery_v013
+    PropKeys:
+    - Time: 0
+      Position: {x: -0.24, y: -0.3815, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.033333335
+      Position: {x: -0.24098378, y: -0.38120487, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.06666667
+      Position: {x: -0.2437037, y: -0.3803889, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.1
+      Position: {x: -0.2478125, y: -0.37915626, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.13333334
+      Position: {x: -0.25296295, y: -0.37761113, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.16666667
+      Position: {x: -0.25880787, y: -0.37585765, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.2
+      Position: {x: -0.265, y: -0.374, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.23333333
+      Position: {x: -0.27119213, y: -0.37214237, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.26666668
+      Position: {x: -0.27703702, y: -0.3703889, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.3
+      Position: {x: -0.2821875, y: -0.36884376, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.33333334
+      Position: {x: -0.28629628, y: -0.3676111, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.36666667
+      Position: {x: -0.2890162, y: -0.36679515, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.4
+      Position: {x: -0.29, y: -0.36650002, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.43333334
+      Position: {x: -0.29, y: -0.36650002, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.46666667
+      Position: {x: -0.29, y: -0.36650002, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.5
+      Position: {x: -0.29, y: -0.36650002, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.53333336
+      Position: {x: -0.29, y: -0.36650002, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.56666666
+      Position: {x: -0.29, y: -0.36650002, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+    - Time: 0.6
+      Position: {x: -0.29, y: -0.36650002, z: 0.81949997}
+      Rotation: {x: 0, y: 0, z: 0, w: 1}
+  - Id: PenPoint
+    Approach: {fileID: -8296149539763964460, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Contact: {fileID: -2178740047458306824, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Recovery: {fileID: -6294603350667597778, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    ApproachState: D02_Learner_PenPointApproach_v013
+    ContactState: D02_Learner_PenPoint_v013
+    RecoveryState: D02_Learner_PenPointRecovery_v013
+    PropKeys:
+    - Time: 0
+      Position: {x: -0.239, y: -0.34369043, z: 0.86337173}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.033333335
+      Position: {x: -0.239, y: -0.33819425, z: 0.86784196}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.06666667
+      Position: {x: -0.239, y: -0.33049962, z: 0.8741003}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.1
+      Position: {x: -0.23179883, y: -0.33049962, z: 0.8759708}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.13333334
+      Position: {x: -0.20109913, y: -0.3337973, z: 0.87866277}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.16666667
+      Position: {x: -0.16016617, y: -0.33819425, z: 0.8673995}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.2
+      Position: {x: -0.12434985, y: -0.34204158, z: 0.8418204}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.23333333
+      Position: {x: -0.109, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.26666668
+      Position: {x: -0.1086527, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.3
+      Position: {x: -0.10831596, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.33333334
+      Position: {x: -0.107999995, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.36666667
+      Position: {x: -0.10771442, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.4
+      Position: {x: -0.10746791, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.43333334
+      Position: {x: -0.107267946, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.46666667
+      Position: {x: -0.10712061, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.5
+      Position: {x: -0.107030384, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.53333336
+      Position: {x: -0.107, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.56666666
+      Position: {x: -0.107030384, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.6
+      Position: {x: -0.10712061, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.6333333
+      Position: {x: -0.107267946, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.6666667
+      Position: {x: -0.10746791, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.7
+      Position: {x: -0.10771442, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.73333335
+      Position: {x: -0.107999995, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.76666665
+      Position: {x: -0.10831596, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.8
+      Position: {x: -0.1086527, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.8333333
+      Position: {x: -0.109, y: -0.34369043, z: 0.82837176}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.8666667
+      Position: {x: -0.12434985, y: -0.34204158, z: 0.8418204}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.9
+      Position: {x: -0.16016617, y: -0.33819425, z: 0.8673995}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.93333334
+      Position: {x: -0.20109913, y: -0.3337973, z: 0.87866277}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 0.96666664
+      Position: {x: -0.23179883, y: -0.33049962, z: 0.8759708}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 1
+      Position: {x: -0.239, y: -0.33049962, z: 0.8741003}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 1.0333333
+      Position: {x: -0.239, y: -0.33819425, z: 0.86784196}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+    - Time: 1.0666667
+      Position: {x: -0.239, y: -0.34369043, z: 0.86337173}
+      Rotation: {x: 0.0000000018064126, y: -0.42954484, z: -0.90304554, w: 0.0000000827444}
+  - Id: PacketPresent
+    Approach: {fileID: 7400000, guid: 8752db05a72063c4dac1b7c022c6c868, type: 2}
+    Contact: {fileID: 7189821537600800947, guid: 4ec37bd6474aa344b82df2bde2c9eaf6, type: 3}
+    Recovery: {fileID: 7400000, guid: 8752db05a72063c4dac1b7c022c6c868, type: 2}
+    ApproachState: ContactRest
+    ContactState: D02_Learner_PacketPresent_v013
+    RecoveryState: ContactRest
+    PropKeys: []

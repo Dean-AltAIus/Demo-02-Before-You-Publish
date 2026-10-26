@@ -1,0 +1,48 @@
+{
+  "source": "SourceArt\\Demo02\\UI\\ReviewStillLife_v002\\ReviewStillLife_v002.blend",
+  "states": {
+    "folio": [],
+    "locked": [
+      "Closed authority lock"
+    ],
+    "pending": [
+      "Closed authority lock",
+      "Actual requested review clock"
+    ],
+    "returned": [
+      "Closed authority lock",
+      "Returned document arrow"
+    ],
+    "stale": [
+      "Closed authority lock",
+      "Different current and historical papers"
+    ],
+    "approved": [
+      "Closed authority lock",
+      "Actual accepted receipt seal"
+    ],
+    "released": [
+      "Released open shackle",
+      "Actual accepted receipt seal"
+    ],
+    "held": [
+      "Owned hold marker"
+    ],
+    "unverified-hold": [
+      "Owned hold marker",
+      "Actual requested review clock"
+    ],
+    "unknown": [
+      "Closed authority lock",
+      "Unknown review marker"
+    ],
+    "unavailable": [
+      "Closed authority lock",
+      "Unavailable review marker"
+    ]
+  },
+  "text_baked": false,
+  "rights": "Owned native procedural geometry and materials",
+  "locked_stale_pixels": "Preserved from inspected v001, identical geometry and camera",
+  "status": "Native render variants; Unity state and visual admission required"
+}

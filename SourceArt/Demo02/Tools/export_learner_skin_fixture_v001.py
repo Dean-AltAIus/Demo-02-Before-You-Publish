@@ -27,8 +27,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', type=Path, default=SOURCE)
     parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--poses', nargs='+', help='Optional Take:frame samples, including fractional native frames')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
     source, out = (ROOT / args.source).resolve(), (ROOT / args.output_dir).resolve()
+    poses = [(value.rsplit(':', 1)[0], float(value.rsplit(':', 1)[1])) for value in args.poses] if args.poses else POSES
     if out.exists():
         raise RuntimeError('Preserve existing output directory: ' + str(out))
     before = digest(source)
@@ -46,7 +48,7 @@ def main():
     if (modifier.object != rig or not modifier.use_vertex_groups or modifier.use_bone_envelopes
             or modifier.vertex_group or modifier.use_deform_preserve_volume):
         raise RuntimeError('Changed skinning mode requires renewed fixture admission')
-    for take, frame in POSES:
+    for take, frame in poses:
         action = bpy.data.actions[f'D02_Learner_{take}_v013']
         if not action.frame_range[0] <= frame <= action.frame_range[1]:
             raise RuntimeError('Sample outside action range: ' + take)
@@ -79,11 +81,11 @@ def main():
     index['rest'], wire = capture('rest')
     index['non_surface_vertices'] = wire
     rig.data.pose_position = 'POSE'
-    for take, frame in POSES:
+    for take, frame in poses:
         action = bpy.data.actions[f'D02_Learner_{take}_v013']
         rig.animation_data.action = action
         rig.animation_data.action_slot = action.slots[0]
-        scene.frame_set(frame)
+        scene.frame_set(int(frame), subframe=frame-int(frame))
         record, current_wire = capture(f'{take}-{frame}')
         if current_wire != wire:
             raise RuntimeError('Face topology changed across poses')
@@ -115,7 +117,7 @@ def main():
     if digest(source) != before:
         raise RuntimeError('Source changed during capture')
     (out / 'index.json').write_text(json.dumps(index, indent=2) + '\n', encoding='utf-8')
-    print(json.dumps({'output': str(out), 'vertices': len(body.data.vertices), 'poses': len(POSES),
+    print(json.dumps({'output': str(out), 'vertices': len(body.data.vertices), 'poses': len(poses),
                       'non_surface_vertices': wire, 'maximum_influences': maximum,
                       'source_unchanged': True}), flush=True)
 

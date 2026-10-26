@@ -1,0 +1,17 @@
+{
+    "package": "SourceArt/Demo02/Exports/ExactSkinWeights_v001/ModuleLead/receipt.json",
+    "package_sha256": "8c6c08cd06b7d4eb84b4734815280b07a96ed11c919c83b41892a3d69405cca3",
+    "source": "SourceArt\\Demo02\\Characters\\ModuleLead\\ModuleLead_Interactions_v019.blend",
+    "source_sha256": "01e59cdaa0c4587ae54cde75de36c9ce32042590a57742f6813659bd9b81ad31",
+    "prefab": "Assets/Demo02/Art/NPCInteractions_v001/ModuleLead.prefab",
+    "original_mesh": "Assets/Demo02/Art/NPCInteractions_v001/ModuleLead_Interactions_v019.fbx",
+    "mesh": "Assets/Demo02/Art/ExactNativeSkin_v001/ModuleLead.asset",
+    "native_vertices": 15309,
+    "unity_vertices": 23286,
+    "mapped_native_vertices": 15309,
+    "maximum_requested_influences": 16,
+    "maximum_saved_influences": 16,
+    "maximum_rest_error_m": 3.34861937290043e-7,
+    "maximum_saved_weight_error": 0.00004042093496536836,
+    "contract": "All positive native deform influences mapped by evaluated rest position and bone name. Geometry, UVs, normals, bindposes and editable source rig remain unchanged. Engine weight storage precision is measured, not assumed."
+}

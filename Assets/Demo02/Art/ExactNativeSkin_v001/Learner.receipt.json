@@ -1,0 +1,29 @@
+{
+    "package": "SourceArt/Demo02/Exports/ExactSkinWeights_v001/Learner/receipt.json",
+    "package_sha256": "4f8506dbd16a0fb8b5f531bee6420d7aeb787d4356ceecb9dfa01a37f7952888",
+    "source": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_ContactLibrary_v013.blend",
+    "source_sha256": "a71f315a3da967ec93a3ec037de06f9b31856b150a14677a9406ada33cb523a1",
+    "prefab": "Assets/Demo02/Art/FinalContacts_v009/AcademicLearner.prefab",
+    "original_mesh": "Assets/Demo02/Art/FinalContacts_v009/AcademicLearner_ContactLibrary_v009.fbx",
+    "mesh": "Assets/Demo02/Art/ExactNativeSkin_v001/Learner.asset",
+    "native_vertices": 24179,
+    "unity_vertices": 31974,
+    "mapped_native_vertices": 24169,
+    "maximum_requested_influences": 10,
+    "maximum_saved_influences": 9,
+    "non_surface_vertices": [
+        4820,
+        4970,
+        18272,
+        18273,
+        18274,
+        18275,
+        20510,
+        20511,
+        20878,
+        20879
+    ],
+    "maximum_rest_error_m": 3.279102145370416e-7,
+    "maximum_saved_weight_error": 0.000030279159545898438,
+    "contract": "All positive native deform influences mapped by evaluated rest position and bone name. Geometry, UVs, normals, bindposes and editable source rig remain unchanged. Engine weight storage precision is measured, not assumed."
+}

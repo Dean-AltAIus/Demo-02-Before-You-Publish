@@ -5,7 +5,7 @@ int objects=0,renderers=0,skinned=0,missing=0,labels=0;long triangles=0;int slot
 foreach(var root in scene.GetRootGameObjects()){
  foreach(var t in root.GetComponentsInChildren<UnityEngine.Transform>(true)){objects++;missing+=UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject);}
  foreach(var r in root.GetComponentsInChildren<UnityEngine.Renderer>()){renderers++;slots+=r.sharedMaterials.Length;var skin=r as UnityEngine.SkinnedMeshRenderer;var filter=r.GetComponent<UnityEngine.MeshFilter>();var mesh=skin?skin.sharedMesh:(filter?filter.sharedMesh:null);if(skin)skinned++;if(mesh)for(int i=0;i<mesh.subMeshCount;i++)triangles+=(long)mesh.GetIndexCount(i)/3;}
- foreach(var label in root.GetComponentsInChildren<UnityEngine.TextMesh>()){var renderer=label.GetComponent<UnityEngine.Renderer>();if(renderer.sharedMaterial.shader.name!="Altaius/Demo02/World Text Depth"||!label.GetComponent<Altaius.Demo02.Gameplay.WorldTextAtlasBinding>())throw new System.Exception("Unbound label "+label.name);labels++;}
+ foreach(var label in root.GetComponentsInChildren<UnityEngine.TextMesh>()){var renderer=label.GetComponent<UnityEngine.Renderer>();if(renderer.sharedMaterial.shader.name!="Altaius/Demo02/World Text Depth"||label.GetComponents<Altaius.Demo02.Gameplay.WorldTextAtlasBinding>().Length!=1)throw new System.Exception("Label requires exactly one atlas binding: "+label.name);labels++;}
 }
 report.AppendLine("roots="+scene.rootCount+" objects="+objects+" activeRenderers="+renderers+" activeSkinned="+skinned+" activeMeshTriangles="+triangles+" materialSlots="+slots+" missingScripts="+missing+" depthLabels="+labels);
 UnityEngine.Physics.SyncTransforms();int blocked=0;

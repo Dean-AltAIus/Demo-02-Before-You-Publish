@@ -27,13 +27,17 @@ namespace Altaius.Demo02.Gameplay
         public MonoBehaviour WorkspaceBehaviour;
         public Text WorldPrompt;
         public bool PresenterOwnsInput;
+        public bool ContactOwnsInput { get; private set; }
+        public event Action ContactCancelled;
+        public event Action ContactRouteRequested;
+        public void SetContactInput(bool owned) { ContactOwnsInput=owned; }
         public CampusStation ActiveStation { get; private set; }
         public string SelectedSpecimenId { get; private set; }
         public bool IsComposing { get; private set; }
         public ICampusWorkspace Workspace => WorkspaceBehaviour as ICampusWorkspace;
         public bool Typing => EventSystem.current && EventSystem.current.currentSelectedGameObject &&
             EventSystem.current.currentSelectedGameObject.TryGetComponent<InputField>(out var f) && f.isFocused;
-        public bool WorldOwnsInput => !PresenterOwnsInput && !IsComposing && !Typing && !(Workspace?.IsOpen ?? false);
+        public bool WorldOwnsInput => !ContactOwnsInput && !PresenterOwnsInput && !IsComposing && !Typing && !(Workspace?.IsOpen ?? false);
         Vector2 presenterMove;
         void OnEnable() { if (Keyboard.current != null) Keyboard.current.onIMECompositionChange += Composition; }
         void OnDisable() { if (Keyboard.current != null) Keyboard.current.onIMECompositionChange -= Composition; Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
@@ -54,7 +58,7 @@ namespace Altaius.Demo02.Gameplay
             else if (WorldOwnsInput && keyboard != null)
                 movement = new Vector2((keyboard.dKey.isPressed ? 1 : 0) - (keyboard.aKey.isPressed ? 1 : 0),
                     (keyboard.wKey.isPressed ? 1 : 0) - (keyboard.sKey.isPressed ? 1 : 0));
-            Motor.Move(movement, Time.unscaledDeltaTime);
+            if(!ContactOwnsInput)Motor.Move(movement, Time.unscaledDeltaTime);
             if (WorldOwnsInput && mouse != null && mouse.rightButton.isPressed) CameraRig.Look(mouse.delta.ReadValue());
             if (WorldPrompt && !(Workspace?.IsOpen ?? false))
             {
@@ -65,6 +69,7 @@ namespace Altaius.Demo02.Gameplay
         public void HandleEscape()
         {
             if(IsComposing)return;
+            ContactCancelled?.Invoke();
             // End native field ownership before rebuilding the view. NativeRow also protects
             // the draft if uGUI processed its Escape cancellation earlier in this frame.
             EventSystem.current?.SetSelectedGameObject(null);
@@ -87,6 +92,7 @@ namespace Altaius.Demo02.Gameplay
         {
             var station = Array.Find(Stations, s => s && s.StationId == stationId);
             if (!station || !station.Arrival) return false;
+            ContactRouteRequested?.Invoke();
             CloseInspection(); Motor.GoTo(station.Arrival.position, station.Arrival.rotation); CameraRig.SnapFollow(); return Inspect(station);
         }
         public Passage InspectPassage(string sourceId)

@@ -1,0 +1,49 @@
+{
+  "source": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_ContactLibrary_v023.blend",
+  "source_sha256": "8c5da177af823a5c125fe35a99830b589a5a6540ceee6616aeaac774f32e48ab",
+  "profile": "SourceArt/Demo02/Exports/ContactLibrary_v013/receipt.json",
+  "profile_sha256": "d31302317eeedbdf6176e381d60270200f19cbca8908ee222494c30e80cc5473",
+  "matches_original_source_pin": false,
+  "export": "AcademicLearner_ContactLibrary_v023.fbx",
+  "export_sha256": "731625680d790d2f56dfdf3d2392ae12a4c274d82d05dfd3ea47c3ca02db1df7",
+  "clips": [
+    {
+      "key": "FolioClose",
+      "name": "D02_Learner_FolioClose_v013",
+      "frames": 16,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioCloseRecovery",
+      "name": "D02_Learner_FolioCloseRecovery_v013",
+      "frames": 19,
+      "duration": 0.6
+    }
+  ],
+  "profile_clip_count": 29,
+  "bake_frame_step": 0.125,
+  "samples_per_second": 240.0,
+  "export_fps": 240,
+  "export_frame_scale": 8,
+  "export_ranges": [
+    {
+      "key": "FolioClose",
+      "frames": 121,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioCloseRecovery",
+      "frames": 145,
+      "duration": 0.6
+    }
+  ],
+  "bone_count": 54,
+  "fps": 30,
+  "root_motion": false,
+  "root_policy": "Fixed object roots; runtime motor owns world displacement",
+  "source_frames_checked": 619,
+  "maximum_object_root_matrix_delta": 0.0,
+  "source_saved": false,
+  "historical_actions_exported": false,
+  "status": "Native reexport only. Renew actual Unity surface, contact and playback acceptance after edits."
+}

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc99d8cd37d2cfb4da9aaffb580b8dda, type: 3}
+  m_Name: ReviewArtLibrary
+  m_EditorClassIdentifier: 
+  GenericFolio: {fileID: 21300000, guid: 533a101411e5d524bb81d4e22ccf9f59, type: 3}
+  States:
+  - State: 0
+    Sprite: {fileID: 21300000, guid: 6472ed16dd1ea974d93a2da37fdcfbe4, type: 3}
+  - State: 1
+    Sprite: {fileID: 21300000, guid: 264afe5be5a0c5940861bca904dff18e, type: 3}
+  - State: 2
+    Sprite: {fileID: 21300000, guid: 264afe5be5a0c5940861bca904dff18e, type: 3}
+  - State: 3
+    Sprite: {fileID: 21300000, guid: 4580501d9f169fe42a8c2af0bdc70203, type: 3}
+  - State: 4
+    Sprite: {fileID: 21300000, guid: 665a966c880a9b84281c52f10b0a2ff2, type: 3}
+  - State: 5
+    Sprite: {fileID: 21300000, guid: d97afbee3754579499a92ca666b995d4, type: 3}
+  - State: 6
+    Sprite: {fileID: 21300000, guid: 2574e7bd23c86a94385374061fe91cb7, type: 3}
+  - State: 7
+    Sprite: {fileID: 21300000, guid: 6ac7ca8af88353649b9fb279fbb8593a, type: 3}
+  - State: 8
+    Sprite: {fileID: 21300000, guid: 33dc5eea07a5aeb49b5cd973eadd5fdd, type: 3}
+  - State: 9
+    Sprite: {fileID: 21300000, guid: 6ac7ca8af88353649b9fb279fbb8593a, type: 3}
+  - State: 10
+    Sprite: {fileID: 21300000, guid: e633a23b50739ed4f9e023caacf4d737, type: 3}
+  - State: 11
+    Sprite: {fileID: 21300000, guid: e633a23b50739ed4f9e023caacf4d737, type: 3}
+  - State: 12
+    Sprite: {fileID: 21300000, guid: 706d398d3d5569047a5a6fdc07172e29, type: 3}

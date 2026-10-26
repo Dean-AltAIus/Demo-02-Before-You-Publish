@@ -7,6 +7,7 @@ namespace Altaius.Demo02.UI
     public enum NativeRowKind { Text, Action, Input }
     public sealed class NativeRow : MonoBehaviour
     {
+        public NativeUiStyle Style;
         public NativeRowKind Kind;
         public Text Caption;
         public Text Body;
@@ -46,16 +47,16 @@ namespace Altaius.Demo02.UI
                 if(!Input.wasCanceled)return;
                 cancellationHandled=true;Input.SetTextWithoutNotify(latestDraft);Input.ForceLabelUpdate();
             });
-            if (InputLayout) InputLayout.preferredHeight = (multiline ? 112 : 48) * scale;
+            if (InputLayout) InputLayout.preferredHeight = (multiline ? (Style?Style.MultilineHeight:76) : (Style?Style.InputHeight:34)) * scale;
             ApplyScale(scale);
         }
         public void ApplyScale(float scale)
         {
-            if (Caption) Caption.fontSize = Mathf.RoundToInt(20 * scale);
-            if (Body) Body.fontSize = Mathf.RoundToInt(21 * scale);
-            if (Input) { Input.textComponent.fontSize = Mathf.RoundToInt(21 * scale); if (Input.placeholder is Text p) p.fontSize = Mathf.RoundToInt(21 * scale); }
-            if (Input && InputLayout) InputLayout.preferredHeight=(Input.lineType==InputField.LineType.MultiLineNewline?112:48)*scale;
-            if (ActionLayout) ActionLayout.minHeight = 52 * scale;
+            if (Caption) Caption.fontSize = Mathf.RoundToInt((Style?Style.BodyFont:14) * scale);
+            if (Body) Body.fontSize = Mathf.RoundToInt((Style?Style.BodyFont:14) * scale);
+            if (Input) { Input.textComponent.fontSize = Mathf.RoundToInt((Style?Style.BodyFont:14) * scale); if (Input.placeholder is Text p) p.fontSize = Mathf.RoundToInt((Style?Style.BodyFont:14) * scale); }
+            if (Input && InputLayout) InputLayout.preferredHeight=(Input.lineType==InputField.LineType.MultiLineNewline?(Style?Style.MultilineHeight:76):(Style?Style.InputHeight:34))*scale;
+            if (ActionLayout) ActionLayout.minHeight = (Style?Style.ControlHeight:32) * scale;
         }
     }
 }

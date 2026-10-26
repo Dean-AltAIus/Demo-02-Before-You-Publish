@@ -45,6 +45,8 @@ namespace Altaius.Demo02.Presenter
             if(Dock){Dock.SetActive(true);Dock.transform.SetAsLastSibling();}Checkpoint();RefreshDock();
         }
         void Update()=>Tick(Time.unscaledDeltaTime);
+        float dockScale=-1,dockCanvasWidth=-1;
+        void LateUpdate(){if(!Active||!UI||!UI.Workbench)return;if(Mathf.Abs(dockScale-UI.Workbench.TextScale)>.01f||Mathf.Abs(dockCanvasWidth-((RectTransform)UI.Workbench.HudHeader.parent).rect.width)>1)RefreshDock();UI.Workbench.WorldHelp.gameObject.SetActive(false);UI.TalkLauncher.gameObject.SetActive(false);}
         public void Tick(float deltaTime)
         {
             if(!Active)return;
@@ -158,33 +160,23 @@ namespace Altaius.Demo02.Presenter
         void RefreshDock()
         {
             LayoutDock();string label=Completed?"Complete. Return to your practice.":Paused?"Paused. Draft and step retained.":CurrentStep?.Label??"Starting";if(label.Length>39)label=label.Substring(0,36)+"...";
-            if(Status)Status.text="SYNTHETIC / AUTHORED / OFFLINE\n"+label+"\n"+PresentedSeconds.ToString("0.0")+"s | "+TravelledMetres.ToString("0.0")+"m | no learner evidence";
-            if(Status&&UI.Workbench.TextScale>1&&!Paused)Status.text="AUTHORED / OFFLINE | no evidence";
+            if(Status)Status.text="SYNTHETIC / AUTHORED / OFFLINE\n"+label+"\n"+(Paused||Completed?PresentedSeconds.ToString("0.0")+"s | "+TravelledMetres.ToString("0.0")+"m | ":"")+"No learner evidence";
+            if(Status&&UI.Workbench.TextScale>1)Status.text=Paused?"AUTHORED / OFFLINE\nPaused. Draft retained.\nNo learner evidence":"AUTHORED / OFFLINE | no evidence";
             if(PauseButton)PauseButton.GetComponentInChildren<Text>().text=Paused?"Resume":"Pause";
-            if(Commentary){bool shown=showCommentary&&!string.IsNullOrEmpty(CurrentStep?.BuyerCommentary)&&typingField==null&&UI.SurfaceId!="conversation"&&UI.SurfaceId!="receipt";Commentary.gameObject.SetActive(shown);var backing=Commentary.GetComponent<PresenterCaptionBacking>();if(backing&&backing.Backing)backing.Backing.SetActive(shown);Commentary.text="Buyer commentary\n"+CurrentStep?.BuyerCommentary;}
+            if(Commentary){bool shown=showCommentary&&!string.IsNullOrEmpty(CurrentStep?.BuyerCommentary)&&typingField==null&&!UI.IsOpen;Commentary.gameObject.SetActive(shown);var backing=Commentary.GetComponent<PresenterCaptionBacking>();if(backing&&backing.Backing)backing.Backing.SetActive(shown);Commentary.text="Buyer commentary\n"+CurrentStep?.BuyerCommentary;}
         }
         void LayoutDock()
         {
             if(!Dock||!Status)return;var rect=(RectTransform)Dock.transform;bool panel=UI.IsOpen,large=UI.Workbench.TextScale>1;float scale=UI.Workbench.TextScale;
-            if(Commentary){Commentary.fontSize=Mathf.RoundToInt(17*scale);Commentary.rectTransform.sizeDelta=new Vector2(Mathf.Min(684,350*scale),132*scale);Commentary.GetComponent<PresenterCaptionBacking>()?.Fit();}
-            var controls=new[]{PauseButton,CancelButton,ResetButton,ExitButton,CommentaryButton};foreach(var button in controls)if(button){button.gameObject.SetActive(!large||Paused||button==PauseButton||button==CancelButton);var text=button.GetComponentInChildren<Text>(true);text.fontSize=Mathf.RoundToInt(16*scale);text.rectTransform.anchorMin=Vector2.zero;text.rectTransform.anchorMax=Vector2.one;text.rectTransform.offsetMin=new Vector2(8,0);text.rectTransform.offsetMax=new Vector2(-8,0);}
-            if(large)
-            {
-                rect.anchorMin=new Vector2(.56f,0);rect.anchorMax=new Vector2(.99f,0);rect.pivot=new Vector2(.5f,0);rect.anchoredPosition=new Vector2(0,4);rect.sizeDelta=new Vector2(0,Paused?430:146);
-                Place(Status.rectTransform,12,8,524,Paused?158:62);Status.fontSize=Mathf.RoundToInt(14*scale);
-                for(int i=0;i<controls.Length;i++)if(controls[i])Place((RectTransform)controls[i].transform,i==4?12:12+i%2*266,Paused?180+i/2*76:76,i==4?524:250,64);
-                if(!panel)UI.Workbench.WorldHelp.gameObject.SetActive(false);
-            }
-            else if(panel)
-            {
-                rect.anchorMin=new Vector2(.30f,0);rect.anchorMax=new Vector2(.99f,0);rect.pivot=new Vector2(.5f,0);rect.anchoredPosition=new Vector2(0,4);rect.sizeDelta=new Vector2(0,72);Place(Status.rectTransform,12,5,300,62);Status.fontSize=14;
-                var x=new[]{318f,422,526,630,714};var widths=new[]{100f,100,100,76,158};for(int i=0;i<controls.Length;i++)if(controls[i])Place((RectTransform)controls[i].transform,x[i],16,widths[i],40);
-            }
-            else
-            {
-                rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(16,large?-210:-88);rect.sizeDelta=new Vector2(350,198);Place(Status.rectTransform,12,10,326,80);Status.fontSize=16;
-                if(PauseButton)Place((RectTransform)PauseButton.transform,12,98,100,40);if(CancelButton)Place((RectTransform)CancelButton.transform,122,98,100,40);if(ResetButton)Place((RectTransform)ResetButton.transform,232,98,106,40);if(ExitButton)Place((RectTransform)ExitButton.transform,12,148,100,40);if(CommentaryButton)Place((RectTransform)CommentaryButton.transform,122,148,216,40);
-            }
+            dockScale=scale;dockCanvasWidth=((RectTransform)UI.Workbench.HudHeader.parent).rect.width;float left=Mathf.Max(large?.56f:.30f,(UI.Workbench.LeenaDock.anchoredPosition.x+UI.Workbench.LeenaDock.rect.width+16)/dockCanvasWidth);
+            if(Commentary){Commentary.fontSize=Mathf.RoundToInt(13*scale);Commentary.horizontalOverflow=HorizontalWrapMode.Wrap;Commentary.verticalOverflow=VerticalWrapMode.Overflow;var caption=Commentary.rectTransform;caption.anchorMin=caption.anchorMax=caption.pivot=new Vector2(0,1);caption.anchoredPosition=new Vector2(24,large?-182:-76);caption.sizeDelta=new Vector2(large?Mathf.Min(570,dockCanvasWidth-48):310,0);caption.sizeDelta=new Vector2(caption.sizeDelta.x,Mathf.Max(48,Commentary.preferredHeight+8));Commentary.GetComponent<PresenterCaptionBacking>()?.Fit();}
+            var controls=new[]{PauseButton,CancelButton,ResetButton,ExitButton,CommentaryButton};
+            rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(1,0);rect.anchoredPosition=new Vector2(-14,12);rect.sizeDelta=new Vector2(large?Mathf.Min(640,dockCanvasWidth-370):550,large?128+64*scale:96);
+            float width=rect.rect.width-20;Place(Status.rectTransform,10,6,width,large?96:42);Status.fontSize=Mathf.RoundToInt(12*scale);
+            var widths=new[]{62f,64,62,52,116};float cursor=10;
+            for(int i=0;i<controls.Length;i++)if(controls[i]){controls[i].gameObject.SetActive(true);var text=controls[i].GetComponentInChildren<Text>(true);text.fontSize=Mathf.RoundToInt(12*scale);text.rectTransform.offsetMin=new Vector2(3,0);text.rectTransform.offsetMax=new Vector2(-3,0);float bw=large?(width-12)/3:widths[i];float x=large?10+(i%3)*(bw+6):cursor;float y=large?108+(i/3)*(32*scale+6):54;Place((RectTransform)controls[i].transform,x,y,bw,32*scale);cursor+=bw+6;}
+            if(!panel)UI.Workbench.WorldHelp.gameObject.SetActive(false);
+            if(PauseButton)PauseButton.GetComponentInChildren<Text>().color=new Color(1,.97f,.87f);
         }
         static void Place(RectTransform rect,float x,float y,float width,float height)
         {rect.anchorMin=rect.anchorMax=rect.pivot=new Vector2(0,1);rect.anchoredPosition=new Vector2(x,-y);rect.sizeDelta=new Vector2(width,height);}

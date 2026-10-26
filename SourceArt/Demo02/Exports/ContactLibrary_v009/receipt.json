@@ -1,0 +1,216 @@
+{
+  "source": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_ContactLibrary_v009.blend",
+  "source_sha256": "1328ed5f1bc5043ad4ff5c4c7b39be2029857b9867e061a25e804dbe148de15b",
+  "fbx_sha256": "b66b29faff4ad87080a265cc083624439cd3d7fb0b5e540cb4748195aa80b1b5",
+  "bone_count": 54,
+  "root_motion": false,
+  "source_takes": {
+    "D02_Learner_FolioOpen_skin_v003.001": {
+      "file": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_FolioOpenSkin_v003.blend",
+      "sha256": "fdfefeacd5de73bc3ffbb6a0ee338b5586e7ead81bfed45f29c6cc4e5eebceea",
+      "action": "D02_Learner_FolioOpen_skin_v003"
+    },
+    "D02_Learner_FolioClose_skin_v002": {
+      "file": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_FolioCloseSkin_v002.blend",
+      "sha256": "afc22d8128698a6973d31e1d431188268b4dbbeef6eaf85babb0d904634d5d61",
+      "action": "D02_Learner_FolioClose_skin_v002"
+    },
+    "D02_Learner_SheetTransfer_skin_v004": {
+      "file": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_SheetTransferSkin_v004.blend",
+      "sha256": "b7fcec2bf5de3d0e16c6e12a517ada3f3375992e1958f7ebc8c5426f04b48775",
+      "action": "D02_Learner_SheetTransfer_skin_v004"
+    },
+    "D02_Learner_PageTurn_skin_v002": {
+      "file": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_PageTurnSkin_v002.blend",
+      "sha256": "b04ccde3962f30bffc7cda8d683b28484920fc3d4b8b0d5a98ceef908e044f71",
+      "action": "D02_Learner_PageTurn_skin_v002"
+    },
+    "D02_Learner_EditionSlide_skin_v002": {
+      "file": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_EditionSlideSkin_v002.blend",
+      "sha256": "ac5895da232fcfe83ec06f9201f24e91accd03e28a454c5ce34fc9f730b9cea9",
+      "action": "D02_Learner_EditionSlide_skin_v002"
+    },
+    "D02_Learner_PenPoint_skin_v004": {
+      "file": "SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_PenPointSkin_v004.blend",
+      "sha256": "bd4d3309c7d25d9a65ea8b4f5de310d5a34560704c6b1badd64dffafa56a38c5",
+      "action": "D02_Learner_PenPoint_skin_v004"
+    }
+  },
+  "clips": [
+    {
+      "key": "Idle",
+      "name": "D02_Learner_Idle_v009",
+      "frames": 121,
+      "duration": 4.0
+    },
+    {
+      "key": "Walk",
+      "name": "D02_Learner_Walk_v009",
+      "frames": 30,
+      "duration": 0.9666666666666667
+    },
+    {
+      "key": "FolioOpen",
+      "name": "D02_Learner_FolioOpen_v009",
+      "frames": 16,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioOpenApproach",
+      "name": "D02_Learner_FolioOpenApproach_v009",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "FolioOpenRecovery",
+      "name": "D02_Learner_FolioOpenRecovery_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "FolioClose",
+      "name": "D02_Learner_FolioClose_v009",
+      "frames": 16,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioCloseApproach",
+      "name": "D02_Learner_FolioCloseApproach_v009",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "FolioCloseRecovery",
+      "name": "D02_Learner_FolioCloseRecovery_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "Passage",
+      "name": "D02_Learner_Passage_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "PassageApproach",
+      "name": "D02_Learner_PassageApproach_v009",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "PassageRecovery",
+      "name": "D02_Learner_PassageRecovery_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "PageTurn",
+      "name": "D02_Learner_PageTurn_v009",
+      "frames": 13,
+      "duration": 0.4
+    },
+    {
+      "key": "PageTurnApproach",
+      "name": "D02_Learner_PageTurnApproach_v009",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "PageTurnRecovery",
+      "name": "D02_Learner_PageTurnRecovery_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "EditionSlide",
+      "name": "D02_Learner_EditionSlide_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "EditionSlideApproach",
+      "name": "D02_Learner_EditionSlideApproach_v009",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "EditionSlideRecovery",
+      "name": "D02_Learner_EditionSlideRecovery_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "PenPoint",
+      "name": "D02_Learner_PenPoint_v009",
+      "frames": 33,
+      "duration": 1.0666666666666667
+    },
+    {
+      "key": "PenPointApproach",
+      "name": "D02_Learner_PenPointApproach_v009",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "PenPointRecovery",
+      "name": "D02_Learner_PenPointRecovery_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "PassageLift",
+      "name": "D02_Learner_PassageLift_v009",
+      "frames": 7,
+      "duration": 0.2
+    },
+    {
+      "key": "PassageTransfer",
+      "name": "D02_Learner_PassageTransfer_v009",
+      "frames": 7,
+      "duration": 0.2
+    },
+    {
+      "key": "PassageRelease",
+      "name": "D02_Learner_PassageRelease_v009",
+      "frames": 7,
+      "duration": 0.2
+    },
+    {
+      "key": "PenApproach",
+      "name": "D02_Learner_PenApproach_v009",
+      "frames": 8,
+      "duration": 0.23333333333333334
+    },
+    {
+      "key": "MarkPoint",
+      "name": "D02_Learner_MarkPoint_v009",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "PenRest",
+      "name": "D02_Learner_PenRest_v009",
+      "frames": 8,
+      "duration": 0.23333333333333334
+    },
+    {
+      "key": "Stop",
+      "name": "D02_Learner_Stop_v009",
+      "frames": 8,
+      "duration": 0.23333333333333334
+    },
+    {
+      "key": "Turn",
+      "name": "D02_Learner_Turn_v009",
+      "frames": 9,
+      "duration": 0.26666666666666666
+    },
+    {
+      "key": "PacketPresent",
+      "name": "D02_Learner_PacketPresent_v009",
+      "frames": 45,
+      "duration": 1.4666666666666666
+    }
+  ],
+  "status": "Candidate export. Table audit and motion/contact visual defects block admission; Unity mapping and playback pending."
+}

@@ -1,0 +1,16 @@
+{
+  "source": "SourceArt\\Demo02\\UI\\ReviewStillLife_v001\\ReviewStillLife_v001.blend",
+  "states": [
+    "locked",
+    "pending",
+    "returned",
+    "stale",
+    "approved",
+    "released",
+    "held",
+    "unverified-hold"
+  ],
+  "text_baked": false,
+  "rights": "Owned native procedural geometry and materials",
+  "status": "Representative renders awaiting visual review before remaining variants"
+}

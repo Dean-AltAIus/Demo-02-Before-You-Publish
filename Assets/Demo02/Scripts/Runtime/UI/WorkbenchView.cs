@@ -12,6 +12,7 @@ namespace Altaius.Demo02.UI
     /// <summary>Live native controls bound only to admitted domain projections and own drafts.</summary>
     public sealed class WorkbenchView : MonoBehaviour, ICampusWorkspace
     {
+        public NativeUiStyle Style;
         public CampusGameplayFacade Gameplay;
         public CampusSession Host;
         public GameObject Window;
@@ -38,9 +39,12 @@ namespace Altaius.Demo02.UI
         public string ViewId { get; private set; }
         public ulong BindingGeneration {get;private set;}
         public string SelectedWork { get; private set; }
+        public string InspectedSourceId {get;private set;}
         public string LastEditedControl { get; private set; }
         string previewReturn;
         string passageReturn;
+        Passage visiblePassage;
+        bool showProvenance;
         CampusStation station;
         WorkbenchModel Model => Host.Workbench;
         SessionSnapshot S => Host.Session.Snapshot;
@@ -64,7 +68,7 @@ namespace Altaius.Demo02.UI
         void Begin(string view, string title)
         {
             BindingGeneration++;
-            ViewId = view; Window.SetActive(true); Heading.text = title; Message.text = ""; Rows.Begin();
+            ViewId = view;InspectedSourceId=null; Window.SetActive(true); Heading.text = title; Message.text = ""; Rows.Begin();
             Primary.gameObject.SetActive(false); Secondary.gameObject.SetActive(false);
             Primary.interactable = true; Secondary.interactable = true;
             Primary.onClick.RemoveAllListeners(); Secondary.onClick.RemoveAllListeners();
@@ -136,10 +140,18 @@ namespace Altaius.Demo02.UI
         public void OpenPassage(string sourceId,string returnTo)
         {
             var passage = returnTo == "notebook" ? Host.Session.Inspect(sourceId,InspectionLocation.PortableWorkspace) : Gameplay.InspectPassage(sourceId);
-            passageReturn = returnTo; Begin("passage",sourceId);
-            Text("Passage.Body","Literal passage",passage.DisplayText);
-            Text("Passage.Provenance","Source identity",passage.Reference.SourceId + " | Version " + passage.Reference.Version + "\nPassage " + passage.Reference.PassageId + "\nSHA-256 " + passage.Reference.Sha256);
-            Buttons("Back",()=> { if(returnTo == "notebook") OpenNotebook(); else OpenSourceList(); }); FirstFocus();
+            passageReturn = returnTo;visiblePassage=passage;showProvenance=false;RenderPassage();
+        }
+        void RenderPassage()
+        {
+            var passage=visiblePassage;var source=passage.Reference.SourceId;var item=source.Split('.').Last();
+            string title=source.StartsWith("D02.task.")?"Task "+passage.Reference.Version+" | Question "+item:source.StartsWith("D02.rubric.")?"Rubric "+passage.Reference.Version+" | Criterion "+item:source.StartsWith("W_")?"Work "+source:"Source "+source;
+            Begin("passage",title);InspectedSourceId=source;
+            Text("Passage.Body",source.StartsWith("D02.task.")?"Question "+item:source.StartsWith("D02.rubric.")?"Current criterion":"Literal passage",passage.DisplayText);
+            Text("Passage.Identity","Inspected source",source+" | Version "+passage.Reference.Version+"\nPassage "+passage.Reference.PassageId);
+            Action("Passage.Details",showProvenance?"Hide exact provenance":"View exact provenance",()=>{showProvenance=!showProvenance;RenderPassage();});
+            if(showProvenance)Text("Passage.Provenance","Exact SHA-256",passage.Reference.Sha256);
+            Buttons("Back",()=> { if(passageReturn == "notebook") OpenNotebook(); else OpenSourceList(); });FirstFocus();
         }
         public void OpenNotebook()
         {
@@ -179,7 +191,7 @@ namespace Altaius.Demo02.UI
         {
             Begin("work",work + " | current marking");
             Text("Work.Literal","Literal work | v"+passage.Reference.Version,passage.DisplayText);
-            Text("Work.Total","Saved draft total: " + S.DraftTotal(work) + " / 20", (S.Mode==SessionMode.Presenter?"Authored demonstration hypothesis.":"Learner hypothesis.")+" Evaluation is unverified. Offline evaluation is unavailable for arbitrary prose.");
+            Text("Work.Total","Draft hypothesis: " + S.DraftTotal(work) + " / 20", (S.Mode==SessionMode.Presenter?"Authored demonstration hypothesis.":"Learner hypothesis.")+" Evaluation is unverified. Offline evaluation is unavailable for arbitrary prose.");
             foreach(var c in S.Rubric.Criteria)
             {
                 var criterion = c; bool inspected = S.Notebook.Any(p=>p.Reference.SourceId == WorkbenchModel.CriterionSource(S,c.Id));
@@ -360,41 +372,52 @@ namespace Altaius.Demo02.UI
             Canvas.ForceUpdateCanvases();Scroll.verticalNormalizedPosition=1;
             Message.text="Read the inspected passage and criterion above. Your marking draft is retained below.";
         }
+        float lastHudWidth;
+        float CanvasWidth=>((RectTransform)HudHeader.parent).rect.width;
+        void LateUpdate(){if(HudHeader&&Mathf.Abs(CanvasWidth-lastHudWidth)>1)ApplyInterfaceScale();}
         public void ApplyInterfaceScale()
         {
             if(!HudHeader || !LeenaDock || !WorldHelp)return;
             bool large=TextScale>1f;float scale=TextScale;
-            HudHeader.gameObject.SetActive(!large || !IsOpen);
-            HudHeader.sizeDelta=new Vector2(0,large?202:78);
-            HudTitle.fontSize=Mathf.RoundToInt(23*scale);HudStatus.fontSize=Mathf.RoundToInt(17*scale);
-            Place(HudTitle.rectTransform,18,10,large?1220:410,large?58:30);
-            Place(HudStatus.rectTransform,18,large?70:44,large?1220:510,large?48:24);
+            float canvasWidth=CanvasWidth;lastHudWidth=canvasWidth;
+            bool overlay=Gameplay&&Gameplay.Workspace is PresentationView presentation&&presentation.Overlay&&presentation.Overlay.activeSelf;
+            HudHeader.gameObject.SetActive(!overlay&&(!large || !IsOpen));
+            HudHeader.anchorMin=HudHeader.anchorMax=HudHeader.pivot=new Vector2(0,1);
+            HudHeader.anchoredPosition=new Vector2(14,-12);HudHeader.sizeDelta=large?new Vector2(420,82):(Style?Style.SessionSize:new Vector2(282,46));
+            HudTitle.fontSize=Mathf.RoundToInt((Style?Style.HeadingFont-4:16)*scale);HudStatus.fontSize=Mathf.RoundToInt((Style?Style.SecondaryFont:12)*scale);
+            Place(HudTitle.rectTransform,10,4,large?400:262,large?34:22);
+            Place(HudStatus.rectTransform,10,large?40:26,large?400:262,large?34:16);
             var buttons=new[]{RoutesButton,NotebookButton,HistoryButton,TextSizeButton,PauseButton};
-            var normalX=new[]{560f,692,840,972,1132};var normalWidth=new[]{120f,136,120,148,130};
-            var largeX=new[]{18f,230,478,690,998};var largeWidth=new[]{200f,236,200,296,264};
+            var widths=new[]{64f,84f,70f,88f,60f};float total=widths.Sum()*scale+24;
+            float x=canvasWidth-total-28,y=0;
+            if(large&&x<440){x=0;y=94;}
             for(int i=0;i<buttons.Length;i++)if(buttons[i])
-            {buttons[i].GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(20*scale);Place((RectTransform)buttons[i].transform,large?largeX[i]:normalX[i],large?122:20,large?largeWidth[i]:normalWidth[i],large?68:40);}
-            LeenaDock.sizeDelta=large?new Vector2(684,146):new Vector2(342,112);
-            LeenaIdentity.fontSize=Mathf.RoundToInt(21*scale);LeenaStatus.fontSize=Mathf.RoundToInt(17*scale);
-            Place(LeenaIdentity.rectTransform,112,large?10:20,large?558:220,large?54:32);
-            Place(LeenaStatus.rectTransform,112,large?62:58,large?558:220,large?82:40);
-            WorldHelp.gameObject.SetActive(!IsOpen);
-            WorldHelp.anchorMin=new Vector2(large?.56f:.29f,0);WorldHelp.anchorMax=new Vector2(.99f,0);WorldHelp.sizeDelta=new Vector2(0,large?128:48);
-            Gameplay.WorldPrompt.fontSize=Mathf.RoundToInt(18*scale);
-            var wr=(RectTransform)Window.transform;wr.anchorMin=new Vector2(large?.015f:.30f,0);wr.anchorMax=new Vector2(.99f,1);
-            wr.offsetMin=new Vector2(0,large?152:76);wr.offsetMax=new Vector2(0,large?-12:-90);
-            Heading.fontSize=Mathf.RoundToInt(27*scale);PairLabel.fontSize=Mathf.RoundToInt(17*scale);Message.fontSize=Mathf.RoundToInt(17*scale);
-            Heading.rectTransform.offsetMin=new Vector2(20,large?-76:-44);Heading.rectTransform.offsetMax=new Vector2(large?-110:-66,-10);
-            PairLabel.rectTransform.offsetMin=new Vector2(20,large?-124:-72);PairLabel.rectTransform.offsetMax=new Vector2(-20,large?-82:-46);
-            var closeRect=(RectTransform)Close.transform;closeRect.sizeDelta=large?new Vector2(80,68):new Vector2(44,40);Close.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(20*scale);
-            var scrollRect=(RectTransform)Scroll.transform;scrollRect.offsetMin=new Vector2(16,large?218:132);scrollRect.offsetMax=new Vector2(-16,large?-132:-80);
-            Message.rectTransform.offsetMin=new Vector2(20,large?102:64);Message.rectTransform.offsetMax=new Vector2(-20,large?210:124);
+            {float width=widths[i]*scale;var label=buttons[i].GetComponentInChildren<Text>();label.fontSize=Mathf.RoundToInt((Style?Style.ControlFont:13)*scale);label.rectTransform.offsetMin=new Vector2(4,0);label.rectTransform.offsetMax=new Vector2(-4,0);Place((RectTransform)buttons[i].transform,x,y,width,(Style?Style.ControlHeight:32)*scale);x+=width+6;}
+            LeenaDock.sizeDelta=large?new Vector2(330,100):(Style?Style.LeenaSize:new Vector2(200,62));
+            LeenaIdentity.fontSize=Mathf.RoundToInt((Style?Style.BodyFont:14)*scale);LeenaStatus.fontSize=Mathf.RoundToInt((Style?Style.SecondaryFont:12)*scale);
+            Place(LeenaIdentity.rectTransform,large?84:60,8,large?238:132,22*scale);
+            Place(LeenaStatus.rectTransform,large?84:60,large?48:32,large?238:132,large?44:24);
+            var leena=LeenaDock.GetComponent<LeenaHudProjection>();
+            if(leena){if(leena.Portrait)Place(leena.Portrait.rectTransform,6,6,large?70:48,large?86:50);if(leena.CanonicalFallback)Place(leena.CanonicalFallback.rectTransform,6,6,large?70:48,large?86:50);}
+            WorldHelp.gameObject.SetActive(!IsOpen&&!overlay&&(!Gameplay||!Gameplay.PresenterOwnsInput));
+            WorldHelp.anchorMin=WorldHelp.anchorMax=new Vector2(.5f,0);WorldHelp.pivot=new Vector2(.5f,0);WorldHelp.anchoredPosition=new Vector2(0,12);WorldHelp.sizeDelta=new Vector2(large?460:430,large?74:32);
+            if(Gameplay&&Gameplay.WorldPrompt)Gameplay.WorldPrompt.fontSize=Mathf.RoundToInt((Style?Style.SecondaryFont:12)*scale);
+            var wr=(RectTransform)Window.transform;wr.anchorMin=wr.anchorMax=wr.pivot=new Vector2(1,1);
+            wr.anchoredPosition=new Vector2(-14,large?-12:-64);wr.sizeDelta=new Vector2(large?canvasWidth-28:(Style?Style.WorkspaceWidth:450),large?((RectTransform)HudHeader.parent).rect.height-126:Mathf.Min(ViewId=="task"||ViewId=="rubric"||ViewId=="mark"||ViewId=="preview"?(Style?Style.PanelHeight:500):390,((RectTransform)HudHeader.parent).rect.height-150));
+            Heading.fontSize=Mathf.RoundToInt((Style?Style.HeadingFont:20)*scale);PairLabel.fontSize=Mathf.RoundToInt((Style?Style.SecondaryFont:12)*scale);Message.fontSize=Mathf.RoundToInt((Style?Style.SecondaryFont:12)*scale);
+            Heading.rectTransform.offsetMin=new Vector2(12,large?-58:-34);Heading.rectTransform.offsetMax=new Vector2(large?-90:-50,-6);
+            PairLabel.rectTransform.offsetMin=new Vector2(12,large?-94:-54);PairLabel.rectTransform.offsetMax=new Vector2(-12,large?-60:-36);
+            var closeRect=(RectTransform)Close.transform;closeRect.sizeDelta=new Vector2(32*scale,30*scale);Close.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt((Style?Style.BodyFont:14)*scale);var closeText=Close.GetComponentInChildren<Text>();closeText.alignment=TextAnchor.MiddleCenter;closeText.rectTransform.offsetMin=Vector2.zero;closeText.rectTransform.offsetMax=Vector2.zero;
+            var scrollRect=(RectTransform)Scroll.transform;scrollRect.offsetMin=new Vector2(12,large?154:92);scrollRect.offsetMax=new Vector2(-12,large?-100:-60);
+            Message.rectTransform.offsetMin=new Vector2(12,large?76:48);Message.rectTransform.offsetMax=new Vector2(-12,large?148:86);
             var first=(RectTransform)Primary.transform;var second=(RectTransform)Secondary.transform;
-            first.offsetMin=new Vector2(20,12);first.offsetMax=new Vector2(-8,large?92:56);second.offsetMin=new Vector2(8,12);second.offsetMax=new Vector2(-20,large?92:56);
-            PrimaryText.fontSize=Mathf.RoundToInt(20*scale);SecondaryText.fontSize=Mathf.RoundToInt(20*scale);
-            if(WorkspaceTextSizeButton){WorkspaceTextSizeButton.gameObject.SetActive(large&&IsOpen);WorkspaceTextSizeButton.GetComponentInChildren<Text>().text="Text "+Mathf.RoundToInt(scale*100)+"%";WorkspaceTextSizeButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(16*scale);}
-            if(MarkContextPanel)MarkContextPanel.SetActive(ViewId=="mark" && IsOpen && !large);
-            if(MarkContextButton){MarkContextButton.gameObject.SetActive(ViewId=="mark" && IsOpen && large);MarkContextButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt(16*scale);}
+            first.offsetMin=new Vector2(12,10);first.offsetMax=new Vector2(-4,large?70:42);second.offsetMin=new Vector2(4,10);second.offsetMax=new Vector2(-12,large?70:42);
+            PrimaryText.fontSize=Mathf.RoundToInt((Style?Style.BodyFont:14)*scale);SecondaryText.fontSize=Mathf.RoundToInt((Style?Style.BodyFont:14)*scale);
+            if(WorkspaceTextSizeButton){WorkspaceTextSizeButton.gameObject.SetActive(large&&IsOpen);WorkspaceTextSizeButton.GetComponentInChildren<Text>().text="Text "+Mathf.RoundToInt(scale*100)+"%";WorkspaceTextSizeButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt((Style?Style.ControlFont:13)*scale);}
+            // Literal work and criterion are the first scroll rows. One context action
+            // returns to those rows instead of covering the actor with a second panel.
+            if(MarkContextPanel)MarkContextPanel.SetActive(false);
+            if(MarkContextButton){MarkContextButton.gameObject.SetActive(ViewId=="mark"&&IsOpen);var r=(RectTransform)MarkContextButton.transform;r.anchorMin=r.anchorMax=r.pivot=Vector2.zero;r.anchoredPosition=new Vector2(large?358:226,18);r.sizeDelta=new Vector2(128*scale,32*scale);MarkContextButton.GetComponentInChildren<Text>().text="Read context";MarkContextButton.GetComponentInChildren<Text>().fontSize=Mathf.RoundToInt((Style?Style.ControlFont:13)*scale);}
             foreach(var row in Rows.GetComponentsInChildren<NativeRow>(true))row.ApplyScale(scale);
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)Rows.transform);
         }

@@ -1,0 +1,261 @@
+{
+  "current_editable_master": "SourceArt/Demo02/Characters/Learner/AcademicLearner_ContactLibrary_v019.blend",
+  "current_master_sha256": "885889b3edbdc2bf5f6520e4ce058326c6e73c37a67bb912b7563dd36f5e8540",
+  "logical_take_suffix": "v013 identifiers retained for existing graph bindings",
+  "revised_export": "SourceArt/Demo02/Exports/ContactLibrary_v019/AcademicLearner_ContactLibrary_v019.fbx",
+  "revised_export_sha256": "0ddeb8eaee95bd656945c7d329ec8649b3078649d5c1937b99e7bd8b557f1170",
+  "retained_export": "SourceArt/Demo02/Exports/ContactLibrary_v013/AcademicLearner_ContactLibrary_v013.fbx",
+  "retained_export_sha256": "43d7bb68d1896ca9b0ebf719c4a7589c03e9899a4b0e00f61ceebc1f702acdc6",
+  "prop_tracks": "SourceArt/Demo02/Exports/ContactPropTracks_v005/native-prop-tracks.json",
+  "prop_tracks_sha256": "bccf12d2719781038eea18b1b9e4700554401807ae2cea4a8bf150554beb9e09",
+  "root_motion": false,
+  "reexport_arguments": "--source SourceArt/Demo02/Characters/Learner/AcademicLearner_ContactLibrary_v019.blend --takes FolioOpen FolioOpenApproach FolioOpenRecovery FolioClose FolioCloseApproach FolioCloseRecovery --output-dir <new-folder>",
+  "baseline_reproduction": "Explicit --source AcademicLearner_ContactLibrary_v013.blend retains the original 29-take profile at 30 Hz.",
+  "clips": [
+    {
+      "key": "Idle",
+      "name": "D02_Learner_Idle_v013",
+      "duration": 4.0,
+      "native_frames": 121,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "Walk",
+      "name": "D02_Learner_Walk_v013",
+      "duration": 0.9666666666666667,
+      "native_frames": 30,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "FolioOpen",
+      "name": "D02_Learner_FolioOpen_v013",
+      "duration": 0.5,
+      "native_frames": 16,
+      "export": "Assets/Demo02/Art/FinalContacts_v019/AcademicLearner_ContactLibrary_v019.fbx",
+      "export_fps": 240,
+      "bound_clip": "Assets/Demo02/Art/FinalContacts_v019/NativeLinearClips/D02_Learner_FolioOpen_v013.anim"
+    },
+    {
+      "key": "FolioOpenApproach",
+      "name": "D02_Learner_FolioOpenApproach_v013",
+      "duration": 0.6333333333333333,
+      "native_frames": 20,
+      "export": "Assets/Demo02/Art/FinalContacts_v019/AcademicLearner_ContactLibrary_v019.fbx",
+      "export_fps": 240,
+      "bound_clip": "Assets/Demo02/Art/FinalContacts_v019/NativeLinearClips/D02_Learner_FolioOpenApproach_v013.anim"
+    },
+    {
+      "key": "FolioOpenRecovery",
+      "name": "D02_Learner_FolioOpenRecovery_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v019/AcademicLearner_ContactLibrary_v019.fbx",
+      "export_fps": 240,
+      "bound_clip": "Assets/Demo02/Art/FinalContacts_v019/NativeLinearClips/D02_Learner_FolioOpenRecovery_v013.anim"
+    },
+    {
+      "key": "FolioClose",
+      "name": "D02_Learner_FolioClose_v013",
+      "duration": 0.5,
+      "native_frames": 16,
+      "export": "Assets/Demo02/Art/FinalContacts_v019/AcademicLearner_ContactLibrary_v019.fbx",
+      "export_fps": 240,
+      "bound_clip": "Assets/Demo02/Art/FinalContacts_v019/NativeLinearClips/D02_Learner_FolioClose_v013.anim"
+    },
+    {
+      "key": "FolioCloseApproach",
+      "name": "D02_Learner_FolioCloseApproach_v013",
+      "duration": 0.6333333333333333,
+      "native_frames": 20,
+      "export": "Assets/Demo02/Art/FinalContacts_v019/AcademicLearner_ContactLibrary_v019.fbx",
+      "export_fps": 240,
+      "bound_clip": "Assets/Demo02/Art/FinalContacts_v019/NativeLinearClips/D02_Learner_FolioCloseApproach_v013.anim"
+    },
+    {
+      "key": "FolioCloseRecovery",
+      "name": "D02_Learner_FolioCloseRecovery_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v019/AcademicLearner_ContactLibrary_v019.fbx",
+      "export_fps": 240,
+      "bound_clip": "Assets/Demo02/Art/FinalContacts_v019/NativeLinearClips/D02_Learner_FolioCloseRecovery_v013.anim"
+    },
+    {
+      "key": "Passage",
+      "name": "D02_Learner_Passage_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PassageApproach",
+      "name": "D02_Learner_PassageApproach_v013",
+      "duration": 0.6333333333333333,
+      "native_frames": 20,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PassageRecovery",
+      "name": "D02_Learner_PassageRecovery_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PageTurn",
+      "name": "D02_Learner_PageTurn_v013",
+      "duration": 0.4,
+      "native_frames": 13,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PageTurnApproach",
+      "name": "D02_Learner_PageTurnApproach_v013",
+      "duration": 0.6333333333333333,
+      "native_frames": 20,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PageTurnRecovery",
+      "name": "D02_Learner_PageTurnRecovery_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "EditionSlide",
+      "name": "D02_Learner_EditionSlide_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "EditionSlideApproach",
+      "name": "D02_Learner_EditionSlideApproach_v013",
+      "duration": 0.6333333333333333,
+      "native_frames": 20,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "EditionSlideRecovery",
+      "name": "D02_Learner_EditionSlideRecovery_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PenPoint",
+      "name": "D02_Learner_PenPoint_v013",
+      "duration": 1.0666666666666667,
+      "native_frames": 33,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PenPointApproach",
+      "name": "D02_Learner_PenPointApproach_v013",
+      "duration": 0.6333333333333333,
+      "native_frames": 20,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PenPointRecovery",
+      "name": "D02_Learner_PenPointRecovery_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PassageLift",
+      "name": "D02_Learner_PassageLift_v013",
+      "duration": 0.2,
+      "native_frames": 7,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PassageTransfer",
+      "name": "D02_Learner_PassageTransfer_v013",
+      "duration": 0.2,
+      "native_frames": 7,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PassageRelease",
+      "name": "D02_Learner_PassageRelease_v013",
+      "duration": 0.2,
+      "native_frames": 7,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PenApproach",
+      "name": "D02_Learner_PenApproach_v013",
+      "duration": 0.23333333333333334,
+      "native_frames": 8,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "MarkPoint",
+      "name": "D02_Learner_MarkPoint_v013",
+      "duration": 0.6,
+      "native_frames": 19,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PenRest",
+      "name": "D02_Learner_PenRest_v013",
+      "duration": 0.23333333333333334,
+      "native_frames": 8,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "Stop",
+      "name": "D02_Learner_Stop_v013",
+      "duration": 0.23333333333333334,
+      "native_frames": 8,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "Turn",
+      "name": "D02_Learner_Turn_v013",
+      "duration": 0.26666666666666666,
+      "native_frames": 9,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    },
+    {
+      "key": "PacketPresent",
+      "name": "D02_Learner_PacketPresent_v013",
+      "duration": 1.4666666666666666,
+      "native_frames": 45,
+      "export": "Assets/Demo02/Art/FinalContacts_v013/AcademicLearner_ContactLibrary_v013.fbx",
+      "export_fps": 30
+    }
+  ],
+  "unity_interpolation": "Independent editable NativeLinearClips derivatives. Linear tangents match dense native curves; original imported FBX cubic tangents are retained but not bound.",
+  "unity_derivation_recipe": "Task5FolioRevisionAuthoring.DeriveLinearOnce(19)",
+  "verified_surface": "27 complete actual Unity BakeMesh poses including half keys; 31,974 mapped imported vertices; maximum error 0.000004854601 metres. Playback pending.",
+  "revised_export_receipt": "SourceArt/Demo02/Exports/ContactLibrary_v019/receipt.json",
+  "revised_export_receipt_sha256": "9a1a3124e16034c194a65491cc7476fd19674aded3f381b28f94d4fcd339384b",
+  "retained_export_receipt": "SourceArt/Demo02/Exports/ContactLibrary_v013/receipt.json",
+  "retained_export_receipt_sha256": "d31302317eeedbdf6176e381d60270200f19cbca8908ee222494c30e80cc5473"
+}

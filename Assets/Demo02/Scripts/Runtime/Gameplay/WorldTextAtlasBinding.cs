@@ -4,6 +4,7 @@ namespace Altaius.Demo02.Gameplay
 {
     /// <summary>Keeps a depth-tested world label bound to its dynamic font atlas.</summary>
     [ExecuteAlways]
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(TextMesh), typeof(MeshRenderer))]
     public sealed class WorldTextAtlasBinding : MonoBehaviour
     {

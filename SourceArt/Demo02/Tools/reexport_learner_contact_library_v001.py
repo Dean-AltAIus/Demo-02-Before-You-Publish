@@ -1,4 +1,4 @@
-"""Reexport the edited v013 learner master without regenerating or saving it.
+"""Reexport an explicitly selected learner master without regenerating or saving it.
 
 Run in isolated Blender with --factory-startup --python-exit-code 1, then this
 script and -- --output-dir LocalOnly/Validation/NewLearnerExport.
@@ -32,6 +32,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', type=Path, default=SOURCE)
     parser.add_argument('--output-dir', type=Path, required=True)
+    parser.add_argument('--takes', nargs='+', help='Optional logical take keys for a bounded clip revision')
+    parser.add_argument('--bake-step', type=float, help='Native frame step; may not omit required fractional source keys')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else [])
     source = (ROOT / args.source).resolve()
     out = (ROOT / args.output_dir).resolve()
@@ -47,6 +49,15 @@ def main():
     bpy.ops.wm.open_mainfile(filepath=str(source))
     scene = bpy.data.scenes['Demo02_LearnerRig_v001']
     bpy.context.window.scene = scene
+    required_step = float(scene.get('required_fbx_bake_step', 1))
+    bake_step = args.bake_step if args.bake_step is not None else required_step
+    if not 0 < bake_step <= min(1, required_step):
+        raise RuntimeError('Bake step would omit required source keys or is invalid')
+    selected = set(args.takes) if args.takes else TAKES
+    if not selected or not selected.issubset(TAKES):
+        raise RuntimeError('Unknown logical take selection')
+    exported_clips = [clip for clip in clips if clip['key'] in selected]
+    exported_names = {clip['name'] for clip in exported_clips}
     if scene.render.fps != 30 or scene.render.fps_base != 1:
         raise RuntimeError('Preserve the current 30fps timing contract')
     rig = bpy.data.objects['AcademicLearner_EditableRig']
@@ -83,9 +94,25 @@ def main():
         raise RuntimeError('Object roots moved; preserve motor-owned world translation')
     # Remove historical takes only in this isolated in-memory copy.
     for action in list(bpy.data.actions):
-        if action.name not in names:
+        if action.name not in exported_names:
             bpy.data.actions.remove(action)
-    idle = bpy.data.actions['D02_Learner_Idle_v013']
+    # Retiming this private export copy to integer high-rate frames avoids an
+    # importer silently resampling dense fractional keys back to a 30 Hz file.
+    frame_scale = round(1 / bake_step)
+    if abs(frame_scale * bake_step - 1) > 1e-7:
+        raise RuntimeError('Bake step must be a reciprocal integer frame rate')
+    if frame_scale != 1:
+        for action in bpy.data.actions:
+            for layer in action.layers:
+                for strip in layer.strips:
+                    for bag in strip.channelbags:
+                        for curve in bag.fcurves:
+                            for key in curve.keyframe_points:
+                                key.co.x = (key.co.x - 1) * frame_scale + 1
+                                key.handle_left.x = (key.handle_left.x - 1) * frame_scale + 1
+                                key.handle_right.x = (key.handle_right.x - 1) * frame_scale + 1
+        scene.render.fps = 30 * frame_scale
+    idle = bpy.data.actions[exported_clips[0]['name']]
     rig.animation_data.action = idle
     rig.animation_data.action_slot = idle.slots[0]
     scene.frame_set(1)
@@ -96,7 +123,7 @@ def main():
         obj.select_set(True)
     bpy.context.view_layer.objects.active = rig
     out.mkdir(parents=True)
-    target = out / 'AcademicLearner_ContactLibrary_v013.fbx'
+    target = out / (source.stem + '.fbx')
     bpy.ops.export_scene.fbx(
         filepath=str(target), use_selection=True, object_types={'EMPTY', 'ARMATURE', 'MESH'},
         apply_unit_scale=True, apply_scale_options='FBX_SCALE_UNITS', axis_forward='-Z', axis_up='Y',
@@ -111,7 +138,12 @@ def main():
         'source': str(source), 'source_sha256': before,
         'profile': PROFILE.relative_to(ROOT).as_posix(), 'profile_sha256': digest(PROFILE),
         'matches_original_source_pin': before == profile['source_sha256'],
-        'export': target.name, 'export_sha256': digest(target), 'clips': clips,
+        'export': target.name, 'export_sha256': digest(target), 'clips': exported_clips,
+        'profile_clip_count': len(clips), 'bake_frame_step': bake_step,
+        'samples_per_second': 30 / bake_step,
+        'export_fps': scene.render.fps, 'export_frame_scale': frame_scale,
+        'export_ranges': [{'key': clip['key'], 'frames': (clip['frames'] - 1) * frame_scale + 1,
+                           'duration': clip['duration']} for clip in exported_clips],
         'bone_count': len(rig.data.bones), 'fps': 30, 'root_motion': False,
         'root_policy': 'Fixed object roots; runtime motor owns world displacement',
         'source_frames_checked': samples, 'maximum_object_root_matrix_delta': max_root_delta,
@@ -119,7 +151,7 @@ def main():
         'status': 'Native reexport only. Renew actual Unity surface, contact and playback acceptance after edits.',
     }
     (out / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
-    print(json.dumps({'export': str(target), 'clips': len(clips), 'frames': samples,
+    print(json.dumps({'export': str(target), 'clips': len(exported_clips), 'frames': samples,
                       'root_delta': max_root_delta, 'source_unchanged': True}), flush=True)
 
 

@@ -65,7 +65,7 @@ namespace Altaius.Demo02.UI
             if(Workbench.TextScale!=Scale&&!(Overlay&&Overlay.activeSelf)){Applied.TextScale=Workbench.TextScale;}
             if(Lifecycle.Dispatch.Tick(Time.unscaledTime,Lifecycle.Paused)&&SurfaceId=="conversation")RenderConversation();
             if(conversationRefresh&&SurfaceId=="conversation"){conversationRefresh=false;UpdateConversationStatus();}
-            Workbench.LeenaStatus.text=Workbench.TextScale>1.5f?"Offline | Voice unavailable":"Offline | "+(SurfaceId=="coach"?"Help open":"Ask Leena")+" | Voice unavailable";
+            Workbench.LeenaStatus.text="Offline | "+(SurfaceId=="coach"?"Help open":"Ask Leena");
             TalkLauncher.gameObject.SetActive(!IsOpen); // The persistent coach anchor remains visible on every gameplay surface.
         }
         void OnCanvasRender()
@@ -87,14 +87,25 @@ namespace Altaius.Demo02.UI
             if(Gameplay.IsComposing)throw new InvalidOperationException("Finish composing before changing this surface.");
             if(Workbench.IsOpen){suspendedWorkbench=true;suspendedFocus=EventSystem.current?EventSystem.current.currentSelectedGameObject:null;if(!suspendedFocus||!suspendedFocus.transform.IsChildOf(Workbench.Window.transform))suspendedFocus=Workbench.Rows.Find(Workbench.LastEditedControl)?.Input?.gameObject;Workbench.Window.SetActive(false);}
             SurfaceId=id;Overlay.SetActive(true);current=Surfaces.Single(s=>s.SurfaceId==id);
+            // The companion passage belongs to the suspended work surface, not the system overlay.
+            if(Workbench.MarkContextPanel)Workbench.MarkContextPanel.SetActive(false);
+            if(Workbench.MarkContextButton)Workbench.MarkContextButton.gameObject.SetActive(false);
+            if(Workbench.WorkspaceTextSizeButton)Workbench.WorkspaceTextSizeButton.gameObject.SetActive(false);
+            current.RoomComposition=(Gameplay.ActiveStation&&Gameplay.ActiveStation.Kind==StationKind.Review&&(id=="review"||id=="reviewRequest"||id=="receipt"||id=="confirmation"))||(id=="conversation"&&ConversationStation);
             current.BeginBinding();
             foreach(var screen in Surfaces)screen.gameObject.SetActive(screen==current);
             current.Heading.text=heading;current.Status.text="";current.Rows.Begin();
             foreach(var b in new[]{current.Primary,current.Secondary,current.Tertiary}){b.gameObject.SetActive(false);b.onClick.RemoveAllListeners();b.interactable=true;}
             current.Scroll.verticalNormalizedPosition=1;current.Close.gameObject.SetActive(id!="title"&&id!="loading");
-            if(current.SideText)current.SideText.text="Task "+S.Task.Version+"\nRubric "+S.Rubric.Version+"\n\n"+S.Publication+"\n\n"+LocalAuthority.Time(S.ClockMinute);
+            if(current.SideText)current.SideText.text=SidebarState();
             Workbench.HudHeader.gameObject.SetActive(false);Workbench.WorldHelp.gameObject.SetActive(false);EventSystem.current?.SetSelectedGameObject(null);return current;
         }
+        string SidebarState()=>"Task "+S.Task.Version+" / Rubric "+S.Rubric.Version+"\n"+PublicationLabel(S.Publication,true)+"\n"+LocalAuthority.Time(S.ClockMinute);
+        public CampusStation ConversationStation=>SurfaceId=="conversation"?Gameplay.Stations.FirstOrDefault(s=>s&&((ConversationRole==ActorRole.Colleague&&s.Kind==StationKind.Studio)||(ConversationRole==ActorRole.ModuleLead&&s.Kind==StationKind.Review))&&s.DistanceTo(Gameplay.Motor.transform.position)<=s.InteractionRange):null;
+        public bool PhysicalConversationVisible=>Overlay&&Overlay.activeSelf&&SurfaceId=="conversation"&&current&&current.RoomComposition&&Scale<1.5f&&ConversationStation;
+        public bool PhysicalReviewRoomVisible=>Overlay&&Overlay.activeSelf&&SurfaceId!="conversation"&&current&&current.RoomComposition&&Scale<1.5f;
+        public static string PublicationLabel(PublicationStatus state,bool compact=false)
+        {return state==PublicationStatus.HoldCommittedUnverified?(compact?"Hold committed\nUnverified":"Hold committed (unverified)"):state==PublicationStatus.HoldRequested?"Hold requested":state.ToString();}
         NativeRow Text(string id,string heading,string body)
         {var row=current.Rows.Take(NativeRowKind.Text,id);row.BindText(heading,WorkbenchView.Display(body),Scale);return row;}
         NativeRow Action(string id,string caption,Action action,bool enabled=true)
@@ -170,7 +181,7 @@ namespace Altaius.Demo02.UI
             var last=Lifecycle.Conversation.History.LastOrDefault(r=>r.Request.Recipient==ConversationRole);
             current.Status.text=(last==null?"Draft only":last.State+". Draft retained")+" | Task "+S.Task.Version+" / Rubric "+S.Rubric.Version+" | Offline. Voice unavailable.";
             bool waiting=last!=null&&(last.State==ReplyState.Sending||last.State==ReplyState.Ready);
-            current.Send.interactable=!waiting&&S.Mode!=SessionMode.Replay;current.CancelRequest.interactable=last!=null;current.CancelRequest.GetComponentInChildren<Text>().text=waiting?"Cancel":"Receipt";
+            current.Send.interactable=!waiting&&S.Mode!=SessionMode.Replay;current.CancelRequest.interactable=last!=null;current.CancelRequest.GetComponentInChildren<Text>().text=waiting?"Cancel":"Receipt";current.ApplyScale(Scale);
         }
         void CancelOrInspectConversation()
         {
@@ -208,8 +219,8 @@ namespace Altaius.Demo02.UI
         string CurrentOpportunity()=>Workbench.SelectedWork!=null?WorkbenchModel.OpportunityForWork(Workbench.SelectedWork):LocalAuthority.PublicationOpportunity;
         public void OpenReview()
         {
-            Begin("review","Review and publication");Text("Review.Pair","Current Task "+S.Task.Version+" / Rubric "+S.Rubric.Version,"Task SHA-256 "+S.Task.Digest+"\nRubric SHA-256 "+S.Rubric.Digest+"\nWorld revision "+S.WorldRevision+" | Clock revision "+S.ClockRevision);
-            Text("Review.Gate","Publication: "+S.Publication,"Review: "+S.ReviewStatus+". Current approval: "+(S.CurrentApproval?.ReceiptId.ToString()??"Not recorded")+". The cabinet needs a release receipt for this exact current pair.");
+            Begin("review","Review and publication");var historicalApproval=S.ApprovalHistory.LastOrDefault();Text("Review.Pair","Current Task "+S.Task.Version+" / Rubric "+S.Rubric.Version,S.ReviewStatus==ReviewStatus.Stale&&historicalApproval!=null?"Review is stale. Historical approval: Task "+historicalApproval.Pair.TaskVersion+" / Rubric "+historicalApproval.Pair.RubricVersion+". Current authority is required.":"Review: "+S.ReviewStatus+". Publication: "+PublicationLabel(S.Publication)+".");
+            Text("Review.Gate","Publication: "+PublicationLabel(S.Publication),"Review: "+S.ReviewStatus+". Current approval: "+(S.CurrentApproval?.ReceiptId.ToString()??"Not recorded")+(S.Publication==PublicationStatus.Released?". Release is recorded for this exact current pair.":". The cabinet needs a release receipt for this exact current pair."));
             Action("Review.Request","Request an exact-pair review time",OpenReviewRequest);Action("Review.Conversation","Talk to module reviewer",()=>OpenConversation(ActorRole.ModuleLead));
             var latest=S.ReviewHistory.LastOrDefault();if(latest!=null)
             {Text("Review.Original","Original review request",latest.Id+" | "+latest.Status+" | "+LocalAuthority.Time(latest.Minute)+"\n"+latest.ChangeSummary+"\n"+(latest.DecisionReason??"No decision reason recorded."));
@@ -219,7 +230,7 @@ namespace Altaius.Demo02.UI
             Action("Review.Hold","Propose an owned hold",OpenHold);Action("Review.Timeline","Inspect authority and receipt history",OpenTimeline);
             var hold=S.HoldHistory.LastOrDefault();if(hold!=null){Text("Hold.Current","Hold proposal "+hold.Id,hold.Proposal.Defect+"\nOwner "+hold.Proposal.Owner+" | Review "+hold.Proposal.ReviewAt+"\nNext action: "+hold.Proposal.NextAction+"\nAcceptance "+(hold.Accepted?.ToString()??"Not recorded")+" | Defect verified "+hold.DefectVerified+" | Self-owned "+hold.SelfOwned);
                 if(hold.Accepted==null)Action("Hold.Accept",hold.Proposal.Owner==ActorRole.Learner?"Confirm my self-owned commitment":"Check actual owner response",()=>{if(hold.Proposal.Owner==ActorRole.Learner)PreviewDomain(Lifecycle.Authority.StageSelfAcceptance(hold.Id),"self hold");else ShowAuthority(Lifecycle.Authority.PrepareOwnerAcceptance(hold.Id));});}
-            Button(current.Primary,"Back to campus",ReturnToCampus);Button(current.Secondary,"Debrief",OpenDebrief);Finish("Scheduling, review decisions and release are separate receipts. Arbitrary semantic review is unavailable offline.");
+            Text("Review.Provenance","Exact provenance details","Task SHA-256 "+S.Task.Digest+"\nRubric SHA-256 "+S.Rubric.Digest+"\nWorld revision "+S.WorldRevision+" | Clock revision "+S.ClockRevision);Button(current.Primary,"Back to campus",ReturnToCampus);Button(current.Secondary,"Debrief",OpenDebrief);Finish("Scheduling, review decisions and release are separate receipts. Arbitrary semantic review is unavailable offline.");
         }
         public void OpenReviewRequest()
         {
@@ -266,7 +277,7 @@ namespace Altaius.Demo02.UI
             LastAuthorityReply=reply;Begin("receipt",reply.Status);var row=Text("Authority.Reply",RoleName(reply.AuthorityRole)+" | actual local response",reply.Text);
             Text("Authority.Identity","Scoped offline reply",reply.Provenance+"\nOriginal request "+reply.OriginalRequestId+"\nReply "+reply.Id+"\nAttempt "+reply.AttemptId);
             Button(current.Primary,"Review and publication",OpenReview);Button(current.Secondary,"View timeline",OpenTimeline);Finish("Response prepared. Role authority is admitted only after actual display.");
-            AfterRendered(row.Body,reply.Id,()=>{Lifecycle.Authority.Acknowledge(reply);Host.NotifyChanged();if(current&&SurfaceId=="receipt"){current.Heading.text=reply.Status;if(current.SideText)current.SideText.text="Task "+S.Task.Version+"\nRubric "+S.Rubric.Version+"\n\n"+S.Publication+"\n\n"+LocalAuthority.Time(S.ClockMinute);current.Status.text=reply.Status+". "+reply.Provenance;}});
+            AfterRendered(row.Body,reply.Id,()=>{Lifecycle.Authority.Acknowledge(reply);Host.NotifyChanged();if(current&&SurfaceId=="receipt"){current.Heading.text=reply.Status;if(current.SideText)current.SideText.text=SidebarState();current.Status.text=reply.Status+". "+reply.Provenance;}});
         }
         public void Pause()
         {
@@ -301,6 +312,8 @@ namespace Altaius.Demo02.UI
                 Text("Debrief.Presenter","Exact authored run records","Current Task "+S.Task.Version+" / Rubric "+S.Rubric.Version+". Current approval: "+(S.CurrentApproval==null?"Not recorded":S.CurrentApproval.ReceiptId.ToString())+".\nHistorical approval: "+(approval==null?"Not recorded":"Task "+approval.Pair.TaskVersion+" / Rubric "+approval.Pair.RubricVersion+" | "+approval.ReceiptId)+".\nLast release request: "+(release==null?"Not attempted":release.Receipt.RequestId+" | "+release.Receipt.Status+" | "+release.Receipt.ReasonCode)+".\nPublication: "+S.Publication+". Accepted hold: "+(S.HoldHistory.Any(h=>h.Accepted==true)?"Recorded":"Not recorded")+". Learner evidence records: "+S.Evidence.Count+".\nThe shown repair, hypotheses and scoped findings are authored demonstration content. Seek review of the current pair before release.");
             }
             Button(current.Primary,"View timeline",OpenTimeline);Button(current.Secondary,"Linked practice",()=>ConfirmLifecycle("linked"));Button(current.Tertiary,"Back",()=>{if(Lifecycle.Paused)Pause();else CloseSurface();});Finish(S.Mode==SessionMode.Presenter?"Synthetic presenter records. No learner evidence.":"This debrief describes only the recorded local attempt.");
+            var reportRow=current.Rows.Find("Debrief.Observation");var reportAttempt=S.AttemptId;var reportDisplay=Guid.NewGuid();
+            if(reportRow)AfterRendered(reportRow.Body,reportDisplay,()=>Workbench.LeenaDock.GetComponent<LeenaHudProjection>()?.ReportRendered(reportAttempt,reportDisplay));
         }
         public void OpenTimeline()
         {

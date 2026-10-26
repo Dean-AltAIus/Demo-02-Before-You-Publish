@@ -1,0 +1,93 @@
+{
+  "source": "D:\\Altaius\\Demo-02-Before-You-Publish\\SourceArt\\Demo02\\Characters\\Learner\\AcademicLearner_ContactLibrary_v019.blend",
+  "source_sha256": "885889b3edbdc2bf5f6520e4ce058326c6e73c37a67bb912b7563dd36f5e8540",
+  "profile": "SourceArt/Demo02/Exports/ContactLibrary_v013/receipt.json",
+  "profile_sha256": "d31302317eeedbdf6176e381d60270200f19cbca8908ee222494c30e80cc5473",
+  "matches_original_source_pin": false,
+  "export": "AcademicLearner_ContactLibrary_v019.fbx",
+  "export_sha256": "0ddeb8eaee95bd656945c7d329ec8649b3078649d5c1937b99e7bd8b557f1170",
+  "clips": [
+    {
+      "key": "FolioOpen",
+      "name": "D02_Learner_FolioOpen_v013",
+      "frames": 16,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioOpenApproach",
+      "name": "D02_Learner_FolioOpenApproach_v013",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "FolioOpenRecovery",
+      "name": "D02_Learner_FolioOpenRecovery_v013",
+      "frames": 19,
+      "duration": 0.6
+    },
+    {
+      "key": "FolioClose",
+      "name": "D02_Learner_FolioClose_v013",
+      "frames": 16,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioCloseApproach",
+      "name": "D02_Learner_FolioCloseApproach_v013",
+      "frames": 20,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "FolioCloseRecovery",
+      "name": "D02_Learner_FolioCloseRecovery_v013",
+      "frames": 19,
+      "duration": 0.6
+    }
+  ],
+  "profile_clip_count": 29,
+  "bake_frame_step": 0.125,
+  "samples_per_second": 240.0,
+  "export_fps": 240,
+  "export_frame_scale": 8,
+  "export_ranges": [
+    {
+      "key": "FolioOpen",
+      "frames": 121,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioOpenApproach",
+      "frames": 153,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "FolioOpenRecovery",
+      "frames": 145,
+      "duration": 0.6
+    },
+    {
+      "key": "FolioClose",
+      "frames": 121,
+      "duration": 0.5
+    },
+    {
+      "key": "FolioCloseApproach",
+      "frames": 153,
+      "duration": 0.6333333333333333
+    },
+    {
+      "key": "FolioCloseRecovery",
+      "frames": 145,
+      "duration": 0.6
+    }
+  ],
+  "bone_count": 54,
+  "fps": 30,
+  "root_motion": false,
+  "root_policy": "Fixed object roots; runtime motor owns world displacement",
+  "source_frames_checked": 619,
+  "maximum_object_root_matrix_delta": 0.0,
+  "source_saved": false,
+  "historical_actions_exported": false,
+  "status": "Native reexport only. Renew actual Unity surface, contact and playback acceptance after edits."
+}

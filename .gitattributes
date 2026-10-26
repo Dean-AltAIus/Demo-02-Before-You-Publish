@@ -17,3 +17,8 @@
 *.wav binary
 *.mp3 binary
 SourceArt/Demo02/Characters/Leena/Demo01_Mechanical_v003/Original*.json -text
+SourceArt/Demo02/Exports/**/receipt.json -text
+SourceArt/Demo02/Exports/**/integration-profile.json -text
+SourceArt/Demo02/Exports/ContactPropTracks_v005/native-prop-tracks.json -text
+*.f32 binary
+*.bin binary

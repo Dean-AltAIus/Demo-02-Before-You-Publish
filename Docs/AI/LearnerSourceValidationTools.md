@@ -1,16 +1,18 @@
 # Editing and validating the current learner source
 
-The editable master is `SourceArt/Demo02/Characters/Learner/AcademicLearner_ContactLibrary_v013.blend`. Its current production contract contains 29 named takes at 30 fps, with fixed object roots and motor-owned world displacement. The six family sources retain independently editable props and their tracks. Direct changes to the master can be exported without rebuilding it from the family sources.
+The editable master is `SourceArt/Demo02/Characters/Learner/AcademicLearner_ContactLibrary_v023.blend`. Its production contract retains 29 named takes on a 30 fps timeline, with dense 240 Hz keys for the six M1 phases, fixed object roots and motor-owned world displacement. The six family sources retain independently editable props and tracks. Direct edits can be exported without rebuilding the master. The portable tools retain their original v013 default for reproducibility; select the current source explicitly as shown below. The actual composite runtime profile is `SourceArt/Demo02/Exports/ContactLibrary_v023/integration-profile.json`.
 
 Use isolated Blender background execution. Both tools derive the repository root from their own location, preserve source bytes and refuse any existing output directory. Choose a new directory for each changed-source check. The examples below assume the shell is in the repository and Blender is already available.
 
 ```powershell
-& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 2 --python-exit-code 1 --python SourceArt/Demo02/Tools/reexport_learner_contact_library_v001.py -- --output-dir LocalOnly/Validation/LearnerExport_001
+& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --disable-autoexec --offline-mode --threads 2 --python-exit-code 1 --python SourceArt/Demo02/Tools/reexport_learner_contact_library_v001.py -- --source SourceArt/Demo02/Characters/Learner/AcademicLearner_ContactLibrary_v023.blend --takes FolioClose FolioCloseRecovery --bake-step 0.125 --output-dir LocalOnly/Validation/LearnerExport_001
 
-& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 2 --python-exit-code 1 --python SourceArt/Demo02/Tools/export_learner_skin_fixture_v001.py -- --output-dir LocalOnly/Validation/LearnerSkin_001
+& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --disable-autoexec --offline-mode --threads 2 --python-exit-code 1 --python SourceArt/Demo02/Tools/export_learner_skin_fixture_v001.py -- --source SourceArt/Demo02/Characters/Learner/AcademicLearner_ContactLibrary_v023.blend --poses FolioClose:1.875 FolioClose:7.9375 FolioClose:8.0625 FolioCloseRecovery:4.0625 --output-dir LocalOnly/Validation/LearnerSkin_001
 ```
 
 Either tool accepts `--source path/to/edited.blend`. The source must retain the named learner rig, mesh and current take contract. A changed rig, timing contract or production take set requires explicit profile/tool updates and renewed runtime admission. The tools change only their private in-memory Blender scene and new output files.
+
+`--takes` restricts a bounded revision to named logical keys. Omitting it exports all 29 current takes. `--bake-step` may not be coarser than the saved source's required step. A dense source is retimed in memory to integer high-rate frames before FBX export, so subframe corrections are retained by the importer. `--poses Take:frame` accepts fractional native frames for actual Unity half-key surface comparisons. The original v013 command remains reproducible by explicitly selecting the v013 source and omitting these optional selections. Unchanged imported clips are retained by the current graph; exporting a full master does not authorize replacing all of them without renewed checks.
 
 ## Current-master FBX reexport
 

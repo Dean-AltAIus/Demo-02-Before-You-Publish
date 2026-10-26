@@ -11,6 +11,7 @@ Use the external reference root recorded in LocalOnly/reference-source.json and 
 - Work in D:/Altaius/Demo-02-Before-You-Publish on dev. Preserve unrelated work and other projects. No GitHub-hosted builds. Inspect local and remote default-branch workflow triggers before every push.
 - All environments, characters, props, lighting, cameras and UI must be saved, editable authoring assets outside Play Mode. Generators preserve manual edits and overrides; regeneration is bounded and explicit.
 - Keep canonical Leena visibly integrated into the gameplay HUD. Separate coach help, NPC dialogue, learner hypotheses, scoped findings and authoritative review receipts.
+- Default UI must be compact game UI. Dean rejected the oversized full-width HUD and large panels on 26 October 2026. Use small corner HUD elements and Leena dock, restrained typography, spacing and chrome, and bounded interaction panels so the world and characters remain prominent. Preserve all actions and readable scrolling. The optional 200% text mode reflows separately; reference image dimensions do not override this explicit direction.
 - All AI/SIE/external transport stays disabled. Local scripted provider behavior is labelled and cannot claim natural-language validation or live services.
 - Presenter automation uses the same movement, typed fields, interactions, commands, camera and UI as ordinary gameplay. It creates no learner evidence.
 - Never use en dashes or em dashes in authored copy. Keep source bytes immutable for source hashes; normalize display punctuation separately.
