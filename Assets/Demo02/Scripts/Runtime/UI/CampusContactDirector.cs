@@ -24,7 +24,8 @@ namespace Altaius.Demo02.UI
         public int Completed {get;private set;}
         public int Cancelled {get;private set;}
         public event Action<string> PresentationCompleted;
-        sealed class Job {public ContactBinding Binding;public ContactMotion Motion;public bool Reverse;public string WorkId,CriterionId;public int TaskVersion,RubricVersion;}
+        public event Action<Guid,bool> PacketPresentationSettled;
+        sealed class Job {public ContactBinding Binding;public ContactMotion Motion;public bool Reverse;public string WorkId,CriterionId;public int TaskVersion,RubricVersion;public Guid RequestId;}
         struct Pose {public Vector3 Position;public Quaternion Rotation;}
         readonly Queue<Job> queue=new Queue<Job>();
         readonly Dictionary<Transform,Pose> initial=new Dictionary<Transform,Pose>();
@@ -140,7 +141,7 @@ namespace Altaius.Demo02.UI
                 {Ensure("WorkOpen",false);Request("MarkPoint");}
                 if((r.Action=="task.edit"||r.Action=="rubric.edit")&&IsAtEnd("PlacePassage"))
                 {Ensure("WorkOpen",true);Ensure("EditionSlide",true);}
-                if(r.Action=="review.request"&&Gameplay.ActiveStation&&Gameplay.ActiveStation.Kind==StationKind.Review)Request("PacketPresent");
+                // Review packet preparation is scheduled by NpcInteractionDirector with its exact request identity.
             }
         }
         bool IsAtEnd(string id)
@@ -161,13 +162,13 @@ namespace Altaius.Demo02.UI
         }
         void CloseFolio(string stem){if(IsAtEnd(stem+"Page"))Request(stem+"Page",true);if(IsAtEnd(stem+"Open"))Request(stem+"Close");}
         void Ensure(string id,bool end){if(IsAtEnd(id)==end||queue.Any(j=>j.Binding.Id==id&&j.Reverse!=end)||active!=null&&active.Binding.Id==id&&active.Reverse!=end)return;Request(id,!end);}
-        public bool Request(string id,bool reverse=false)
+        public bool Request(string id,bool reverse=false,Guid requestId=default(Guid))
         {
             var binding=Bindings?.SingleOrDefault(b=>b.Id==id);var motion=binding==null?null:Library.Find(binding.MotionId);
             if(binding==null||motion==null||!binding.Stance||!motion.Approach||!motion.Contact||!motion.Recovery){LastProblem="Missing saved contact binding: "+id;return false;}
             if(queue.Count>=8){LastProblem="Contact sequence queue is full.";return false;}
             var mark=Gameplay.SessionHost.Workbench.Mark;
-            queue.Enqueue(new Job{Binding=binding,Motion=motion,Reverse=reverse,WorkId=id=="PlacePassage"&&mark!=null?mark.Work.SourceId:null,CriterionId=id=="PlacePassage"&&mark!=null?mark.CriterionId:null,TaskVersion=mark?.TaskVersion??0,RubricVersion=mark?.RubricVersion??0});return true;
+            queue.Enqueue(new Job{Binding=binding,Motion=motion,Reverse=reverse,RequestId=requestId,WorkId=id=="PlacePassage"&&mark!=null?mark.Work.SourceId:null,CriterionId=id=="PlacePassage"&&mark!=null?mark.CriterionId:null,TaskVersion=mark?.TaskVersion??0,RubricVersion=mark?.RubricVersion??0});return true;
         }
         void StartNext()
         {
@@ -206,7 +207,7 @@ namespace Altaius.Demo02.UI
             if(id=="PlacePassage"){lastWork=active.Reverse?null:active.WorkId;lastCriterion=active.Reverse?null:active.CriterionId;lastTaskVersion=active.TaskVersion;lastRubricVersion=active.RubricVersion;}
             if(id.EndsWith("Close")){var stem=id.Substring(0,id.Length-5);endStates[stem+"Open"]=active.Reverse;SetLeafVisible(stem,active.Reverse);}
             if(id.EndsWith("Open")){var stem=id.Substring(0,id.Length-4);endStates[stem+"Close"]=active.Reverse;SetLeafVisible(stem,!active.Reverse);}
-            Completed++;Release();PresentationCompleted?.Invoke(id);
+            Completed++;Release(true);PresentationCompleted?.Invoke(id);
         }
         void SetLeafVisible(string stem,bool visible)
         {
@@ -216,20 +217,22 @@ namespace Altaius.Demo02.UI
         }
         public void Cancel()
         {
-            queue.Clear();if(active==null)return;
+            ClearQueued();if(active==null)return;
             if(VisiblePhase=="Travel"||VisiblePhase=="Stop"||VisiblePhase=="Turn"){Cancelled++;Release();return;}
             if(VisiblePhase=="Recovery")return;rewind=true;
         }
         void RestoreActionStart(){if(active?.Binding.Prop){active.Binding.Prop.position=actionStart.Position;active.Binding.Prop.rotation=actionStart.Rotation;}}
-        void Release()
+        void ClearQueued(){while(queue.Count>0){var job=queue.Dequeue();if(job.RequestId!=Guid.Empty)PacketPresentationSettled?.Invoke(job.RequestId,false);}}
+        void Release(bool completed=false)
         {
-            active=null;rewind=false;VisiblePhase="Idle";Gameplay?.SetContactInput(false);
+            var requestId=active?.RequestId??Guid.Empty;active=null;rewind=false;VisiblePhase="Idle";Gameplay?.SetContactInput(false);
             if(Learner){Learner.speed=1;if(Learner.isActiveAndEnabled){Learner.Play(IdleState,0,0);Learner.Update(0);}}
+            if(requestId!=Guid.Empty)PacketPresentationSettled?.Invoke(requestId,completed);
         }
         void DirectRouteHandback(){RestoreActionStart();ImmediateHandback(false);}
         void ImmediateHandback(bool reset)
         {
-            queue.Clear();if(active!=null)RestoreActionStart();Release();
+            ClearQueued();if(active!=null)RestoreActionStart();Release();
             if(reset){foreach(var pair in initial)if(pair.Key){pair.Key.position=pair.Value.Position;pair.Key.rotation=pair.Value.Rotation;}endStates.Clear();SetLeafVisible("Task",false);SetLeafVisible("Rubric",false);SetLeafVisible("Work",false);}
         }
     }
