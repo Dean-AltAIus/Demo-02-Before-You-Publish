@@ -1,5 +1,7 @@
 # Demo 2 work order
 
+This is the original setup and implementation work order. For the implemented campus, current controls and remaining validation limits, read [README](../../README.md), [integrated acceptance](IntegratedAcceptance.md) and the [production acceptance matrix](ProductionAcceptanceMatrix.md). The setup checkpoint below is historical. Dean's later instruction requires the remaining validation to use the existing Editor without further local Player builds.
+
 ## Setup checkpoint
 
 Create the Unity project in D:/Altaius, establish dev tracking, review the complete reference tree and current source precedence, register with Unity Hub and open the Editor. Stop for Dean to install and start MCP for Unity. Resume only after he reports readiness.

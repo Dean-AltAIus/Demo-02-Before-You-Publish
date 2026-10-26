@@ -1,21 +1,26 @@
 # Demo-02-Before-You-Publish
 
-University marking and assessment design, a compact third-person campus simulation.
+A playable offline campus simulation about university marking and assessment design, authored in Unity 6000.0.71f1 with Universal Render Pipeline 17.0.4.
 
-The intended learner practice is to examine what an assessment rewards, mark contrasting fictional work, explain a counterexample, revise and retest the task/rubric, then seek review of the exact current versions or arrange a responsible hold.
+Inspect fictional source material and student work, record marks and your own reasons, revise the task and rubric, retest, and request review of the exact versions. Review, publication and an accountable hold are separate decisions. Authored replies support the local demonstration; they do not interpret arbitrary prose or provide live AI evaluation.
 
-## Current status
+## Open and play
 
-Project preparation only, 25 October 2026. Unity 6000.0.71f1, Universal Render Pipeline 17.0.4, Windows desktop, keyboard and mouse. The saved template SampleScene is a setup baseline. Demo gameplay and production assets have not been implemented.
+Open this project from Unity Hub and load `Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity`. Enter Play Mode for the title and practice options. Choose **Watch walkthrough** to open the briefing for the isolated synthetic demonstration. Its controls support pause, restart and return to the preceding practice session.
 
-Development uses `dev`. The initial `main` branch is preserved. Do not trigger GitHub-hosted builds or manually dispatch build workflows. Use necessary local Editor validation; create player builds only when they serve an agreed acceptance need.
+- Arrow keys move; hold the right mouse button to look; E inspects a nearby station.
+- Tab opens direct routes in the world and moves focus within interfaces. Shift+Tab reverses focus. Enter or Space activates a focused action.
+- Escape returns or pauses. Native text fields retain their drafts; use the displayed submit action to send multiline text.
+- Settings include text scaling, reduced motion, silent mode and high contrast. Direct routes reach the same station commands without travel precision.
 
-Read [project context](Docs/AI/UnityProjectContext.md), [production requirements](Docs/AI/ProductionRequirements.md), [work order](Docs/AI/BuildoutPlan.md), and [integration preparation](Docs/AI/IntegrationPreparation.md). Machine-specific source locations and developer reference receipts are in ignored `LocalOnly/`.
+The title uses an editable book-and-laurel plaque, a vertical menu and a saved view of the reviewer workroom. The default gameplay HUD uses compact corner controls, a persistent Leena dock and bounded panels. Its editable style is `Assets/Demo02/Settings/Presentation/CompactGameUi.asset`; enlarged text uses a separate reflow. The campus, characters, station props, cameras, lights and native UI are saved and editable outside Play Mode.
 
-## Current handoff
+## Edit and validate
 
-The requested MCP URL is now present in Packages/manifest.json following the Editor handoff. Dean finishes package setup and starts its server/Editor bridge. Resume implementation only after he reports it ready and the correct project is verified. The requested package URL is:
+First-party scenes, prefabs, settings and scripts are under `Assets/Demo02`. Editable Blender sources and export tools are under `SourceArt/Demo02`. Keep manual edits and prefab overrides; authoring tools use explicit bounded operations. Historical construction scripts are not a safe way to regenerate the entire accepted scene.
 
-`https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main`
+Read [integrated acceptance](Docs/AI/IntegratedAcceptance.md), [project context](Docs/AI/UnityProjectContext.md), [presenter operation](Docs/AI/PresenterWalkthrough.md), [production sources](Docs/AI/Task5EditableProductionSources.md), [NPC sources](Docs/AI/NPCInteractionSources.md) and [integration preparation](Docs/AI/IntegrationPreparation.md). The acceptance record identifies tested conditions and limits; source inspection and test counts alone do not establish visual or performance acceptance.
 
-The full reference pack stays outside Assets and outside this public repository. Private reviewer oracles, unrestricted source snapshots, credentials and participant data must not be imported into learner-facing content.
+Development uses `dev`; `main` is preserved. Do not trigger GitHub-hosted builds or dispatch build workflows. Dean has directed that no further local player builds are needed for this buildout; remaining validation uses the Editor.
+
+The private developer reference pack, reviewer oracles, machine-specific validation receipts, credentials and participant data are excluded from public source. AI/SIE transport is disconnected, with blank endpoint and identity slots. The installed Unity MCP package is an Editor authoring tool, not the simulation's AI integration.

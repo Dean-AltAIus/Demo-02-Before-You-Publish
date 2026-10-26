@@ -1,5 +1,7 @@
 # Demo 02 asset production ledger
 
+This ledger preserves dated production candidates, rejected iterations and source decisions. Current content and its bounded validation status are mapped in [ProductionAcceptanceMatrix.md](ProductionAcceptanceMatrix.md) and [IntegratedAcceptance.md](IntegratedAcceptance.md). Historical defects below are not automatically current defects; source previews are not runtime acceptance.
+
 Updated 25 October 2026. All entries below are development sources, not final game acceptance.
 
 Priority update from Dean: complete the bulk of gameplay, reference-faithful gameplay art and UI art first. All usable character/environment assets may be placed before animation refinement. Fine motion/contact and small finish details are deferred to the final pass, with their known defects preserved below.

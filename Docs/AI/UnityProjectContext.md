@@ -1,37 +1,41 @@
 # Unity project context
 
-Analyzed 25 October 2026. Setup baseline, before Demo 2 implementation.
+Demo 2 is an implemented local, offline campus simulation. This document describes its source architecture; [integrated acceptance](IntegratedAcceptance.md) identifies executed checks and remaining limits.
 
-## Confirmed environment
+## Environment
 
-- Project: D:/Altaius/Demo-02-Before-You-Publish.
-- GitHub: https://github.com/Dean-AltAIus/Demo-02-Before-You-Publish.
-- Working branch: dev, created from the initial main commit 72a20208714a4c413331e36a6fd767d4d1be8688.
-- Unity: 6000.0.71f1, revision 907bc2d768b5.
-- Installed Editor: C:/Program Files/Unity 6000.0.71f1/Editor/Unity.exe.
-- Created from the installed 3D URP template, version 17.0.12. URP package 17.0.4.
-- Input System package 1.19.0; activeInputHandler 1. Keyboard/mouse is the intended input surface.
-- Template also includes AI Navigation 2.0.11, Timeline 1.8.10, uGUI 2.0.0, Test Framework 1.6.0 and Visual Scripting 1.9.10. These are available dependencies, not implemented Demo 2 systems. Built-in UI Toolkit is also available. Final native UI implementation remains a buildout choice.
-- No multiplayer gameplay, AI transport or custom framework is implemented.
+The project is `D:/Altaius/Demo-02-Before-You-Publish`, linked to `Dean-AltAIus/Demo-02-Before-You-Publish` on `dev`. The initial `main` commit is `72a20208714a4c413331e36a6fd767d4d1be8688`. Preserve `main` and do not trigger GitHub-hosted builds.
 
-## Saved content and architecture
+`ProjectVersion.txt` pins Unity 6000.0.71f1, revision 907bc2d768b5. The package manifest includes URP 17.0.4, Input System 1.19.0, uGUI 2.0.0 and Test Framework 1.6.0. The native interface uses uGUI. Template dependencies such as AI Navigation, Timeline and Visual Scripting being installed do not imply those systems implement the demo.
 
-Assets/Scenes/SampleScene.unity is the standard saved template scene, with its camera, directional light and global volume. Assets/Settings contains editable URP profiles/assets. These are a project baseline, not the Demo 2 campus.
+The Unity MCP package is installed from the requested CoplayDev URL and has been used for exact-instance Editor authoring and validation. It is separate from the disconnected simulation AI/SIE boundary. Verify the actual open project before every new Editor session; another project's Editor is never an acceptable target.
 
-Assets/Demo02 is reserved for first-party scenes, prefabs, scripts, data, materials, UI, audio and animation. SourceArt/Demo02 is reserved for editable production sources. There are no first-party gameplay scripts or assembly definitions yet. Keep runtime and Editor code separate when authoring begins.
+## Saved content
 
-Planned dependency direction: domain state and typed commands, then permitted presentation projections, then input/UI and authored world bindings. Presenter automation and offline scripted response providers use the same commands/presentation. Actual authority, conversation text, rendering, and learning evidence remain separate concerns.
+`Assets/Demo02/Scenes/BeforeYouPublish_Campus.unity` is the authored gameplay scene. It contains the compact courtyard, four stations, characters, physical marking/review props, lights, camera rig, Leena portrait camera and native interface. Reusable source assets live in the corresponding `Prefabs`, `Art` and `Settings` directories. `Assets/Scenes/SampleScene.unity` is the retained template, not the gameplay start point.
 
-## Sources and continuity
+`SourceArt/Demo02` retains editable Blender environments, characters, rigs, motions, materials and review artwork. See `Task5EditableProductionSources.md`, `NPCInteractionSources.md` and `LearnerSourceValidationTools.md` for current master files, exact skin derivatives and safe export paths. Older compatibility assets remain where current serialized references require them.
 
-The authoritative pack is external to the repository. LocalOnly/ReferenceReview.md records its exact location, review findings, precedence, validation evidence and gaps. LocalOnly/reference-review/inventory.json is the 841-file SHA-256 baseline. Do not import the developer pack wholesale into Assets or publish it to this public repository.
+Authoring tools are explicit and bounded. Preserve manual scene edits, prefab overrides and existing catalogue entries. Runtime code operates on saved assets and data-driven state; it does not replace the campus with a runtime-only generated scene.
 
-Current gameplay and domain fixture control mechanics; the learning contract controls interpretation/assistance. Later reference availability and Leena HUD clarifications supplement those sources. Historical UI examples and generated copy do not grant facts, authority or defaults.
+`Assets/Demo02/Settings/Presentation/CompactGameUi.asset` exposes the compact HUD, panel, typography and spacing settings. `Task5CompactUiAuthoring.Apply()` is an explicit layout update across the existing UI prefabs and campus overrides; it requires the correct clean saved scene outside Play. Use it only when deliberately updating that layout scope, since its purpose is to apply the style to those authored properties.
 
-## Validation and tooling
+`Assets/Demo02/Prefabs/UI/Presentation/title.prefab` contains the dedicated native title composition. Its saved workroom shot reuses the gameplay camera while the title owns presentation, then releases it on return to gameplay. Title layout, ornament and scene-presentation components remain editable separately from the gameplay HUD style.
 
-The initial Unity batch creation/import completed with exit code 0. No player build or Play Mode test was run. Test Framework is installed, but Demo 2 has no tests yet. Gameplay, art, accessibility, target performance, privacy/reset behavior and post-Play persistence require implementation and actual validation.
+## Runtime boundaries
 
-The requested MCP for Unity Git URL appeared in Packages/manifest.json during the Editor handoff. The agent did not install it. Its package import and server/bridge readiness remain unverified; Dean owns this setup. Live MCP access is unverified at this checkpoint. Verify the exact project instance before any later Editor operation.
+- **Domain:** a pure C# assembly owns typed commands, immutable document versions, source permissions, logical time, scoped review/release/hold rules, receipts, audit and reset isolation.
+- **Integration and presentation:** pure C# contracts and coordinators manage authored offline replies, cancellation, history, help, assistance attribution and state projections. Reply text is distinct from authority.
+- **Gameplay and UI:** Unity assemblies bind the saved campus, collision movement, station interactions, physical contacts, cameras and native fields to the same domain operations. Direct routes provide an alternative to spatial travel.
+- **Presenter:** an editable sequence and route configuration drive real movement, progressive native field entry and the ordinary interaction surfaces in an isolated synthetic attempt. Returning restores the prior practice session. See `PresenterWalkthrough.md` for operation and measured timing.
+- **Authoring and tests:** Editor code and test assemblies are separate from runtime. Acceptance tools retain measurements and captures locally; a passing source or rig audit does not substitute for rendered gameplay inspection.
 
-Read ProductionRequirements.md and BuildoutPlan.md for acceptance and work order. Do not mistake folder scaffolding, JSON parsing or static reference checks for a completed game.
+`Assets/Demo02/strings/STR_EN.asset` is the saved native English string table. Runtime semantic keys and saved label bindings use it through `EnglishCatalogueBinding`. Static authored copy is separate from literal learner text, admitted sources, identifiers and historical payloads. Named substitutions insert those values once without changing their punctuation or interpreting rich text. The explicit label refresh and missing-key seeding operations have different purposes; do not use broad regeneration to overwrite authored labels.
+
+## Source and delivery boundaries
+
+The authoritative reference pack remains outside the repository. Ignored `LocalOnly/ReferenceReview.md` and the reference inventory record its location, precedence and review. Gameplay contracts control mechanics; the learning contract controls interpretation and assistance. The user's later compact-UI and restrained-world instructions control presentation sizing and scope.
+
+Only admitted learner content belongs in runtime assets. Do not publish the private developer pack, reviewer oracle, credentials or participant records. Endpoint and identity configuration is blank and transport disabled, as described in `IntegrationPreparation.md`.
+
+Final handoff evidence must distinguish native input simulation from unobserved OS/IME delivery, Editor rendering from a Player build, and functional/visual acceptance from production service integration. Verify the current Unity Hub registration, stopped Editor state and remote `dev` revision at delivery rather than inferring them from this architecture document.

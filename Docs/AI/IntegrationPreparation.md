@@ -1,11 +1,19 @@
 # Integration preparation
 
-Status: architectural preparation. No C# integration ports, endpoint configuration assets, service clients or live connections are implemented at the project-setup checkpoint.
+The demo runs locally with authored, source-bounded replies. It contains editable integration configuration and typed preparation contracts, but no external AI/SIE transport or service client. Turning on a flag does not implement an integration.
 
-During buildout, prepare separate interfaces for session/attempt lifecycle, permitted current context, NPC replies, Leena support, actual display/history, delivered assistance, domain authority and evidence. Provide an editable offline configuration with all external transport disabled, endpoint/identity slots unset, and source-bounded scripted providers. Preserve original request IDs, version joins, cancellation and late-callback isolation.
+## Current binding points
 
-Reuse the established platform's bootstrap-advertised actor_response and conversation_history operations, and its Leena support websocket when a later integration task is authorized. Resolve real IDs and accepted schemas from the approved environment then. The pack's local-demo facade is a contract test double, not a new production API family. Do not hardcode another simulation's IDs, endpoint paths or data transfer objects.
+`Assets/Demo02/Scripts/Runtime/Integration/ConversationContracts.cs` defines conversation requests and replies, cancellation, display acknowledgements, an offline reply provider and request history. Requests carry attempt/request identity, the document pair, world revision, literal own text and admitted sources. `ConversationCoordinator` implements local history and uses `SourceBoundedOfflineReplies`. A ready reply is separate from an actually displayed reply.
 
-Conversation text, a gesture, or generated feedback cannot approve publication or mutate authoritative state. Offline scripted scenario controllers must enforce the same current-version, source and command rules. Label scripted responses accurately. A reply being available is different from it being displayed. Retain assistance only on actual delivery, and preserve unknown versus missing versus verified-empty history.
+`Runtime/Domain/AuthorityPorts.cs` defines `ITrustedEvaluatorPort` and its exact-scope verification result for a future trusted adapter. It is not a connected evaluator. Local scenario permits bind authored responses to their attempt and command. Conversation text, animation and coaching cannot themselves approve publication or change authoritative state.
 
-Keep provider credentials server-side in the future owning platform. External AI/SIE, Control Centre writes, profile/title/account writes and participant persistence remain disconnected. The presenter route must remain fully demonstrable through local scripted systems.
+`Assets/Demo02/Settings/Presentation/DisabledIntegration.asset` is a saved `DisconnectedIntegrationSettings` asset. External transport and SIE writes are false; the bootstrap endpoint, environment and real binding identities are blank. Its validation callback forces both transport flags off. No credentials belong in this asset.
+
+## Future integration boundary
+
+A later authorized integration task must resolve the platform's actual bootstrap-advertised actor response, conversation history and Leena support operations. Verify accepted schemas and real environment, simulation, level, configuration, scene, actor and framework identities then. The local demo facade is a contract test double, not a production API definition; do not reuse another simulation's IDs or invent endpoint paths.
+
+Keep cancellation, late-response rejection, exact version joins, display acknowledgements and actual assistance delivery intact. Distinguish unknown history from missing history and verified-empty history. Validate any trusted authority response against its attempt, command digest, communicated clauses, source scope and rule version before admission.
+
+Credentials stay server-side in the future owning platform. Control Centre writes, profile/account writes and participant persistence remain disconnected. Presenter activity uses an isolated synthetic attempt and cannot become learner competence evidence. The walkthrough remains demonstrable entirely offline.
