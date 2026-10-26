@@ -1,6 +1,6 @@
 # Integrated acceptance
 
-Native functional, visual and saved-authoring checks passed within the scopes below. The required rendered-performance gate remains failed in measured Editor conditions. The first local Player diagnostic could not render and supplied no valid timing interval. This is not an all-gates acceptance claim. The production matrix maps all 155 items to saved content, evidence and explicit limits.
+Native functional, visual and saved-authoring checks passed within the scopes below. The required rendered-performance gate remains failed in measured Editor conditions. The first local Player diagnostic could not render. A separately authorized isolated-desktop run later rendered successfully but still missed the frame-time target in courtyard and marking. This is not an all-gates acceptance claim. The production matrix maps all 155 items to saved content, evidence and explicit limits.
 
 The saved native English catalogue has 697 entries and 54 static label bindings. Its literal-data bindings preserve learner prose, source text, identifiers, units, whitespace and review reasons. Primary review/receipt copy explains the original requested pair and current publication state. Exact provenance remains available in read-only details. The saved compact interface, canonical Leena, scene geometry, native motion masters and exact skin weights are retained.
 
@@ -38,6 +38,22 @@ Supported camera callbacks verified the absence of SceneView rendering during is
 The final supported attribution sample recorded GPU mean 31.23698 ms and p95 35.9065 ms, PlayerLoop mean 26.7271 ms and p95 33.0957 ms. EditorLoop and several wait recorders were zero-only and remain unverified, rather than evidence of zero cost. The remaining whole-frame versus PlayerLoop difference left standalone cost unresolved.
 
 One authorized local Development Player was built from `e22dc15005b4f8e45ba6f4a6512bc0d9fe4ba03d` plus a recorded Unity-generated settings/resource serialization delta. It is a pre-arrow diagnostic. The build succeeded with zero errors and one retained warning. It was launched once in hidden batch mode with D3D11, without `-nographics`. The Player reported Iris Xe, 1920x1080 and PC quality, but supplied zero render-camera callbacks; framebuffer readback failed before any PNG or timing interval. It exited safely. Device initialization alone did not pass the rendering guard. No Player FPS is reported. Recorded build-created settings were restored, and generated performance metadata was preserved privately from the packed output. Any further validation method requires a separate concrete decision.
+
+A separately authorized amendment made one scripts-only update of that same artifact, from `91f2f1d19eff2015a7da2cadb6974d11a7bb29b8`, followed by one normal-rendering launch on a newly created inactive Windows desktop. The update succeeded in 47.8209466 seconds with zero errors or warnings. All 15 packed scene/catalogue/resource data files were unchanged; the ten changed managed DLL/PDB files and original recoverable assemblies are recorded. Startup metadata changed; the original hash and complete current contents/hash are retained, but the exact original startup metadata diff is unavailable. The artifact retains pre-arrow saved catalogue data and later runtime code, so it is rendering evidence only.
+
+All five original 1920x1080 captures were inspected: courtyard, marking before/after and review before/after. They show the actual saved world/actors, native UI and canonical Leena. The three planned warm 20-second intervals, with no capture during timing, measured:
+
+| Isolated Player state | Mean FPS | p95 frame duration | GPU mean / p95, positive samples | Verdict |
+| --- | ---: | ---: | ---: | --- |
+| Courtyard | 32.5467 | 37.5936 ms | 28.8753 / 32.6816 ms | Failed |
+| Normal marking | 37.6711 | 36.1625 ms | 23.8953 / 27.1233 ms | Failed |
+| Normal review packet | 38.5970 | 32.4875 ms | 22.9788 / 26.7080 ms | Passed stated mean/p95 gate |
+
+Both actual Game cameras rendered throughout: campus at 1920x1080 and Leena at 280x320. Typical draw/batch counts were 3227/2866, 1707/1681 and 936/843. Counter startup zeros and all raw values remain retained; zeros do not establish free rendering. Per-frame desktop-identity checks and measurement formatting allocate and contribute to measured CPU time. Aggregate allocation counters do not isolate product allocations or establish a GC cause. No further run or rendering change followed these results.
+
+The child exited normally. Input desktop `Default` stayed unchanged through 418 launcher checks, and all owned handles closed. The owned desktop was subsequently confirmed absent. Current D3D11 rendering used ClientWorkerJobs after the requested SplitJobs mode was rejected. Inactive-desktop rendering does not establish physical display/compositor or keyboard/IME behavior. The required overall performance gate remains failed.
+
+A read-only saved-state audit found 847 active MeshRenderers, 376 with batching flags, and substantial repeated mesh/material use. GPU Resident Drawer remains disabled; its project validator requires a shader-stripping setting change before it is supported. These are candidates for a later bounded diagnostic, not implemented optimizations. The original rendering profile, geometry, material sources and Unlimited skin remain unchanged.
 
 ## Scope and provenance
 

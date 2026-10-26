@@ -2,7 +2,7 @@
 
 The [CSV matrix](ProductionAcceptanceMatrix.csv) maps all 155 source-manifest items to saved content or explicitly scoped preparation, relevant states and observed evidence. It preserves the distinction between a candidate path and accepted content. The private local JSON additionally retains source and content hashes and the original candidate annotations.
 
-There are 147 required items, one conditional item, three optional items and four gated future items. At this checkpoint, 146 required content rows pass their stated checks; the world row retains a failed rendered-performance gate. The conditional texture workflow and two authored buyer surfaces pass. Optional ambience and four gated Arabic/voice items remain unverified by design. The first authorized Player diagnostic failed its rendering guard and supplied no valid timing interval. These counts are not an all-gates release claim.
+There are 147 required items, one conditional item, three optional items and four gated future items. At this checkpoint, 146 required content rows pass their stated checks; the world row retains a failed rendered-performance gate. The conditional texture workflow and two authored buyer surfaces pass. Optional ambience and four gated Arabic/voice items remain unverified by design. The first Player diagnostic failed its rendering guard. A separately authorized isolated-desktop run rendered successfully, but courtyard and marking still failed the frame-time target. These counts are not an all-gates release claim.
 
 | Group | Scope of evidence |
 | --- | --- |
